@@ -1,6 +1,7 @@
 ---
 title: Steeven Janny
 role: PhD Student
+avatar_filename: save_20210118_140125.jpg
 bio: My research interests include distributed robotics, mobile computing and
   programmable matter.
 interests:
