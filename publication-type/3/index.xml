@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>3 | Steeven Janny</title>
+    <link>https://steevenjanny.github.io/publication-type/3/</link>
+      <atom:link href="https://steevenjanny.github.io/publication-type/3/index.xml" rel="self" type="application/rss+xml" />
+    <description>3</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://steevenjanny.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <title>3</title>
+      <link>https://steevenjanny.github.io/publication-type/3/</link>
+    </image>
+    
+    <item>
+      <title>Learning to estimate UAV created turbulence from scene structure observed by onboard cameras</title>
+      <link>https://steevenjanny.github.io/post/turbulences/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      <guid>https://steevenjanny.github.io/post/turbulences/</guid>
+      <description>&lt;p&gt;Controlling UAV flights precisely requires a realistic dynamic model and accurate state estimates from onboard sensors like UAV, GPS and visual observations. Obtaining a precise dynamic model is extremely difficult, as important aerodynamic effects are hard to model, in particular ground effect and other turbulences. While machine learning has been used in the past to estimate UAV created turbulence, this was restricted to flat grounds or diffuse in-flight air turbulences, both without taking into account obstacles. In this work we address the complex problem of estimating in-flight turbulences caused by obstacles, in particular the complex structures in cluttered environments. We learn a mapping from control input and images captured by onboard cameras to turbulence. In a large-scale setting, we train a model over a large number of different simulated photo-realistic environments loaded into the Habitat simulator augmented with a dynamic UAV model and an analytic ground effect model. We transfer the model from simulation to a real environment and evaluate on real UAV flights from the EuRoC-MAV dataset, showing that the model is capable of good sim2real generalization performance. The dataset will be made publicly available upon acceptance.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MoCap-less Quantitative Evaluation of Ego-Pose Estimation Without Ground Truth Measurements</title>
+      <link>https://steevenjanny.github.io/post/mocapless/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://steevenjanny.github.io/post/mocapless/</guid>
+      <description>&lt;p&gt;The emergence of data-driven approaches for control and planning in robotics have highlighted the need for developing experimental robotic platforms for data collection. However, their implementation is often complex and expensive, in particular for flying and terrestrial robots where the precise estimation of the position requires motion capture devices (MoCap) or Lidar. In order to simplify the use of a robotic platform dedicated to research on a wide range of indoor and outdoor environments, we present a data validation tool for ego-pose estimation that does not require any equipment other than the on-board camera. The method and tool allow a rapid, visual and quantitative evaluation of the quality of ego-pose sensors and are sensitive to different sources of flaws in the acquisition chain, ranging from desynchronization of the sensor flows to misevaluation of the geometric parameters of the robotic platform. Using computer vision, the information from the sensors is used to calculate the motion of a semantic scene point through its projection to the 2D image space of the on-board camera. The deviations of these keypoints from references created with a semi-automatic tool allow rapid and simple quality assessment of the data collected on the platform. To demonstrate the performance of our method, we evaluate it on two challenging standard UAV datasets as well as one dataset taken from a terrestrial robot.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Attended temperature scaling: a practical approach for calibrating deep neural networks</title>
+      <link>https://steevenjanny.github.io/post/attendedtemperature/</link>
+      <pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>https://steevenjanny.github.io/post/attendedtemperature/</guid>
+      <description>&lt;p&gt;Recently, Deep Neural Networks (DNNs) have been achieving impressive results on wide range of tasks. However, they suffer from being well-calibrated. In decision-making applications, such as autonomous driving or medical diagnosing, the confidence of deep networks plays an important role to bring the trust and reliability to the system. To calibrate the deep networks&amp;rsquo; confidence, many probabilistic and measure-based approaches are proposed. Temperature Scaling (TS) is a state-of-the-art among measure-based calibration methods which has low time and memory complexity as well as effectiveness. In this paper, we study TS and show it does not work properly when the validation set that TS uses for calibration has small size or contains noisy-labeled samples. TS also cannot calibrate highly accurate networks as well as non-highly accurate ones. Accordingly, we propose Attended Temperature Scaling (ATS) which preserves the advantages of TS while improves calibration in aforementioned challenging situations. We provide theoretical justifications for ATS and assess its effectiveness on wide range of deep models and datasets. We also compare the calibration results of TS and ATS on skin lesion detection application as a practical problem where well-calibrated system can play important role in making a decision.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
