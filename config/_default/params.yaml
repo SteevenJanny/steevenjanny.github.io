@@ -6,10 +6,9 @@
 # Appearance
 
 appearance:
-  theme_day: minimal
   theme_night: minimal
-  font: minimal
-  font_size: L
+  font: native
+  font_size: S
 
 # SEO
 
@@ -17,9 +16,9 @@ marketing:
   seo:
     site_type: Person
     local_business_type: ''
-    org_name: ''
-    description: 'A highly-customizable Hugo academic resume theme powered by Wowchemy website builder.'
-    twitter: 'wowchemy'
+    org_name: 'Steeven Janny'
+    description: 'Steeven Janny is a PhD student in Deep Learning, Physics and Robotics'
+    twitter: 'JannySteeven'
   analytics:
     google_analytics: ''
     baidu_tongji: ''
@@ -32,11 +31,11 @@ marketing:
 header:
   navbar:
     enable: true
-    align: l
+    align: r
     show_logo: true
     show_language: false
-    show_day_night: true
-    show_search: true
+    show_day_night: false
+    show_search: false
     highlight_active_link: true
 
 # Site footer
