@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 # Display name
 title: Steeven Janny
 
@@ -40,10 +41,20 @@ education:
 # For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "/#contact" for contact widget.
+=======
+title: Steeven Janny
+role: PhD Student
+avatar_filename: save_20210118_140125.jpg
+bio: My research interests include distributed robotics, mobile computing and
+  programmable matter.
+interests:
+  - Artificial Intelligence
+  - Computational Linguistics
+  - Information Retrieval
 social:
   - icon: envelope
     icon_pack: fas
-    link: '/#contact'
+    link: /#contact
   - icon: twitter
     icon_pack: fab
     link: https://twitter.com/JannySteeven
@@ -68,6 +79,24 @@ social:
 email: 'steeven.janny@insa-lyon.fr'
 
 # Highlight the author in author lists? (true/false)
+=======
+    link: https://www.linkedin.com/
+organizations:
+  - name: Stanford University
+    url: https://www.stanford.edu/
+education:
+  courses:
+    - course: PhD in Artificial Intelligence
+      institution: Stanford University
+      year: 2012
+    - course: MEng in Artificial Intelligence
+      institution: Massachusetts Institute of Technology
+      year: 2009
+    - course: BSc in Artificial Intelligence
+      institution: Massachusetts Institute of Technology
+      year: 2008
+email: ""
+superuser: true
 highlight_name: true
 
 ---
@@ -77,3 +106,4 @@ Hi! I am a PhD Student at [INSA Lyon](https://www.insa-lyon.fr/) working jointly
 I am interested in physics-involved machine learning problem, such as future forecasting of fluid flow, dynamical system modelling/control, and robotics. I like to work on hybrid methods joining physical prior knowledge with cutting-edge machine learning techniques to enjoy the benefits of both worlds !
 
 I received two master's degrees, one in electrical engineering and signal processing, and another in artificial intelligence. I am also an " _agrégatif_ " teacher in engineering and industrial data processing.
+
