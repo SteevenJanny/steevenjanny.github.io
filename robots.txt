@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://steevenjanny.github.io/sitemap.xml
