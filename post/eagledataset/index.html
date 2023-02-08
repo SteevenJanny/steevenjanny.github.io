@@ -56,10 +56,10 @@
   
     
   
-  <meta name="description" content="To appear in Conference on Decision and Control (CDC 2022)" />
+  <meta name="description" content="ICLR 2023 (Poster)" />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://steevenjanny.github.io/post/reducedstatespace/" />
+  <link rel="alternate" hreflang="en-us" href="https://steevenjanny.github.io/post/eagledataset/" />
 
   
   
@@ -274,7 +274,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
 
-  <link rel="canonical" href="https://steevenjanny.github.io/post/reducedstatespace/" />
+  <link rel="canonical" href="https://steevenjanny.github.io/post/eagledataset/" />
 
   
   
@@ -299,18 +299,18 @@
     <meta property="twitter:creator" content="@JannySteeven" />
   
   <meta property="og:site_name" content="Steeven Janny" />
-  <meta property="og:url" content="https://steevenjanny.github.io/post/reducedstatespace/" />
-  <meta property="og:title" content="Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical Approach | Steeven Janny" />
-  <meta property="og:description" content="To appear in Conference on Decision and Control (CDC 2022)" /><meta property="og:image" content="https://steevenjanny.github.io/post/reducedstatespace/featured.png" />
-    <meta property="twitter:image" content="https://steevenjanny.github.io/post/reducedstatespace/featured.png" /><meta property="og:locale" content="en-us" />
+  <meta property="og:url" content="https://steevenjanny.github.io/post/eagledataset/" />
+  <meta property="og:title" content="EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers | Steeven Janny" />
+  <meta property="og:description" content="ICLR 2023 (Poster)" /><meta property="og:image" content="https://steevenjanny.github.io/post/eagledataset/featured.png" />
+    <meta property="twitter:image" content="https://steevenjanny.github.io/post/eagledataset/featured.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2021-03-23T00:00:00&#43;00:00"
+        content="2023-01-26T00:00:00&#43;00:00"
       />
     
-    <meta property="article:modified_time" content="2022-04-19T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2023-01-26T00:00:00&#43;00:00">
   
 
   
@@ -334,16 +334,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://steevenjanny.github.io/post/reducedstatespace/"
+    "@id": "https://steevenjanny.github.io/post/eagledataset/"
   },
-  "headline": "Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical Approach",
+  "headline": "EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers",
   
   "image": [
-    "https://steevenjanny.github.io/post/reducedstatespace/featured.png"
+    "https://steevenjanny.github.io/post/eagledataset/featured.png"
   ],
   
-  "datePublished": "2021-03-23T00:00:00Z",
-  "dateModified": "2022-04-19T00:00:00Z",
+  "datePublished": "2023-01-26T00:00:00Z",
+  "dateModified": "2023-01-26T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -358,7 +358,7 @@
       "url": "https://steevenjanny.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "To appear in Conference on Decision and Control (CDC 2022)"
+  "description": "ICLR 2023 (Poster)"
 }
 </script>
 
@@ -374,11 +374,11 @@
 
 
 
-  <title>Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical Approach | Steeven Janny</title>
+  <title>EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers | Steeven Janny</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  dark " data-wc-page-id="c726f3e734b103843e900492418015d4" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  dark " data-wc-page-id="c148e5dcfa797ceefb89cf5ede039494" >
 
   
   
@@ -692,7 +692,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical Approach</h1>
+  <h1>EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers</h1>
 
   
 
@@ -710,9 +710,10 @@
 
   <span class="author-highlighted">
       Steeven Janny</span>, <span >
-      Quentin Possamaï</span>, <span >
-      Laurent Bako</span>, <span >
+      Aurélien Bénéteau</span>, <span >
       Madiha Nadri</span>, <span >
+      Julie Digne</span>, <span >
+      Nicolas Thome</span>, <span >
       Christian Wolf</span>
   </div>
   
@@ -724,7 +725,7 @@
     
       
     
-    Apr 19, 2022
+    Jan 26, 2023
   </span>
   
 
@@ -769,15 +770,39 @@
 
 
 
-<a class="btn btn-outline-primary btn-page-header" href="https://arxiv.org/abs/2206.04791" target="_blank" rel="noopener">
+<a class="btn btn-outline-primary btn-page-header" href="https://openreview.net/forum?id=mfIX4QpsARJ" target="_blank" rel="noopener">
   PDF
 </a>
 
 
 
 <a href="#" class="btn btn-outline-primary btn-page-header js-cite-modal"
-        data-filename="/post/reducedstatespace/cite.bib">
+        data-filename="/post/eagledataset/cite.bib">
   Cite
+</a>
+
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary btn-page-header" href="https://github.com/eagle-dataset/EagleMeshTransformer" target="_blank" rel="noopener">
+  Code
+</a>
+
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary btn-page-header" href="https://datasets.liris.cnrs.fr/eagle-version1" target="_blank" rel="noopener">
+  Dataset
+</a>
+
+
+
+<a class="btn btn-outline-primary btn-page-header" href="https://eagle-dataset.github.io/" target="_blank" rel="noopener">
+  Project
 </a>
 
 
@@ -790,19 +815,15 @@
 
 
 
-
-
-
-
 </div>
 
 
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 359px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 425px;">
   <div style="position: relative">
-    <img src="/post/reducedstatespace/featured_hu624fc68c284fd74541e4f57a3b534cfd_98139_720x2500_fit_q75_h2_lanczos_3.webp" width="720" height="359" alt="" class="featured-image">
+    <img src="/post/eagledataset/featured_hub4a19bfa3893c2a4b75091751a2a8cfb_846699_720x2500_fit_q75_h2_lanczos_3.webp" width="720" height="425" alt="" class="featured-image">
     
   </div>
 </div>
@@ -812,7 +833,19 @@
   <div class="article-container">
 
     <div class="article-style">
-      <p>The identification of a nonlinear dynamic model is an open topic in control theory, especially from sparse input-output measurements. A fundamental challenge of this problem is that very few to zero prior knowledge is available on both the state and the nonlinear system model. To cope with this challenge, we investigate the effectiveness of deep learning in the modeling of dynamic systems with nonlinear behavior by advocating an approach which relies on three main ingredients: (i) we show that under some structural conditions on the to-be-identified model, the state can be expressed in function of a sequence of the past inputs and outputs; (ii) this relation which we call the state map can be modelled by resorting to the well-documented approximation power of deep neural networks; (iii) taking then advantage of existing learning schemes, a state-space model can be finally identified. After the formulation and analysis of the approach, we show its ability to identify three different nonlinear systems. The performances are evaluated in terms of open-loop prediction on test data generated in simulation as well as a real world data-set of unmanned aerial vehicle flight measurements.</p>
+      <p>Estimating fluid dynamics is classically done through the simulation and integration of numerical models solving the
+Navier-Stokes equations, which is computationally complex and time-consuming even on high-end hardware. This is a
+notoriously hard problem to solve, which has recently been addressed with machine learning, in particular graph neural
+networks (GNN) and variants trained and evaluated on datasets of static objects in static scenes with fixed geometry. We
+attempt to go beyond existing work in complexity and introduce a new model, method and benchmark. We propose EAGLE, a
+large-scale dataset of ∼1.1 million 2D meshes resulting from simulations of unsteady fluid dynamics caused by a moving
+flow source interacting with nonlinear scene structure, comprised of 600 different scenes of three different types. To
+perform future forecasting of pressure and velocity on the challenging EAGLE dataset, we introduce a new mesh
+transformer. It leverages node clustering, graph pooling and global attention to learn long-range dependencies between
+spatially distant data points without needing a large number of iterations, as existing GNN methods do. We show that our
+transformer outperforms state-of-the-art performance on, both, existing synthetic and real datasets and on EAGLE.
+Finally, we highlight that our approach learns to attend to airflow, integrating complex information in a single
+iteration.</p>
 
     </div>
 
@@ -834,7 +867,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://steevenjanny.github.io/post/reducedstatespace/&amp;text=Learning%20Reduced%20Nonlinear%20State-Space%20Models:%20an%20Output-Error%20Based%20Canonical%20Approach" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://steevenjanny.github.io/post/eagledataset/&amp;text=EAGLE:%20Large-scale%20Learning%20of%20Turbulent%20Fluid%20Dynamics%20with%20Mesh%20Transformers" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -847,7 +880,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://steevenjanny.github.io/post/reducedstatespace/&amp;t=Learning%20Reduced%20Nonlinear%20State-Space%20Models:%20an%20Output-Error%20Based%20Canonical%20Approach" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://steevenjanny.github.io/post/eagledataset/&amp;t=EAGLE:%20Large-scale%20Learning%20of%20Turbulent%20Fluid%20Dynamics%20with%20Mesh%20Transformers" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -860,7 +893,7 @@
       
       
       <li>
-        <a href="mailto:?subject=Learning%20Reduced%20Nonlinear%20State-Space%20Models:%20an%20Output-Error%20Based%20Canonical%20Approach&amp;body=https://steevenjanny.github.io/post/reducedstatespace/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+        <a href="mailto:?subject=EAGLE:%20Large-scale%20Learning%20of%20Turbulent%20Fluid%20Dynamics%20with%20Mesh%20Transformers&amp;body=https://steevenjanny.github.io/post/eagledataset/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -873,7 +906,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://steevenjanny.github.io/post/reducedstatespace/&amp;title=Learning%20Reduced%20Nonlinear%20State-Space%20Models:%20an%20Output-Error%20Based%20Canonical%20Approach" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+        <a href="https://www.linkedin.com/shareArticle?url=https://steevenjanny.github.io/post/eagledataset/&amp;title=EAGLE:%20Large-scale%20Learning%20of%20Turbulent%20Fluid%20Dynamics%20with%20Mesh%20Transformers" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -886,7 +919,7 @@
       
       
       <li>
-        <a href="whatsapp://send?text=Learning%20Reduced%20Nonlinear%20State-Space%20Models:%20an%20Output-Error%20Based%20Canonical%20Approach%20https://steevenjanny.github.io/post/reducedstatespace/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+        <a href="whatsapp://send?text=EAGLE:%20Large-scale%20Learning%20of%20Turbulent%20Fluid%20Dynamics%20with%20Mesh%20Transformers%20https://steevenjanny.github.io/post/eagledataset/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -899,7 +932,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://steevenjanny.github.io/post/reducedstatespace/&amp;title=Learning%20Reduced%20Nonlinear%20State-Space%20Models:%20an%20Output-Error%20Based%20Canonical%20Approach" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://steevenjanny.github.io/post/eagledataset/&amp;title=EAGLE:%20Large-scale%20Learning%20of%20Turbulent%20Fluid%20Dynamics%20with%20Mesh%20Transformers" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1031,6 +1064,12 @@
 
     </div>
   </div>
+
+
+  
+    
+
+
 
 
   
