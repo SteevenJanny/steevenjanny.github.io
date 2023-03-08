@@ -1,48 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>1 | Steeven Janny</title>
-    <link>https://steevenjanny.github.io/publication-type/1/</link>
-      <atom:link href="https://steevenjanny.github.io/publication-type/1/index.xml" rel="self" type="application/rss+xml" />
-    <description>1</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 01 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <title>highlights | Steeven Janny</title>
+    <link>https://steevenjanny.github.io/tag/highlights/</link>
+      <atom:link href="https://steevenjanny.github.io/tag/highlights/index.xml" rel="self" type="application/rss+xml" />
+    <description>highlights</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 26 Jan 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://steevenjanny.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
-      <title>1</title>
-      <link>https://steevenjanny.github.io/publication-type/1/</link>
+      <title>highlights</title>
+      <link>https://steevenjanny.github.io/tag/highlights/</link>
     </image>
-    
-    <item>
-      <title>Deep Learning of a Communication Policy for an Event-Triggered Observer for Linear Systems</title>
-      <link>https://steevenjanny.github.io/post/eventtrigger/</link>
-      <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://steevenjanny.github.io/post/eventtrigger/</guid>
-      <description>&lt;p&gt;The problem of learning a communication policy is investigated in this paper for the
-design of an event-triggered observer for discrete-time LTI systems. Firstly, the event-triggered
-observer problem is formulated as an optimisation problem. The existence of a solution to this
-problem (communication policy) is investigated and it is verified if this solution still preserves
-the stability of the estimation error dynamics. Secondly, an algorithm is provided to approximate
-this optimal solution using neural networks and deep learning. Simulation examples are provided
-to illustrate the effectiveness of the learned communication policies.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Deep Learning-based Output Tracking via Regulation and Contraction Theory </title>
-      <link>https://steevenjanny.github.io/post/outputregulation/</link>
-      <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://steevenjanny.github.io/post/outputregulation/</guid>
-      <description>&lt;p&gt;In this paper, we deal with output tracking control problems for input-affine nonlinear systems. We propose a deep
-learning-based solution whose foundations lay in control theory. We design a two-step controller: a contraction-based
-feedback stabilizer and feedforward action. The first component guarantees convergence to the steady-state trajectory on
-which the tracking error is zero. The second one is inherited from output regulation theory and provides forward
-invariantness of such a trajectory along the solutions of the system. To alleviate the need for heavy analytical
-computations or online optimization, we rely on deep neural networks and link their approximation error to the tracking
-one. Mimicking the analytical control structure, we split the learning task into two separate modules. For the
-stabilizer module, we propose a switching objective function balancing feasibility of the solution and performance
-improvement. We test our solution in a challenging environment to validate the proposed design.&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical Approach</title>
@@ -89,25 +57,6 @@ spatially distant data points without needing a large number of iterations, as e
 transformer outperforms state-of-the-art performance on, both, existing synthetic and real datasets and on EAGLE.
 Finally, we highlight that our approach learns to attend to airflow, integrating complex information in a single
 iteration.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>An example conference paper</title>
-      <link>https://steevenjanny.github.io/publication/example/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>https://steevenjanny.github.io/publication/example/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

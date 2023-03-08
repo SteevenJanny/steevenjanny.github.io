@@ -13,15 +13,6 @@
     </image>
     
     <item>
-      <title>Learning to estimate UAV created turbulence from scene structure observed by onboard cameras</title>
-      <link>https://steevenjanny.github.io/post/turbulences/</link>
-      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
-      <guid>https://steevenjanny.github.io/post/turbulences/</guid>
-      <description>&lt;p&gt;Controlling UAV flights precisely requires a realistic dynamic model and accurate state estimates from onboard sensors like UAV, GPS and visual observations. Obtaining a precise dynamic model is extremely difficult, as important aerodynamic effects are hard to model, in particular ground effect and other turbulences. While machine learning has been used in the past to estimate UAV created turbulence, this was restricted to flat grounds or diffuse in-flight air turbulences, both without taking into account obstacles. In this work we address the complex problem of estimating in-flight turbulences caused by obstacles, in particular the complex structures in cluttered environments. We learn a mapping from control input and images captured by onboard cameras to turbulence. In a large-scale setting, we train a model over a large number of different simulated photo-realistic environments loaded into the Habitat simulator augmented with a dynamic UAV model and an analytic ground effect model. We transfer the model from simulation to a real environment and evaluate on real UAV flights from the EuRoC-MAV dataset, showing that the model is capable of good sim2real generalization performance. The dataset will be made publicly available upon acceptance.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>MoCap-less Quantitative Evaluation of Ego-Pose Estimation Without Ground Truth Measurements</title>
       <link>https://steevenjanny.github.io/post/mocapless/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
@@ -36,6 +27,15 @@
       <pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate>
       <guid>https://steevenjanny.github.io/post/attendedtemperature/</guid>
       <description>&lt;p&gt;Recently, Deep Neural Networks (DNNs) have been achieving impressive results on wide range of tasks. However, they suffer from being well-calibrated. In decision-making applications, such as autonomous driving or medical diagnosing, the confidence of deep networks plays an important role to bring the trust and reliability to the system. To calibrate the deep networks&amp;rsquo; confidence, many probabilistic and measure-based approaches are proposed. Temperature Scaling (TS) is a state-of-the-art among measure-based calibration methods which has low time and memory complexity as well as effectiveness. In this paper, we study TS and show it does not work properly when the validation set that TS uses for calibration has small size or contains noisy-labeled samples. TS also cannot calibrate highly accurate networks as well as non-highly accurate ones. Accordingly, we propose Attended Temperature Scaling (ATS) which preserves the advantages of TS while improves calibration in aforementioned challenging situations. We provide theoretical justifications for ATS and assess its effectiveness on wide range of deep models and datasets. We also compare the calibration results of TS and ATS on skin lesion detection application as a practical problem where well-calibrated system can play important role in making a decision.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Learning to estimate UAV created turbulence from scene structure observed by onboard cameras</title>
+      <link>https://steevenjanny.github.io/post/turbulences/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      <guid>https://steevenjanny.github.io/post/turbulences/</guid>
+      <description>&lt;p&gt;Controlling UAV flights precisely requires a realistic dynamic model and accurate state estimates from onboard sensors like UAV, GPS and visual observations. Obtaining a precise dynamic model is extremely difficult, as important aerodynamic effects are hard to model, in particular ground effect and other turbulences. While machine learning has been used in the past to estimate UAV created turbulence, this was restricted to flat grounds or diffuse in-flight air turbulences, both without taking into account obstacles. In this work we address the complex problem of estimating in-flight turbulences caused by obstacles, in particular the complex structures in cluttered environments. We learn a mapping from control input and images captured by onboard cameras to turbulence. In a large-scale setting, we train a model over a large number of different simulated photo-realistic environments loaded into the Habitat simulator augmented with a dynamic UAV model and an analytic ground effect model. We transfer the model from simulation to a real environment and evaluate on real UAV flights from the EuRoC-MAV dataset, showing that the model is capable of good sim2real generalization performance. The dataset will be made publicly available upon acceptance.&lt;/p&gt;
 </description>
     </item>
     
