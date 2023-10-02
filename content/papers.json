@@ -1,0 +1,176 @@
+{
+  "eagledataset": {
+    "title": "EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers",
+    "authors": "Steeven Janny, Aurélien Benetteau, Madiha Nadri, Julie Digne, Nicolas Thome, Christian Wolf",
+    "venue": "International Conference on Learning Representations (ICLR), Poster",
+    "year": "2023",
+    "url_pdf": "https://openreview.net/forum?id=mfIX4QpsARJ",
+    "url_code": "https://github.com/eagle-dataset/EagleMeshTransformer",
+    "url_dataset": "https://datasets.liris.cnrs.fr/eagle-version1",
+    "url_poster": "",
+    "url_project": "https://eagle-dataset.github.io/",
+    "url_source": "",
+    "url_video": "",
+    "tags": [
+      "highlights",
+      "physics"
+    ]
+  },
+  "filteredcophy": {
+    "title": "Filtered-CoPhy: Unsupervised Learning of Counterfactual Physics in Pixel Space",
+    "authors": "Steeven Janny, Fabien Baradel, Natalia Neverova, Madiha Nadri, Christian Wolf",
+    "venue": "International Conference on Learning Representations (ICLR), Oral",
+    "year": "2022",
+    "url_pdf": "https://openreview.net/forum?id=1L0C5ROtFp",
+    "url_code": "https://github.com/filteredcophy/FilteredCoPhy",
+    "url_dataset": "https://zenodo.org/record/5906002#.YtaA1uxBxmr",
+    "url_poster": "",
+    "url_project": "https://filteredcophy.github.io/",
+    "url_source": "",
+    "url_video": "https://www.youtube.com/watch?v=y40wzlfIr8g&t=7s&ab_channel=SteevenJanny",
+    "tags": [
+      "highlights",
+      "physics"
+    ]
+  },
+  "deepkkl": {
+    "title": "Deep KKL: Data-driven Output Prediction for Non-Linear Systems",
+    "authors": "Steeven Janny, Vincent Andrieu, Madiha Nadri, Christian Wolf",
+    "venue": "Conference on Decision and Control (CDC)",
+    "year": "2021",
+    "url_pdf": "https://arxiv.org/abs/2103.12443",
+    "url_code": "https://github.com/SteevenJanny/DeepKKL",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "",
+    "url_source": "",
+    "url_video": "https://www.youtube.com/watch?v=UsqLK2ONA3c",
+    "tags": [
+      "highlights",
+      "control"
+    ]
+  },
+  "reducedstatespace": {
+    "title": "Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical Approach",
+    "authors": "Steeven Janny, Quentin Possamaï, Laurent Bako, Madiha Nadri, Christian Wolf",
+    "venue": "Conference on Decision and Control (CDC)",
+    "year": "2022",
+    "url_pdf": "https://arxiv.org/abs/2206.04791",
+    "url_code": "https://github.com/SteevenJanny/CanonicalStateSpace",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "",
+    "url_source": "",
+    "url_video": "",
+    "tags": [
+      "highlights",
+      "control"
+    ]
+  },
+  "outputregulation": {
+    "title": "Deep Learning-based Output Tracking via Regulation and Contraction Theory",
+    "authors": "Samuele Zoboli, Steeven Janny, Mattia Giaccagli",
+    "venue": "International Federation of Automatic Control (IFAC)",
+    "year": "2023",
+    "url_pdf": "https://hal.science/hal-03912988/",
+    "url_code": "https://github.com/SteevenJanny/OutputTracking_contraction",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "",
+    "url_source": "",
+    "url_video": "",
+    "tags": [
+      "control"
+    ]
+  },
+  "eventtrigger": {
+    "title": "Deep Learning of a Communication Policy for an Event-Triggered Observer for Linear Systems",
+    "authors": "Mathieu Marchand, Vincent Andrieu, Sylvain Bertrand, Steeven Janny, Hélène Piet-Lahanier",
+    "venue": "International Federation of Automatic Control (IFAC)",
+    "year": "2023",
+    "url_pdf": "https://hal.science/hal-03945265/document",
+    "url_code": "",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "",
+    "url_source": "",
+    "url_video": "",
+    "tags": [
+      "control"
+    ]
+  },
+  "turbulences": {
+    "title": "Learning to estimate UAV created turbulence from scene structure observed by onboard cameras",
+    "authors": "Quentin Possamaï, Steeven Janny, Madiha Nadri, Laurent Bako, Christian Wolf\n",
+    "venue": "Preprint",
+    "year": "2022",
+    "url_pdf": "https://arxiv.org/abs/2203.14726",
+    "url_code": "",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "",
+    "url_source": "",
+    "url_video": "",
+    "tags": []
+  },
+  "informatiqueellipses": {
+    "title": "ITC, informatique tronc commun PSI, MP, PC",
+    "authors": "Steeven Janny, Wenqi Shu-Quartier-Dit-Maire, Théodore Cherrière, Jeanne Redaud",
+    "venue": "Editions Ellipses",
+    "year": "2022",
+    "url_pdf": "",
+    "url_code": "",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "",
+    "url_source": "https://www.amazon.fr/ITC-informatique-tronc-commun-PSI/dp/2340068827",
+    "url_video": "",
+    "tags": [
+      "books"
+    ]
+  },
+  "physiqueellipses": {
+    "title": "Physique-chimie PSI-PSI* Concours X, ENS, CentraleSupélec, Mines-Ponts, CCINP",
+    "authors": "Théodore Cherrière, Steeven Janny, Jeanne Redaud, Alexandre Daby-Seesaram",
+    "venue": "Editions Ellipses",
+    "year": "2020",
+    "url_pdf": "",
+    "url_code": "",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "",
+    "url_source": "https://www.amazon.fr/Oraux-corrig%5c%C3%5c%A9s-comment%5c%C3%5c%A9s-physique-chimie-PSI-PSI/dp/2340037514",
+    "url_video": "",
+    "tags": [
+      "books"
+    ]
+  },
+  "mocapless": {
+    "title": "MoCap-less Quantitative Evaluation of Ego-Pose Estimation Without Ground Truth Measurements",
+    "authors": "Quentin Possamaï, Steeven Janny, Guillaume Bono, Madiha Nadri, Laurent Bako, Christian Wolf",
+    "venue": "Preprint",
+    "year": "2022",
+    "url_pdf": "https://arxiv.org/abs/2202.00403",
+    "url_code": "https://github.com/quentinpossamai/vice",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "",
+    "url_source": "",
+    "url_video": "https://www.youtube.com/playlist?list=PLRsYEUUGzW54jqsfRdkNAYjZUnoEM4uhM",
+    "tags": []
+  },
+  "attendedtemperature": {
+    "title": "Attended temperature scaling: a practical approach for calibrating deep neural networks",
+    "authors": "Azadeh Sadat Mozafari, Hugo Siqueira Gomes, Wilson Leao, Steeven Janny, Christian Gagné",
+    "venue": "Preprint",
+    "year": "2018",
+    "url_pdf": "https://arxiv.org/abs/1810.11586",
+    "url_code": "",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "",
+    "url_source": "",
+    "url_video": "",
+    "tags": []
+  }
+}
