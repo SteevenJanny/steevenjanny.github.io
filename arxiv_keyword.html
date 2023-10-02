@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content="Steeven Janny"/>
+  <title>Steeven Janny</title>
+  <!--    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>-->
+  <link href="css/styles.css" rel="stylesheet"/>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+          type="text/javascript"></script>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300ital…alic%7CVarela+Round:400%7CBungee+Shade:regular%7CRoboto:300,regular,500"
+        media="all">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"></script>
+
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Steeven Janny</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+            class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#posts">Publications</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#education">Education</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#misc">Misc</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <!--    Simple form with a button to send inputs-->
+  </br>
+  <div class="row">
+    <div class="col">
+      <h1 class="display-4 text-center">ArXiv authors by Keywords</h1>
+      <p class="lead text-center">Enter keywords in the field below. The tool will query the ArXiv API for papers
+        containing them either in <b>title</b> or in the <b>abstract</b> (or both), and display each author with
+        a square,
+        which color depends on the number of papers co-authored by this author.</p>
+    </div>
+  </div>
+  </br>
+  <div class="row">
+    <div class="col text-center">
+      <form id="myForm" style="margin:auto">
+        Keywords:
+        <input type="text" name="keyword" value="" id="keywords_field">
+        <input class="btn btn-primary" type="button" name="button" value="Search"
+               onClick="testResults(this.form)" id="submit_button">
+        <!-- add radio for search in title, abstract, or global-->
+        </br>
+        <input type="radio" id="title" name="search_type" value="title" checked>
+        <label for="title">Search in title</label>
+        <input type="radio" id="abstract" name="search_type" value="abstract">
+        <label for="abstract">Search in abstract</label>
+        <input type="radio" id="all" name="search_type" value="all">
+        <label for="all">Search all</label>
+        </br>
+        <input type="checkbox" id="singleton" name="singleton" value="singleton" checked>
+        <label for="singleton">Include single-paper authors</label>
+      </form>
+      <div id="loading_anim"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center"><h4 id="graph_title">Enter keywords</h4></div>
+  </div>
+  <div class="row" style="border:none">
+    <div class="container" style="padding-top: 20px">
+      <div id="svg_container2" style="width: 50%; margin:auto"></div>
+    </div>
+  </div>
+
+  <br/>
+  <div class="row">
+    <div class="col justify-content-evenly text-info">
+      <p> Usage: </p>
+      <ul>
+        <li>Enter keywords in the field above, for instance "<i>physics</i>" and click on the button
+          "<i>Search</i>".
+        </li>
+        <li>Wait for the results to appear. It may take a few seconds...</li>
+        <li>Hover the squares to see the author's name and number of papers.</li>
+        <li>Click on a square to see the list of its publication (below the figure)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-black-50 justify-content-evenly">
+      <p>Caveat: I am still trying to understand how the ArXiv API works: search results differ from the ones on the website. Stemming does not work,
+        "<i>navigat</i>" returns nothing... I suggest to try different keywords to compare results, like "<i>navigate</i>","<i>navigating</i>" and "<i>navigation</i>". Also, it is limited to the first 10,000 results.
+      </p>
+    </div>
+  </div>
+  <hr/>
+  <div class="row" style="border:none">
+    <div class="col">
+      <div class="text-center">
+        <h2>Looking for someone ?</h2>
+        <div class="col justify-content-evenly text-info">
+          <p> Enter the name in the field below, and we will highlight the matching squares.</p>
+        </div>
+        <form id="myForm2" style="margin:auto">
+          <!--                    This form calls highlightAuthor every time the user enter something, immediately-->
+          <input type="text" name="name" value="" id="name_field" oninput="highlightAuthor(this.form)">
+        </form>
+      </div>
+    </div>
+    <!--        create placeholder for papers title, and author list-->
+    <div class="col justify-content-evenly">
+      <div class="text-center">
+        <h2>Paper list:</h2>
+      </div>
+      <div id="paper_list"></div>
+    </div>
+
+  </div>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+
+  <!--    <div class="row" style="border:none">-->
+  <!--        <div class="col-sm" style="padding-top: 20px">-->
+  <!--            <div id="svg_container1" style="width: 100%; margin:auto"></div>-->
+  <!--        </div>-->
+  <!--        <div class="col-sm" style="padding-top: 20px">-->
+  <!--            <div class="container" style="padding-top: 20px"></div>-->
+  <!--        </div>-->
+  <!--    </div>-->
+  <!--    <br/>-->
+  <!--    <hr/>-->
+  <!--    <div class="row">-->
+  <!--        <div class="col">-->
+  <!--            <div id="results"></div>-->
+  <!--        </div>-->
+  <!--    </div>-->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3-color@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-interpolate@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-scale-chromatic@3"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="js/arxiv_api.js"></script>
+<script src="js/graph1.js"></script>
+<script src="js/graph2.js"></script>
+</body>
+</html>
