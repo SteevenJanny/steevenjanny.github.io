@@ -7,7 +7,7 @@ function string_sanitizer(str) {
 function forge_query(keyword){
     // Check value of radio buttons
     var radio_buttons = document.getElementsByName("search_type");
-    var query = "http://export.arxiv.org/api/query?search_query=";
+    var query = "https://export.arxiv.org/api/query?search_query=";
     query +=  "(cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CV+OR+cat:cs.NE)"
 
     if (radio_buttons[2].checked) {
