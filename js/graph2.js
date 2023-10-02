@@ -231,7 +231,6 @@ function highlightAuthor(input) {
 
     list_rects.selectAll("rect").each(function (d) {
             var author_name = d3.select(this).attr("author_name");
-            console.log(author_name, pattern)
             if (author_name.toLowerCase().includes(pattern.toLowerCase()) && pattern !== "") {
                 // Highlight rectangle and glowing effect
                 d3.select(this).attr("stroke", "black").attr("stroke-width", 2)

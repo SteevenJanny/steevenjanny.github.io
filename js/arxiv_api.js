@@ -55,7 +55,6 @@ function arxiv_search(keyword) {
             updateChart1(cumsum);
 
             var authors = paper_per_author(results);
-            // console.log(authors);
             updateChart2(authors);
             if (results.length > 0) {
                 loading_anim.innerHTML = "";
