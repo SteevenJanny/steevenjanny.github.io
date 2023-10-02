@@ -194,6 +194,8 @@ function updateChart2(papers_by_author) {
         })
             .on("mouseout", function () {
                 author_name_box.attr("opacity", 0);
+                // prevent mouse to interact with author name box
+                d3.select("#author_name_box").attr("pointer-events", "none");
                 if (d3.select(this).attr("identified") === "false") {
                     d3.select(this).attr("stroke", "none");
                 } else {
