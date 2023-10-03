@@ -206,7 +206,7 @@ function updateChart2(papers_by_author) {
                 // Display papers by author in div id="paper_list"
                 var author_name = d3.select(this).attr("author_name");
                 var paper_list = papers_by_author[author_name];
-                var paper_list_html = "<h3>" + author_name + "</h3>";
+                var paper_list_html = "<h3 style=\"font-size: 2vw;\">" + author_name + "</h3>";
                 paper_list.forEach(function (paper) {
                         var paper_title = paper.title;
                         var paper_authors_list = paper.authors;
@@ -218,7 +218,7 @@ function updateChart2(papers_by_author) {
                             }
                         );
                         paper_authors = paper_authors.slice(0, -2);
-                        paper_list_html += "<p><a href='" + url + "' target='_blank'>" + paper_title + "</a><br>" + paper_authors + "<br>" + paper_date + "</p>";
+                        paper_list_html += "<p  style=\"font-size: 1vw;\" ><a href='" + url + "' target='_blank' >" + paper_title + "</a><br>" + paper_authors + "<br>" + paper_date + "</p>";
                     }
                 );
                 d3.select("#paper_list").html(paper_list_html);
