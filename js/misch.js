@@ -62,6 +62,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 function copy_to_clipboard() {
     // Get the text field
     var modal = document.getElementById("exampleModal");
+    var text = modal.getElementsByClassName("model-bib")[0].innerText;
     // Copy the text inside the text field
     navigator.clipboard.writeText(text);
 }
