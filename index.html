@@ -33,7 +33,7 @@
 </head>
 <body>
 <!-- Responsive navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark sticky-top">
     <div class="container">
         <a class="navbar-brand" href="#">Steeven Janny</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -55,7 +55,7 @@
     <div class="container" style="padding-top: 50px">
         <div class="row">
             <div class="col-12 col-lg-4 text-center" style="padding-bottom: inherit">
-                <img class="avatar avatar-circle" width="270" height="270" src="/assets/avatar.jpg"
+                <img class="avatar avatar-circle" src="/assets/avatar.jpg"
                      alt="Steeven Janny">
                 <br/>
                 <br/>
@@ -166,20 +166,20 @@
                     <!--                        <button type="button" class="btn btn-primary">Books</button>-->
                     <!--                    </div>-->
 
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-primary active" onclick="loadPapers()">
+                    <div class="btn-group btn-group-toggle flex-wrap d-flex" data-toggle="buttons">
+                        <label class="btn btn-primary active " onclick="loadPapers()">
                             <input type="radio" name="tags" id="all" autocomplete="off" checked> All
                         </label>
-                        <label class="btn btn-primary" onclick="loadPapers()">
+                        <label class="btn btn-primary " onclick="loadPapers()">
                             <input type="radio" name="tags" id="highlights" autocomplete="off"> Highlights
                         </label>
-                        <label class="btn btn-primary" onclick="loadPapers()">
+                        <label class="btn btn-primary " onclick="loadPapers()">
                             <input type="radio" name="tags" id="physics" autocomplete="off"> Physics & DL
                         </label>
-                        <label class="btn btn-primary" onclick="loadPapers()">
+                        <label class="btn btn-primary " onclick="loadPapers()">
                             <input type="radio" name="tags" id="control" autocomplete="off"> Control & DL
                         </label>
-                        <label class="btn btn-primary" onclick="loadPapers()">
+                        <label class="btn btn-primary " onclick="loadPapers()">
                             <input type="radio" name="tags" id="books" autocomplete="off"> Books
                         </label>
                     </div>
@@ -440,7 +440,8 @@
                 <div class="row">
                     <div class="col py-2">
                         <ul>
-                            <li>I made an online tool to explore ArXiv papers and authors in IA: <a href="arxiv_keyword.html">Go check it out!</a></li>
+                            <li>I made an online tool to explore ArXiv papers and authors in IA: <a
+                                    href="arxiv_keyword.html">Go check it out!</a></li>
                         </ul>
                     </div>
                 </div>
@@ -453,34 +454,56 @@
 </section>
 
 
-<section id="contact" style="margin-top: 50px; background-color: #efefef;height: 100px">
+<section id="contact" style="margin-top: 50px; background-color: #efefef;height: auto">
     <div class="container">
+        <div class="row" style="height: 25px"></div>
         <div class="row">
             <div class="section-heading col-12 col-lg-4 mb-3 mb-lg-0 d-flex flex-column align-items-center align-items-lg-start">
                 <h1 class="display-5" style=" margin: 0 0 10px">Contact</h1>
             </div>
             <div class="col-12 col-lg-8">
                 <div class="row">
-                    <div class="col">
-                        <i class="fa-li fas fa-envelope fa-2x" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-12">
-                        <span><a href="mailto:steeven.janny@insa-lyon.fr">steeven.janny@insa-lyon.fr</a></span>
+                    <div class="col py-2">
+                        <ul>
+                            <li><a href="mailto:steeven.janny@insa-lyon.fr">steeven.janny@insa-lyon.fr</a></li>
+                        </ul>
+                        <ul>
+                            <li>CPE, Lagepp, 3 Rue Victor Grignard, Bureau G231, Villeurbanne, 69100</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="row" style="margin-top: 25px">
-                    <div class="col">
-                        <i class="fa-li fas fa-map-marker fa-2x" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-12">
-                        <span>CPE, Lagepp, 3 Rue Victor Grignard, Bureau G231, Villeurbanne, 69100</span>
-                    </div>
-                </div>
             </div>
         </div>
+
     </div>
-    </div>
+    <!--    <div class="container">-->
+    <!--        <div class="row">-->
+    <!--            <div class="section-heading col-12 col-lg-4 mb-3 mb-lg-0 d-flex flex-column align-items-center align-items-lg-start">-->
+    <!--                <h1 class="display-5" style=" margin: 0 0 10px">Contact</h1>-->
+    <!--            </div>-->
+    <!--            <div class="col-12 col-lg-8">-->
+    <!--                <div class="row">-->
+    <!--                    <div class="col">-->
+    <!--                        <i class="fa-li fas fa-envelope fa-2x" aria-hidden="true"></i>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-12">-->
+    <!--                        <span><a href="mailto:steeven.janny@insa-lyon.fr">steeven.janny@insa-lyon.fr</a></span>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+
+    <!--                <div class="row" style="margin-top: 25px">-->
+    <!--                    <div class="col">-->
+    <!--                        <i class="fa-li fas fa-map-marker fa-2x" aria-hidden="true"></i>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-12">-->
+    <!--                        <span>CPE, Lagepp, 3 Rue Victor Grignard, Bureau G231, Villeurbanne, 69100</span>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    </div>-->
 </section>
 
 
@@ -490,6 +513,6 @@
 <br/>
 <br/>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="js/misch.js"></script>
+<script src="js/misc.js"></script>
 </body>
 </html>
