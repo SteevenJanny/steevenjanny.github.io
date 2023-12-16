@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/custom.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+<script>
+
+    var dt=0.05;
+    var T=30;
+    var N_agent= 5;
+
+    var graph_margin = {
+        top: 20,
+        right: 30,
+        bottom: 20,
+        left: 30
+    };
+
+    function f_oscillator(state) {
+        // Semi implicit Euler
+        var x = state.x;
+        var y = state.y;
+        var dx = y;
+        var dy = -(x + dt*dx)
+
+        return {
+            x: x + dt * dx,
+            y: y + dt * dy
+        };
+    }
+
+
+
+
+    // ------------------------------------------------- //
+    // 3D Graph of Linear Dynamics
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var xScale = d3.scaleLinear()
+        .domain([0, T])
+        .range([graph_margin.left, width - graph_margin.right]);
+    var yScale = d3.scaleLinear()
+        .domain([2, -2])
+        .range([graph_margin.top, height - graph_margin.bottom]);
+
+    var particle_set = graph.append("g")
+        .attr("id", "particle_set");
+
+
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+
+    graph.append("g")
+        .attr("transform", "translate(0," + (height / 2) + ")")
+        .call(xAxis);
+    graph.append("g")
+        .attr("transform", "translate(" + (graph_margin.left) + ",0)")
+        .call(yAxis);
+
+
+    var z0 = {
+        x: 0,
+        y: 1.5
+    };
+    var z = [z0];
+    var t = 0
+    var i = 0;
+    while (t < T) {
+        z.push(f_oscillator(z[i]));
+        t = t + dt;
+        i++;
+    }
+
+    var agents= [];
+    var agents_traj= [];
+    for (var i=0; i<N_agent; i++){
+        var agent = {
+            x: Math.random() * 4 - 2,
+            y: Math.random() * 4 - 2
+        }
+        agents.push(agent);
+        agents_traj.push([agent]);
+    }
+
+    var t = 0
+    var time_index = 0;
+
+    // time is dt * i, plot x function of time
+    var line = d3.line()
+        .x(function (d, i) {
+            return xScale(i * dt);
+        })
+        .y(function (d) {
+            return yScale(d.x);
+        });
+
+    graph.append("path")
+        .datum(z)
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .attr("d", line);
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    for (var i=0; i<N_agent; i++){
+        graph.append("path")
+            .attr("id", "agent_traj_"+i)
+            .datum(agents_traj[i])
+            .attr("fill", "none")
+            .attr("stroke", color(i))
+            .attr("stroke-width", 1.5)
+            .attr("d", line);
+        graph.append("circle")
+            .attr("id", "agent_"+i)
+            .attr("cx", xScale(0))
+            .attr("cy", yScale(agents[i].x))
+            .attr("r", 5)
+            .attr("fill", color(i))
+    }
+
+    // Draw the legend
+    var legend = graph.append("g")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 12)
+        .attr("text-anchor", "end")
+
+    var delta=115;
+    var length=20;
+
+    legend.append("rect")
+        .attr("x", width - delta-10)
+        .attr("y", 0)
+        .attr("width", delta+10)
+        .attr("height", 6 + 10*N_agent)
+        .attr("fill", "white")
+        .attr("stroke", "black")
+
+    legend.append("line")
+        .attr("x1", width - delta)
+        .attr("x2", width - delta +length)
+        .attr("y1", 10)
+        .attr("y2", 10)
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+    legend.append("text")
+        .attr("x", width -12)
+        .attr("y", 10)
+        .attr("dy", "0.32em")
+        .text("True trajectory")
+
+    for (var i=0; i<N_agent; i++){
+        legend.append("line")
+            .attr("x1", width - delta)
+            .attr("x2", width - delta +length)
+            .attr("y1", 25 + 5*i)
+            .attr("y2", 25 + 5*i)
+            .attr("stroke", color(i))
+            .attr("stroke-width", 2)
+    }
+    legend.append("foreignObject")
+        .attr("x", width - 100)
+        .attr("y", 22)
+        .attr("width", 100)
+        .attr("height", 100)
+        .append("xhtml:div")
+        .style("text-align", "center")
+        .html("Random initial <br/>conditions")
+
+
+
+    function simulate(){
+        for (var i = 0; i < N_agent; i++) {
+            var agent = agents[i];
+            agent = f_oscillator(agent);
+            var correction = {
+                x: agent.x - z[time_index].x,
+                y: agent.y - z[time_index].y
+            }
+            agent = {
+                x: agent.x - 0.01 * correction.x,
+                y: agent.y - 0.01 * correction.y
+            }
+            agents[i] = agent;
+            agents_traj[i].push(agent);
+
+        }
+        t = t + dt;
+        time_index++;
+
+        if (t > T){
+            t=0;
+            time_index=0;
+            for (var i=0; i<N_agent; i++){
+                agents[i] = {
+                    x: Math.random() * 4 - 2,
+                    y: Math.random() * 4 - 2
+                }
+                agents_traj[i] = [agents[i]];
+                graph.select("#agent_"+i)
+                    .attr("cx", xScale(0))
+                    .attr("cy", yScale(agents[i].x))
+                    .attr("r", 5)
+            }
+
+        }
+        for (var i=0; i<N_agent; i++){
+            graph.select("#agent_traj_"+i)
+                .datum(agents_traj[i])
+                .attr("d", line);
+        }
+    }
+    var interval = setInterval(simulate, 1);
+
+</script>
+</body>
+</html>

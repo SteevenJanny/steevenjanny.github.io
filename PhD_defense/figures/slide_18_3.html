@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/custom.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+<script>
+
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+    var p = {
+        node_radius: Math.min(height, width) * 0.1,
+        neighbor_reduction: 0.8,
+        neighbor_distance: Math.min(height, width)*0.4,
+        n_neighbors: 5,
+        linewidth: 5,
+        text_delta: 40,
+        fontsize: 20,
+        duration: 1500,
+        margin_left:20,
+    }
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var edges_g = graph.append("g").attr("opacity", 1)
+        .attr("transform", "translate("+ (-width / 2 + p.neighbor_distance + p.margin_left) + ",0)");
+    var edge_label_g = graph.append("g").attr("opacity", 0)
+        .attr("transform", "translate("+ (-width / 2 + p.neighbor_distance + p.margin_left) + ",0)");
+
+    var sum_edge = graph.append("foreignObject")
+        .attr("transform", "translate("+ (-width / 2 + p.neighbor_distance + p.margin_left) + ",0)")
+        .attr("x", width / 2 - 50 + p.margin_left)
+        .attr("y", height/4 - 25)
+        .attr("font-size", p.fontsize)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("width", 100)
+        .attr("height", 50)
+        .attr("opacity", 0)
+        .style("background-color", "white")
+        .html("$\\sum \\mathbf{e}_{ij}$")
+
+    var nodes_g = graph.append("g")
+        .attr("transform", "translate("+ (-width / 2 + p.neighbor_distance + p.margin_left) + ",0)");
+
+
+    var labels_g = graph.append("g")
+        .attr("transform", "translate("+ (-width / 2 + p.neighbor_distance + p.margin_left) + ",0)");
+
+    var text_mp = labels_g.append("text")
+        .attr("x", width / 2 + p.neighbor_distance + p.text_delta)
+        .attr("y", height / 2 - p.neighbor_distance/2)
+        .attr("text-anchor", "left")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", p.fontsize)
+        .attr("font-weight", "bold")
+        .attr("fill", "black")
+        .attr("opacity", 0.3)
+        .text("1. Message passing")
+
+    var text_aggregate = labels_g.append("text")
+        .attr("x", width / 2 + p.neighbor_distance + p.text_delta)
+        .attr("y", height / 2)
+        .attr("text-anchor", "left")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", p.fontsize)
+        .attr("font-weight", "bold")
+        .attr("fill", "black")
+        .attr("opacity", 0.3)
+        .text("2. Aggregation")
+
+    var text_update = labels_g.append("text")
+        .attr("x", width / 2 + p.neighbor_distance + p.text_delta)
+        .attr("y", height / 2 + p.neighbor_distance/2)
+        .attr("text-anchor", "left")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", p.fontsize)
+        .attr("font-weight", "bold")
+        .attr("fill", "black")
+        .attr("opacity", 0.3)
+        .text("3. Update")
+
+
+    var k = 0
+
+    var c = d3.hsl(colors(k))
+    var c_dimmed = d3.hsl(colors(k))
+    c_dimmed.l = 0.8
+
+    var node_center = nodes_g.append("circle")
+        .attr("cx", width / 2)
+        .attr("cy", height / 2)
+        .attr("r", p.node_radius)
+        .attr("fill", c)
+
+    var neighbors = []
+
+    var delta_angle = 2 * Math.PI / p.n_neighbors
+    for (var i = 0; i < p.n_neighbors; i++) {
+        neighbors.push(nodes_g.append("circle")
+            .attr("class", "neighbor")
+            .attr("cx", width / 2 + Math.cos(delta_angle * i) * p.neighbor_distance)
+            .attr("cy", height / 2 + Math.sin(delta_angle * i) * p.neighbor_distance)
+            .attr("r", p.node_radius * p.neighbor_reduction)
+            .attr("fill", "#9B9B9B"))
+    }
+    var lines = []
+    for (var i = 0; i < neighbors.length; i++) {
+        lines.push(edges_g.append("line")
+            .attr("class", "to_neighbor")
+            .attr("x1", width / 2)
+            .attr("y1", height / 2)
+            .attr("x2", width / 2)
+            .attr("y2", height / 2)
+            .attr("x_target", neighbors[i].attr("cx"))
+            .attr("y_target", neighbors[i].attr("cy"))
+            .attr("stroke", "black")
+            .attr("stroke-width", p.linewidth)
+            .attr("opacity", 1)
+        )
+
+        lines.push(edges_g.append("line")
+            .attr("class", "to_target")
+            .attr("x1", neighbors[i].attr("cx"))
+            .attr("y1", neighbors[i].attr("cy"))
+            .attr("x2", neighbors[i].attr("cx"))
+            .attr("y2", neighbors[i].attr("cy"))
+            .attr("x_target", width / 2)
+            .attr("y_target", height / 2)
+            .attr("stroke", "black")
+            .attr("stroke-width", p.linewidth)
+            .attr("opacity", 1)
+        )
+
+        var x_target = parseFloat(neighbors[i].attr("cx"))
+        var y_target = parseFloat(neighbors[i].attr("cy"))
+
+        edge_label_g.append("foreignObject")
+            .attr("x", ((width / 2 + parseFloat(neighbors[i].attr("cx"))) / 2) - p.node_radius / 2)
+            .attr("y", ((height / 2 + parseFloat(neighbors[i].attr("cy"))) / 2)  - p.node_radius / 2)
+            .attr("font-size", p.fontsize -5)
+            // .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "hanging")
+            .attr("width", p.node_radius)
+            .attr("height", p.node_radius)
+            .attr("opacity", 1)
+            .style("background-color", "white")
+            // .style("border", "1px solid black")
+            .html("$$\\mathbf{e}_{ij}$$")
+
+
+    }
+
+
+    function deploy() {
+        var t = d3.transition()
+            .duration(1000)
+            .ease(d3.easeLinear)
+
+        for (var i = 0; i < lines.length; i++) {
+            lines[i].transition(t)
+                .attr("x2", lines[i].attr("x_target"))
+                .attr("y2", lines[i].attr("y_target"))
+        }
+
+        edge_label_g.transition(t)
+            .attr("opacity", 1)
+
+        text_mp.transition(t)
+            .attr("opacity", 1)
+        text_aggregate.transition(t)
+            .attr("opacity", 0.3)
+        text_update.transition(t)
+            .attr("opacity", 0.3)
+    }
+
+    function reverse_deploy() {
+
+        for (var i = 0; i < lines.length; i++) {
+            lines[i]
+                .attr("x2", lines[i].attr("x1"))
+                .attr("y2", lines[i].attr("y1"))
+        }
+
+        edge_label_g
+            .attr("opacity", 0)
+    }
+
+    function aggregate() {
+        var t = d3.transition()
+            .duration(1000)
+            .ease(d3.easeLinear)
+
+        // Remove  the rotation
+        edge_label_g.selectAll("foreignObject")
+            .transition(t)
+            .attr('x', width / 2 - p.node_radius / 2)
+            .attr('y', height / 2 - p.neighbor_distance / 2 - p.node_radius / 2)
+            .attr("opacity", 0)
+
+        sum_edge.transition(t)
+            .attr("opacity", 1)
+
+
+        edges_g.transition().duration(1000)
+            .attr("opacity", 0.1)
+            .selectAll("line")
+            .attr("stroke-width", 2)
+
+        text_mp.transition(t)
+            .attr("opacity", 0.3)
+        text_aggregate.transition(t)
+            .attr("opacity", 1)
+        text_update
+            .attr("opacity", 0.3)
+    }
+
+    function reverse_aggregate() {
+
+        // Remove  the rotation
+        edge_label_g.selectAll("foreignObject")
+            .attr('x', function (d, i) {
+                return ((width / 2 + parseFloat(neighbors[i].attr("cx"))) / 2) - p.node_radius / 2
+            })
+            .attr('y', function (d, i) {
+                return ((height / 2 + parseFloat(neighbors[i].attr("cy"))) / 2) - p.node_radius / 2
+            })
+            .attr("opacity", 1)
+
+        sum_edge
+            .attr("opacity", 0)
+
+        edges_g
+            .attr("opacity", 1)
+            .selectAll("line")
+            .attr("stroke-width", p.linewidth)
+
+    }
+
+    function update() {
+        var t = d3.transition()
+            .duration(1000)
+            .ease(d3.easeLinear)
+
+        k = k + 1
+        var c = d3.hsl(colors(k))
+        var c_dimmed = d3.hsl(colors(k))
+        c_dimmed.l = 0.8
+        node_center.transition(t)
+            .attr("fill", c)
+
+        sum_edge.transition().duration(500)
+            .attr("y", height / 2 - 25)
+            .attr("opacity", 0)
+
+
+        // for (var i = 0; i < neighbors.length; i++) {
+        //     neighbors[i].transition(t)
+        //         .attr("fill", c_dimmed)
+        // }
+
+        text_mp.transition(t)
+            .attr("opacity", 0.3)
+        text_aggregate.transition(t)
+            .attr("opacity", 0.3)
+        text_update.transition(t)
+            .attr("opacity", 1)
+    }
+
+    function reset() {
+        sum_edge.attr("opacity", 0)
+            .attr("x", width / 2 - 50 + p.margin_left)
+            .attr("y", height / 4 - 25)
+        reverse_aggregate()
+        reverse_deploy()
+    }
+
+    function animate() {
+        deploy()
+        setTimeout(aggregate, p.duration)
+        setTimeout(update, 2 * p.duration)
+        setTimeout(reset, 3 * p.duration)
+    }
+
+    animate()
+
+    var interval_ = setInterval(animate, 4 * p.duration)
+
+
+</script>
+</body>
+</html>

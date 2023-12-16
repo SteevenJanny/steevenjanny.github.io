@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" href="../css/custom.css">
+</head>
+<body>
+
+
+<script>
+
+    var width = 1000;
+    var height = 375;
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+        .style("display", "block")
+        .style("margin", "auto");
+
+    var initial_state = {x: 0.1, y: 0.1};
+    var dt = 0.01;
+    var T = 75;
+    var plot_delay = 20;
+    var N_points = 25;
+    var N_particles = 1000;
+
+    function f(state) {
+        var x = state.x;
+        var y = state.y;
+        var dx = y;
+        var dy = -x + (1 - x * x) * y;
+        return {x: dx, y: dy};
+    }
+
+    function euler(state) {
+        var k1 = f(state);
+        return {
+            x: state.x + dt * k1.x,
+            y: state.y + dt * k1.y
+        };
+    }
+
+    var states = [initial_state];
+    var graph_margin = {
+        top: 10,
+        right: 10,
+        bottom: 10,
+        left: 10
+    };
+
+    var xScale = d3.scaleLinear()
+        .domain([-4, 4])
+        .range([graph_margin.left, width - graph_margin.right]);
+    var yScale = d3.scaleLinear()
+        .domain([-4, 4])
+        .range([height - graph_margin.bottom, graph_margin.top]);
+
+    // Plot the axis
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+
+
+    graph.append("g")
+        .attr("transform", "translate(0," + (height / 2 - graph_margin.top) + ")")
+        .call(xAxis);
+    graph.append("g")
+        .attr("transform", "translate(" + (width / 2) + ",0)")
+        .call(yAxis);
+
+    //draw a grid for x axis (N_points lines)
+    graph.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + (height - graph_margin.top) + ")")
+        .call(xAxis
+            .tickSize(-height + graph_margin.top + graph_margin.bottom)
+            .tickFormat("")
+            .ticks(N_points)
+        )
+        .style("color", "#CECECE")
+        .call(g => g.select(".domain").remove())
+    graph.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(" + graph_margin.left + ",0)")
+        .call(yAxis
+            .tickSize(-width + graph_margin.left + graph_margin.right)
+            .tickFormat("")
+            .ticks(N_points)
+        )
+        .style("color", "#CECECE")
+        .call(g => g.select(".domain").remove())
+
+
+    // add labels, use MathJax for latex
+    var x_label = graph.append("g")
+        .attr("transform", "translate(" + (width - 10) + "," + (height / 2 - 20) + ")");
+
+    var y_label = graph.append("g")
+        .attr("transform", "translate(" + (width / 2 + 20) + "," + (30) + ")");
+
+    x_label.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", 0)
+        .attr("y", 0)
+        .text("position")
+        .style("font-family", "sans-serif")
+        .style("font-size", "20px");
+
+    y_label.append("text")
+        .attr("text-anchor", "start")
+        .attr("x", 0)
+        .attr("y", 0)
+        .text("velocity")
+        .style("font-family", "sans-serif")
+        .style("font-size", "20px");
+
+
+
+    var line = d3.line()
+        .x(function (d, i) {
+            return xScale(d.x);
+        })
+        .y(function (d) {
+            return yScale(d.y);
+        });
+
+    graph.append("path")
+        .attr("id", "x_path")
+        .datum(states)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 1.5)
+        .attr("d", line);
+
+
+    var lines = []
+
+    var defs = graph.append("svg:defs");
+
+    function draw_vector_field() {
+        var normalization = 8 / N_points * 0.8;
+        var list_dx = [];
+        var list_dy = [];
+        var N = N_points;
+        var shift_center = 0// 0.5 * 8 / N_points;
+        for (var i = 0; i < N + 1; i++) {
+            for (var j = 0; j < N + 1; j++) {
+                var state = {x: -4 + 8 * i / N + shift_center, y: -4 + 8 * j / N + shift_center}
+                var d_state = f(state)
+                list_dx.push(d_state.x)
+                list_dy.push(d_state.y)
+            }
+        }
+        // use plasma color map
+        var gradientColor = d3.scaleSequential()
+            .interpolator(d3.interpolateCool)
+            .domain([0, 1]);
+        var max_dx = Math.max(...list_dx);
+        var max_dy = Math.max(...list_dy);
+        var max_norm = Math.sqrt(max_dx * max_dx + max_dy * max_dy);
+        for (var i = 0; i < N + 1; i++) {
+            for (var j = 0; j < N + 1; j++) {
+                // draw arrows
+                var x = -4 + 8 * i / N + shift_center;
+                var y = -4 + 8 * j / N + shift_center;
+                var dx = list_dx[i * (N + 1) + j]
+                var dy = list_dy[i * (N + 1) + j]
+
+                var norm = Math.sqrt(dx * dx + dy * dy + 0.00001)
+                var color = norm / max_norm
+
+                dx = dx / norm * normalization;
+                dy = dy / norm * normalization;
+                var line = graph.append("line")
+                    .attr("x1", xScale(x))
+                    .attr("y1", yScale(y))
+                    .attr("x2", xScale(x))
+                    .attr("y2", yScale(y))
+                    .attr("stroke-width", 1.5)
+                    .attr("stroke", gradientColor(color))
+                    .attr("marker-end", marker(gradientColor(color)))
+                    .style("opacity", 1).attr("z-index", "100")
+
+
+                line.transition()
+                    .duration(1000)
+                    .attr("x2", xScale(x + dx))
+                    .attr("y2", yScale(y + dy))
+                lines.push(line)
+            }
+        }
+
+        function marker(color) {
+            color = "" + color;
+            if (!color || color.indexOf("rgb") < 0) {
+                color = d3.rgb(color).toString();
+            }
+            color = color.replace("rgb(", "").replace(")", "");
+            color = color.split(",").map(function (color) {
+                return parseInt(color);
+            });
+            color = color.map(function (color) {
+                return ("0" + color.toString(16)).slice(-2);
+            });
+            color = "#" + color.join("");
+
+            defs.append("svg:marker")
+                .attr("id", color.replace("#", ""))
+                .attr("refX", 3)
+                .attr("refY", 2)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 4)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("d", "M 0,0 V 4 L6,2 Z")
+                .style("fill", color);
+            return "url(" + color + ")";
+        };
+
+    }
+
+    var particle_set = graph.append("g")
+        .attr("id", "particle_set");
+    var particles = []
+
+    function update_particles() {
+        for (var i = 0; i < particles.length; i++) {
+            var particle = particles[i]
+            var state = {x: particle.x, y: particle.y}
+            var d_state = f(state)
+            particle.x = state.x + d_state.x * dt
+            particle.y = state.y + d_state.y * dt
+            particle.t += 1
+            if (particle.t > T) {
+                particle.x = 8 * Math.random() - 4
+                particle.y = 8 * Math.random() - 4
+                particle.t = 0
+            }
+            particle.path
+                .attr("cx", xScale(particle.x))
+                .attr("cy", yScale(particle.y))
+                .style("opacity", 1 - particle.t / T)
+        }
+    }
+
+    var interval;
+
+    function erase_particles() {
+        for (var i = 0; i < particles.length; i++) {
+            particles[i].path.remove()
+        }
+        particles = []
+        clearInterval(interval)
+    }
+
+    function draw_particles(N) {
+        if (particles.length > N) {
+            while (particles.length > N) {
+                p = particles.pop();
+                p.path.transition()
+                    .duration(500)
+                    .style("opacity", 0)
+                    .remove()
+                // Remove from the list
+            }
+        }
+        else {
+            while (particles.length < N) {
+                var particle = {
+                    x: 8 * Math.random() - 4,
+                    y: 8 * Math.random() - 4,
+                    t: Math.random() * T,
+                }
+                // particle with random color in pastel tones
+                particle["path"] = particle_set.append("circle")
+                    .attr("cx", xScale(particle.x))
+                    .attr("cy", yScale(particle.y))
+                    .attr("r", 4)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 0.5)
+                    .attr("fill", d3.interpolateRainbow(Math.random()))
+                    .style("opacity", 0);
+
+                particles.push(particle)
+                particle.path.transition()
+                    .duration(500)
+                    .style("opacity", 1)
+            }
+            // Pause for a second before starting the animation
+
+
+        }
+        interval = setInterval(update_particles, plot_delay);
+    }
+
+    draw_particles(100)
+
+
+    var _transitions = [
+        {
+            transitionForward: () => draw_particles(1000),
+            transitionBackward: () => draw_particles(100),
+            index: 0
+        },
+    ]
+
+
+</script>
+</body>
+</html>
