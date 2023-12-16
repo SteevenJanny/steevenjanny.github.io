@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/simple.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script src="https://kit.fontawesome.com/170d25c765.js" crossorigin="anonymous"></script>
+    <!--    <link rel="stylesheet" href="css/styles.css">-->
+
+</head>
+<body>
+
+
+<div class="reveal">
+    <div class="slides">
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 1 -->
+        <!--         -->
+        <section id="title-sec" data-transition="none">
+
+            <div class="title">Identification and Simulation of
+                Physical Systems with Structured
+                Deep Learning and Inductive Knowledge
+            </div>
+            <div style="margin-top: 50px">Steeven Janny</div>
+            <div class="fontsize-20" style="margin-top: 25px">
+                Under the supervision of: <br/>
+                <table>
+                    <tr>
+                        <td>DIGNE</td>
+                        <td>Julie</td>
+                        <td>(CNRS, Liris, INSA Lyon)</td>
+                    </tr>
+                    <tr>
+                        <td>NADRI</td>
+                        <td>Madiha</td>
+                        <td>(Lagepp, Univ. Lyon 1)</td>
+                    </tr>
+                    <tr>
+                        <td>WOLF</td>
+                        <td>Christian</td>
+                        <td>(NaverLabs Europe)</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="margin-top: 50px; margin-bottom: 75px">
+                <div class="grid_row">
+                    <img src="assets/title_page/logo_insa.png" class="logo" alt="logo_insa">
+                    <img src="assets/title_page/logo_liris.png" class="logo zero-padding" alt="logo_liris">
+                    <img src="assets/title_page/logo_lagepp.png" class="logo" alt="logo_lagepp">
+                    <img src="assets/title_page/logo_univ.png" class="logo" alt="logo_univ">
+                </div>
+            </div>
+            <table class="row fontsize-15" style="height:25px; color: white; width:100%">
+                <tr>
+                    <td style="background-color: #16485b;text-align: center; vertical-align: middle">
+                        Steeven Janny
+                    </td>
+                    <td style="background-color: #277C9D;text-align: center; vertical-align: middle">
+                        Identification and Simulation of Physical Systems
+                    </td>
+                    <td style="background-color: #43c7fc;text-align: center; vertical-align: middle">
+                        January, 2022
+                    </td>
+                </tr>
+            </table>
+
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 2 -->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="bold">Identification and simulation of physical systems</p>
+            <p class="italic fontsize-20">why ?</p>
+            <div class="r-stack">
+                <div class="fragment  current-visible" data-fragment-index="1">
+                    <video data-autoplay src="assets/slide1/scalar_flow_final.mp4" autoplay="true" loop="true"
+                           muted="true" width="720"></video>
+                    <p style="font-size: 10px; padding:0px; margin: 0px">Eckert, Marie-Lena, Kiwon Um, and Nils Thuerey.
+                        "ScalarFlow: a large-scale volumetric data set of real-world scalar transport flows for computer
+                        animation and machine learning." ACM Transactions on Graphics (TOG) 38.6 (2019): 1-16.</p>
+                </div>
+                <div class="fragment  current-visible" data-fragment-index="2">
+                    <video data-autoplay src="assets/slide1/fluid.mp4" autoplay="true" loop="true"
+                           muted="true" width="720"></video>
+                    <p style="font-size: 10px; padding:0px; margin: 0px">Allen, Kelsey R., et al. "Physical design using
+                        differentiable learned simulators." arXiv preprint arXiv:2202.00728 (2022).</p>
+                </div>
+                <div class="fragment current-visible" data-fragment-index="3">
+                    <video data-autoplay src="assets/slide1/boston_dynamics.mp4" autoplay="true" loop="true"
+                           muted="true"
+                           width="720"></video>
+                    <p style="font-size: 10px; padding:0px; margin: 0px">Boston Dynamics</p>
+                </div>
+            </div>
+            <div class="row fontsize-15">
+                <div class="col-33 fragment" data-fragment-index="1">
+                    <ol class="rectangle-list">
+                        <li class="blue" value="1">To Understand</li>
+                    </ol>
+                    <p class="fontsize-15 light-text"> Accurate simulation cheaper (and more informative) than
+                        real-world experiments.</p>
+                </div>
+                <div class="col-33 fragment" data-fragment-index="2">
+                    <ol class="rectangle-list fragment" data-fragment-index="2">
+                        <li class="blue" value="2">To Design</li>
+                    </ol>
+                    <p class="fontsize-15 light-text"> Simulator well adapted to optimization techniques.</p>
+                </div>
+                <div class="col-33 fragment" data-fragment-index="3">
+                    <ol class="rectangle-list">
+                        <li class="blue" value="3">To Control</li>
+                    </ol>
+                    <p class="fontsize-15 light-text">Faster simulations for planning movements and trajectories.</p>
+                </div>
+            </div>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 3 -->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1"
+                 data-auto-animate data-no-background>
+            <p class="bold">Identification and simulation of physical systems</p>
+            <p class="italic fontsize-20">how ?</p>
+            <div class="fragment" data-fragment-index="1">
+                <ol class="rounded-list fontsize-20" style="margin-right: 25px">
+                    <li class="blue" value="1">From <b>Physics</b> and First Principles</li>
+                </ol>
+                <ol class="rounded-list fontsize-20 fragment semi-fade-out" style="margin-left: 25px"
+                    data-fragment-index="2">
+                    <li class="red" value="2">From <b>Data</b> and Machine Learning</li>
+                </ol>
+            </div>
+
+            <div class="r-stretch">
+                <div class="fig-container" data-file="figures/slide_2.html" data-style="width:100%; align:center"
+                     style="height: 100%; margin-top: 1%" data-id="anim_slide3"
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+
+            <div class="fragment" data-fragment-index="3"></div>
+
+            <div class="container fragment " data-fragment-index="4" style="height: 100px; width: 100%;">
+                <div class="center" style="width: 100%;">
+                    <span class="fas fa-user-graduate "></span>
+                    <span class=""> + </span>
+                    <span class="fas fa-file" style="font-size: 30px"></span>
+                    <span class="fas fa-pen" style="font-size: 20px"></span>
+                    <span class="fas fa-long-arrow-alt-right" style="padding-left: 50px; padding-right: 50px"></span>
+                    <span>$\frac{\partial \mathbf{s}}{\partial t} = {\color{#277C9D} f}(\mathbf{s})$</span>
+                </div>
+
+            </div>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 4 -->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-auto-animate data-no-background>
+            <p class="bold">Identification and simulation of physical systems</p>
+            <p class="italic fontsize-20">how ?</p>
+            <ol class="rounded-list fontsize-20" style="margin-right: 25px; opacity: 50%">
+                <li class="blue" value="1">From <b>Physics</b> and First Principles</li>
+            </ol>
+            <ol class="rounded-list fontsize-20" style="margin-left: 25px" data-fragment-index="1">
+                <li class="red" value="2">From <b>Data</b> and Machine Learning</li>
+            </ol>
+            <div class="r-stretch">
+                <div class="fig-container" data-file="figures/slide_3.html" data-style="width:100%; align:center"
+                     style="height: 100%; margin-top: 1%" data-id="anim_slide3"
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+            <div class="container fragment" data-fragment-index="4" style="height: 100px; width: 100%;">
+                <div class="center" style="width: 100%;">
+                    <span>$\frac{\partial \mathbf{s}}{\partial t} = {\color{#598938} f_\theta}(\mathbf{s})$</span>
+                    <span class="fas fa-long-arrow-alt-right" style="padding-left: 25px; padding-right: 25px"></span>
+                    <!--                    fa icon of a computer-->
+                    <span class="fas fa-database"></span>
+                    <span class="fas fa-long-arrow-alt-right" style="padding-left: 25px; padding-right: 25px"></span>
+                    <span>${\color{#598938} \theta} = \arg \min \mathcal{L}(\mathbf{s}, \hat{\mathbf{s}}, \theta)$</span>
+                </div>
+            </div>
+
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 5 -->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-auto-animate data-no-background>
+            <p class="bold">Identification and simulation of physical systems</p>
+            <p class="italic fontsize-20">how ?</p>
+            <div class="row">
+                <div class="col-50">
+                    <ol class="rounded-list fontsize-20">
+                        <li class="blue" value="1">From <b>Physics</b> and First Principles</li>
+                    </ol>
+
+                    <ul class="ul_fancy fontsize-20 fragment" style="width: 50%; margin-left: 10%">
+                        <li class="blue"> Fiability <p class="light-text fontsize-15"> physics laws are thoroughly
+                            validated, well known, and generalizable</p></li>
+                        <li class="blue"> Explicability <p class="light-text fontsize-15"> models are easier to
+                            understand, at least at a high level of abstraction </p></li>
+                    </ul>
+                    </br>
+                    <ul class="ul_fancy fontsize-20 fragment" style="width: 50%; margin-left: 10%">
+                        <li class="red"> Difficulty <p class="light-text fontsize-15"> building a model from first
+                            principle is hard, not always possible.</p></li>
+                        <li class="red"> Slow <p class="light-text fontsize-15"> in general case, simulation is
+                            computationnally intensive</p></li>
+                    </ul>
+
+                </div>
+                <div class="col-50">
+                    <ol class="rounded-list fontsize-20" style="margin-left: 25px" data-fragment-index="1">
+                        <li class="red" value="2">From <b>Data</b> and Machine Learning</li>
+                    </ol>
+
+                    <ul class="ul_fancy fontsize-20 fragment" style="width: 50%; margin-left: 10%">
+                        <li class="blue"> Easier <p class="light-text fontsize-15"> we let the neural network and the
+                            optimization extract patterns from the data</p></li>
+                        <li class="blue"> Faster <p class="light-text fontsize-15"> once trained, they are faster than
+                            most simulation algorithms </p></li>
+                    </ul>
+                    </br>
+                    <ul class="ul_fancy fontsize-20 fragment" style="width: 50%; margin-left: 10%">
+                        <li class="red"> Generalizability <p class="light-text fontsize-15"> no guarantee that the
+                            model will generalize outside training domain</p></li>
+                        <li class="red"> Reliability <p class="light-text fontsize-15"> no guarantee of robustness to
+                            noise and/or stability</p></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="fragment">
+                <p> Then, why not do both ?</p>
+                <p class="fontsize-20"> Hybrid simulation with Phyics + Machine Learning</p>
+            </div>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 6 -->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-auto-animate data-no-background>
+            <p class="bold">Agenda</p>
+            <ol class="rectangle-list fontsize-20">
+                <div class="fragment">
+                    <li class="blue" value="1"> Help from control theory for robust simulation with <b>Deep-KKL</b></li>
+                    <div class="col-100" style="align-content: center">
+                        <video data-autoplay src="assets/slide6/lorenz.mp4" autoplay="true" loop="true" muted="true"
+                               style="width: 100%"
+                               height="100"></video>
+                    </div>
+                </div>
+                <div class="fragment">
+                    <li class="blue" value="2"> A leap in difficulty: Fluid simulations with <b>EAGLE</b></li>
+                    <video data-autoplay src="assets/slide6/triangular.mp4" autoplay="true" loop="true" muted="true"
+                           style="width: 100%"
+                           height="100"></video>
+                </div>
+                <div class="fragment">
+                    <li class="blue" value="3"> The big picture: causality with <b>Filtered-CoPhy</b></li>
+                    <div class="row" style="width: 100%">
+                        <div class="col-33"><img src="assets/slide6/balls.gif" height="100" style="margin-left: 25%">
+                        </div>
+                        <div class="col-33"><img src="assets/slide6/blocktower.gif" height="100"
+                                                 style="margin-left: 25%"></div>
+                        <div class="col-33"><img src="assets/slide6/collision.gif" height="100"
+                                                 style="margin-left: 25%"></div>
+                    </div>
+                </div>
+            </ol>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 7 -->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-auto-animate data-no-background>
+            <p class="bold">Publication List</p>
+            <ul class="ul_fancy fontsize-20" style="width: 100%">
+                <li class="blue">
+                    <u>Conference on Decision and Control (CDC)</u>
+
+                    <ul class="ul_fancy fontsize-20" style="width: 100%; margin-left: 5%">
+                        <li class="red">
+                            Deep KKL: Data-driven Output Prediction for Non-Linear Systems
+                            <p class="light-text fontsize-15"><b>Steeven Janny</b>, Vincent Andrieu, Madiha Nadri,
+                                Christian Wolf (2021)</p>
+                        </li>
+                        <li class="red  fragment semi-fade-out" data-fragment-index="0">
+                            Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical Approach
+                            <p class="light-text fontsize-15"><b>Steeven Janny</b>, Quentin Possamaï, Laurent Bako,
+                                Madiha Nadri, Christian Wolf (2022)</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="blue">
+                    <u>International Federation of Automatic Control (IFAC)</u>
+                    <ul class="ul_fancy fontsize-20" style="width: 100%; margin-left: 5%">
+                        <li class="red  fragment semi-fade-out" data-fragment-index="0">
+                            Deep Learning-based Output Tracking via Regulation and Contraction Theory
+                            <p class="light-text fontsize-15"> Samuele Zoboli, <b>Steeven Janny</b>, Mattia Giaccagli,
+                                (2023)</p>
+                        </li>
+                        <li class="red  fragment semi-fade-out" data-fragment-index="0">
+                            Deep Learning of a Communication Policy for an Event-Triggered Observer for Linear Systems
+                            <p class="light-text fontsize-15"> Mathieu Marchand, Vincent Andrieu, Sylvain Bertrand, <b>Steeven
+                                Janny</b>, Hélène Piet-Lahanier, (2023)</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="blue">
+                    <u>International Conference on Learning Representations (ICLR) </u>
+                    <ul class="ul_fancy fontsize-20" style="width: 100%; margin-left: 5%">
+                        <li class="red">
+                            Filtered-CoPhy: Unsupervised Learning of Counterfactual Physics in Pixel Space
+                            <p class="light-text fontsize-15"><b>Steeven Janny</b>, Fabien Baradel, Natalia Neverova,
+                                Madiha Nadri, Christian Wolf, (Oral, 2022)</p>
+                        </li>
+                        <li class="red">
+                            EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers
+                            <p class="light-text fontsize-15"><b>Steeven Janny</b>, Aurélien Benetteau, Madiha Nadri,
+                                Julie Digne, Nicolas Thome, Christian Wolf, (Poster, 2023)</p>
+                        </li>
+                        <li class="red fragment semi-fade-out" data-fragment-index="0">
+                            Space and time continuous physics simulation from partial observations
+                            <p class="light-text fontsize-15"><b>Steeven Janny</b>, Madiha Nadri, Julie Digne, Christian
+                                Wolf, (2024)</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </ul>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 8 -->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-auto-animate data-no-background>
+            <p class="titlebox" style="margin:0px">Deep KKL: Data-driven Output Prediction for Non-Linear Systems</p>
+            <p class="subtitlebox" style="margin-top:0px">The Output Prediction task</p>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 9 -->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-auto-animate data-no-background>
+            <p class="titlebox" style="margin:0px">Deep KKL: Data-driven Output Prediction for Non-Linear Systems</p>
+            <p class="subtitlebox" style="margin-top:0px">The Output Prediction task</p>
+            <div class="fontsize-20" style="height: 100%;">
+                <b>Non-linear</b> Dynamical System: $\quad \left\{\begin{array}{cll}
+                \dot{\mathbf{s}} &= {\color{#277C9D} f}(\mathbf{s}) & \quad\Rightarrow
+                \color{#888888}\small{\textit{ Dynamics}}\\
+                \mathbf{y} &= {\color{#277C9D} h}(\mathbf{s}) & \quad\Rightarrow \color{#888888}\small\textit{
+                Output}\\
+                \end{array}\right.$
+            </div>
+            <div class="fragment" style="width: 0; height: 0" data-fragment-index="1"></div>
+            <div class="row" style="height: 250px">
+                <div class="fig-container" data-file="figures/slide_8.html"
+                     data-style="width:100%; align:center"
+                     style="height: 100%; margin-top: 1%"
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+            <div class="fragment" data-fragment-index="2" style="margin-top: 50px">
+                <div class="row fontsize-25">
+                    How can we design a different dynamical model capable of <b>simulating the observation</b>?
+                </div>
+            </div>
+
+            <div class="fragment" data-fragment-index="2" style="margin-top: 20px">
+                <div class="theorem_title">
+                    <b>Definition:</b> Output Predictor [Janny et al. 2020]
+                </div>
+                <div class="theorem_content">
+                    <p style="margin: 0px">
+                        An <b>output predictor</b> is defined as a couple $G, \psi$ such as:
+                    </p>
+                    <ul style="margin-top: 5px">
+                        <li>$\dot{z} = G(z, y)$ is a uniform exponential contraction,</li>
+                        <li>the couple $(g, \psi)$ with $g(z)= G(z, \psi(z))$ is a generating model.</li>
+                    </ul>
+
+                </div>
+            </div>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 10-->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px">Deep KKL: Data-driven Output Prediction for Non-Linear Systems</p>
+            <p class="subtitlebox" style="margin-top:0px;margin-bottom: 5px">From Non-Linear to Linear</p>
+
+            <div class="row r-stretch">
+                <div class="fig-container" data-file="figures/slide_9.html"
+                     data-style="width:100%; align:center;height:100%;"
+                     style="height: 100%; margin-top: 0%"
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+
+            <div class="fragment" data-fragment-index="1"></div>
+
+            <div class="r-stack">
+                <div class="fragment fade-in-then-out" style="margin-top: 1%" data-fragment-index="2">
+                    <div class="theorem_title">
+                        Koopman theory
+                    </div>
+                    <div class="theorem_content">
+                        <p style="margin: 0px">
+                            For all non-linear system $\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$, there exists
+                            an <span style="color:#E77475">infinite dimensional linear</span> operator $\mathcal{K}$
+                            such that $\mathcal{K} \mathbf{h}(\mathbf{s}) = \mathbf{h}({\color{#277C9D}
+                            f}(\mathbf{s}))$.</p>
+                    </div>
+
+                    <div class="fontsize-15" style="margin-top:15px; text-align: left">
+                        Lusch, B., Kutz, J. N., & Brunton, S. L. (2018). Deep learning for universal linear embeddings
+                        of
+                        nonlinear dynamics. Nature communications
+                    </div>
+                </div>
+                <div class="fragment fade-in" data-fragment-index="3" style="margin-top: 1%">
+                    <div class="theorem_title">
+                        Kazantzis-Kravaris-Luenberger <b>(KKL)</b> theory
+                    </div>
+                    <div class="theorem_content">
+                        <p style="margin: 0px">
+                            For any non-linear system $\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$ and <span
+                                style="color:#E77475">for any paire $A, b$</span>, there exists an injective mapping $T$
+                            such that
+                            $\dot{\mathbf{z}} = A \mathbf{z} + by$ and $\mathbf{y} = \mathbf{h}\Big(T^{-1}(y)\Big)$
+                            where
+                            <span style="color:#E77475"> $\mathbf{z}$ is of finite dimension.</span>
+                        </p>
+
+                    </div>
+                    <div class="fontsize-15" style="margin-top:15px; text-align: left">
+                        Andrieu, V., & Praly, L. (2006). On the existence of a Kazantzis--Kravaris/Luenberger observer.
+                        SIAM Journal on Control and Optimization
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!--         -->
+        <!--         -->
+        <!--SLIDE 11 -->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px">Deep KKL: Data-driven Output Prediction for Non-Linear Systems</p>
+            <p class="subtitlebox" style="margin-top:0px">KKL Observer</p>
+
+            <div class="fontsize-20 rounded_box green">
+                $$\begin{array}{cl}
+                \dot{\mathbf{z}} &= A \mathbf{z} + b\psi(\mathbf{z}) \\
+                y &= \psi(\mathbf{z})
+                \end{array}$$
+            </div>
+            <div style="text-align: left; width: 100%">
+                <ul class="ul_fancy" style="padding-bottom: 0;padding-top:0;margin-left: 0">
+                    <li class="blue bold fontsize-25">Parameters to identify:</li>
+                </ul>
+            </div>
+            <div class="fontsize-25 row fragment" style="margin-top: 5px">
+                <div class="col-10"></div>
+                <div class="col-30">
+                    <div class="theorem_title" style="background-color: #598938">
+                        $$ A, b $$
+                    </div>
+                    <div class="theorem_content" style="text-align: center;padding:2px">
+                        <p class="no_margin">$A$ Hurwitz</p>
+                        <p class="no_margin">$A,b$ controllable</p>
+                    </div>
+                </div>
+                <div class="col-10"></div>
+                <div class="col-10"></div>
+                <div class="col-30">
+                    <div class="theorem_title" style="background-color: #598938">
+                        $$ \psi $$
+                    </div>
+                    <div class="theorem_content" style="text-align: center;padding:2px">
+                        <p class="no_margin">Lipschitz</p>
+                        <p class="no_margin" style="opacity: 0"> aaa</p>
+                    </div>
+                </div>
+                <div class="col-10"></div>
+            </div>
+
+
+            <div class="fragment" style="margin-top: 20px;">
+                <div class="theorem_title">
+                    <b>Theorem:</b> [Andrieu et al., 2006]
+                </div>
+                <div class="theorem_content">
+                    <p style="margin: 0px">
+                        With $\dim \mathbf{z} = 2\dim \mathbf{s}+2$, there exists a Hurwitz matrix
+                        $A$
+                        and a
+                        function $\psi$ such that the KKL observer is an <b>output observer</b>.
+                    </p>
+                </div>
+            </div>
+
+            <table class="fragment" style="width: 100%;vertical-align: middle;margin-top: 0;border-width: 0">
+                <tr>
+                    <td style="width:40%;border: none;padding:0">
+                        <ul class="ul_fancy" style="padding-bottom: 0;margin-left: 0">
+                            <li class="red bold fontsize-25">Analytic solutions:</li>
+                        </ul>
+                    </td>
+                    <td class="fontsize-20" style="text-align: center;border:none">
+                        Good luck.
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border: none;padding:0">
+                        <p class="light-text fontsize-15">Bernard, P., Devos, T., Martin, P., & Praly, L. (2022). KKL
+                            observer design for sensorless induction motors. Conference on Decision and
+                            Control.</p>
+
+                        <p class="light-text fontsize-15">Brivadis, L., Andrieu, V., & Serres, U. (2019). Luenberger
+                            observers for discrete-time nonlinear systems. Conference on Decision and Control.</p>
+                    </td>
+                </tr>
+            </table>
+            <table class="fragment" style="width: 100%;vertical-align: middle;margin-top: 10px;border-width: 0">
+                <tr>
+                    <td style="width:40%;border: none;padding:0">
+                        <ul class="ul_fancy" style="padding-bottom: 0;margin-left: 0;padding-top:0">
+                            <li class="green bold fontsize-25">Deep Learning</li>
+                        </ul>
+                    </td>
+                    <td class="fontsize-20" style="text-align: center">
+                        Model $\psi$ with an MLP,<br/>
+                        Learn $A,b$ via gradient descent.
+                    </td>
+                </tr>
+            </table>
+            <div class="r-stretch"></div>
+
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 12-->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px">Deep KKL: Data-driven Output Prediction for Non-Linear Systems</p>
+            <p class="subtitlebox" style="margin-top:0px">Model overview</p>
+
+            <div style="height:200px; width:70%;margin:auto">
+                <div class="fig-container" data-file="figures/slide_11_bis.html"
+                     data-style="width:100%; align:center; height:100%"
+                     style="height: 100%"
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+
+            <div class="r-stack">
+                <div class="fragment" data-fragment-index="2" style="margin-top: 0">
+                    <div style="text-align: left; width: 100%">
+                        <ul class="ul_fancy" style="padding-bottom: 0;padding-top:0;margin-left: 0">
+                            <li class="green bold fontsize-25"> Training objective:</li>
+                        </ul>
+                    </div>
+                    $$\psi, A, b = \arg \min \sum_{t=1}^T \Big\| y(t) - \hat{y}(t) \Big\|_2^2$$
+                </div>
+                <div class="fragment fade-in-then-out" style="margin-top: 20px;" data-fragment-index="1">
+                    <div class="theorem_title">
+                        <b>Proposition:</b> [Janny et al., 2021]
+                    </div>
+                    <div class="theorem_content">
+                        <p style="margin: 0px">
+                            Assume that $\psi$ is lipschitz continuous, then for all trajectory $y$ known in the
+                            time
+                            interval $[0, \ell]$, the prediction $\hat{y}$ at the prediction horizon $p>0$ is given
+                            as:
+                            $$ | \hat{y}(\ell+p) - y(\ell+p) | \leq k_1 e^{-\lambda\ell + k_2p} |z_0| $$
+                        </p>
+                    </div>
+                </div>
+                <div style="height:300px; width:100%">
+                    <div class="fig-container" data-file="figures/slide_11.html"
+                         data-style="width:100%; align:center; height:100%"
+                         style="height: 100%"
+                         data-scroll="no" data-overflow-shown=true></div>
+                </div>
+            </div>
+
+
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 13-->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px">Deep KKL: Data-driven Output Prediction for Non-Linear Systems</p>
+            <p class="subtitlebox" style="margin-top:0px">Comparison with Recurrent Neural Networks</p>
+
+            <div class="row" style="height:200px">
+                <div class="col-30">
+                    <p class="fontsize-20 bold no_margin">Deep KKL</p>
+                    <div class="fontsize-20 rounded_box green" style="margin-top:40px">
+                        <p style="margin:5px">
+                            $$\begin{array}{cl}
+                            \dot{\mathbf{z}} &= A \mathbf{z} + by \\
+                            y &= \psi(\mathbf{z})
+                            \end{array}$$
+                        </p>
+                    </div>
+                </div>
+                <div class="col-30 fragment" data-fragment-index="1">
+                    <p class="fontsize-20 bold no_margin">RNN </p>
+                    <div class="fontsize-20 rounded_box blue" style="margin-top:40px">
+                        <p style="margin:5px">
+                            $$\begin{array}{cl}
+                            \dot{\mathbf{z}} &= \text{tanh}(A \mathbf{z} + by) \\
+                            y &= \psi(\mathbf{z})
+                            \end{array}$$
+                        </p>
+                    </div>
+                </div>
+                <div class="col-40 fragment" data-fragment-index="2">
+                    <p class="fontsize-20 bold no_margin">GRU </p>
+                    <div class="fontsize-20 rounded_box red">
+                        <p style="margin:5px">
+                            $$\begin{array}{cl}
+                            \mathbf{r} &= \sigma(W_r \mathbf{z} + U_r y + \mathbf{b}_r) \\
+                            \mathbf{x} &= \sigma(W_x \mathbf{z} + U_x y + \mathbf{b}_x) \\
+                            \mathbf{n} &= \text{tanh}\big(W_n \mathbf{z} + r * (U_n y + \mathbf{b}_n)\big) \\
+                            \dot{\mathbf{z}} &= (1 - \mathbf{x}) * \mathbf{z} + \mathbf{x} * \mathbf{n} \\
+                            \end{array}$$
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-30">
+                    <table class="fontsize-25" style="border:none">
+                        <tr>
+                            <td class="fas fa-check-circle" style="color: #598938; border:none"></td>
+                            <td style="border:none">Proof of existence</td>
+                        </tr>
+                        <tr>
+                            <td class="fas fa-check-circle" style="color: #598938"></td>
+                            <td>Contraction</td>
+                    </table>
+                </div>
+                <div class="col-30 fragment" data-fragment-index="1">
+                    <table class="fontsize-25" style="border:none">
+                        <tr>
+                            <td class="fas fa-minus-circle" style="color: #FF8C00; border:none"></td>
+                            <td style="border:none">Proof of existence</td>
+                        </tr>
+                        <tr>
+                            <td class="fas fa-minus-circle" style="color: #FF8C00"></td>
+                            <td>Contraction</td>
+                    </table>
+                </div>
+                <div class="col-40 fragment" data-fragment-index="2">
+                    <table class="fontsize-25" style="border:none">
+                        <tr>
+                            <td class="fas fa-times-circle" style="color: #E77475; border:none"></td>
+                            <td style="border:none">Proof of existence</td>
+                        </tr>
+                        <tr>
+                            <td class="fas fa-times-circle" style="color: #E77475"></td>
+                            <td>Contraction</td>
+                    </table>
+                </div>
+            </div>
+
+            <div class="r-stretch" style="width:100%">
+                <div class="fig-container" data-file="figures/slide_12.html"
+                     data-style="width:100%; align:center; height:100%"
+                     style="height: 100%"
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+
+
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 14-->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px">Deep KKL: Data-driven Output Prediction for Non-Linear Systems</p>
+            <p class="subtitlebox" style="margin-top:0px">Take home messages</p>
+
+            <div class="fragment">
+                <p class="fontsize-20 bold no_margin" style="text-align: left">What DeepKKL is:</p>
+                <ul class="rectangle-list fontsize-20">
+                    <li class="blue">A recurrent structure with provable existence of a solution in finite dimension,
+                    </li>
+                    <li class="blue">Interpretability over the training process (thanks to contraction),</li>
+                    <li class="blue">Good performances on chaotic dynamical systems.</li>
+                </ul>
+            </div>
+            <div class="fragment">
+                <p class="fontsize-20 bold no_margin" style="text-align: left">What DeepKKL is not:</p>
+                <ul class="rectangle-list fontsize-20">
+                    <li class="red">More performant than modern recurrent models,</li>
+                    <li class="red">Designed to address larger-scale problems.</li>
+                </ul>
+            </div>
+            <div class="fragment">
+                <p class="fontsize-20 bold no_margin" style="text-align: left">Take home messages:</p>
+                <ul class="rectangle-list fontsize-20">
+                    <li class="green">DeepKKL is an inductive bias for learning dynamical system,</li>
+                    <li class="green">It is also a first step toward more principled theory on RNN.</li>
+                </ul>
+            </div>
+            <div class="fragment">
+                <p class="fontsize-20 bold no_margin" style="text-align: left">Follow-up work</p>
+                <p class="light-text fontsize-15">Peralez, J., & Nadri, M. (2021). Deep learning-based luenberger
+                    observer design for discrete-time nonlinear systems. CDC.</p>
+                <p class="light-text fontsize-15">Buisson-Fenet, M., Bahr, L., Morgenthaler, V., & Di Meglio, F. (2023).
+                    Towards gain tuning for numerical kkl observers. IFAC.</p>
+                <p class="light-text fontsize-15">Miao, K., & Gatsis, K. (2023). Learning Robust State Observers using
+                    Neural ODEs. Learning for Dynamics and Control Conference.</p>
+            </div>
+
+
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 15-->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
+                Dynamics with Mesh Transformers</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">How do we address larger-scale
+                problems?</p>
+
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 16-->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
+                Dynamics with Mesh Transformers</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">How do we address larger-scale
+                problems?</p>
+            <p> An infamous example: Simulation of Fluid Mechanics</p>
+            <div class="r-stack">
+                <div class="fragment fade-out" data-fragment-index="1">
+                    <table style="width: 100%">
+                        <tr>
+                            <td class="no_padding" style="align-content: center;vertical-align: middle; text-align: center;width:60%">
+                                <video data-autoplay src="assets/slide16/coffee.mp4" autoplay="true" loop="true"
+                                       muted="true" width="100%"></video>
+                            </td>
+                            <td style="align-content: center;vertical-align: middle; text-align: center;width:40%">
+                                <div class="theorem_title">The Navier-Stokes equations:</div>
+                                <div class="theorem_content">
+                                    $$\begin{array}{cl}
+                                    \dot{\mathbf{u}} &= -\nabla p + \nu \Delta \mathbf{u} + \mathbf{f} \\
+                                    \nabla \cdot \mathbf{u} &= 0 \\
+                                    \nabla \times \mathbf{u} &= 0 \\
+                                    \end{array}$$
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <ul class="ul_fancy fontsize-25">
+                        <li class="red">No known general solution (1M$ cash-prize)</li>
+                        <li class="red">Direct simulation is extremely difficult</li>
+                        <li class="red">Multi-scale dynamics</li>
+                    </ul>
+                </div>
+                <div class="fragment fade-in-then-out" data-fragment-index="1">
+                    <div class="r-stack">
+                        <div>
+                            <video data-autoplay src="assets/slide16/liquid.mp4" autoplay="true" loop="true"
+                                   muted="true" height="500px"></video>
+                        </div>
+                        <div style="margin-top: 40px">
+                            <p class="bold no_margin" style="color: #277C9D;">Smoothed Particles Hydrodynamics</p>
+                            <p class="light-text">Lagrangian approach of fluids : simulate
+                                particles interactions.</p>
+                            <ul class="ul_fancy fontsize-25">
+
+                                <li class="green">Real-time, good-looking</li>
+                                <li class="red"># of particles, physical accuracy</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="light-text fontsize-10 no_margin">Gingold, R. A., & Monaghan, J. J. (1977). Smoothed
+                        particle hydrodynamics: theory and application to non-spherical stars. Monthly notices of the
+                        royal astronomical society.</p>
+
+                </div>
+                <div class="fragment" data-fragment-index="2">
+                    <div class="r-stack">
+                        <div>
+                            <video data-autoplay src="assets/slide16/smoke.mp4" autoplay="true" loop="true"
+                                   muted="true" height="500px"></video>
+                        </div>
+                        <div style="margin-top: 40px">
+                            <p class="bold no_margin" style="color: #277C9D;">Stable Fluid Simulation </p>
+                            <p class="light-text">Lagrangian/Eulerian approach of fluid: fixed
+                                cell and study I/O</p>
+                            <ul class="ul_fancy fontsize-25">
+                                <li class="green">Fast, and plausible</li>
+                                <li class="red">Physical accuracy (for CG only)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="light-text fontsize-10 no_margin">Stam, J. (1999). Stable Fluids.</p>
+                </div>
+            </div>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 17-->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
+                Dynamics with Mesh Transformers</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Engineer-grade simulations</p>
+            <div>
+                <video data-autoplay src="assets/slide16/rans.mp4" autoplay="true" loop="true"
+                       muted="true" height="200px"></video>
+            </div>
+            <div>
+                <p class="bold no_margin" style="color: #277C9D">RANS Simulations</p>
+                <div class="row">
+                    <div class="col-60">
+                        <div class="theorem_title" style="background-color: #598938">
+                            Reynolds-Averaged Navier-Stokes (RANS)
+                        </div>
+                        <div class="theorem_content fontsize-20">
+                            <span>Continuity:</span>
+                            $$\text{div}(\mathbf{\tilde{U}})=0$$
+                            <span>Reynolds equations:</span>
+                            $$\begin{array}{ll}
+                            \frac{\partial \tilde{U}}{\partial t} + \text{div}(\tilde{U}\mathbf{\tilde{U}}) &=
+                            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial x} + \mu
+                            \text{div}(\text{grad}(\tilde{U})) + \rho \color{#E77475}{\tau_x}\\
+                            \frac{\partial \tilde{V}}{\partial t} + \text{div}(\tilde{V}\mathbf{\tilde{U}}) &=
+                            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial y} + \mu
+                            \text{div}(\text{grad}(\tilde{V})) + \rho \color{#E77475}{\tau_y}\\
+                            \frac{\partial \tilde{W}}{\partial t} + \text{div}(\tilde{W}\mathbf{\tilde{U}}) &=
+                            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial z} + \mu
+                            \text{div}(\text{grad}(\tilde{W})) + \rho \color{#E77475}{\tau_z}\\
+                            \end{array}$$
+                        </div>
+                    </div>
+                    <div class="col-40 fontsize-17" style="margin-top: 30px;padding-left: 30px">
+                        <ul class="rectangle-list">
+                            <li class="blue" value="1">Standard in engineering, works with irregular meshes</li>
+                            <li class="blue" value="2">Computation time is controlled (depending on the mesh
+                                resolution)
+                            </li>
+                            <li class="blue" value="3">Accuracy is handled via the turbulence model</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="light-text fontsize-15" style="padding-top: 10px">Versteeg, H. K., & Malalasekera, W. (2007). An
+                introduction to
+                computational fluid dynamics: the finite volume method. Pearson education.</p>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 18-->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
+                Dynamics with Mesh Transformers</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Deep Learning for Fluid
+                Mechanics</p>
+            <table style="width: 100%" class="fragment">
+                <tr>
+                    <td class="no_padding" style="align-content: center;vertical-align: middle; text-align: center;width:70%">
+                        <p class="theorem_title" style="margin: auto">Convolutional Neural
+                            Networks</p>
+                        <div class="fig-container theorem_content" data-file="figures/slide_18_1.html"
+                             style="padding: 0"
+                             data-style="width:100%; align:center; height:100%"
+                             style="height: 100%"
+                             data-scroll="no" data-overflow-shown=true></div>
+                    </td>
+                    <td style="align-content: center;vertical-align: middle; text-align: center;width:30%;padding: 0">
+                        <ul class="ul_fancy no_margin fontsize-20">
+                            <li class="blue">Well-mastered tool by DL community</li>
+                            <li class="red">No adaptive resolution, no complex geometry</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <table style="width: 100%;margin-top: 20px" class="fragment">
+                <tr>
+                    <td style="align-content: center;vertical-align: middle; text-align: center;width:40%">
+                        <ul class="ul_fancy no_margin fontsize-20">
+                            <li class="blue">Suited for irregular meshes</li>
+                            <li class="red">Computationally intensive</li>
+                        </ul>
+                        <div class="fig-container" data-file="figures/slide_18_3.html"
+                             data-style="width:100%; align:center; height:50%"
+                             data-scroll="no" data-overflow-shown=true></div>
+                    </td>
+                    <td class="no_padding" style="align-content: center;vertical-align: middle; text-align: center;width:60%">
+                        <p class="theorem_title" style="margin: auto;">Graph Neural Networks</p>
+                        <div class="theorem_content" style="padding: 0">
+                            <div class="fig-container" data-file="figures/slide_18_2.html"
+                                 data-style="width:100%; align:center; height:100%"
+                                 data-scroll="no" data-overflow-shown=true></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 17-->
+        <!--         -->
+        <section data-background-color="#FFFFFF" class="footnote" data-state="slide1" data-transition="fade"
+                 data-no-background>
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
+                Dynamics with Mesh Transformers</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Engineer-grade simulations</p>
+            <div>
+                <video data-autoplay src="assets/slide16/rans.mp4" autoplay="true" loop="true"
+                       muted="true" height="200px"></video>
+            </div>
+            <div>
+                <p class="bold no_margin" style="color: #277C9D">RANS Simulations</p>
+                <div class="row">
+                    <div class="col-50">
+                        <div class="theorem_title" style="background-color: #598938">
+                            Reynolds-Averaged Navier-Stokes (RANS)
+                        </div>
+                        <div class="theorem_content fontsize-20">
+                            <span>Continuity:</span>
+                            $$\text{div}(\mathbf{\tilde{U}})=0$$
+                            <span>Reynolds equations:</span>
+                            $$\begin{array}{ll}
+                            \frac{\partial \tilde{U}}{\partial t} + \text{div}(\tilde{U}\mathbf{\tilde{U}}) &=
+                            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial x} + \mu
+                            \text{div}(\text{grad}(\tilde{U})) + \rho \color{#E77475}{\tau_x}\\
+                            \frac{\partial \tilde{V}}{\partial t} + \text{div}(\tilde{V}\mathbf{\tilde{U}}) &=
+                            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial y} + \mu
+                            \text{div}(\text{grad}(\tilde{V})) + \rho \color{#E77475}{\tau_y}\\
+                            \frac{\partial \tilde{W}}{\partial t} + \text{div}(\tilde{W}\mathbf{\tilde{U}}) &=
+                            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial z} + \mu
+                            \text{div}(\text{grad}(\tilde{W})) + \rho \color{#E77475}{\tau_z}\\
+                            \end{array}$$
+                        </div>
+                    </div>
+                    <div class="col-50 fontsize-17" style="margin-top: 60px">
+                        <ul class="rectangle-list">
+                            <li class="blue" value="1">Standard in engineering, with irregular grid</li>
+                            <li class="blue" value="2">Manageable in terms of computation time</li>
+                            <li class="blue" value="3">Accuracy is controlled via the turbulence model</li>
+                        </ul>
+                    </div>
+                </div>
+                <br/>
+                <p class="light-text fontsize-15">CITE</p>
+            </div>
+        </section>
+
+    </div>
+</div>
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/reveald3.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="plugin/math/math.js"></script>
+
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+        slideNumber: 'c/t',
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, Reveald3, RevealMath.MathJax3],
+        viewDistance: 3, // to lazy load iframes
+        multiplex: {
+            secret: null, // null so the clients do not have control of the master presentation
+            id: '20da067867ea0afe', // id, obtained from socket.io server
+            url: 'https://reveal-multiplex.glitch.me/' // Location of socket.io server
+        },
+        dependencies: [
+            { src: 'https://reveal-multiplex.glitch.me/socket.io/socket.io.js', async: true },
+            { src: 'https://reveal-multiplex.glitch.me/client.js', async: true }
+        ]
+    });
+</script>
+
+
+</body>
+</html>
