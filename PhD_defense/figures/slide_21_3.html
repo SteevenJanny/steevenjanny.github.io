@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/custom.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+<script>
+
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+    var w = width / 3
+
+    var p = {
+        node_radius: w * 0.1,
+        neighbor_reduction: 0.8,
+        neighbor_distance: w * 0.35,
+        n_neighbors: 5,
+        linewidth: 3,
+        text_delta: 40,
+        fontsize: 15,
+        duration: 1500,
+        margin_left: 20,
+    }
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var graph1 = graph.append("g")
+    var graph2 = graph.append("g")
+        .attr("transform", "translate(" + w + ",0)")
+    var graph3 = graph.append("g")
+        .attr("transform", "translate(" + 2 * w + ",0)")
+
+    var edges1 = graph1.append("g")
+    var edges2 = graph2.append("g")
+    var edges3 = graph3.append("g")
+    var nodes1 = graph1.append("g")
+    var nodes2 = graph2.append("g")
+    var nodes3 = graph3.append("g")
+
+    var nodes = [nodes1, nodes2, nodes3]
+    var neighbors = [[], [], []]
+    var delta_angle = 2 * Math.PI / p.n_neighbors
+    for (var i = 0; i < nodes.length; i++) {
+        nodes[i].append("circle")
+            .attr("cx", w / 2)
+            .attr("cy", height / 2)
+            .attr("r", p.node_radius)
+            .attr("fill", function () {
+                if (i == 2) {
+                    return "#598938"
+                } else {
+                    return "#277C9D"
+                }
+            })
+
+        for (var k = 0; k < p.n_neighbors; k++) {
+            neighbors[i].push(nodes[i].append("circle")
+                .attr("class", "neighbor")
+                .attr("cx", w / 2 + Math.cos(delta_angle * k) * p.neighbor_distance)
+                .attr("cy", height / 2 + Math.sin(delta_angle * k) * p.neighbor_distance)
+                .attr("r", p.node_radius * p.neighbor_reduction)
+                .attr("fill", function () {
+                    if (i == 2) {
+                        return "#b0de91"
+                    } else {
+                        return "#88c7e0"
+                    }
+                }))
+        }
+    }
+
+    var edges = [edges1, edges2, edges3]
+    for (var k = 0; k < edges.length; k++) {
+        for (var i = 0; i < neighbors[0].length; i++) {
+            edges[k].append("line")
+                .attr("class", "to_neighbor")
+                .attr("x1", w / 2)
+                .attr("y1", height / 2)
+                .attr("x2", neighbors[k][i].attr("cx"))
+                .attr("y2", neighbors[k][i].attr("cy"))
+                .attr("stroke", "black")
+                .attr("stroke-width", p.linewidth)
+                .attr("opacity", 1)
+            if (k == 0) {
+                edges[k].append("foreignObject")
+                    .attr("x", ((w / 2 + parseFloat(neighbors[k][i].attr("cx"))) / 2) - p.node_radius / 2)
+                    .attr("y", ((height / 2 + parseFloat(neighbors[k][i].attr("cy"))) / 2) - p.node_radius / 2)
+                    .attr("font-size", p.fontsize - 5)
+                    // .attr("text-anchor", "middle")
+                    .attr("dominant-baseline", "hanging")
+                    .attr("width", p.node_radius)
+                    .attr("height", p.node_radius)
+                    .attr("opacity", 1)
+                    .style("background-color", "white")
+                    .html("$$\\mathbf{e}_{ij}$$")
+            }
+        }
+    }
+
+    graph2.append("foreignObject")
+        .attr("x", 0)
+        .attr("y", height - 50)
+        .attr("font-size", p.fontsize)
+        // .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "hanging")
+        .attr("width", w)
+        .attr("height", 50)
+        .attr("opacity", 0.75)
+        .style("background-color", "white")
+        .html("$$\\sum\\mathbf{e}_{ij}$$")
+
+    // Arrows between graphs
+    graph.append("text")
+        .attr("x", w+10)
+        .attr("y", height / 2)
+        .attr("font-size", p.fontsize)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("opacity", 1)
+        .text("►")
+
+    graph.append("text")
+        .attr("x", 2*w+10)
+        .attr("y", height / 2)
+        .attr("font-size", p.fontsize)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("opacity", 1)
+        .text("►")
+
+    graph.append("line")
+        .attr("x1", w+10)
+        .attr("y1",0)
+        .attr("x2", w+10)
+        .attr("y2",height)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1)
+        .attr("opacity", 1)
+        .attr("stroke-dasharray", "5,5")
+
+    graph.append("line")
+        .attr("x1", 2*w+10)
+        .attr("y1",0)
+        .attr("x2", 2*w+10)
+        .attr("y2",height)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1)
+        .attr("opacity", 1)
+        .attr("stroke-dasharray", "5,5")
+
+    graph.append("text")
+        .attr("x", w/2)
+        .attr("y", 0)
+        .attr("font-size", p.fontsize)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "hanging")
+        .attr("opacity", 1)
+        .text("1. Message passing")
+
+    graph.append("text")
+        .attr("x", w+10+w/2)
+        .attr("y", 0)
+        .attr("font-size", p.fontsize)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "hanging")
+        .attr("opacity", 1)
+        .text("2. Aggregation")
+
+    graph.append("text")
+        .attr("x", 2*w+10+w/2)
+        .attr("y", 0)
+        .attr("font-size", p.fontsize)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "hanging")
+        .attr("opacity", 1)
+        .text("3. Update")
+
+
+</script>
+</body>
+</html>

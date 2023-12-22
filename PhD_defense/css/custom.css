@@ -946,3 +946,58 @@ mjx-container[display="true"] {
 .MathJax_SVG_Display {
     margin: 0em 0 ! important
 }
+
+/* Change mouse cursor to look like a laser pointer*/
+body {
+    cursor: default;
+}
+
+/* Style for the button container */
+.button-group {
+    display: inline-block;
+}
+
+/* Style for the buttons */
+.button-group .button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+/* Style for the active button */
+.button-group .button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Style for the hover effect */
+.button-group .button:hover {
+    background-color: #ddd;
+}
+
+/* Style for the disabled buttons */
+.button-group .button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.slider-container {
+    max-width: 400px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+/* Style for the slider input */
+.slider {
+    width: 100%;
+    margin-top: 10px;
+}

@@ -56,6 +56,7 @@
     "rollup": "^2.48.0",
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.39.2",
+    "vite": "^5.0.10",
     "yargs": "^15.1.0"
   },
   "overrides": {
@@ -100,5 +101,10 @@
       "no-eq-null": 2,
       "no-unused-expressions": 0
     }
+  },
+  "dependencies": {
+    "node-static": "^0.7.11",
+    "reveal-multiplex": "^0.1.0",
+    "three": "^0.159.0"
   }
 }
