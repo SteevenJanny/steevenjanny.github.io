@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+</head>
+<body>
+<script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    p = {
+        radius: 7,
+        strokeWidth: 2,
+    }
+
+    points = {
+        cylinder_flow: [9, 1],
+        airfoil: [8.5, 3],
+        vascular: [7.5, 2],
+        scalarflow: [1, 8],
+        jhtd: [0.5, 7.5],
+        eagle: [6, 7],
+    }
+
+
+    var margin = {top: 100, right: 350, bottom: 250, left: 300};
+
+    var x_scale = d3.scaleLinear()
+        .domain([0, 10])
+        .range([margin.left, width - margin.right]);
+    var y_scale = d3.scaleLinear()
+        .domain([0, 10])
+        .range([height - margin.bottom, margin.top]);
+
+    var chart = graph.append("g");
+    var cylinder_flow = graph.append("g").attr("visibility", "hidden")
+    var airfoil = graph.append("g").attr("visibility", "hidden")
+    var vascular = graph.append("g").attr("visibility", "hidden")
+    var scalarflow = graph.append("g").attr("visibility", "hidden")
+    var jhtd = graph.append("g").attr("visibility", "hidden")
+    var eagle = graph.append("g").attr("visibility", "hidden")
+    var pareto = graph.append("g").attr("visibility", "hidden")
+
+    chart.append("g")
+        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
+        .call(d3.axisBottom(x_scale).ticks(0));
+
+    chart.append("g")
+        .attr("transform", "translate(" + margin.left + ",0)")
+        .call(d3.axisLeft(y_scale).ticks(0));
+
+    chart.append("text")
+        .attr("x", x_scale(5))
+        .attr("y", y_scale(0) + 30)
+        .attr("font-size", 30)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .text("Scale");
+
+    chart.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -y_scale(5))
+        .attr("y", x_scale(0) - 30)
+        .attr("font-size", 30)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .text("Difficulty");
+
+    chart.append("rect")
+        .attr("x", x_scale(0))
+        .attr("y", y_scale(10))
+        .attr("width", x_scale(10) - x_scale(0))
+        .attr("height", y_scale(0) - y_scale(10))
+        .attr("fill", "#EFEFEF")
+        .attr("opacity", 1);
+
+    // Add a grid
+    chart.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
+        .attr("opacity", 0.2)
+        .call(d3.axisBottom(x_scale)
+            .tickSize(-height + margin.top + margin.bottom)
+            .tickFormat("")
+            .ticks(10)
+        )
+    chart.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(" + margin.left + ",0)")
+        .attr("opacity", 0.2)
+        .call(d3.axisLeft(y_scale)
+            .tickSize(-width + margin.left + margin.right)
+            .tickFormat("")
+            .ticks(10)
+        )
+
+
+    cylinder_flow.append("circle")
+        .attr("cx", x_scale(points.cylinder_flow[0]))
+        .attr("cy", y_scale(points.cylinder_flow[1]))
+        .attr("r", p.radius)
+        .attr("fill", "#598938")
+        .attr("opacity", 1)
+        .attr("stroke", "#314b1f")
+        .attr("stroke-width", p.strokeWidth);
+
+    airfoil.append("circle")
+        .attr("cx", x_scale(points.airfoil[0]))
+        .attr("cy", y_scale(points.airfoil[1]))
+        .attr("r", p.radius)
+        .attr("fill", "#598938")
+        .attr("opacity", 1)
+        .attr("stroke", "#314b1f")
+        .attr("stroke-width", p.strokeWidth);
+
+    vascular.append("circle")
+        .attr("cx", x_scale(points.vascular[0]))
+        .attr("cy", y_scale(points.vascular[1]))
+        .attr("r", p.radius)
+        .attr("fill", "#598938")
+        .attr("opacity", 1)
+        .attr("stroke", "#314b1f")
+        .attr("stroke-width", p.strokeWidth);
+
+    scalarflow.append("circle")
+        .attr("cx", x_scale(points.scalarflow[0]))
+        .attr("cy", y_scale(points.scalarflow[1]))
+        .attr("r", p.radius)
+        .attr("fill", "#E77475")
+        .attr("opacity", 1)
+        .attr("stroke", "#733a3b")
+        .attr("stroke-width", p.strokeWidth);
+
+    jhtd.append("circle")
+        .attr("cx", x_scale(points.jhtd[0]))
+        .attr("cy", y_scale(points.jhtd[1]))
+        .attr("r", p.radius)
+        .attr("fill", "#E77475")
+        .attr("opacity", 1)
+        .attr("stroke", "#733a3b")
+        .attr("stroke-width", p.strokeWidth);
+
+    eagle.append("circle")
+        .attr("cx", x_scale(points.eagle[0]))
+        .attr("cy", y_scale(points.eagle[1]))
+        .attr("r", p.radius)
+        .attr("fill", "#277C9D")
+        .attr("opacity", 1)
+        .attr("stroke", "#123a49")
+        .attr("stroke-width", p.strokeWidth);
+
+    pareto.append("path")
+        .attr("id", "pareto")
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 3)
+        .attr("opacity", 0.5)
+        .attr("d", "M" + x_scale(0) + "," + y_scale(9.5) + " L" + x_scale(10) + "," + y_scale(2.5))
+        .attr("stroke-dasharray", "5,5");
+    pareto.append("text")
+        .append("textPath")
+        .attr("xlink:href", "#pareto")
+        .attr("startOffset", "50%")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "text-bottom")
+        .attr("font-size", 30)
+        .attr("fill", "black")
+        .attr("opacity", 0.5)
+        .text("↑ ↑ ↑ Pareto frontier ↑ ↑ ↑");
+
+
+    // VIDEOS
+    // cylinder flow : assets/slide18/cylinder.mp4
+    var video_cylinder = cylinder_flow.append("foreignObject")
+        .attr("x", width - 400 - 50)
+        .attr("y", height - 100 - 50)
+        .attr("width", 450)
+        .attr("height", 150);
+
+    video_cylinder.append("xhtml:video")
+        .attr("class", "theorem_content")
+        .attr("width", 400)
+        .attr("height", 104)
+        .attr("src", "../assets/slide18/cylinder.mp4")
+        .attr("autoplay", "true")
+        .attr("loop", "loop")
+        .attr("muted", "muted")
+        .attr("controls", "controls");
+
+    var video_airfoil = airfoil.append("foreignObject")
+        .attr("x", width - 200 - 50)
+        .attr("y", 30)
+        .attr("width", 450)
+        .attr("height", 250);
+
+    video_airfoil.append("xhtml:video")
+        .attr("class", "theorem_content")
+        .attr("width", 400 / 2)
+        .attr("height", 306 / 2)
+        .attr("src", "../assets/slide18/airfoil.mp4")
+        .attr("autoplay", "true")
+        .attr("loop", "loop")
+        .attr("muted", "muted")
+        .attr("controls", "controls");
+
+    var video_vascular = vascular.append("foreignObject")
+        .attr("x", width - 200 - 50)
+        .attr("y", height / 2 - 100 + 25 + 30)
+        .attr("width", 450)
+        .attr("height", 250);
+
+    video_vascular.append("xhtml:video")
+        .attr("class", "theorem_content")
+        .attr("width", 400 / 2)
+        .attr("height", 294 / 2)
+        .attr("src", "../assets/slide18/vascular.mp4")
+        .attr("autoplay", "true")
+        .attr("loop", "loop")
+        .attr("muted", "muted")
+        .attr("controls", "controls")
+        .on("loadedmetadata", function (e) {
+            this.playbackRate = 5;
+        });
+
+    var video_scalarflow = scalarflow.append("foreignObject")
+        .attr("x", 0)
+        .attr("y", 30)
+        .attr("width", 375)
+        .attr("height", 275);
+
+    // ../assets/slide18/scalar.gif
+    video_scalarflow.append("xhtml:img")
+        .attr("class", "theorem_content")
+        .attr("width", 375 / 2)
+        .attr("height", 275 / 2)
+        .attr("src", "../assets/slide18/scalar.gif")
+        .attr("autoplay", "true")
+        .attr("loop", "loop")
+        .attr("muted", "muted")
+        .attr("controls", "controls");
+
+    var video_jhtd = jhtd.append("foreignObject")
+        .attr("x", 0)
+        .attr("y", height / 2 - 100 + 25 + 30)
+        .attr("width", 450)
+        .attr("height", 250);
+
+    video_jhtd.append("xhtml:video")
+        .attr("class", "theorem_content")
+        .attr("width", 400 / 2)
+        .attr("height", 226 / 2)
+        .attr("src", "../assets/slide18/jhtd.mp4")
+        .attr("autoplay", "true")
+        .attr("loop", "loop")
+        .attr("muted", "muted")
+        .attr("controls", "controls")
+        //play it faster
+        .on("loadedmetadata", function (e) {
+            this.playbackRate = 5;
+        });
+
+
+    eagle.append("foreignObject")
+        .attr("x", x_scale(points.eagle[0]) + p.radius)
+        .attr("y", y_scale(points.eagle[1]) - p.radius-40)
+        .attr("width", 40)
+        .attr("height", 40)
+        .append("xhtml:img")
+        .attr("width", 40)
+        .attr("height", 40)
+        .attr("src", "../assets/slide18/eagle.ico")
+
+
+    // Titles
+    cylinder_flow.append("foreignObject")
+        .attr("x", width - 400 - 50)
+        .attr("y", height - 100 - 50 - 30)
+        .attr("width", 200)
+        .attr("height", 30)
+        .append("xhtml:div")
+        .attr("class", "theorem_title")
+        .style("width", "150px")
+        .style("background-color", "#598938")
+        .style("height", "30px")
+        .html("Cylinder flow [1]");
+
+    airfoil.append("foreignObject")
+        .attr("x", width - 200 - 50)
+        .attr("y", 0)
+        .attr("width", 200)
+        .attr("height", 30)
+        .append("xhtml:div")
+        .attr("class", "theorem_title")
+        .style("width", "150px")
+        .style("height", "30px")
+        .style("background-color", "#598938")
+        .html("Airfoil [1]");
+
+    vascular.append("foreignObject")
+        .attr("x", width - 200 - 50)
+        .attr("y", height / 2 - 100 + 25)
+        .attr("width", 200)
+        .attr("height", 30)
+        .append("xhtml:div")
+        .attr("class", "theorem_title")
+        .style("width", "150px")
+        .style("height", "30px")
+        .style("background-color", "#598938")
+        .html("Vascular [1]");
+
+    scalarflow.append("foreignObject")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 200)
+        .attr("height", 30)
+        .append("xhtml:div")
+        .attr("class", "theorem_title")
+        .style("width", "150px")
+        .style("height", "30px")
+        .style("background-color", "#E77475")
+        .html("ScalarFlow [3]");
+
+    jhtd.append("foreignObject")
+        .attr("x", 0)
+        .attr("y", height / 2 - 100 + 25)
+        .attr("width", 200)
+        .attr("height", 30)
+        .append("xhtml:div")
+        .attr("class", "theorem_title")
+        .style("width", "150px")
+        .style("height", "30px")
+        .style("background-color", "#E77475")
+        .html("JHTD [4]");
+
+
+    // ARROWS
+    cylinder_flow.append("line")
+        .attr("x1", x_scale(points.cylinder_flow[0]))
+        .attr("y1", y_scale(points.cylinder_flow[1]))
+        .attr("x2", parseFloat(video_cylinder.attr("x")) + 200)
+        .attr("y2", video_cylinder.attr("y"))
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 3)
+        .attr("marker-end", "url(#arrow)");
+
+    airfoil.append("line")
+        .attr("x1", x_scale(points.airfoil[0]))
+        .attr("y1", y_scale(points.airfoil[1]))
+        .attr("x2", parseFloat(video_airfoil.attr("x")))
+        .attr("y2", parseFloat(video_airfoil.attr("y")) + 100)
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 3)
+        .attr("marker-end", "url(#arrow)");
+
+    vascular.append("line")
+        .attr("x1", x_scale(points.vascular[0]))
+        .attr("y1", y_scale(points.vascular[1]))
+        .attr("x2", parseFloat(video_vascular.attr("x")))
+        .attr("y2", parseFloat(video_vascular.attr("y")) + 100)
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 3)
+        .attr("marker-end", "url(#arrow)");
+
+    scalarflow.append("line")
+        .attr("x1", x_scale(points.scalarflow[0]))
+        .attr("y1", y_scale(points.scalarflow[1]))
+        .attr("x2", parseFloat(video_scalarflow.attr("x")) + 210)
+        .attr("y2", parseFloat(video_scalarflow.attr("y")) + 100)
+        .attr("stroke", "#E77475")
+        .attr("stroke-width", 3)
+        .attr("marker-end", "url(#arrowred)");
+
+    jhtd.append("line")
+        .attr("x1", x_scale(points.jhtd[0]))
+        .attr("y1", y_scale(points.jhtd[1]))
+        .attr("x2", parseFloat(video_jhtd.attr("x")) + 230)
+        .attr("y2", parseFloat(video_jhtd.attr("y")) + 60)
+        .attr("stroke", "#E77475")
+        .attr("stroke-width", 3)
+        .attr("marker-end", "url(#arrowred)");
+
+
+    var defs = graph.append("defs");
+    defs.append("marker")
+        .attr("id", "arrow")
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("refX", 0)
+        .attr("refY", 3)
+        .attr("orient", "auto")
+        .attr("markerUnits", "strokeWidth")
+        .append("path")
+        .attr("d", "M0,0 L0,6 L6,3 z")
+        .attr("fill", "#598938");
+
+    defs.append("marker")
+        .attr("id", "arrowred")
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("refX", 0)
+        .attr("refY", 3)
+        .attr("orient", "auto")
+        .attr("markerUnits", "strokeWidth")
+        .append("path")
+        .attr("d", "M0,0 L0,6 L6,3 z")
+        .attr("fill", "#E77475");
+
+
+    // References
+    var references = graph.append("g")
+
+    references.append("foreignObject")
+        .attr("x", 0)
+        .attr("y", height - 150)
+        .attr("width", 500)
+        .attr("height", 150)
+        .append("xhtml:div")
+        .attr("class", "")
+        .style("width", "450px")
+        .style("height", "100px")
+        .html("<p class='light-text fontsize-10' style='padding-bottom: 5px'> [1] Pfaff, T., Fortunato, M., Sanchez-Gonzalez, A., & Battaglia, P. (2020). Learning Mesh-Based Simulation with Graph Networks. ICLR </p>" +
+            "<p class='light-text fontsize-10' style='padding-bottom: 5px'> [2] Han, X., Gao, H., Pfaff, T., Wang, J. X., & Liu, L. (2021). Predicting Physics in Mesh-reduced Space with Temporal Attention. ICLR </p>" +
+            "<p class='light-text fontsize-10' style='padding-bottom: 5px'> [3] Eckert, M. L., Um, K., & Thuerey, N. (2019). ScalarFlow: a large-scale volumetric data set of real-world scalar transport flows for computer animation and machine learning. TOG.</p>" +
+            "<p class='light-text fontsize-10'> [4] Kanov, K., Burns, R., Lalescu, C., & Eyink, G. (2015). The Johns Hopkins turbulence databases: An open simulation laboratory for turbulence research. Computing in Science & Engineering </p>");
+
+    function toggle_green_on() {
+        cylinder_flow.attr("visibility", "visible")
+        airfoil.attr("visibility", "visible")
+        vascular.attr("visibility", "visible")
+    }
+    function toggle_green_off() {
+        cylinder_flow.attr("visibility", "hidden")
+        airfoil.attr("visibility", "hidden")
+        vascular.attr("visibility", "hidden")
+    }
+
+    function toggle_red_on() {
+        scalarflow.attr("visibility", "visible")
+        jhtd.attr("visibility", "visible")
+    }
+    function toggle_red_off() {
+        scalarflow.attr("visibility", "hidden")
+        jhtd.attr("visibility", "hidden")
+    }
+
+    function toggle_eagle_on() {
+        toggle_red_on()
+        toggle_green_on()
+        pareto.attr("visibility", "visible")
+        eagle.attr("visibility", "visible")
+    }
+    function toggle_eagle_off() {
+        pareto.attr("visibility", "hidden")
+        eagle.attr("visibility", "hidden")
+    }
+
+
+    var _transitions = [
+        {
+            transitionForward: () => toggle_green_on(),
+            transitionBackward: () => toggle_green_off(),
+            index: 0
+        },
+        {
+            transitionForward: () => toggle_red_on(),
+            transitionBackward: () => toggle_red_off(),
+            index: 1
+        },
+        {
+            transitionForward: () => toggle_eagle_on(),
+            transitionBackward: () => toggle_eagle_off(),
+            index: 2
+        }
+    ]
+
+</script>
+</body>
+</html>
