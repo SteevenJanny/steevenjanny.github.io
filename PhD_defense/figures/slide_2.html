@@ -85,11 +85,20 @@
         lines = []
     }
 
+    function get_pos(i){
+        if (i==0){
+            return 1;
+        }
+        else{
+            return 8 * Math.random() - 4;
+        }
+    }
+
     function draw_particles(n, t) {
         var r, u, i;
         for (erase_particles(), T = t, r = 4, n == 1 && (r = 10), u = 0; u < n; u++) i = {
-            x: 8 * Math.random() - 4,
-            y: 8 * Math.random() - 4,
+            x: get_pos(u),
+            y: get_pos(u),
             t: Math.random() * T
         }, i.path = particle_set.append("circle").attr("cx", xScale(i.x)).attr("cy", yScale(i.y)).attr("r", r).attr("stroke", "black").attr("stroke-width", .5).attr("fill", d3.interpolateRainbow(Math.random())).attr("opacity", 1), particles.push(i);
         interval = setInterval(update_particles, plot_delay)
@@ -158,7 +167,7 @@
     _transitions = [{
         transitionForward: () => animation_step1(),
         transitionBackward: () => reverse_animation_step1(),
-        index: 2
+        index: 1
     }, {
         transitionForward: () => animation_step2(),
         transitionBackward: () => reverse_animation_step2(),
