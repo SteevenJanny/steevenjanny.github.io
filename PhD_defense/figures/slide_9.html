@@ -117,7 +117,7 @@
     var x_center = (width - p.dyn_block_width - p.obs_block_width - 3*p.block_margin_w - p.obs_width) / 2
 
     var nl_block = figure.append("g")
-        .attr("transform", "translate(" + x_center + ","+ (p.sim_dim_h/2 + figure_margin.top)+")")
+        .attr("transform", "translate(" + x_center + ","+ (p.sim_dim_h/2 + figure_margin.top + 50)+")")
 
     var delta_y = (p.sim_dim_h + figure_margin.top) + p.block_margin_h + p.dyn_block_height + p.models_dist
 
@@ -422,11 +422,18 @@
     x_right = nl_block_pos.x + nl_block_pos.width
     y_center = (l_block_pos.y + l_block_pos.height)/2
 
-    nl_block.append("line")
+    var xScale_obs = d3.scaleLinear()
+        .domain([0, T])
+        .range([0, p.obs_width]);
+    var yScale_obs = d3.scaleLinear()
+        .domain([0, 50])
+        .range([p.obs_height, 0]);
+
+    var arrow_nl = nl_block.append("line")
         .attr("x1", p.dyn_block_width + 2*p.block_margin_w + p.obs_block_width)
         .attr("y1", p.dyn_block_height / 2 + p.sim_dim_h/2 + p.block_margin_h)
         .attr("x2", x_right-15)
-        .attr("y2", p.dyn_block_height + p.sim_dim_h/2 + p.block_margin_h + p.models_dist/2)
+        .attr("y2", p.dyn_block_height + p.sim_dim_h/2 + p.block_margin_h + p.models_dist/2 -37)
         .attr("stroke", "#277C9D")
         .attr("stroke-width", 2)
         .attr("marker-end", "url(#arrowhead)")
@@ -445,12 +452,7 @@
         .attr("width", p.obs_width)
         .attr("height", p.obs_height);
 
-    var xScale_obs = d3.scaleLinear()
-        .domain([0, T])
-        .range([0, p.obs_width]);
-    var yScale_obs = d3.scaleLinear()
-        .domain([0, 50])
-        .range([p.obs_height, 0]);
+
 
     var xAxis_obs = d3.axisBottom(xScale_obs);
     var yAxis_obs = d3.axisLeft(yScale_obs);
@@ -507,12 +509,19 @@
 
     var interval = setInterval(update_particles, 20);
 
+    l_block.style("opacity", 0)
     function toggle_nl_on() {
-        nl_block.style("opacity", 1)
+        nl_block.transition().duration(250).style("opacity", 1)
+            .attr("transform", "translate(" + x_center + ","+ (p.sim_dim_h/2 + figure_margin.top + 50)+")")
+        l_block.transition().duration(250).style("opacity", 0)
+        arrow_nl.transition().duration(250).attr("y2", p.dyn_block_height + p.sim_dim_h/2 + p.block_margin_h + p.models_dist/2-37)
     }
 
     function toggle_nl_off() {
-        nl_block.style("opacity", 0.25)
+        nl_block.transition().duration(250).style("opacity", 0.25)
+            .attr("transform", "translate(" + x_center + ","+ (p.sim_dim_h/2 + figure_margin.top )+")")
+        l_block.transition().duration(250).style("opacity", 1)
+        arrow_nl.transition().duration(250).attr("y2", p.dyn_block_height + p.sim_dim_h/2 + p.block_margin_h + p.models_dist/2)
     }
 
     function set_dynamics_koopman() {
@@ -542,8 +551,6 @@
         l_dyn_rect.transition().duration(500)
             .attr("fill", "rgba(89,137,56,0.5)")
             .attr("stroke-width", 4)
-
-
     }
 
     var _transitions = [
