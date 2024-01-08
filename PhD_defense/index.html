@@ -13,9 +13,11 @@
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css">
-    <link rel="stylesheet" href="css/custom.css">
     <script src="https://kit.fontawesome.com/170d25c765.js" crossorigin="anonymous"></script>
     <!--    <link rel="stylesheet" href="css/styles.css">-->
+
+
+    <link rel="stylesheet" href="css/custom.css">
 
 </head>
 <body>
@@ -87,21 +89,19 @@
                 <div class="col-33">
                     <video data-autoplay data-src="assets/slide1/scalar_flow_final.mp4" autoplay="true" loop="true"
                            muted="true" width="720"></video>
-                    <p style="font-size: 10px; padding:0px; margin: 0px">Eckert, Marie-Lena, Kiwon Um, and Nils Thuerey.
-                        "ScalarFlow: a large-scale volumetric data set of real-world scalar transport flows for computer
-                        animation and machine learning." ACM Transactions on Graphics (TOG) 38.6 (2019): 1-16.</p>
+                    <p style="font-size: 10px">Eckert et al. (2019). ScalarFlow: a large-scale volumetric data set of real-world scalar transport flows for computer
+                        animation and machine learning. TOG</p>
                 </div>
                 <div class="col-33">
                     <video data-autoplay data-src="assets/slide1/fluid.mp4" autoplay="true" loop="true"
                            muted="true" width="720"></video>
-                    <p style="font-size: 10px; padding:0px; margin: 0px">Allen, Kelsey R., et al. "Physical design using
-                        differentiable learned simulators." arXiv preprint arXiv:2202.00728 (2022).</p>
+                    <p style="font-size: 10px">Allen, Kelsey R., et al. (2019), Physical design using
+                        differentiable learned simulators. arXiv preprint.</p>
                 </div>
                 <div class="col-33">
                     <video data-autoplay data-src="assets/slide1/boston_dynamics.mp4" autoplay="true" loop="true"
-                           muted="true"
-                           width="720"></video>
-                    <p style="font-size: 10px; padding:0px; margin: 0px">Boston Dynamics</p>
+                           muted="true" width="720"></video>
+                    <p style="font-size: 10px;">Boston Dynamics</p>
                 </div>
             </div>
             <br/>
@@ -152,13 +152,8 @@
 
             <div class="fragment" data-fragment-index="3"></div>
 
-            <div class="container fragment " data-fragment-index="4" style="height: 100px; width: 100%;">
-                <div class="center" style="width: 100%;">
-                    <!--                    <span class="fas fa-user-graduate "></span>-->
-                    <!--                    <span class=""> + </span>-->
-                    <!--                    <span class="fas fa-file" style="font-size: 30px"></span>-->
-                    <!--                    <span class="fas fa-pen" style="font-size: 20px"></span>-->
-                    <!--                    <span class="fas fa-long-arrow-alt-right" style="padding-left: 50px; padding-right: 50px"></span>-->
+            <div class="container fragment " data-fragment-index="3" style="height: 100px; width: 100%;">
+                <div class="center" style="width: 100%">
                     Ordinary Differential Equation:
                     <span>$\frac{\partial \mathbf{s}}{\partial t} = {\color{#277C9D} f}(\mathbf{s})$</span>
                 </div>
@@ -804,43 +799,33 @@
                 Non-Linear Systems</p>
             <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">Take home messages</p>
 
-            <div class="row">
+            <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
-                        <li class="green">Deep KKL is a powerful inductive bias</li>
-                        <p class="no_margin" style="text-align: justify">Many practical tasks do not require a
-                            full-fledged deep neural network with fancy GNN or
-                            Transformers,
-                            but rather a simple, fast and robust model capable of simulating the output of a dynamical
-                            system.</p>
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
+                        <li class="green">A powerful inductive bias</li>
                     </ul>
                 </div>
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
-                        <li class="blue">A step toward more principled theory on RNN</li>
-                        <p class="no_margin" style="text-align: justify">Deep KKL provides a simpler framework to study
-                            the properties of RNNs, by explaining their
-                            success using contraction theory. </p>
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
+                        <li class="blue">A step toward theory on RNN</li>
                     </ul>
                 </div>
             </div>
-            <div class="r-stretch"></div>
-            <div class="row" style="margin-bottom: 40px">
+            <div>
+                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Pros</p>
+                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
+                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Cons</p>
+            </div>
+            <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
-                        <li class="red">Do not replace your RNNs with Deep KKL !</li>
-                        <p class="no_margin" style="text-align: justify">We do not claim that Deep KKL is better than
-                            RNNs, but rather that it is a different inductive
-                            bias that can be useful in some cases, especially when dealing with dynamical systems.</p>
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
+                        <li class="red">Do not replace your RNNs !</li>
                     </ul>
                 </div>
 
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
                         <li class="red">Limitation to "small" systems</li>
-                        <p class="no_margin" style="text-align: justify">Deep KKL suffers from a limitation of control
-                            theory: it do not scale well with the dimension of
-                            the system. Addressing larger-scale problems is (currently) a challenge.</p>
                     </ul>
                 </div>
             </div>
@@ -883,7 +868,7 @@
                 Dynamics with Mesh Transformers</p>
             <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">How do we address larger-scale
                 problems?</p>
-            <p> An infamous example: Simulation of Fluid Mechanics</p>
+            <p style="margin-bottom:0"> An infamous example: Simulation of Fluid Mechanics</p>
             <div class="r-stack">
                 <div class="fragment fade-out" data-fragment-index="1">
                     <table style="width: 100%">
@@ -1252,48 +1237,38 @@
                 Dynamics with Mesh Transformers</p>
             <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Take home messages</p>
 
-            <div class="row">
+            <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
-                        <li class="green"> First large-scale dataset for CFD</li>
-                        <p class="no_margin" style="text-align: justify">The eagle dataset is the first fluid dynamics
-                            dataset of such scale, and is publicly available. It is a big leap in difficulty compared to
-                            previous datasets, and is a step toward better neural simulators.</p>
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
+                        <li class="green">Large-scale dataset for CFD</li>
                     </ul>
                 </div>
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
                         <li class="blue">Mesh Transformer is SOTA on CFD tasks</li>
-                        <p class="no_margin" style="text-align: justify"> Our Mesh Transformer achieves state-of-the-art
-                            results on the eagle dataset, and on classical benchmarks such as Cylinder-flow. It also
-                            offers a form of interpretability via attention maps.</p>
                     </ul>
                 </div>
             </div>
-            <div class="r-stretch"></div>
-            <div class="row" style="margin-bottom: 40px">
+            <div>
+                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Pros</p>
+                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
+                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Cons</p>
+            </div>
+            <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
                         <li class="red">Limited to 2D simulations</li>
-                        <p class="no_margin" style="text-align: justify"> Addressing 3D simulation in an accurate and
-                            efficient way is still a challenge.
-                            For now, Eagle focuses on 2D simulations with an engineering-grade turbulence model.
-                            Extending to 3D simulations
-                            requires way more data and computational power.</p>
                     </ul>
                 </div>
 
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
                         <li class="red">Going further with inductive bias</li>
-                        <p class="no_margin" style="text-align: justify">The strength of our Mesh Transformer is also
-                            its weakness:
-                            it differs from conventional solvers by allowing non-local interactions, which improves
-                            greatly the accuracy
-                            but also makes the use of physical priors more difficult.</p>
                     </ul>
                 </div>
             </div>
+
+
 
             <p class="fontsize-20 bold no_margin" style="text-align: left">Follow-up work</p>
             <p class="light-text fontsize-15">Li, Z. et al. (2023). Latent Neural PDE Solver for Time-dependent Systems.
@@ -1738,7 +1713,6 @@
                 Counterfactual Physics in Pixel Space</p>
             <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Results </p>
 
-
             <div style="height: 125px;margin-bottom: 20px">
                 <div class="fig-container" data-file="figures/slide_34.html"
                      data-style="width:100%; align:center; height:100%" data-preload
@@ -1773,43 +1747,37 @@
                 Counterfactual Physics in Pixel Space</p>
             <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;">Take home messages</p>
 
-            <div class="row">
+            <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
-                        <li class="green"> Dataset for causal discovery in physics</li>
-                        <p class="no_margin" style="text-align: justify">The Filtered-Cophy dataset is an improvement
-                        over CoPhy, the first dataset for causal discovery in physics, yet eliminating the ill-posedness
-                        of the tasks and addressing the more challenging problem of reasoning in pixel space.</p>
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
+                        <li class="green">Dataset for causal discovery in physics</li>
                     </ul>
                 </div>
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
-                        <li class="blue">Object-level representation via keypoints</li>
-                        <p class="no_margin" style="text-align: justify"> Our keypoints detector is designed to use
-                        a limited set of keypoints to describe complex 3d objects using shape coefficients that are discovered
-                        via the unsupervised pre-training. This representation is interpretable and can be used for downstream
-                        tasks such as counterfactual prediction.</p>
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
+                        <li class="blue">Explainability via keypoints</li>
                     </ul>
                 </div>
             </div>
-            <div class="r-stretch"></div>
-            <div class="row" style="margin-bottom: 40px">
+            <div>
+                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Pros</p>
+                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
+                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Cons</p>
+            </div>
+            <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
                         <li class="red">Apparent simplicity / True challenge</li>
-                        <p class="no_margin" style="text-align: justify"> At first glance, the task seems not so complicated. Yet,
-                        collisions are a very difficult phenomenon to model, which make the dataset challenging.
                     </ul>
                 </div>
 
                 <div class="col-50">
-                    <ul class="rectangle-list fontsize-20">
-                        <li class="red">A lot of opportunity for follow-up work</li>
-                        <p class="no_margin" style="text-align: justify">Several parts of the model can benefit from a V2
-                        update to account for new progress in the field.</p>
+                    <ul class="rectangle-list fontsize-20" style="width:90%">
+                        <li class="red">Lot of opportunities for follow-up work</li>
                     </ul>
                 </div>
             </div>
+
 
             <p class="fontsize-20 bold no_margin" style="text-align: left">Follow-up work</p>
             <p class="light-text fontsize-15">Yang, T. Y., Rosca, J., Narasimhan, K., & Ramadge, P. J. (2022). Learning physics constrained dynamics using autoencoders. NeurIPS</p>
@@ -1836,6 +1804,7 @@
                      data-style="width:100%; align:center; height:100%" data-preload
                      style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
             </div>
+
 
         </section>
 
@@ -1911,7 +1880,7 @@
         hash: true,
         slideNumber: 'c/t',
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, Reveald3, RevealMath.MathJax3],
+        plugins: [RevealMarkdown, RevealHighlight, Reveald3, RevealMath.MathJax3],
         viewDistance: 2, // to lazy load iframes
         multiplex: {
             secret: "", // null so the clients do not have control of the master presentation

@@ -310,13 +310,13 @@
             .attr("cy", yScale(y))
             .attr("r", radius)
             .attr("stroke", "none")
-            .style("fill", "black")
+            .style("fill", "#f1a4a4")
         g_level_4.append("text")
             .attr("x", xScale_4(x) + radius * 2)
             .attr("y", yScale(y))
             .attr("text-anchor", "start")
             .attr("alignment-baseline", "middle")
-            .style("fill", "black")
+            .style("fill", "#E77475")
             .style("font-size", "20px")
             .style("font-family", "sans-serif")
             .text(text);
@@ -531,7 +531,7 @@
             .attr("opacity", 1)
         g_level_4.transition()
             .duration(250)
-            .attr("opacity", 0)
+            .attr("opacity", 1)
     }
 
     function step2_reverse() {
@@ -546,29 +546,29 @@
             .attr("opacity", 0)
     }
 
-    function step3() {
-        g_level_2.transition()
-            .duration(250)
-            .attr("opacity", 1)
-        g_level_3.transition()
-            .duration(250)
-            .attr("opacity", 1)
-        g_level_4.transition()
-            .duration(250)
-            .attr("opacity", 1)
-    }
-
-    function step3_reverse() {
-        g_level_2.transition()
-            .duration(250)
-            .attr("opacity", 1)
-        g_level_3.transition()
-            .duration(250)
-            .attr("opacity", 1)
-        g_level_4.transition()
-            .duration(250)
-            .attr("opacity", 0)
-    }
+    // function step3() {
+    //     g_level_2.transition()
+    //         .duration(250)
+    //         .attr("opacity", 1)
+    //     g_level_3.transition()
+    //         .duration(250)
+    //         .attr("opacity", 1)
+    //     g_level_4.transition()
+    //         .duration(250)
+    //         .attr("opacity", 1)
+    // }
+    //
+    // function step3_reverse() {
+    //     g_level_2.transition()
+    //         .duration(250)
+    //         .attr("opacity", 1)
+    //     g_level_3.transition()
+    //         .duration(250)
+    //         .attr("opacity", 1)
+    //     g_level_4.transition()
+    //         .duration(250)
+    //         .attr("opacity", 0)
+    // }
 
     var _transitions = [
         {
@@ -581,11 +581,11 @@
             transitionBackward: () => step2_reverse(),
             index: 1
         },
-        {
-            transitionForward: () => step3(),
-            transitionBackward: () => step3_reverse(),
-            index: 2
-        }
+        // {
+        //     transitionForward: () => step3(),
+        //     transitionBackward: () => step3_reverse(),
+        //     index: 2
+        // }
     ]
 
 </script>
