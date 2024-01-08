@@ -58,6 +58,14 @@
     margin: 0px !important;
 }
 
+a{
+    color: #606060;
+}
+
+a:hover{
+    color: #277C9D;
+}
+
 .no_margin {
     margin: 0px !important;
 }
