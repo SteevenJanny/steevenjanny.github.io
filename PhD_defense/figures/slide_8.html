@@ -137,7 +137,7 @@
         .append("xhtml:div")
         .style("text-align", "center")
         .style("font-size", "20px")
-        .html("<i>Observation ($y$)</i>");
+        .html("<i>Measure from sensor $y = {\\color{#277C9D} h}(\\mathbf{s})$</i>");
 
     graph_lorenz.append("foreignObject")
         .attr("x", 0)
@@ -147,7 +147,7 @@
         .append("xhtml:div")
         .style("text-align", "center")
         .style("font-size", "20px")
-        .html("<i>State space ($\\mathbf{s}$)</i>");
+        .html("<i>State of  the system $\\dot{\\mathbf{s}} = {\\color{#277C9D} f}(\\mathbf{s})$</i>");
 
 
     graph_lorenz.append("g")
@@ -329,7 +329,7 @@
     ]
 
 
-    draw_particles(100)
+    draw_particles(50)
 
 
 </script>

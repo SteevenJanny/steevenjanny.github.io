@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/custom.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+
+
+<script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var p = {
+        ratio: 0.60,
+        innerMargin_lr: 0.05,
+        innerMargin_tb: 0.08,
+        space: 0.1,
+        inputSize: 0.3,
+        dt: 10,
+    }
+
+    var margins = {
+        "left": 5,
+        "right": 5,
+        "top": 20,
+        "bottom": 20
+    }
+
+    var graph_model = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var cody = graph_model.append("g")
+
+    var xScale_model = d3.scaleLinear()
+        .domain([0, 1])
+        .range([margins.left, width - margins.right])
+    var yScale_model = d3.scaleLinear()
+        .domain([0, 1])
+        .range([margins.top, height - margins.bottom])
+
+    var cody_width = (xScale_model(1) - xScale_model(0)) * p.ratio
+    var cody_height = (yScale_model(1) - yScale_model(0))
+
+    cody.append("rect")
+        .attr("x", xScale_model(0.5) - cody_width / 2)
+        .attr("y", yScale_model(0))
+        .attr("width", cody_width)
+        .attr("height", cody_height)
+        .attr("rx", 5)
+        .attr("stroke-width", 2)
+        .attr("stroke", "#E77475")
+        .style("fill", "#f1a4a4")
+        .style("filter", "drop-shadow( 5px 5px 5px rgba(0, 0, 0, .7))");
+
+
+    var cf_module = cody.append("g")
+    var dynamics_module = cody.append("g")
+
+    var inner_margin_lr = cody_width * p.innerMargin_lr
+    var inner_margin_tb = cody_height * p.innerMargin_tb
+    var space = cody_height * p.space
+
+    var block_width = cody_width - 2 * inner_margin_lr
+    var block_height = (cody_height / 2) - inner_margin_tb - space / 2
+
+    var xScale_cf = d3.scaleLinear()
+        .domain([0, 1])
+        .range([xScale_model(0.5) - cody_width / 2 + inner_margin_lr, xScale_model(0.5) + cody_width / 2 - inner_margin_lr])
+    var yScale_cf = d3.scaleLinear()
+        .domain([0, 1])
+        .range([yScale_model(0) + inner_margin_tb + 30, yScale_model(0) + inner_margin_tb + block_height])
+
+    var xScale_dyn = d3.scaleLinear()
+        .domain([0, 1])
+        .range([xScale_model(0.5) - cody_width / 2 + inner_margin_lr, xScale_model(0.5) + cody_width / 2 - inner_margin_lr])
+    var yScale_dyn = d3.scaleLinear()
+        .domain([0, 1])
+        .range([yScale_model(0) + space / 2 + cody_height / 2 +30 , yScale_model(0) + space / 2 + cody_height / 2 + block_height])
+    var blocksize = 25
+    var typical_length = (yScale_cf(0.5) - yScale_cf(0.0))
+
+    cf_module.append("rect")
+        .attr("x", xScale_model(0.5) - typical_length - inner_margin_lr)
+        .attr("y", yScale_model(0) + inner_margin_tb)
+        .attr("width", typical_length*2+inner_margin_lr*2)
+        .attr("height", block_height)
+        .attr("rx", 5)
+        .attr("stroke-width", 2)
+        .attr("stroke", "#E77475")
+        .style("fill", "white")
+
+    dynamics_module.append("rect")
+        .attr("x", xScale_model(0.5) - cody_width / 2 + inner_margin_lr)
+        .attr("y", yScale_model(0) + space / 2 + cody_height / 2)
+        .attr("width", block_width)
+        .attr("height", block_height)
+        .attr("rx", 5)
+        .attr("stroke-width", 2)
+        .attr("stroke", "#E77475")
+        .style("fill", "white")
+
+    dynamics_module.append("text")
+        .attr("x", xScale_model(0.5))
+        .attr("y", yScale_model(0) + space / 2 + cody_height / 2 + 5)
+        .attr("font-size", "20px")
+        .attr("fill", "black")
+        .attr("dominant-baseline", "hanging")
+        .attr("text-anchor", "middle")
+        .text("Dynamics")
+        .style("font-family", "sans-serif");
+
+    cf_module.append("text")
+        .attr("x", xScale_model(0.5))
+        .attr("y", yScale_model(0) + inner_margin_tb + 5)
+        .attr("font-size", "20px")
+        .attr("fill", "black")
+        .attr("dominant-baseline", "hanging")
+        .attr("text-anchor", "middle")
+        .text("CF Estimator")
+        .style("font-family", "sans-serif");
+
+    // ------------------------------------------------
+    // inputs
+
+    graph_model.append("foreignObject")
+        .attr("x", xScale_model(0))
+        .attr("y", yScale_model(0.25) - yScale_model(p.inputSize) / 2)
+        .attr("width", yScale_model(1))
+        .attr("height", yScale_model(1))
+        .append("xhtml:video")
+        .attr("src", "../assets/slide31/AB_seg.mp4")
+        .attr("width", yScale_model(p.inputSize))
+        .attr("autoplay", true)
+        .attr("loop", true)
+        .style("border", "solid 1px black");
+
+    graph_model.append("text")
+        .attr("x", xScale_model(0))
+        .attr("y", yScale_model(0.25) - yScale_model(p.inputSize) / 2 - 5)
+        .attr("font-size", "20px")
+        .attr("fill", "black")
+        .attr("dominant-baseline", "baseline")
+        .text("AB")
+        .style("font-family", "sans-serif");
+
+
+    graph_model.append("foreignObject")
+        .attr("x", xScale_model(0))
+        .attr("y", yScale_model(0.75) - yScale_model(p.inputSize) / 2)
+        .attr("width", yScale_model(1))
+        .attr("height", yScale_model(1))
+        .append("xhtml:img")
+        .attr("src", "../assets/slide31/C_seg.png")
+        .attr("width", yScale_model(p.inputSize))
+        .style("border", "solid 1px black");
+
+    graph_model.append("text")
+        .attr("x", xScale_model(0))
+        .attr("y", yScale_model(0.75) - yScale_model(p.inputSize) / 2 - 5)
+        .attr("font-size", "20px")
+        .attr("fill", "black")
+        .attr("dominant-baseline", "baseline")
+        .text("C")
+        .style("font-family", "sans-serif");
+
+    graph_model.append("foreignObject")
+        .attr("x", xScale_model(1) - yScale_model(p.inputSize))
+        .attr("y", yScale_model(0.5) - yScale_model(p.inputSize) / 2)
+        .attr("width", yScale_model(1))
+        .attr("height", yScale_model(1))
+        .append("xhtml:video")
+        .attr("src", "../assets/slide31/CD_seg.mp4")
+        .attr("width", yScale_model(p.inputSize))
+        .attr("autoplay", true)
+        .attr("loop", true)
+        .style("border", "solid 1px black");
+
+    graph_model.append("text")
+        .attr("x", xScale_model(1) - yScale_model(p.inputSize))
+        .attr("y", yScale_model(0.5) - yScale_model(p.inputSize) / 2 - 5)
+        .attr("font-size", "20px")
+        .attr("fill", "black")
+        .attr("dominant-baseline", "baseline")
+        .text("D")
+        .style("font-family", "sans-serif");
+
+    // ------------------------------------------------
+    // Dynamics
+
+
+    // Add trapezoid to dynamics (encoder)
+    dynamics_module.append("polygon")
+        .attr("points", xScale_dyn(0.15) + "," + yScale_dyn(0.1) + " " +
+            xScale_dyn(0.25) + "," + yScale_dyn(-0.1) + " " +
+            xScale_dyn(0.25) + "," + yScale_dyn(0.9) + " " +
+            xScale_dyn(0.15) + "," + yScale_dyn(0.7))
+        .attr("stroke-width", 2)
+        .attr("fill", "#E77475")
+
+    dynamics_module.append("text")
+        .attr("x", xScale_dyn(0.15) + 5)
+        .attr("y", yScale_dyn(0.4))
+        .attr("font-size", "20px")
+        .attr("fill", "white")
+        .attr("dominant-baseline", "middle")
+        .text("Enc.")
+        .style("font-family", "sans-serif");
+
+    dynamics_module.append("polygon")
+        .attr("points", xScale_dyn(1-0.15) + "," + yScale_dyn(0.1) + " " +
+            xScale_dyn(1-0.25) + "," + yScale_dyn(-0.1) + " " +
+            xScale_dyn(1-0.25) + "," + yScale_dyn(0.9) + " " +
+            xScale_dyn(1-0.15) + "," + yScale_dyn(0.7))
+        .attr("stroke-width", 2)
+        .attr("fill", "#E77475")
+
+    dynamics_module.append("text")
+        .attr("x", xScale_dyn(1-0.25) + 5)
+        .attr("y", yScale_dyn(0.4))
+        .attr("font-size", "20px")
+        .attr("fill", "white")
+        .attr("dominant-baseline", "middle")
+        .text("Dec.")
+        .style("font-family", "sans-serif");
+
+    // ------------------------------------------------
+    // CF Estimator
+    var block_pos = [
+        [-0.8, 0.1],
+        [1, -0.15],
+        [0.05, -0.8],
+        [0.1, 0.7]
+    ]
+    var cody_graph = cf_module.append("g");
+    var cf_edges = cody_graph.append("g")
+    var cf_messages = cody_graph.append("g")
+    var cf_blocs = cody_graph.append("g")
+    var block_pos_init = 0.5
+
+    cf_blocs.selectAll("rect")
+        .data(block_pos)
+        .enter()
+        .append("rect")
+        .attr("x", function (d) {
+            return xScale_cf(block_pos_init) - blocksize / 2 + d[0] * typical_length
+        })
+        .attr("y", function (d) {
+            return yScale_cf(0.5) - blocksize / 2 + d[1] * typical_length
+        })
+        .attr("width", blocksize)
+        .attr("height", blocksize)
+        .attr("rx", 5)
+        .attr("stroke-width", 2)
+        .style("fill", "#525252")
+
+    var edge_data = []
+    for (var i = 0; i < block_pos.length; i++) {
+        var x1 = xScale_cf(block_pos_init) - blocksize / 2 + block_pos[i][0] * typical_length
+        var y1 = yScale_cf(0.5) - blocksize / 2 + block_pos[i][1] * typical_length
+        for (var j = 0; j < block_pos.length; j++) {
+            var x2 = xScale_cf(block_pos_init) - blocksize / 2 + block_pos[j][0] * typical_length
+            var y2 = yScale_cf(0.5) - blocksize / 2 + block_pos[j][1] * typical_length
+
+            edge_data.push({
+                "x1": x1,
+                "y1": y1,
+                "x2": x2,
+                "y2": y2
+            })
+
+        }
+    }
+
+    cf_edges.selectAll("line")
+        .data(edge_data)
+        .enter()
+        .append("line")
+        .attr("x1", function(d){return d.x1 + blocksize / 2})
+        .attr("y1", function(d){return d.y1 + blocksize / 2})
+        .attr("x2", function(d){return d.x2 + blocksize / 2})
+        .attr("y2", function(d){return d.y2 + blocksize / 2})
+        .attr("stroke-width", 2)
+        .attr("stroke", "#525252")
+
+    cf_messages.selectAll("circle")
+        .data(edge_data)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d){return d.x1 + blocksize / 2})
+        .attr("cy", function(d){return d.y1 + blocksize / 2})
+        .attr("r", 5)
+        .style("fill", "#E77475")
+
+
+    var t = []
+    for (var i =0; i < edge_data.length; i++){
+        t.push(Math.random())
+    }
+    function messages_cf(){
+        cf_messages.selectAll("circle")
+            .attr("cx", function(d, i){
+                return d.x1 + blocksize / 2 + (d.x2 - d.x1) * t[i]
+            })
+            .attr("cy", function(d, i){
+                return d.y1 + blocksize / 2 + (d.y2 - d.y1) * t[i]
+            })
+        for (var i = 0; i < edge_data.length; i++){
+            if (t[i] > 0.99){
+                t[i] = 0
+            }
+            else{
+                t[i] += p.dt/1000
+            }
+        }
+
+        cf_blocs.selectAll("rect")
+            .transition()
+            .duration(p.dt)
+            .ease(d3.easeLinear)
+            .style("fill", function(d, i){
+                return d3.interpolateOrRd(t[i])
+            })
+            .transition()
+            .duration(250)
+            .style("fill", "#525252")
+    }
+
+
+
+
+    var dyn_graph = dynamics_module.append("g");
+    var dyn_edges = dyn_graph.append("g")
+    var dyn_messages = dyn_graph.append("g")
+    var dyn_blocs = dyn_graph.append("g")
+
+    dyn_blocs.selectAll("rect")
+        .data(block_pos)
+        .enter()
+        .append("rect")
+        .attr("x", function (d) {
+            return xScale_dyn(block_pos_init) - blocksize / 2 + d[0] * typical_length
+        })
+        .attr("y", function (d) {
+            return yScale_dyn(0.5) - blocksize / 2 + d[1] * typical_length
+        })
+        .attr("width", blocksize)
+        .attr("height", blocksize)
+        .attr("rx", 5)
+        .attr("stroke-width", 2)
+        .style("fill", "#525252")
+
+    var edge_data_dyn = []
+    for (var i = 0; i < block_pos.length; i++) {
+        var x1 = xScale_dyn(block_pos_init) - blocksize / 2 + block_pos[i][0] * typical_length
+        var y1 = yScale_dyn(0.5) - blocksize / 2 + block_pos[i][1] * typical_length
+        for (var j = 0; j < block_pos.length; j++) {
+            var x2 = xScale_dyn(block_pos_init) - blocksize / 2 + block_pos[j][0] * typical_length
+            var y2 = yScale_dyn(0.5) - blocksize / 2 + block_pos[j][1] * typical_length
+
+            edge_data_dyn.push({
+                "x1": x1,
+                "y1": y1,
+                "x2": x2,
+                "y2": y2
+            })
+
+        }
+    }
+
+    dyn_edges.selectAll("line")
+        .data(edge_data_dyn)
+        .enter()
+        .append("line")
+        .attr("x1", function(d){return d.x1 + blocksize / 2})
+        .attr("y1", function(d){return d.y1 + blocksize / 2})
+        .attr("x2", function(d){return d.x2 + blocksize / 2})
+        .attr("y2", function(d){return d.y2 + blocksize / 2})
+        .attr("stroke-width", 2)
+        .attr("stroke", "#525252")
+
+    dyn_messages.selectAll("circle")
+        .data(edge_data_dyn)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d){return d.x1 + blocksize / 2})
+        .attr("cy", function(d){return d.y1 + blocksize / 2})
+        .attr("r", 5)
+        .style("fill", "#E77475")
+
+
+
+    var interval = setInterval(messages_cf, p.dt);
+
+    // ------------------------------------------------
+    // Arrows heads
+
+    //Arrow from AB to CF module
+    cf_module.append("line")
+        .attr("x1", xScale_model(0) + yScale_model(p.inputSize))
+        .attr("y1", yScale_model(0.25))
+        .attr("x2", xScale_cf(0.5) - typical_length - inner_margin_lr)
+        .attr("y2", yScale_model(0.25))
+        .attr("stroke-width", 2)
+        .attr("stroke", "black")
+        .attr("marker-end", "url(#arrowhead)");
+
+    // Arrow from C to Enc.
+    dynamics_module.append("line")
+        .attr("x1", xScale_model(0) + yScale_model(p.inputSize))
+        .attr("y1", yScale_model(0.75))
+        .attr("x2", xScale_dyn(0.15))
+        .attr("y2", yScale_model(0.75))
+        .attr("stroke-width", 2)
+        .attr("stroke", "black")
+        .attr("marker-end", "url(#arrowhead)");
+
+    // Angle Arrow from Dec. to D
+    dynamics_module.append("path")
+        .attr("d", "M " + (xScale_dyn(1-0.15)) + " " + (yScale_model(0.75)) + " " +
+            "L " + (xScale_dyn(0.95)) + " " + (yScale_model(0.75)) + " " +
+            "L " + (xScale_dyn(0.95)) + " " + (yScale_model(0.5)) + " " +
+            "L " + (xScale_model(1) - yScale_model(p.inputSize)) + " " + (yScale_model(0.5)) + " ")
+        .attr("stroke-width", 2)
+        .attr("stroke", "black")
+        .attr("fill", "none")
+        // .style("stroke-dasharray", ("3, 3"))
+        .attr("marker-end", "url(#arrowhead)");
+
+    // From CF to Dynamics
+    dynamics_module.append("path")
+        .attr("d", "M " + (xScale_cf(0.5) + typical_length + inner_margin_lr) + " " + (yScale_model(0.25)) + " " +
+            "L " + (xScale_dyn(0.75)) + " " + (yScale_model(0.25)) + " " +
+            "L " + (xScale_dyn(0.75)) + " " + (yScale_model(0.5)) + " " +
+            "L " + (xScale_dyn(0.55)) + " " + (yScale_model(0.7)) + " ")
+        .attr("stroke-width", 2)
+        .attr("stroke", "black")
+        .attr("fill", "none")
+        .style("stroke-dasharray", ("3, 3"))
+        .attr("marker-end", "url(#arrowhead)");
+
+    // From encoders to dynamics
+    dynamics_module.append("line")
+        .attr("x1", xScale_dyn(0.25))
+        .attr("y1", yScale_model(0.75))
+        .attr("x2", xScale_dyn(0.5) - typical_length - inner_margin_lr)
+        .attr("y2", yScale_model(0.75))
+        .attr("stroke-width", 2)
+        .attr("stroke", "black")
+        .attr("marker-end", "url(#arrowhead)");
+
+    // From dynamics to decoders
+    dynamics_module.append("line")
+        .attr("x1", xScale_dyn(0.5) + typical_length + inner_margin_lr)
+        .attr("y1", yScale_model(0.75))
+        .attr("x2", xScale_dyn(0.75))
+        .attr("y2", yScale_model(0.75))
+        .attr("stroke-width", 2)
+        .attr("stroke", "black")
+        .attr("marker-end", "url(#arrowhead)");
+
+    // From dynamics to itself (loop)
+    dynamics_module.append("path")
+        .attr("d", "M " + (xScale_dyn(0.7)) + " " + (yScale_model(0.75)) + " " +
+            "L " + (xScale_dyn(0.7)) + " " + (yScale_dyn(1.05)) + " " +
+            "L " + (xScale_dyn(0.3)) + " " + (yScale_dyn(1.05)) + " " +
+            "L " + (xScale_dyn(0.3)) + " " + (yScale_model(0.75)) + " ")
+        .attr("stroke-width", 2)
+        .attr("stroke", "black")
+        .attr("fill", "none")
+        .style("stroke-dasharray", ("3, 3"))
+        .attr("marker-end", "url(#arrowhead)");
+
+    dynamics_module.append("text")
+        .attr("x", xScale_dyn(0.5))
+        .attr("y", yScale_dyn(1.1))
+        .attr("font-size", "15px")
+        .attr("fill", "black")
+        .attr("dominant-baseline", "hanging")
+        .attr("text-anchor", "middle")
+        .text("Auto-regressive")
+        .style("font-family", "sans-serif")
+        .style("font-style", "italic");
+
+
+    cf_module.append("foreignObject")
+        .attr("x", xScale_model(0.65))
+        .attr("y", yScale_cf(0))
+        .attr("width", (xScale_model(0.8) - xScale_model(0.65)))
+        .attr("height", (yScale_cf(1) - yScale_cf(0)))
+        // .style("border", "solid 1px black")
+        .append("xhtml:div")
+        .style("font-size", "20px")
+        .style("font-family", "sans-serif")
+        .style("font-style", "italic")
+        .style("text-align", "left")
+        .html("<p class='no_margin'>latent confounders (unsupervised)</p>");
+
+    var cf_arrow = cf_module.append("line")
+        .attr("x1", xScale_cf(0.5)+typical_length+inner_margin_lr)
+        .attr("y1", yScale_cf(0.3))
+        .attr("x2", xScale_model(0.5) + typical_length + 2*inner_margin_lr)
+        .attr("y2", yScale_cf(0.3))
+        .attr("stroke-width", 2)
+        .attr("stroke", "black")
+        .style("stroke-dasharray", ("3, 3"))
+        .attr("marker-end", "url(#arrowhead)");
+
+
+    graph_model.append("svg:defs").append("svg:marker")
+        .attr("id", "arrowhead")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 10)
+        .attr("refY", 0)
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("orient", "auto")
+        .attr("fill", "black")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+
+    dynamics_module.attr("opacity", 0)
+    cf_module.attr("opacity", 0)
+
+    function step1(){
+        dynamics_module.transition()
+            .duration(250)
+            .attr("opacity", 0)
+        cf_module.transition()
+            .duration(250)
+            .attr("opacity", 1)
+    }
+
+    function step1_reverse(){
+        dynamics_module.transition()
+            .duration(250)
+            .attr("opacity", 0)
+        cf_module.transition()
+            .duration(250)
+            .attr("opacity", 0)
+    }
+
+    function step2(){
+        dynamics_module.transition()
+            .duration(250)
+            .attr("opacity", 1)
+        cf_arrow.attr("opacity", 0)
+        cf_module.transition()
+            .duration(250)
+            .attr("opacity", 1)
+    }
+
+    function step2_reverse(){
+        dynamics_module.transition()
+            .duration(250)
+            .attr("opacity", 0)
+        cf_arrow.attr("opacity", 1)
+        cf_module.transition()
+            .duration(250)
+            .attr("opacity", 1)
+    }
+
+
+
+    var _transitions = [
+        {
+            transitionForward: () => step1(),
+            transitionBackward: () => step1_reverse(),
+            index: 1
+        },
+        {
+            transitionForward: () => step2(),
+            transitionBackward: () => step2_reverse(),
+            index: 2
+        },
+    ]
+
+
+
+</script>
+</body>
+</html>

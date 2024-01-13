@@ -44,7 +44,7 @@ ul.network-icon {
     height: 270px;
     margin: 0 auto;
     object-fit: cover;
-/*    make it responsive on phone*/
+    /*    make it responsive on phone*/
     max-width: 100%;
     max-height: 100%;
 }
