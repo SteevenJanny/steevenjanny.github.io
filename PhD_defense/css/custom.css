@@ -149,6 +149,9 @@ a:hover{
     width: fit-content;
     margin: 5px auto;
     padding: 5px;
+
+    background-color: #C0C0C0;
+    border-color: #9B9B9B;
 }
 
 .rounded_box.green{
@@ -323,29 +326,19 @@ a:hover{
     position: absolute;
     left: 1em;
     color: #5b5b5b;
+    margin: 0px;
+    padding: 0px;
 }
 
 .ul_fancy li.blue:before {
-    font-family: FontAwesome;
-    content: "\f138";
-    position: absolute;
-    left: 1em;
     color: #277C9D;
 }
 
 .ul_fancy li.red:before {
-    font-family: FontAwesome;
-    content: "\f138";
-    position: absolute;
-    left: 1em;
     color: #E77475;
 }
 
 .ul_fancy li.green:before {
-    font-family: FontAwesome;
-    content: "\f138";
-    position: absolute;
-    left: 1em;
     color: #598938;
 }
 
@@ -374,9 +367,11 @@ a:hover{
 .rectangle-list li {
     position: relative;
     display: block;
-    padding: .4em .4em .4em .8em;
+    padding: 5px 0px 5px 15px;
     *padding: .4em;
     margin: .5em 0 .5em 1.5em;
+    margin-top: 5px;
+    margin-bottom: 5px;
     background: #ddd;
     color: #444;
     text-decoration: none;
@@ -1026,4 +1021,48 @@ body {
 .profile_pic{
     border-radius: 10%;
     /*border: 2px solid #277C9D;*/
+}
+
+
+.custom-td{
+    padding: 1px !important;
+    text-align: center;
+    border: none !important;
+    vertical-align: middle;
+}
+
+.td_center{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.border_top{
+    border-top: 1px solid black;
+}
+
+.border_bottom{
+    border-bottom: 1px solid black;
+}
+
+.border_left{
+    border-left: 1px solid black;
+}
+
+.border_right{
+    border-right: 1px solid black;
+}
+
+.citation{
+    font-size: 17px;
+    text-align: left;
+    width: 100%;
+    margin: 0px !important;
+    color: #606060;
+}
+
+.reveal .slide-number{
+    font-size: 25px;
+    left: 1%;
+    right: 90%;
+    text-align: center;
 }

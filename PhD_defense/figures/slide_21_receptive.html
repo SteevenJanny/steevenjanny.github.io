@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/custom.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+<div class="row" style="height: 100vh">
+    <div class="col-70" style="height: 100vh">
+        <div id="graph" style="height: 100vh"></div>
+    </div>
+    <div class="col-30">
+        <p class="fontsize-20 rounded_box blue bold" style="margin-top: 40px; margin-bottom: 70px"> Receptive field of GNNs</p>
+        <div class="slider-container col-50" style="width: 100%">
+            <div id="graph2" style="height:20vh"></div>
+            <input type="range" id="slider" min="1" max="20" value="10" class="slider">
+            <label for="slider">Number of layers: </label> <span id="slider-value">1</span>
+        </div>
+    </div>
+</div>
+<script>
+
+    var center_id = 2;
+    var n_rings = 10;
+    var max_n_rings = 30;
+    var radius = 2;
+
+    var viridis = d3.scaleSequential(d3.interpolatePlasma).domain([max_n_rings, 0]);
+    const slider = document.getElementById('slider');
+    const sliderValue = document.getElementById('slider-value');
+
+    var width = document.getElementById("graph").offsetWidth;
+    var height = document.getElementById("graph").offsetHeight;
+
+    var width2 = document.getElementById("graph2").offsetWidth;
+    var height2 = document.getElementById("graph2").offsetHeight;
+
+    var graph = d3.select("#graph").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var graph2 = d3.select("#graph2").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width2, height2])
+
+    var mesh = graph.append("g")
+    var nodes = [];
+    var edges = [];
+
+    var y_scale = d3.scaleLinear()
+        .domain([-2.1, 1.7])
+        .range([height, 0])
+
+    var k = width * 3.8 / height
+    var x_scale = d3.scaleLinear()
+        .domain([-k / 2, k / 2])
+        .range([0, width])
+
+    var line = d3.line()
+        .x(function (d) {
+            return x_scale(nodes[d][0])
+        })
+        .y(function (d) {
+            return y_scale(nodes[d][1])
+        })
+
+    d3.json("../assets/slide21/contours.json").then(function (data) {
+        nodes = data.points;
+        edges = data.edges;
+
+        rings = compute_rings(nodes, edges, n_rings)
+
+        mesh.selectAll("path")
+            .data(edges)
+            .enter()
+            .append("path")
+            .attr("id", function (d, i) {
+                var min = Math.min(d[0], d[1]);
+                var max = Math.max(d[0], d[1]);
+                return "edge_" + min + "_" + max;
+            })
+            .attr("d", line)
+            .attr("fill", "none")
+            .attr("stroke", "#626262")
+            .attr("stroke-width", 1)
+
+        mesh.selectAll("circle").data(nodes)
+            .enter()
+            .append("circle")
+            .attr("id", function (d, i) {
+                return "node_" + i
+            })
+            .attr("cx", function (d) {
+                return x_scale(d[0])
+            })
+            .attr("cy", function (d) {
+                return y_scale(d[1])
+            })
+            .attr("r", radius)
+            .attr("fill", "black")
+            .attr("stroke", "none")
+
+
+        update_center()
+    });
+
+    function update_ring() {
+        viridis.domain([n_rings, 0]);
+        mesh.selectAll("circle")
+            .attr("fill", "black")
+            .attr("r", radius)
+
+        for (var i = 0; i < n_rings; i++) {
+            for (var j = 0; j < rings[i].length; j++) {
+                mesh.selectAll("#node_" + rings[i][j])
+                    .attr("fill", viridis(i))
+                    .attr("r", radius + 1)
+            }
+        }
+    }
+
+
+    // Initial value display
+    sliderValue.textContent = slider.value;
+
+    // Update value display on slider change
+    slider.addEventListener('input', function () {
+        sliderValue.textContent = slider.value;
+        n_rings = slider.value - 1
+        update_ring()
+        mesh.selectAll("#node_" + center_id)
+            .attr("fill", "red")
+            .attr("r", radius * 2)
+        update_rect()
+    });
+
+    var shrink = 0;
+
+    function update_center() {
+        rings = compute_rings()
+        update_ring()
+        mesh.selectAll("#node_" + center_id)
+            .attr("fill", "red")
+            .attr("r", radius * 2)
+    }
+
+    // add event listener on mouse click
+    graph.on("click", function () {
+        var coords = d3.mouse(this);
+        var x = coords[0];
+        var y = coords[1];
+
+        var min_dist = 100000;
+        var min_id = -1;
+        for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
+            var dist = Math.sqrt(Math.pow(x_scale(node[0]) - x, 2) + Math.pow(y_scale(node[1]) - y, 2));
+            if (dist < min_dist) {
+                min_dist = dist;
+                min_id = i;
+            }
+        }
+        center_id = min_id;
+        update_center()
+    });
+
+    function compute_rings() {
+        var rings = [];
+        var ring = [center_id];
+        var visited = new Set();
+        visited.add(center_id);
+        rings.push(ring);
+        for (var i = 0; i < max_n_rings; i++) {
+            var new_ring = [];
+            for (var j = 0; j < ring.length; j++) {
+                var node = ring[j];
+                for (var k = 0; k < edges.length; k++) {
+                    var edge = edges[k];
+                    if (edge[0] == node && !visited.has(edge[1])) {
+                        new_ring.push(edge[1]);
+                        visited.add(edge[1]);
+                    }
+                    if (edge[1] == node && !visited.has(edge[0])) {
+                        new_ring.push(edge[0]);
+                        visited.add(edge[0]);
+                    }
+                }
+            }
+            ring = new_ring;
+            rings.push(ring);
+        }
+        return rings;
+    }
+
+    graph2.append("line")
+        .attr("x1", 0)
+        .attr("y1", width2 * 0.1)
+        .attr("x2", width2)
+        .attr("y2", width2 * 0.1)
+        .attr("stroke", "#9E9E9E")
+        .attr("stroke-width", 2)
+
+    var layers = graph2.append("g");
+    var static = graph2.append("g");
+
+    static.append("image")
+        .attr("xlink:href", "../assets/slide20/in.png")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", width2 * 0.2)
+
+    static.append("image")
+        .attr("xlink:href", "../assets/slide20/out.png")
+        .attr("x", width2 * 0.8)
+        .attr("y", 0)
+        .attr("width", width2 * 0.2)
+
+    var layer_list = []
+    for (var i = 0; i < max_n_rings; i++) {
+        layer_list.push(layers.append("rect")
+            .attr("x", width2 * 0.9)
+            .attr("y", 0 + 5)
+            .attr("width", width2 * 0.05)
+            .attr("height", width2 * 0.2 - 10)
+            .attr("fill", "#FF8C00")
+            .attr("stroke", "none")
+            .attr("stroke-width", 2)
+            .attr("rx", 2)
+            .style("filter", "drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.10))"))
+    }
+
+    var w_scale = d3.scaleLinear()
+        .domain([0, max_n_rings])
+        .range([width2 * 0.05, width2 * 0.001])
+
+    function update_rect() {
+        var start = width2 * 0.2
+        var end = width2 * 0.8
+
+        var w = w_scale(n_rings)
+
+
+
+        for (var i = 0; i < layer_list.length; i++) {
+            if (i <= n_rings) {
+                layer_list[i].transition().duration(100)
+                    .attr("x", start + (end - start) * (i + 1) / (n_rings + 2) -w / 2)
+                    .attr("width", w)
+            } else {
+                layer_list[i].transition().duration(100)
+                    .attr("x", width2 * 0.9)
+            }
+        }
+    }
+
+    update_rect()
+
+
+</script>
+</body>
+</html>

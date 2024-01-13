@@ -30,9 +30,8 @@
         <!-- SLIDE 1 -->
         <!--         -->
         <section id="title-sec" data-transition="none">
-            <div class="title">Identification and Simulation of
-                Physical Systems with Structured
-                Deep Learning and Inductive Knowledge
+            <div class="title">
+                Identification and Simulation of Physical Systems with Structured Deep Learning and Inductive Knowledge
             </div>
             <div style="margin-top: 50px">Steeven Janny</div>
             <div class="fontsize-20" style="margin-top: 25px">
@@ -72,7 +71,7 @@
                         Identification and Simulation of Physical Systems
                     </td>
                     <td style="background-color: #43c7fc;text-align: center; vertical-align: middle">
-                        January, 2022
+                        January 16th, 2024
                     </td>
                 </tr>
             </table>
@@ -83,116 +82,158 @@
         <!-- SLIDE 2 -->
         <!--         -->
         <section data-transition="none">
-            <p class="titlebox" style="margin:0px;">Identification and simulation of physical systems</p>
-            <p class="subtitlebox" style="margin-top:0px;">why ?</p>
-            <div class="row" style="margin-top: 100px">
-                <div class="col-33">
-                    <video data-autoplay data-src="assets/slide1/scalar_flow_final.mp4" autoplay="true" loop="true"
-                           muted="true" width="720"></video>
-                    <p style="font-size: 10px">Eckert et al. (2019). ScalarFlow: a large-scale volumetric data set of real-world scalar transport flows for computer
-                        animation and machine learning. TOG</p>
-                </div>
-                <div class="col-33">
-                    <video data-autoplay data-src="assets/slide1/fluid.mp4" autoplay="true" loop="true"
-                           muted="true" width="720"></video>
-                    <p style="font-size: 10px">Allen, Kelsey R., et al. (2019), Physical design using
-                        differentiable learned simulators. arXiv preprint.</p>
-                </div>
-                <div class="col-33">
-                    <video data-autoplay data-src="assets/slide1/boston_dynamics.mp4" autoplay="true" loop="true"
-                           muted="true" width="720"></video>
-                    <p style="font-size: 10px;">Boston Dynamics</p>
-                </div>
-            </div>
-            <br/>
-            <div class="row fontsize-20">
-                <div class="col-33">
-                    <ol class="rectangle-list">
-                        <li class="blue" value="1">To Understand</li>
-                    </ol>
-                    <p class="fontsize-15 light-text"> Accurate simulation cheaper (and more informative) than
-                        real-world experiments.</p>
-                </div>
-                <div class="col-33">
-                    <ol class="rectangle-list">
-                        <li class="blue" value="2">To Design</li>
-                    </ol>
-                    <p class="fontsize-15 light-text"> Simulator well adapted to optimization techniques.</p>
-                </div>
-                <div class="col-33">
-                    <ol class="rectangle-list">
-                        <li class="blue" value="3">To Control</li>
-                    </ol>
-                    <p class="fontsize-15 light-text">Faster simulations for planning movements and trajectories.</p>
-                </div>
-            </div>
+            <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
+            <p class="subtitlebox" style="margin-top:0px;">Three use cases for ML & Physics</p>
+            <table style="width:100%;text-align: center" class="fontsize-20 no_margin">
+                <tr>
+                    <td style="border: none;text-align: center;border-right:1px solid black; background-color: #C0C0C0; border-bottom: 1px solid black;width:33%">
+                        <ol class="rectangle-list">
+                            <li class="blue" value="1"><b>Complex dynamics</b> we don't want/can not model</li>
+                        </ol>
+                    </td>
+                    <td style="border: none;text-align: center;border-right:1px solid black; background-color: #C0C0C0; border-bottom: 1px solid black;width:33%">
+                        <ol class="rectangle-list">
+                            <li class="blue" value="2"><b>Trial & Error</b> process for engineering</li>
+                        </ol>
+                    </td>
+                    <td style="border: none;text-align: center; background-color: #C0C0C0; border-bottom: 1px solid black;width:33%">
+                        <ol class="rectangle-list">
+                            <li class="blue" value="3"><b>Planning actions</b> in simulation in robotics</li>
+                        </ol>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="border: none;border-right:1px solid black;padding-top:20px">
+                        <video data-autoplay data-src="assets/slide2/scalar_flow_final.mp4" autoplay="true" loop="true"
+                               muted="true" width="720"></video>
+                        <p class="citation">Eckert et al. (2019). ScalarFlow: a large-scale volumetric
+                            data set of real-world scalar transport flows for computer
+                            animation and machine learning. TOG</p>
+                    </td>
+                    <td style="border: none;border-right:1px solid black">
+                        <video data-autoplay data-src="assets/slide2/fluid.mp4" autoplay="true" loop="true"
+                               muted="true" width="720"></video>
+                        <p class="citation">Allen et al. (2019), Physical design using
+                            differentiable learned simulators. arXiv preprint.</p>
+                    </td>
+                    <td style="border: none">
+                        <video data-autoplay data-src="assets/slide2/boston_dynamics.mp4" autoplay="true" loop="true"
+                               muted="true" width="720"></video>
+                        <p class="citation">Boston Dynamics</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="border: none;text-align: center;border-right:1px solid black;padding-top: 25px">
+                        ML → Automatic identification through data collection
+                    </td>
+                    <td style="border: none;text-align: center;border-right:1px solid black;padding-top: 25px">
+                        ML → Accelerate trials with faster simulations
+                    </td>
+                    <td style="border: none;text-align: center;padding-top: 25px">
+                        ML → Faster simulation to achieve real-time planning, and automatic identification of the environment.
+                    </td>
+                </tr>
+
+            </table>
         </section>
         <!--         -->
         <!--         -->
         <!-- SLIDE 3 -->
         <!--         -->
         <section data-transition="none">
-            <p class="titlebox" style="margin:0px;">Identification and simulation of physical systems</p>
-            <p class="subtitlebox" style="margin-top:0px;">how ?</p>
-            <div class="fragment" data-fragment-index="1">
+            <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
+            <p class="subtitlebox" style="margin-top:0px;">How ?</p>
+            <div>
                 <ol class="rounded-list fontsize-20" style="margin-right: 25px">
                     <li class="blue" value="1">From <b>Physics</b> and First Principles</li>
                 </ol>
                 <ol class="rounded-list fontsize-20 fragment semi-fade-out" style="margin-left: 25px"
-                    data-fragment-index="2">
+                    data-fragment-index="1">
                     <li class="red" value="2">From <b>Data</b> and Machine Learning</li>
                 </ol>
             </div>
 
             <div class="r-stretch">
-                <div class="fig-container" data-file="figures/slide_2.html" data-style="width:100%; align:center"
+                <div class="fig-container" data-file="figures/slide_3.html" data-style="width:100%; align:center"
                      style="height: 100%; margin-top: 1%" data-id="anim_slide3"
                      data-scroll="no" data-overflow-shown=true></div>
             </div>
 
-            <div class="fragment" data-fragment-index="3"></div>
+            <table class="fontsize-25" style="width: 100%;text-align: center">
+                <tr>
+                    <td class="custom-td" style="width:20%;">Initial
+                        Condition
+                    </td>
+                    <td class="custom-td fontsize-30">→</td>
+                    <td class="custom-td">
+                        <div style="border:2px solid black; border-radius: 10px;padding: 15px;">
+                            <div class="row">
+                                <div class="col-45 rounded_box fontsize-20" style="height:100px;padding-top: 10px; text-align: center">
+                                    <b>Dynamics</b>
+                                    $$\frac{\partial \mathbf{s}}{\partial t} = {\color{#277C9D}
+                                    f}(\mathbf{s})$$
+                                </div>
+                                <div class="col-10" style="height:100px;padding-top: 40px">+</div>
+                                <div class="col-45 rounded_box fontsize-20" style="height:100px;padding-top: 10px; text-align:center">
+                                    <p class="bold no_padding no_margin">Numerical solver</p>
+                                    <p class="fas fa-cogs no_margin no_padding" style="font-size: 30px;"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="custom-td fontsize-30">→</td>
+                    <td class="custom-td"><p>Trajectory</p></td>
+                </tr>
+            </table>
 
-            <div class="container fragment " data-fragment-index="3" style="height: 100px; width: 100%;">
-                <div class="center" style="width: 100%">
-                    Ordinary Differential Equation:
-                    <span>$\frac{\partial \mathbf{s}}{\partial t} = {\color{#277C9D} f}(\mathbf{s})$</span>
-                </div>
-
-            </div>
         </section>
         <!--         -->
         <!--         -->
         <!-- SLIDE 4 -->
         <!--         -->
         <section data-transition="none">
-            <p class="titlebox" style="margin:0px;">Identification and simulation of physical systems</p>
-            <p class="subtitlebox" style="margin-top:0px;">why ?</p>
+            <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
+            <p class="subtitlebox" style="margin-top:0px;">How ?</p>
             <ol class="rounded-list fontsize-20" style="margin-right: 25px; opacity: 50%">
                 <li class="blue" value="1">From <b>Physics</b> and First Principles</li>
             </ol>
             <ol class="rounded-list fontsize-20" style="margin-left: 25px" data-fragment-index="1">
                 <li class="red" value="2">From <b>Data</b> and Machine Learning</li>
             </ol>
+
             <div class="r-stretch">
-                <div class="fig-container" data-file="figures/slide_3.html" data-style="width:100%; align:center"
+                <div class="fig-container" data-file="figures/slide_4.html" data-style="width:100%; align:center"
                      style="height: 100%; margin-top: 1%" data-id="anim_slide3" data-preload
                      data-scroll="no" data-overflow-shown=true></div>
             </div>
 
-            <table class="fragment" style="height: 100px; width: 100%;border: 3px solid #335e6e;text-align: center">
+            <table class="fontsize-25" style="width: 100%;text-align: center">
                 <tr>
-                    <td rowspan="2" style="padding-top: 25px; text-align: center">$\frac{\partial \mathbf{s}}{\partial
-                        t} = {\color{#598938} f_\theta}(\mathbf{s})$
+                    <td class="custom-td" style="width:20%;">Initial
+                        Condition
                     </td>
-                    <td rowspan="2" style="text-align: center">+</td>
-                    <td class="fas fa-database no_padding" style="border:none;text-align: center"></td>
-                    <td rowspan="2" style="text-align: center">+</td>
-                    <td rowspan="2" style="text-align: center">Optimization</td>
+                    <td class="custom-td fontsize-30">→</td>
+                    <td class="custom-td">
+                        <div style="border:2px solid black; border-radius: 10px;padding: 15px;">
+                            <div class="row">
+                                <div class="col-45 rounded_box fontsize-20" style="height:100px;padding-top: 10px; text-align: center">
+                                    <b>Dynamics</b>
+                                    $$\frac{\partial \mathbf{s}}{\partial t} = {\color{#277C9D}
+                                    f}(\mathbf{s})$$
+                                </div>
+                                <div class="col-10" style="height:100px;padding-top: 40px">+</div>
+                                <div class="col-45 rounded_box fontsize-20" style="height:100px;padding-top: 10px; text-align:center">
+                                    <p class="bold no_padding no_margin">Numerical solver</p>
+                                    <p class="fas fa-cogs no_margin no_padding" style="font-size: 30px;"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="custom-td fontsize-30">→</td>
+                    <td class="custom-td"><p>Trajectory</p></td>
                 </tr>
-                <tr>
-                    <td class="no_padding" style="text-align: center"> Database</td>
-                </tr>
-
             </table>
         </section>
         <!--         -->
@@ -200,8 +241,8 @@
         <!-- SLIDE 5 -->
         <!--         -->
         <section data-transition="none">
-            <p class="titlebox" style="margin:0px;">Identification and simulation of physical systems</p>
-            <p class="subtitlebox" style="margin-top:0px;">why ?</p>
+            <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
+            <p class="subtitlebox" style="margin-top:0px;">How ?</p>
             <div class="row">
                 <div class="col-50">
                     <ol class="rounded-list fontsize-20">
@@ -253,178 +294,266 @@
         <!-- SLIDE 6 -->
         <!--         -->
         <section data-transition="none">
-            <p class="bold">Agenda</p>
-            <ol class="rectangle-list fontsize-20">
-                <li class="blue" value="1"> Help from control theory for robust simulation with <b>Deep-KKL</b></li>
-                <div class="col-100" style="align-content: center">
-                    <video data-autoplay src="assets/slide6/lorenz.mp4" autoplay="true" loop="true" muted="true"
-                           style="width: 100%"
-                           height="100"></video>
+            <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
+            <p class="subtitlebox" style="margin-top:0px;">SOTA on Physics + Deep Learning</p>
+
+            <div class="row fontsize-20">
+                <div class="col-40"></div>
+                <div class="col-10">
+                    <div style="background-color: #1D7C9D99; border-radius: 10px"> Physics</div>
                 </div>
-                <li class="blue" value="2"> A leap in difficulty: Fluid simulations with <b>EAGLE</b></li>
-                <video data-autoplay src="assets/slide6/triangular.mp4" autoplay="true" loop="true" muted="true"
-                       style="width: 100%"
-                       height="100"></video>
-                <li class="blue" value="3"> The big picture: causality with <b>Filtered-CoPhy</b></li>
-                <div class="row" style="width: 100%">
-                    <div class="col-33"><img src="assets/slide6/balls.gif" height="100" style="margin-left: 25%">
-                    </div>
-                    <div class="col-33"><img src="assets/slide6/blocktower.gif" height="100"
-                                             style="margin-left: 25%"></div>
-                    <div class="col-33"><img src="assets/slide6/collision.gif" height="100"
-                                             style="margin-left: 25%"></div>
+                <div class="col-10">
+                    <div style="background-color: #59893899; border-radius: 10px"> Learning</div>
                 </div>
-            </ol>
+            </div>
+
+            <div class="row fragment semi-fade-out" data-fragment-index="1">
+                <ol class="rectangle-list fontsize-20" style="width: 100%">
+                    <li class="" value="1"> When the <b>Dynamics</b> is known:</li>
+                </ol>
+
+                <table class="fontsize-20" style="width: 100%;">
+                    <tr>
+                        <td class="custom-td">
+                            <div class="rounded_box blue fontsize-20"
+                                 style="padding-top: 10px;width:200px; text-align: center">
+                                $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                            </div>
+                        </td>
+                        <td class="custom-td">+</td>
+                        <td class="custom-td">
+                            <div class="rounded_box green fontsize-20"
+                                 style="padding-top: 10px;width:200px; text-align: center;height:20px">
+                                <span class="bold no_padding no_margin"> Solver</span>
+                                <span class="fas fa-cogs no_margin no_padding"></span>
+                            </div>
+                        </td>
+                        <td class="custom-td">=</td>
+                        <td class="custom-td"><a
+                                href="https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125"
+                                target="_blank">PINNs</a></td>
+                    </tr>
+                </table>
+                <p class="citation">- Raissi et al. (2019). PINNs: A DL framework
+                    for solving forward and inverse problems involving nonlinear PDEs. JCP</p>
+            </div>
+
+            <div class="row fragment fade-in-then-semi-out" data-fragment-index="1">
+                <ol class="rectangle-list fontsize-20" style="width: 100%">
+                    <li class="" value="2"> When the <b>Solver</b> is known:</li>
+                </ol>
+
+                <table class="fontsize-20" style="width: 100%">
+
+                    <tr>
+                        <td class="custom-td" style="text-align: right"> Physics from learning</td>
+                        <td class="custom-td">
+                            <div class="rounded_box fontsize-20"
+                                 style="padding-top: 10px;width:200px; text-align: center;margin:auto;background-color: rgba(89,137,56,0.5)">
+                                $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                            </div>
+                        </td>
+                        <td class="custom-td" rowspan="4">+</td>
+                        <td class="custom-td" rowspan="4">
+                            <div class="rounded_box blue fontsize-20"
+                                 style="height:20px;padding-top: 10px;width:200px; text-align: center">
+                                <span class="bold no_padding no_margin">Solver</span>
+                                <span class="fas fa-cogs no_margin no_padding"></span>
+                            </div>
+                        </td>
+                        <td class="custom-td" rowspan="4"> =</td>
+                        <td class="custom-td" style="text-align: center;"><a href="https://arxiv.org/abs/1806.07366"
+                                                                             target="_blank">Neural-ODE</a></td>
+                    </tr>
+
+                    <tr>
+                        <td class="custom-td" style="text-align: right"> Learning residual</td>
+                        <td class="custom-td">
+                            <table class="no_margin no_padding" style="width:100%">
+                                <tr>
+                                    <td class="custom-td">
+                                        <div class="rounded_box fontsize-20"
+                                             style="text-align: center; background-color: rgba(39,124,157,0.5);margin:auto">
+                                            $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                                        </div>
+                                    </td>
+                                    <td class="custom-td">+</td>
+                                    <td class="custom-td">
+                                        <div class="rounded_box fontsize-20"
+                                             style="text-align: center; background-color: rgba(89,137,56,0.5);margin:auto">
+                                            $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                        <td class="custom-td" style="text-align: center;"><a href="https://arxiv.org/pdf/2010.04456.pdf"
+                                                                             target="_blank">Aphinity</a></td>
+                    </tr>
+                    <tr>
+                        <td class="custom-td" style="text-align: right"> Inductive biases</td>
+                        <td class="custom-td">
+                            <div class="rounded_box fontsize-20"
+                                 style="padding-top: 10px;width:200px; text-align: center;background: rgb(89,137,56); background: linear-gradient(45deg, rgba(89,137,56,0.5) 40%, rgba(29,124,157,0.5) 60%);margin:auto">
+                                $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                            </div>
+                        </td>
+                        <td class="custom-td" style="text-align: center;"><a href="https://arxiv.org/abs/2003.14162"
+                                                                             target="_blank"
+                        >Deep SSM</a></td>
+
+
+                    </tr>
+                </table>
+                <p class="citation">- Chen et al. (2018). Neural ordinary differential equations. NeurIPS</p>
+                <p class="citation">- Yin et al. (2021). Augmenting physical models with deep networks for complex dynamics forecasting. JSM</p>
+                <p class="citation">- Gedon et al. (2021). Deep state space models for nonlinear system identification. IFAC</p>
+            </div>
+
+            <div class="row fragment" data-fragment-index="3">
+                <ol class="rectangle-list fontsize-20" style="width: 100%">
+                    <li class="" value="3"> When everything needs to be learned:</li>
+                </ol>
+
+                <table class="fontsize-20" style="width: 100%">
+                    <tr>
+                        <td class="custom-td" style="text-align: right; width:24%"> End-to-end</td>
+                        <td class="custom-td">
+
+                            <div class="rounded_box fontsize-20"
+                                 style="padding-top: 10px;width:400px; text-align: center;background: rgb(89,137,56); background: linear-gradient(45deg, rgba(89,137,56,0.5) 40%, rgba(29,124,157,0.5) 60%);">
+
+                                <span class="no_padding no_margin">$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$</span>
+                                <span class="bold no_padding no_margin">+</span>
+                                <span class="bold no_padding no_margin">Solver</span>
+                                <span class="fas fa-cogs no_margin no_padding"></span>
+                            </div>
+                        </td>
+
+                        <td class="custom-td">=</td>
+                        <td class="custom-td">
+                            <p class="no_margin"><a href="https://arxiv.org/abs/2003.01460" target="_blank">PhyDNet</a>
+                            </p>
+                            <p class="no_margin"><a href="https://arxiv.org/abs/2010.03409"
+                                                    target="_blank">MeshGraphNet</a></p>
+                        </td>
+                    </tr>
+                </table>
+                <p class="citation">- Guen et al. (2020). Disentangling physical dynamics from unknown factors for unsupervised video prediction. CVPR</p>
+                <p class="citation">- Pfaff et al. (2020). Learning Mesh-Based Simulation with Graph Networks. ICLR</p>
+
+            </div>
+
         </section>
         <!--         -->
         <!--         -->
         <!-- SLIDE 7 -->
         <!--         -->
         <section data-transition="none">
-            <p class="bold no_margin">Publication List</p>
+            <p class="bold">Agenda</p>
 
-            <ul class="rectangle-list fontsize-20" style="width: 100%">
-                <li class="blue"> Publications covered today:</li>
-            </ul>
+            <div style="margin:auto">
+                <div class="row">
+                    <div class="col-10 fontsize-25" style="margin-top: 5px">
+                        1.
+                    </div>
+                    <div class="col-90" style="height: 50px">
+                        <div class="titlebox fontsize-20" style="margin:auto; background-color:#62BCDD">Deep KKL:
+                            Data-driven
+                            Output Prediction for
+                            Non-Linear Systems
+                        </div>
+                    </div>
+                </div>
 
-            <table class="fontsize-15" style="width: 100%;">
-                <tr>
-                    <td style="width: 80%;border:none" class="no_padding">
-                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
-                            <li class="blue">
-                                Deep KKL: Data-driven Output Prediction for Non-Linear Systems
-                                <p class="light-text fontsize-15"><b>Steeven Janny</b>, Vincent Andrieu, Madiha Nadri,
-                                    Christian Wolf</p>
-                            </li>
-                        </ul>
+                <div style="text-align: right;" class="fontsize-20">
+                    <table style="margin-right: 0%; width:100%">
+                        <tr>
+                            <td>
+                                <video data-autoplay src="assets/slide7/lorenz.mp4" autoplay="true" loop="true"
+                                       muted="true"
+                                       style="width: 100%"
+                                       height="100"></video>
+                            </td>
+                            <td style="text-align: right;width:10%; vertical-align: top"><img
+                                    class="no_margin no_padding" src="assets/logos/CDC.png" height="35px"></td>
+                            <!--                        <td style="vertical-align: top; padding-top: 8px"</td>-->
+                        </tr>
 
-                    </td>
+                    </table>
+                </div>
 
-                    <td style="width: 20%; text-align: right; border:none">
-                        <p class="light-text fontsize-15">CDC, 2021</p>
-                    </td>
-                </tr>
+            </div>
 
+            <div class="fragment semi-fade-out" data-fragment-index="1" style="margin:auto">
+                <div class="row">
+                    <div class="col-10 fontsize-25" style="margin-top: 5px">
+                        2.
+                    </div>
+                    <div class="col-90" style="height: 50px">
+                        <div class="titlebox fontsize-20" style="margin:0px;background-color: #3EC3B2;">Large-scale
+                            Learning of
+                            Turbulent Fluid
+                            Dynamics with Mesh Transformers
+                        </div>
+                    </div>
+                </div>
 
-                <tr>
-                    <td style="width: 80%;border:none" class="no_padding">
-                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
-                            <li class="blue">
-                                EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers
-                                <p class="light-text fontsize-15"><b>Steeven Janny</b>, Aurélien Benetteau, Madiha
-                                    Nadri,
-                                    Julie Digne, Nicolas Thome, Christian Wolf</p>
-                            </li>
-                        </ul>
+                <div style="text-align: right;" class="fontsize-20">
+                    <table style="margin-right: 0%; width:100%">
+                        <tr>
+                            <td>
+                                <video data-autoplay src="assets/slide7/triangular.mp4" autoplay="true" loop="true"
+                                       muted="true"
+                                       style="width: 100%"
+                                       height="100"></video>
+                            </td>
+                            <td style="text-align: right;width:15%; vertical-align: top" class="fontsize-15"><img
+                                    class="no_margin no_padding" src="assets/logos/ICLR-logo.svg" height="35px">2023
+                                (Poster)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
-                    </td>
+            <div class="fragment semi-fade-out" data-fragment-index="1" style="margin:auto">
+                <div class="row">
+                    <div class="col-10 fontsize-25" style="margin-top: 5px">
+                        3.
+                    </div>
+                    <div class="col-90" style="height: 50px">
+                        <div class="titlebox fontsize-20" style="margin:0px;background-color: #598938;">Filtered-CoPhy:
+                            Unsupervised Learning of
+                            Counterfactual Physics in Pixel Space
+                        </div>
+                    </div>
+                </div>
 
-                    <td style="width: 20%; text-align: right; border:none">
-                        <p class="light-text fontsize-15">ICLR, 2022 (poster)</p>
-                    </td>
-                </tr>
+                <div style="text-align: right;" class="fontsize-20">
+                    <table style="margin-right: 0%; width:90%;margin-left: 10%">
+                        <tr>
+                            <td>
+                                <div class="row" style="width: 100%">
+                                    <div class="col-33"><img src="assets/slide7/balls.gif" height="100"
+                                                             style="margin-left: 25%">
+                                    </div>
+                                    <div class="col-33"><img src="assets/slide7/blocktower.gif" height="100"
+                                                             style="margin-left: 25%"></div>
+                                    <div class="col-33"><img src="assets/slide7/collision.gif" height="100"
+                                                             style="margin-left: 25%"></div>
+                                </div>
+                            </td>
+                            <td style="text-align: right;width:15%; vertical-align: top" class="fontsize-15"><img
+                                    class="no_margin no_padding" src="assets/logos/ICLR-logo.svg" height="35px">2022
+                                (oral)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
-                <tr>
-                    <td style="width: 80%;border:none" class="no_padding">
-                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
-                            <li class="blue">
-                                Filtered-CoPhy: Unsupervised Learning of Counterfactual Physics in Pixel Space
-                                <p class="light-text fontsize-15"><b>Steeven Janny</b>, Aurélien Benetteau, Madiha
-                                    Nadri,
-                                    Julie Digne, Nicolas Thome, Christian Wolf</p>
-                            </li>
-                        </ul>
-
-                    </td>
-
-                    <td style="width: 20%; text-align: right; border:none">
-                        <p class="light-text fontsize-15">ICLR, 2021 (oral)</p>
-                    </td>
-                </tr>
-            </table>
-
-
-            <ul class="rectangle-list fontsize-20" style="width: 100%">
-                <li> Others publications:</li>
-            </ul>
-
-            <table class="fontsize-15" style="width: 100%;opacity: 0.5">
-                <tr>
-                    <td style="width: 80%;border:none" class="no_padding">
-                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
-                            <li class="">
-                                Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical Approach
-                                <p class="light-text fontsize-15"><b>Steeven Janny</b>, Quentin Possamaï, Laurent Bako,
-                                    Madiha Nadri, Christian Wolf</p>
-                            </li>
-                        </ul>
-
-                    </td>
-
-                    <td style="width: 20%; text-align: right; border:none">
-                        <p class="light-text fontsize-15">CDC, 2022</p>
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td style="width: 80%;border:none" class="no_padding">
-                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
-                            <li class="">
-                                Deep Learning-based Output Tracking via Regulation and Contraction Theory
-                                <p class="light-text fontsize-15"> Samuele Zoboli, <b>Steeven Janny</b>, Mattia
-                                    Giaccagli,
-                                </p>
-                            </li>
-                        </ul>
-
-                    </td>
-
-                    <td style="width: 20%; text-align: right; border:none">
-                        <p class="light-text fontsize-15">IFAC, 2022</p>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="width: 80%;border:none" class="no_padding">
-                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
-                            <li class="">
-                                Deep Learning of a Communication Policy for an Event-Triggered Observer for Linear
-                                Systems
-                                <p class="light-text fontsize-15"> Mathieu Marchand, Vincent Andrieu, Sylvain Bertrand,
-                                    <b>Steeven
-                                        Janny</b>, Hélène Piet-Lahanier</p>
-                            </li>
-                        </ul>
-
-                    </td>
-
-                    <td style="width: 20%; text-align: right; border:none">
-                        <p class="light-text fontsize-15">IFAC, 2022</p>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="width: 80%;border:none" class="no_padding">
-                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
-                            <li class="">
-                                Space and time continuous physics simulation from partial observations
-                                <p class="light-text fontsize-15"><b>Steeven Janny</b>, Madiha Nadri, Julie Digne,
-                                    Christian
-                                    Wolf</p>
-                            </li>
-                        </ul>
-
-                    </td>
-
-                    <td style="width: 20%; text-align: right; border:none">
-                        <p class="light-text fontsize-15">ICLR, 2024</p>
-                    </td>
-                </tr>
-
-            </table>
-
-
+            </div>
         </section>
         <!--         -->
         <!--         -->
@@ -434,33 +563,6 @@
             <p class="titlebox" style="margin:0px; background-color:#62BCDD">Deep KKL: Data-driven Output Prediction for
                 Non-Linear Systems</p>
             <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">The Output Prediction task</p>
-
-            <div style="text-align: right;" class="fontsize-20">
-                <table style="margin-right: 0">
-                    <tr>
-                        <td><img class="no_margin no_padding" src="assets/slide15/CDC.png" height="35px"></td>
-                        <!--                        <td style="vertical-align: top; padding-top: 8px"</td>-->
-                    </tr>
-                </table>
-            </div>
-
-        </section>
-        <!--         -->
-        <!--         -->
-        <!-- SLIDE 9 -->
-        <!--         -->
-        <section data-transition="none">
-            <p class="titlebox" style="margin:0px; background-color:#62BCDD">Deep KKL: Data-driven Output Prediction for
-                Non-Linear Systems</p>
-            <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">The Output Prediction task</p>
-            <div class="fontsize-20" style="height: 100%;">
-                <b>Non-linear</b> Dynamical System: $\quad \left\{\begin{array}{cll}
-                \dot{\mathbf{s}} &= {\color{#277C9D} f}(\mathbf{s}) & \quad\Rightarrow
-                \color{#888888}\small{\textit{ Dynamics}}\\
-                \mathbf{y} &= {\color{#277C9D} h}(\mathbf{s}) & \quad\Rightarrow \color{#888888}\small\textit{
-                Output}\\
-                \end{array}\right.$
-            </div>
             <div class="fragment" style="width: 0; height: 0" data-fragment-index="1"></div>
             <div class="row" style="height: 250px">
                 <div class="fig-container" data-file="figures/slide_8.html"
@@ -468,13 +570,8 @@
                      style="height: 100%; margin-top: 1%"
                      data-scroll="no" data-overflow-shown=true></div>
             </div>
-            <div class="fragment" data-fragment-index="2" style="margin-top: 50px">
-                <div class="row fontsize-25">
-                    How can we design a different dynamical model capable of <b>simulating the observation</b>?
-                </div>
-            </div>
 
-            <div class="fragment" data-fragment-index="2" style="margin-top: 20px">
+            <div style="margin-top: 10px">
                 <div class="theorem_title">
                     <b>Definition:</b> Output Predictor [Janny et al. 2020]
                 </div>
@@ -486,13 +583,30 @@
                         <li>$\dot{z} = G(z, y)$ is a uniform exponential contraction,</li>
                         <li>the couple $(g, \psi)$ with $g(z)= G(z, \psi(z))$ is a generating model.</li>
                     </ul>
+                </div>
+            </div>
 
+            <ul class="rectangle-list fontsize-20" style="margin-top: 10px; text-align: left;width:100%">
+                <li> Motivations</li>
+            </ul>
+            <div class="row fontsize-20">
+                <div class="col-50">
+                    <ul class="ul_fancy">
+                        <li class="blue"> Dynamics ${\color{#277C9D} f}$ is unknown...</li>
+                        <li class="blue"> ... and probably difficult to compute.</li>
+                    </ul>
+                </div>
+                <div class="col-50">
+                    <ul class="ul_fancy">
+                        <li class="blue"> Measurement of state $\mathbf{s}$ is hard...</li>
+                        <li class="blue"> ... while collecting a dataset of $y$ is easy</li>
+                    </ul>
                 </div>
             </div>
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 10-->
+        <!-- SLIDE 9-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px; background-color:#62BCDD">Deep KKL: Data-driven Output Prediction for
@@ -514,7 +628,7 @@
                     <div class="theorem_title">
                         Koopman theory
                     </div>
-                    <div class="theorem_content">
+                    <div class="theorem_content" style="margin-bottom: 20px">
                         <p style="margin: 0px">
                             For all non-linear system $\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$, there exists
                             an <span style="color:#E77475">infinite dimensional linear</span> operator $\mathcal{K}$
@@ -522,8 +636,8 @@
                             f}(\mathbf{s}))$.</p>
                     </div>
 
-                    <div class="fontsize-15" style="margin-top:15px; text-align: left">
-                        Lusch, B., Kutz, J. N., & Brunton, S. L. (2018). Deep learning for universal linear embeddings
+                    <div class="citation">
+                        - Lusch et al. (2018). Deep learning for universal linear embeddings
                         of
                         nonlinear dynamics. Nature communications
                     </div>
@@ -532,7 +646,7 @@
                     <div class="theorem_title">
                         Kazantzis-Kravaris-Luenberger <b>(KKL)</b> theory
                     </div>
-                    <div class="theorem_content">
+                    <div class="theorem_content" style="margin-bottom: 20px">
                         <p style="margin: 0px">
                             For any non-linear system $\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$ and <span
                                 style="color:#E77475">for any paire $A, b$</span>, there exists an injective mapping $T$
@@ -543,8 +657,8 @@
                         </p>
 
                     </div>
-                    <div class="fontsize-15" style="margin-top:15px; text-align: left">
-                        Andrieu, V., & Praly, L. (2006). On the existence of a Kazantzis--Kravaris/Luenberger observer.
+                    <div class="citation">
+                        - Andrieu et al. (2006). On the existence of a Kazantzis--Kravaris/Luenberger observer.
                         SIAM Journal on Control and Optimization
                     </div>
                 </div>
@@ -553,7 +667,7 @@
         </section>
         <!--         -->
         <!--         -->
-        <!--SLIDE 11 -->
+        <!--SLIDE 10 -->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px; background-color:#62BCDD">Deep KKL: Data-driven Output Prediction for
@@ -618,17 +732,17 @@
                             <li class="red bold fontsize-25">Analytic solutions:</li>
                         </ul>
                     </td>
-                    <td class="fontsize-20" style="text-align: center;border:none">
+                    <td class="fontsize-25" style="text-align: center;border:none">
                         Good luck.
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" style="border: none;padding:0">
-                        <p class="light-text fontsize-15">Bernard, P., Devos, T., Martin, P., & Praly, L. (2022). KKL
+                        <p class="citation">- Bernard et al.(2022). KKL
                             observer design for sensorless induction motors. Conference on Decision and
                             Control.</p>
 
-                        <p class="light-text fontsize-15">Brivadis, L., Andrieu, V., & Serres, U. (2019). Luenberger
+                        <p class="citation">- Brivadis et al (2019). Luenberger
                             observers for discrete-time nonlinear systems. Conference on Decision and Control.</p>
                     </td>
                 </tr>
@@ -640,7 +754,7 @@
                             <li class="green bold fontsize-25">Deep Learning</li>
                         </ul>
                     </td>
-                    <td class="fontsize-20" style="text-align: center">
+                    <td class="fontsize-25" style="text-align: center">
                         Model $\psi$ with an MLP,<br/>
                         Learn $A,b$ via gradient descent.
                     </td>
@@ -651,30 +765,32 @@
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 12-->
+        <!-- SLIDE 11-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px; background-color:#62BCDD">Deep KKL: Data-driven Output Prediction for
                 Non-Linear Systems</p>
             <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">Model overview</p>
 
-            <div style="height:200px; width:70%;margin:auto">
-                <div class="fig-container" data-file="figures/slide_11_bis.html"
-                     data-style="width:100%; align:center; height:100%"
-                     style="height: 100%" data-preload
-                     data-scroll="no" data-overflow-shown=true></div>
-            </div>
+            <img class="fragment semi-fade-out" data-fragment-index="1" src="assets/slide11/optim.svg" width="80%"
+                 style="margin:auto">
 
-            <div class="r-stack">
-                <div class="fragment fontsize-25" data-fragment-index="2" style="margin-top: 20px">
-                    <div style="text-align: left; width: 100%">
-                        <ul class="ul_fancy">
-                            <li class="green bold"> Training objective:</li>
-                        </ul>
-                    </div>
-                    $$\psi, A, b = \arg \min \sum_{t=1}^T \Big\| y(t) - \hat{y}(t) \Big\|_2^2$$
+            <div class="fragment" data-fragment-index="1">
+                <div style="height:150px; width:70%;margin:auto">
+                    <div class="fig-container" data-file="figures/slide_11_model.html"
+                         data-style="width:100%; align:center; height:100%"
+                         style="height: 100%" data-preload
+                         data-scroll="no" data-overflow-shown=true></div>
                 </div>
-                <div class="fragment fade-in-then-out" style="margin-top: 20px;" data-fragment-index="1">
+
+                <div style="height:125px; width:100%">
+                    <div class="fig-container" data-file="figures/slide_11_sim.html"
+                         data-style="width:100%; align:center; height:100%"
+                         style="height: 100%"
+                         data-scroll="no" data-overflow-shown=true></div>
+                </div>
+
+                <div style="margin-top: 0px;">
                     <div class="theorem_title">
                         <b>Proposition:</b> [Janny et al., 2021]
                     </div>
@@ -688,19 +804,11 @@
                         </p>
                     </div>
                 </div>
-                <div style="height:300px; width:100%">
-                    <div class="fig-container" data-file="figures/slide_11.html"
-                         data-style="width:100%; align:center; height:100%"
-                         style="height: 100%"
-                         data-scroll="no" data-overflow-shown=true></div>
-                </div>
             </div>
-
-
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 13-->
+        <!-- SLIDE 12-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px; background-color:#62BCDD">Deep KKL: Data-driven Output Prediction for
@@ -719,6 +827,15 @@
                             \end{array}$$
                         </p>
                     </div>
+                    <table class="fontsize-25" style="border:none">
+                        <tr>
+                            <td class="fas fa-check-circle" style="color: #598938; border:none"></td>
+                            <td style="border:none">Proof of existence</td>
+                        </tr>
+                        <tr>
+                            <td class="fas fa-check-circle" style="color: #598938"></td>
+                            <td>Contraction</td>
+                    </table>
                 </div>
                 <div class="col-30 fragment" data-fragment-index="1">
                     <p class="fontsize-20 bold no_margin">RNN </p>
@@ -745,43 +862,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-30">
-                    <table class="fontsize-25" style="border:none">
-                        <tr>
-                            <td class="fas fa-check-circle" style="color: #598938; border:none"></td>
-                            <td style="border:none">Proof of existence</td>
-                        </tr>
-                        <tr>
-                            <td class="fas fa-check-circle" style="color: #598938"></td>
-                            <td>Contraction</td>
-                    </table>
-                </div>
-                <div class="col-30 fragment" data-fragment-index="1">
-                    <table class="fontsize-25" style="border:none">
-                        <tr>
-                            <td class="fas fa-minus-circle" style="color: #FF8C00; border:none"></td>
-                            <td style="border:none">Proof of existence</td>
-                        </tr>
-                        <tr>
-                            <td class="fas fa-minus-circle" style="color: #FF8C00"></td>
-                            <td>Contraction</td>
-                    </table>
-                </div>
-                <div class="col-40 fragment" data-fragment-index="2">
-                    <table class="fontsize-25" style="border:none">
-                        <tr>
-                            <td class="fas fa-times-circle" style="color: #E77475; border:none"></td>
-                            <td style="border:none">Proof of existence</td>
-                        </tr>
-                        <tr>
-                            <td class="fas fa-times-circle" style="color: #E77475"></td>
-                            <td>Contraction</td>
-                    </table>
-                </div>
-            </div>
 
-            <div class="r-stretch" style="width:100%">
+            <div style="width:100%;height:350px">
                 <div class="fig-container" data-file="figures/slide_12.html"
                      data-style="width:100%; align:center; height:100%"
                      style="height: 100%" data-preload
@@ -792,13 +874,17 @@
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 14-->
+        <!-- SLIDE 13-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px; background-color:#62BCDD">Deep KKL: Data-driven Output Prediction for
                 Non-Linear Systems</p>
             <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">Take home messages</p>
 
+            <div>
+                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Pros</p>
+                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
+            </div>
             <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
                     <ul class="rectangle-list fontsize-20" style="width:90%">
@@ -807,38 +893,146 @@
                 </div>
                 <div class="col-50">
                     <ul class="rectangle-list fontsize-20" style="width:90%">
-                        <li class="blue">A step toward theory on RNN</li>
+                        <li class="blue">A step toward theory on RNNs</li>
                     </ul>
                 </div>
             </div>
             <div>
-                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Pros</p>
-                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
                 <p style="text-align: left; width: 100%" class="fontsize-30 bold">Cons</p>
+                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
             </div>
             <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
                     <ul class="rectangle-list fontsize-20" style="width:90%">
-                        <li class="red">Do not replace your RNNs !</li>
+                        <li class="red">Do not replace all your RNNs !</li>
                     </ul>
                 </div>
 
                 <div class="col-50">
                     <ul class="rectangle-list fontsize-20" style="width:90%">
-                        <li class="red">Limitation to "small" systems</li>
+                        <li class="red">Extrapolation to larger system not trivial</li>
                     </ul>
                 </div>
             </div>
 
             <p class="fontsize-20 bold no_margin" style="text-align: left">Follow-up work</p>
-            <p class="light-text fontsize-15">Peralez, J., & Nadri, M. (2021). Deep learning-based luenberger
+            <p class="citation">- Peralez et al. (2021). Deep learning-based luenberger
                 observer design for discrete-time nonlinear systems. CDC.</p>
-            <p class="light-text fontsize-15">Buisson-Fenet, M., Bahr, L., Morgenthaler, V., & Di Meglio, F. (2023).
+            <p class="citation">- Buisson-Fenet et al. (2023).
                 Towards gain tuning for numerical kkl observers. IFAC.</p>
-            <p class="light-text fontsize-15">Miao, K., & Gatsis, K. (2023). Learning Robust State Observers using
+            <p class="citation">- Miao et al. (2023). Learning Robust State Observers using
                 Neural ODEs. Learning for Dynamics and Control Conference.</p>
 
 
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 14-->
+        <!--         -->
+        <section data-transition="none">
+            <p class="bold">Agenda</p>
+
+            <div style="margin:auto; opacity: 0.25">
+                <div class="row">
+                    <div class="col-10 fontsize-25" style="margin-top: 5px">
+                        1.
+                    </div>
+                    <div class="col-90" style="height: 50px">
+                        <div class="titlebox fontsize-20" style="margin:auto; background-color:#62BCDD">Deep KKL:
+                            Data-driven
+                            Output Prediction for
+                            Non-Linear Systems
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: right;" class="fontsize-20">
+                    <table style="margin-right: 0%; width:100%">
+                        <tr>
+                            <td>
+                                <video data-autoplay src="assets/slide7/lorenz.mp4" autoplay="true" loop="true"
+                                       muted="true"
+                                       style="width: 100%"
+                                       height="100"></video>
+                            </td>
+                            <td style="text-align: right;width:10%; vertical-align: top"><img
+                                    class="no_margin no_padding" src="assets/logos/CDC.png" height="35px"></td>
+                            <!--                        <td style="vertical-align: top; padding-top: 8px"</td>-->
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <div style="margin:auto">
+                <div class="row">
+                    <div class="col-10 fontsize-25" style="margin-top: 5px">
+                        2.
+                    </div>
+                    <div class="col-90" style="height: 50px">
+                        <div class="titlebox fontsize-20" style="margin:0px;background-color: #3EC3B2;">Large-scale
+                            Learning of
+                            Turbulent Fluid
+                            Dynamics with Mesh Transformers
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: right;" class="fontsize-20">
+                    <table style="margin-right: 0%; width:100%">
+                        <tr>
+                            <td>
+                                <video data-autoplay src="assets/slide7/triangular.mp4" autoplay="true" loop="true"
+                                       muted="true"
+                                       style="width: 100%"
+                                       height="100"></video>
+                            </td>
+                            <td style="text-align: right;width:15%; vertical-align: top" class="fontsize-15"><img
+                                    class="no_margin no_padding" src="assets/logos/ICLR-logo.svg" height="35px">2023
+                                (Poster)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div style="margin:auto;opacity: 0.25">
+                <div class="row">
+                    <div class="col-10 fontsize-25" style="margin-top: 5px">
+                        3.
+                    </div>
+                    <div class="col-90" style="height: 50px">
+                        <div class="titlebox fontsize-20" style="margin:0px;background-color: #598938;">Filtered-CoPhy:
+                            Unsupervised Learning of
+                            Counterfactual Physics in Pixel Space
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: right;" class="fontsize-20">
+                    <table style="margin-right: 0%;margin-left:10%; width:80%">
+                        <tr>
+                            <td>
+                                <div class="row" style="width: 100%">
+                                    <div class="col-33"><img src="assets/slide7/balls.gif" height="100"
+                                                             style="margin-left: 25%">
+                                    </div>
+                                    <div class="col-33"><img src="assets/slide7/blocktower.gif" height="100"
+                                                             style="margin-left: 25%"></div>
+                                    <div class="col-33"><img src="assets/slide7/collision.gif" height="100"
+                                                             style="margin-left: 25%"></div>
+                                </div>
+                            </td>
+                            <td style="text-align: right;width:15%; vertical-align: top" class="fontsize-15"><img
+                                    class="no_margin no_padding" src="assets/logos/ICLR-logo.svg" height="35px">2022
+                                (oral)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
         </section>
         <!--         -->
         <!--         -->
@@ -849,33 +1043,14 @@
                 Dynamics with Mesh Transformers</p>
             <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">How do we address larger-scale
                 problems?</p>
-            <div style="text-align: right;" class="fontsize-20">
-                <table style="margin-right: 0">
-                    <tr>
-                        <td><img class="no_margin no_padding" src="assets/slide15/ICLR-logo.svg" height="35px"></td>
-                        <td style="vertical-align: top; padding-top: 8px">2023 (Poster)</td>
-                    </tr>
-                </table>
-            </div>
-
-        </section>
-        <!--         -->
-        <!--         -->
-        <!-- SLIDE 16-->
-        <!--         -->
-        <section data-transition="none">
-            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
-                Dynamics with Mesh Transformers</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">How do we address larger-scale
-                problems?</p>
-            <p style="margin-bottom:0"> An infamous example: Simulation of Fluid Mechanics</p>
+            <p class="no_margin fontsize-30"> An infamous example: Simulation of Fluid Mechanics</p>
             <div class="r-stack">
                 <div class="fragment fade-out" data-fragment-index="1">
                     <table style="width: 100%">
                         <tr>
                             <td class="no_padding"
                                 style="align-content: center;vertical-align: middle; text-align: center;width:60%">
-                                <video data-autoplay src="assets/slide16/coffee.mp4" autoplay="true" loop="true"
+                                <video data-autoplay src="assets/slide15/coffee.mp4" autoplay="true" loop="true"
                                        data-ignore
                                        muted="true" width="100%"></video>
                             </td>
@@ -883,7 +1058,8 @@
                                 <div class="theorem_title">The Navier-Stokes equations:</div>
                                 <div class="theorem_content">
                                     $$\begin{array}{cl}
-                                    \dot{\mathbf{u}} + (\mathbf{u}\cdot \nabla) \mathbf{u}  &= -\nabla p + \nu \Delta \mathbf{u} + \mathbf{f} \\
+                                    \dot{\mathbf{u}} + (\mathbf{u}\cdot \nabla) \mathbf{u} &= -\nabla p + \nu \Delta
+                                    \mathbf{u} + \mathbf{f} \\
                                     \nabla \cdot \mathbf{u} &= 0 \\
                                     \end{array}$$
                                 </div>
@@ -900,8 +1076,10 @@
                 <div class="fragment fade-in-then-out" data-fragment-index="1">
                     <div class="r-stack">
                         <div>
-                            <video data-autoplay data-src="assets/slide16/liquid.mp4" autoplay="true" loop="true"
+                            <video data-autoplay data-src="assets/slide15/liquid.mp4" autoplay="true" loop="true"
                                    muted="true" height="500px"></video>
+                            <p class="citation">- Gingold et al. (1977). Smoothed
+                                particle hydrodynamics: theory and application to non-spherical stars. Royal Astronomical Society.</p>
                         </div>
                         <div style="margin-top: 40px">
                             <p class="bold no_margin" style="color: #277C9D;">Smoothed Particles Hydrodynamics</p>
@@ -914,15 +1092,12 @@
                             </ul>
                         </div>
                     </div>
-                    <p class="light-text fontsize-10 no_margin">Gingold, R. A., & Monaghan, J. J. (1977). Smoothed
-                        particle hydrodynamics: theory and application to non-spherical stars. Monthly notices of the
-                        royal astronomical society.</p>
 
                 </div>
                 <div class="fragment" data-fragment-index="2">
                     <div class="r-stack">
                         <div>
-                            <video data-autoplay data-src="assets/slide16/smoke.mp4" autoplay="true" loop="true"
+                            <video data-autoplay data-src="assets/slide15/smoke.mp4" autoplay="true" loop="true"
                                    muted="true" height="500px"></video>
                         </div>
                         <div style="margin-top: 40px">
@@ -936,13 +1111,13 @@
                         </div>
                     </div>
 
-                    <p class="light-text fontsize-10 no_margin">Stam, J. (1999). Stable Fluids.</p>
+                    <p class="citation">- Stam, J. (1999). Stable Fluids.</p>
                 </div>
             </div>
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 17-->
+        <!-- SLIDE 16-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
@@ -987,9 +1162,27 @@
                     </div>
                 </div>
             </div>
-            <p class="light-text fontsize-15" style="padding-top: 10px">Versteeg, H. K., & Malalasekera, W. (2007). An
-                introduction to
-                computational fluid dynamics: the finite volume method. Pearson education.</p>
+            <p class="citation" style="padding-top: 10px">- Versteeg et al. (2007). An
+                introduction to computational fluid dynamics: the finite volume method. Pearson education.</p>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 17-->
+        <!--         -->
+        <section data-transition="none">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
+                Dynamics with Mesh Transformers</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;"> Public Datasets for Learning Fluid
+                Dynamics</p>
+            <div class="r-stretch">
+                <div class="fig-container" data-file="figures/slide_17.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
+            </div>
+            <p class='citation'> [1] Pfaff et al. (2020). Learning Mesh-Based Simulation with Graph Networks. ICLR </p>
+            <p class='citation'> [2] Han et al. (2021). Predicting Physics in Mesh-reduced Space with Temporal Attention. ICLR </p>
+            <p class='citation'> [3] Eckert et al. (2019). A large-scale volumetric data set of real-world scalar transport flows for computer animation and ML. TOG.</p>
+            <p class='citation'> [4] Kanov et al. (2015). The JHTB: An open simulation laboratory for turbulence research. Computing in Science & Engineering </p>
         </section>
         <!--         -->
         <!--         -->
@@ -998,12 +1191,21 @@
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
                 Dynamics with Mesh Transformers</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;"> Public Datasets for Learning Fluid
-                Dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
+                <img class="no_margin" src="assets/slide17/eagle.ico" width="30"> EAGLE Dataset
+            </p>
+
             <div class="r-stretch">
                 <div class="fig-container" data-file="figures/slide_18.html"
                      data-style="width:100%; align:center; height:100%" data-preload
                      style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
+            </div>
+            <div class="row">
+                <video data-autoplay data-src="assets/slide18/neural_lander.mp4" autoplay="true" loop="true"
+                       muted="true" height="150px"></video>
+                <p class="citation">- Shi et al. (2019). Neural lander: Stable drone landing control using learned
+                    dynamics. ICRA</p>
+
             </div>
         </section>
         <!--         -->
@@ -1014,55 +1216,30 @@
             <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
                 Dynamics with Mesh Transformers</p>
             <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
-                <img class="no_margin" src="assets/slide18/eagle.ico" width="30"> EAGLE Dataset
-            </p>
-
-            <div class="r-stretch">
-                <div class="fig-container" data-file="figures/slide_19.html"
-                     data-style="width:100%; align:center; height:100%" data-preload
-                     style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
-            </div>
-            <div class="row">
-                <video data-autoplay data-src="assets/slide19/neural_lander.mp4" autoplay="true" loop="true"
-                       muted="true" height="150px"></video>
-                <p class="light-text fontsize-10">Shi, G., Shi, X., O’Connell, M., Yu, R., Azizzadenesheli, K.,
-                    Anandkumar, A., ... & Chung, S. J. (2019). Neural lander: Stable drone landing control using learned
-                    dynamics. ICRA</p>
-
-            </div>
-        </section>
-        <!--         -->
-        <!--         -->
-        <!-- SLIDE 20-->
-        <!--         -->
-        <section data-transition="none">
-            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
-                Dynamics with Mesh Transformers</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
-                <img class="no_margin" src="assets/slide18/eagle.ico" width="30"> EAGLE Dataset
+                <img class="no_margin" src="assets/slide17/eagle.ico" width="30"> EAGLE Dataset
             </p>
 
             <div class="row fontsize-15 bold">
                 <div class="col-33 no_padding">
                     <p class="no_margin">Step</p>
-                    <video data-autoplay data-src="assets/slide20/crenellation.mp4" autoplay="true" loop="true"
+                    <video data-autoplay data-src="assets/slide19/crenellation.mp4" autoplay="true" loop="true"
                            muted="true" width="100%"></video>
                 </div>
                 <div class="col-33 no_padding">
                     <p class="no_margin">Triangular</p>
-                    <video data-autoplay data-src="assets/slide20/triangular.mp4" autoplay="true" loop="true"
+                    <video data-autoplay data-src="assets/slide19/triangular.mp4" autoplay="true" loop="true"
                            muted="true" width="100%"></video>
                 </div>
                 <div class="col-33 no_padding">
                     <p class="no_margin">Splines</p>
-                    <video data-autoplay data-src="assets/slide20/splines.mp4" autoplay="true" loop="true"
+                    <video data-autoplay data-src="assets/slide19/splines.mp4" autoplay="true" loop="true"
                            muted="true"></video>
                 </div>
             </div>
             <div class="row">
 
                 <div class="col-50 no_padding">
-                    <video data-autoplay data-src="assets/slide20/downsampled_mesh.mp4" autoplay="true" loop="true"
+                    <video data-autoplay data-src="assets/slide19/downsampled_mesh.mp4" autoplay="true" loop="true"
                            muted="true" width="100%"></video>
                 </div>
                 <div class="col-50 no_padding fontsize-15">
@@ -1071,7 +1248,7 @@
                         <li class="blue" style="width:300px"> Irregular mesh / Dynamic</li>
                         <li class="blue" style="width:300px; margin-bottom: 25px"> Accurate turbulence model</li>
 
-                        <li class="green" style="width:300px"> 2 months of simulation on high-end GPUs</li>
+                        <li class="green" style="width:300px"> 2 months of simulation on 8x A100 GPUs</li>
                         <li class="green" style="width:300px"> $\sim$4TB of raw mesh data to post-process</li>
                     </ul>
                 </div>
@@ -1083,7 +1260,7 @@
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 21-->
+        <!-- SLIDE 20-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
@@ -1096,13 +1273,11 @@
                         style="align-content: center;vertical-align: middle; text-align: center;width:70%">
                         <p class="theorem_title" style="margin: auto">Convolutional Neural
                             Networks</p>
-                        <div class="fig-container theorem_content" data-file="figures/slide_21_1.html"
+                        <div class="fig-container theorem_content" data-file="figures/slide_20_cnn.html"
                              data-style="width:100%; align:center; height:100%"
-                             style="height: 100%;padding: 0" data-scroll="no" data-overflow-shown=true></div>
+                             style="height: 100%;padding: 0;margin-bottom: 20px" data-scroll="no" data-overflow-shown=true></div>
 
-                        <p class="light-text fontsize-10" style="padding-top: 20px">Stachenfeld, K., Fielding, D. B.,
-                            Kochkov, D., Cranmer, M., Pfaff, T., Godwin, J., ... & Sanchez-Gonzalez, A. (2021). Learned
-                            simulators for turbulence. ICLR</p>
+                        <p class="citation">- Stachenfeld et al. (2021). Learned simulators for turbulence. ICLR</p>
                     </td>
                     <td style="align-content: center;vertical-align: middle; text-align: center;width:30%;padding: 0">
                         <ul class="ul_fancy no_margin fontsize-20">
@@ -1116,11 +1291,14 @@
             <table style="width: 100%;margin-top: 20px" class="fragment">
                 <tr>
                     <td style="align-content: center;vertical-align: middle; text-align: center;width:33%">
-                        <img src="assets/slide21/ferret_1.png" width="100%">
+                        <p class="no_margin fontsize-15">High resolution sim. on <b>irregular mesh</b></p>
+                        <img src="assets/slide20/ferret_1.png" width="100%">
                     </td>
                     <td class="no_padding"
                         style="align-content: center;vertical-align: middle; text-align: center;width:66%">
-                        <div class="fig-container" data-file="figures/slide_21_2.html"
+
+                        <p class="no_margin fontsize-15">Mesh → Grid → Mesh</p>
+                        <div class="fig-container" data-file="figures/slide_20_grid.html"
                              data-style="width:100%; align:center; height:250px"
                              data-scroll="no" data-overflow-shown=true></div>
                     </td>
@@ -1131,7 +1309,7 @@
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 22-->
+        <!-- SLIDE slide21-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
@@ -1143,7 +1321,7 @@
                 <tr>
                     <td style="align-content: center;vertical-align: middle; text-align: center;width:40%">
 
-                        <div class="fig-container" data-file="figures/slide_21_3.html"
+                        <div class="fig-container" data-file="figures/slide_21_figure.html"
                              data-style="width:100%; align:center; height:100%" data-preload
                              style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
                     </td>
@@ -1151,19 +1329,35 @@
                         style="align-content: center;vertical-align: middle; text-align: center;width:60%">
                         <p class="theorem_title" style="margin: auto;">Graph Neural Networks</p>
                         <div class="theorem_content" style="padding: 0">
-                            <div class="fig-container" data-file="figures/slide_22_1.html"
-                                 data-style="width:100%; align:center; height:120px"
+                            <div class="fig-container" data-file="figures/slide_21_gnn.html"
+                                 data-style="width:100%; align:center; height:120px" style="margin-bottom: 20px"
                                  data-scroll="no" data-overflow-shown=true></div>
                         </div>
-                        <p class="light-text fontsize-10" style="padding-top: 20px">Pfaff, T., Fortunato, M.,
-                            Sanchez-Gonzalez, A., & Battaglia, P. (2020). Learning Mesh-Based Simulation with Graph
+                        <p class="citation">- Pfaff et al. (2020). Learning Mesh-Based Simulation with Graph
                             Networks. ICLR</p>
                     </td>
                 </tr>
             </table>
 
             <div class="fragment" style="height: 400px">
-                <div class="fig-container" data-file="figures/slide_22_2.html"
+                <div class="fig-container" data-file="figures/slide_21_receptive.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
+            </div>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 22-->
+        <!--         -->
+        <section data-transition="none">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
+                Dynamics with Mesh Transformers</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
+                Mesh Transformer
+            </p>
+
+            <div class="r-stretch">
+                <div class="fig-container" data-file="figures/slide_22.html"
                      data-style="width:100%; align:center; height:100%" data-preload
                      style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
             </div>
@@ -1176,13 +1370,36 @@
             <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
                 Dynamics with Mesh Transformers</p>
             <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
-                Mesh Transformer
+                Comparison with State-of-the-Art
             </p>
 
-            <div class="r-stretch">
-                <div class="fig-container" data-file="figures/slide_23.html"
-                     data-style="width:100%; align:center; height:100%" data-preload
-                     style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
+            <video data-autoplay src="assets/slide23/all_2.mp4" autoplay="true" loop="true"
+                   muted="true" width="100%"></video>
+
+            <div class="fragment">
+                <div style="height: 200px">
+                    <div class="fig-container" data-file="figures/slide_23.html"
+                         data-style="width:100%; align:center; height:100%"
+                         style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+                </div>
+
+                <div class="row fontsize-15">
+                    <div class="col-50">
+                        <ul class="rectangle-list" style="width:80%; margin:auto">
+                            <li class="blue"> More accurate forecasting</li>
+                        </ul>
+                    </div>
+                    <div class="col-50">
+                        <ul class="rectangle-list" style="width:80%; margin:auto">
+                            <li class="blue"> Faster inference</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="r-stretch"></div>
+            <div class="">
+                <p class="citation">- Stachenfeld et al. (2021). Learned simulators for turbulence. ICLR</p>
+                <p class="citation">- Pfaff et al. (2020). Learning Mesh-Based Simulation with Graph Networks. ICLR</p>
             </div>
         </section>
         <!--         -->
@@ -1192,25 +1409,12 @@
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
                 Dynamics with Mesh Transformers</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
-                Comparison with State-of-the-Art
-            </p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Attention maps</p>
 
-            <video data-autoplay src="assets/slide24/all_2.mp4" autoplay="true" loop="true"
-                   muted="true" width="100%"></video>
-            <div style="height: 200px" class="fragment">
+            <div class="r-stretch">
                 <div class="fig-container" data-file="figures/slide_24.html"
                      data-style="width:100%; align:center; height:100%" data-preload
                      style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
-            </div>
-            <div class="r-stretch"></div>
-            <div class="">
-                <p class="light-text fontsize-10">Stachenfeld, K., Fielding, D. B.,
-                    Kochkov, D., Cranmer, M., Pfaff, T., Godwin, J., ... & Sanchez-Gonzalez, A. (2021). Learned
-                    simulators for turbulence. ICLR</p>
-                <p class="light-text fontsize-10">Pfaff, T., Fortunato, M.,
-                    Sanchez-Gonzalez, A., & Battaglia, P. (2020). Learning Mesh-Based Simulation with Graph
-                    Networks. ICLR</p>
             </div>
         </section>
         <!--         -->
@@ -1220,23 +1424,12 @@
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
                 Dynamics with Mesh Transformers</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Attention maps</p>
-
-            <div class="r-stretch">
-                <div class="fig-container" data-file="figures/slide_25.html"
-                     data-style="width:100%; align:center; height:100%" data-preload
-                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
-            </div>
-        </section>
-        <!--         -->
-        <!--         -->
-        <!-- SLIDE 26-->
-        <!--         -->
-        <section data-transition="none">
-            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Large-scale Learning of Turbulent Fluid
-                Dynamics with Mesh Transformers</p>
             <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Take home messages</p>
 
+            <div>
+                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Pros</p>
+                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
+            </div>
             <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
                     <ul class="rectangle-list fontsize-20" style="width:90%">
@@ -1250,9 +1443,8 @@
                 </div>
             </div>
             <div>
-                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Pros</p>
-                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
                 <p style="text-align: left; width: 100%" class="fontsize-30 bold">Cons</p>
+                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
             </div>
             <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
@@ -1269,46 +1461,136 @@
             </div>
 
 
-
             <p class="fontsize-20 bold no_margin" style="text-align: left">Follow-up work</p>
-            <p class="light-text fontsize-15">Li, Z. et al. (2023). Latent Neural PDE Solver for Time-dependent Systems.
+            <p class="citation">- Li et al. (2023). Latent Neural PDE Solver for Time-dependent Systems.
                 NeurIPS AI for Science Workshop.</p>
-            <p class="light-text fontsize-15">Luo, X. et al. (2023). CARE: Modeling Interacting Dynamics Under Temporal
+            <p class="citation">- Luo et al. (2023). CARE: Modeling Interacting Dynamics Under Temporal
                 Environmental Variation. NeurIPS</p>
-            <p class="light-text fontsize-15">Hao, Y. et al. (2023). Forecasting 3D unsteady multi-phase flow fields in
+            <p class="citation">- Hao et al. (2023). Forecast. 3D unsteady multiphase flow fields in
                 the coal-supercritical water fluidized bed reactor via GNN. Energy.</p>
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 26-->
+        <!--         -->
+        <section data-transition="none">
+            <p>30 seconds break</p>
+            <video data-autoplay src="assets/slide26/ferret.mp4" autoplay="true" loop="true"
+                   muted="true" width="30%"></video>
+            <p class="fontsize-20 light-text"> Do not worry, the ferret is doing the "happy" dance...</p>
         </section>
         <!--         -->
         <!--         -->
         <!-- SLIDE 27-->
         <!--         -->
         <section data-transition="none">
-            <p>30 seconds break</p>
-            <video data-autoplay src="assets/slide27/ferret.mp4" autoplay="true" loop="true"
-                   muted="true" width="30%"></video>
-        </section>
-        <!--         -->
-        <!--         -->
-        <!-- SLIDE 28-->
-        <!--         -->
-        <section data-transition="none">
-            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
-                Counterfactual Physics in Pixel Space</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;">The Three Layers Causal
-                Hierarchy</p>
+            <p class="bold">Agenda</p>
 
-            <div style="text-align: right;" class="fontsize-20">
-                <table style="margin-right: 0">
-                    <tr>
-                        <td><img class="no_margin no_padding" src="assets/slide15/ICLR-logo.svg" height="35px"></td>
-                        <td style="vertical-align: top; padding-top: 8px">2022 (Oral)</td>
-                    </tr>
-                </table>
+            <div style="margin:auto; opacity: 25%">
+                <div class="row">
+                    <div class="col-10 fontsize-25" style="margin-top: 5px">
+                        1.
+                    </div>
+                    <div class="col-90" style="height: 50px">
+                        <div class="titlebox fontsize-20" style="margin:auto; background-color:#62BCDD">Deep KKL:
+                            Data-driven
+                            Output Prediction for
+                            Non-Linear Systems
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: right;" class="fontsize-20">
+                    <table style="margin-right: 0%; width:100%">
+                        <tr>
+                            <td>
+                                <video data-autoplay src="assets/slide7/lorenz.mp4" autoplay="true" loop="true"
+                                       muted="true"
+                                       style="width: 100%"
+                                       height="100"></video>
+                            </td>
+                            <td style="text-align: right;width:10%; vertical-align: top"><img
+                                    class="no_margin no_padding" src="assets/logos/CDC.png" height="35px"></td>
+                            <!--                        <td style="vertical-align: top; padding-top: 8px"</td>-->
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <div style="margin:auto; opacity: 25%">
+                <div class="row">
+                    <div class="col-10 fontsize-25" style="margin-top: 5px">
+                        2.
+                    </div>
+                    <div class="col-90" style="height: 50px">
+                        <div class="titlebox fontsize-20" style="margin:0px;background-color: #3EC3B2;">Large-scale
+                            Learning of
+                            Turbulent Fluid
+                            Dynamics with Mesh Transformers
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: right;" class="fontsize-20">
+                    <table style="margin-right: 0%; width:100%">
+                        <tr>
+                            <td>
+                                <video data-autoplay src="assets/slide7/triangular.mp4" autoplay="true" loop="true"
+                                       muted="true"
+                                       style="width: 100%"
+                                       height="100"></video>
+                            </td>
+                            <td style="text-align: right;width:15%; vertical-align: top" class="fontsize-15"><img
+                                    class="no_margin no_padding" src="assets/logos/ICLR-logo.svg" height="35px">2023
+                                (Poster)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div style="margin:auto">
+                <div class="row">
+                    <div class="col-10 fontsize-25" style="margin-top: 5px">
+                        3.
+                    </div>
+                    <div class="col-90" style="height: 50px">
+                        <div class="titlebox fontsize-20" style="margin:0px;background-color: #598938;">Filtered-CoPhy:
+                            Unsupervised Learning of
+                            Counterfactual Physics in Pixel Space
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: right;" class="fontsize-20">
+                    <table style="margin-right: 0%; margin-left:10%; width:90%">
+                        <tr>
+                            <td>
+                                <div class="row" style="width: 100%">
+                                    <div class="col-33"><img src="assets/slide7/balls.gif" height="100"
+                                                             style="margin-left: 25%">
+                                    </div>
+                                    <div class="col-33"><img src="assets/slide7/blocktower.gif" height="100"
+                                                             style="margin-left: 25%"></div>
+                                    <div class="col-33"><img src="assets/slide7/collision.gif" height="100"
+                                                             style="margin-left: 25%"></div>
+                                </div>
+                            </td>
+                            <td style="text-align: right;width:15%; vertical-align: top" class="fontsize-15"><img
+                                    class="no_margin no_padding" src="assets/logos/ICLR-logo.svg" height="35px">2022
+                                (oral)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
             </div>
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 29-->
+        <!-- SLIDE 28-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
@@ -1321,22 +1603,22 @@
                 </ul>
                 <div class="row">
                     <div class="col-25">
-                        <video data-autoplay src="assets/slide29/0_fixed.mp4" autoplay="true" loop="true"
+                        <video data-autoplay src="assets/slide28/0_fixed.mp4" autoplay="true" loop="true"
                                muted="true" height="100px"></video>
                     </div>
                     <div class="col-25">
-                        <video data-autoplay src="assets/slide29/1_fixed.mp4" autoplay="true" loop="true"
+                        <video data-autoplay src="assets/slide28/1_fixed.mp4" autoplay="true" loop="true"
                                muted="true" height="100px"></video>
                     </div>
                     <div class="col-25">
-                        <video data-autoplay src="assets/slide29/2_fixed.mp4" autoplay="true" loop="true"
+                        <video data-autoplay src="assets/slide28/2_fixed.mp4" autoplay="true" loop="true"
                                muted="true" height="100px"></video>
                     </div>
                     <div class="col-25">
-                        <video data-autoplay src="assets/slide29/3_fixed.mp4" autoplay="true" loop="true"
+                        <video data-autoplay src="assets/slide28/3_fixed.mp4" autoplay="true" loop="true"
                                muted="true" height="100px"></video>
                     </div>
-                    <p class="light-text fontsize-10 no_margin no_padding">Lerer, A., Gross, S., & Fergus, R. (2016).
+                    <p class="citation">- Lerer et al. (2016).
                         Learning physical
                         intuition of block towers by example. ICML</p>
                 </div>
@@ -1348,16 +1630,15 @@
                 </ul>
                 <div class="row">
                     <div class="col-33">
-                        <img src="assets/slide29/phyre1.gif" height="100px" style="border: solid 1px black">
+                        <img src="assets/slide28/phyre1.gif" height="100px" style="border: solid 1px black">
                     </div>
                     <div class="col-33">
-                        <img src="assets/slide29/phyre2.gif" height="100px" style="border: solid 1px black">
+                        <img src="assets/slide28/phyre2.gif" height="100px" style="border: solid 1px black">
                     </div>
                     <div class="col-33">
-                        <img src="assets/slide29/phyre3.gif" height="100px" style="border: solid 1px black">
+                        <img src="assets/slide28/phyre3.gif" height="100px" style="border: solid 1px black">
                     </div>
-                    <p class="light-text fontsize-10">Bakhtin, A., van der Maaten, L., Johnson, J., Gustafson, L., &
-                        Girshick, R. (2019). Phyre: A new benchmark for physical reasoning. NeurIPS</p>
+                    <p class="citation">- Bakhtin et al (2019). Phyre: A new benchmark for physical reasoning. NeurIPS</p>
                 </div>
             </div>
 
@@ -1366,13 +1647,13 @@
                     <li class="blue">Level 3 : <b>Counterfactuals</b> $$ P(y_x | x', y')$$</li>
                 </ul>
             </div>
-            <p class="light-text fontsize-15">Judea Pearl. Causal and counterfactual inference. The Handbook of
+            <p class="citation">- Judea Pearl. Causal and counterfactual inference. The Handbook of
                 Rationality.</p>
 
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 30-->
+        <!-- SLIDE 29-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
@@ -1381,7 +1662,7 @@
                 Physics</p>
 
             <div class="r-stretch" style="margin-bottom: 20px">
-                <div class="fig-container" data-file="figures/slide_30.html"
+                <div class="fig-container" data-file="figures/slide_29.html"
                      data-style="width:100%; align:center; height:100%" data-preload
                      style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
             </div>
@@ -1409,7 +1690,7 @@
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 31-->
+        <!-- SLIDE 30-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
@@ -1422,13 +1703,13 @@
                         <div class="row">
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <img src="assets/slide31/BT_A.png" style="border: solid 1px black; width: 112px"/>
+                                    <img src="assets/slide30/BT_A.png" style="border: solid 1px black; width: 112px"/>
                                     <p style="text-align: left; width:100px; height:100px">A</p>
                                 </div>
                             </div>
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <video data-autoplay src="assets/slide31/BT-B.mp4" autoplay="true" loop="true"
+                                    <video data-autoplay src="assets/slide30/BT-B.mp4" autoplay="true" loop="true"
                                            muted="true" style="border: solid 1px black;"></video>
                                     <p style="text-align: left; width:100px; height:100px">B</p>
                                 </div>
@@ -1437,13 +1718,13 @@
                         <div class="row" style="margin-top: 10px">
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <img src="assets/slide31/BT_C.png" style="border: solid 1px black; width: 112px"/>
+                                    <img src="assets/slide30/BT_C.png" style="border: solid 1px black; width: 112px"/>
                                     <p style="text-align: left; width:100px; height:100px">C</p>
                                 </div>
                             </div>
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <video data-autoplay src="assets/slide31/BT-D.mp4" autoplay="true" loop="true"
+                                    <video data-autoplay src="assets/slide30/BT-D.mp4" autoplay="true" loop="true"
                                            muted="true" style="border: solid 1px black;"></video>
                                     <p style="text-align: left; width:100px; height:100px">D</p>
                                 </div>
@@ -1459,13 +1740,13 @@
                         <div class="row">
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <img src="assets/slide31/B-A.png" style="border: solid 1px black; width: 112px"/>
+                                    <img src="assets/slide30/B-A.png" style="border: solid 1px black; width: 112px"/>
                                     <p style="text-align: left; width:100px; height:100px">A</p>
                                 </div>
                             </div>
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <video data-autoplay src="assets/slide31/B-B.mp4" autoplay="true" loop="true"
+                                    <video data-autoplay src="assets/slide30/B-B.mp4" autoplay="true" loop="true"
                                            muted="true" style="border: solid 1px black;"></video>
                                     <p style="text-align: left; width:100px; height:100px">B</p>
                                 </div>
@@ -1474,13 +1755,13 @@
                         <div class="row" style="margin-top: 10px">
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <img src="assets/slide31/B-C.png" style="border: solid 1px black; width: 112px"/>
+                                    <img src="assets/slide30/B-C.png" style="border: solid 1px black; width: 112px"/>
                                     <p style="text-align: left; width:100px; height:100px">C</p>
                                 </div>
                             </div>
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <video data-autoplay src="assets/slide31/B-D.mp4" autoplay="true" loop="true"
+                                    <video data-autoplay src="assets/slide30/B-D.mp4" autoplay="true" loop="true"
                                            muted="true" style="border: solid 1px black;"></video>
                                     <p style="text-align: left; width:100px; height:100px">D</p>
                                 </div>
@@ -1496,13 +1777,13 @@
                         <div class="row">
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <img src="assets/slide31/C-A.png" style="border: solid 1px black; width: 112px"/>
+                                    <img src="assets/slide30/C-A.png" style="border: solid 1px black; width: 112px"/>
                                     <p style="text-align: left; width:100px; height:100px">A</p>
                                 </div>
                             </div>
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <video data-autoplay src="assets/slide31/C-B.mp4" autoplay="true" loop="true"
+                                    <video data-autoplay src="assets/slide30/C-B.mp4" autoplay="true" loop="true"
                                            muted="true" style="border: solid 1px black;"></video>
                                     <p style="text-align: left; width:100px; height:100px">B</p>
                                 </div>
@@ -1511,13 +1792,13 @@
                         <div class="row" style="margin-top: 10px">
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <img src="assets/slide31/C-C.png" style="border: solid 1px black; width: 112px"/>
+                                    <img src="assets/slide30/C-C.png" style="border: solid 1px black; width: 112px"/>
                                     <p style="text-align: left; width:100px; height:100px">C</p>
                                 </div>
                             </div>
                             <div class="col-50">
                                 <div class="r-stack">
-                                    <video data-autoplay src="assets/slide31/C-D.mp4" autoplay="true" loop="true"
+                                    <video data-autoplay src="assets/slide30/C-D.mp4" autoplay="true" loop="true"
                                            muted="true" style="border: solid 1px black;"></video>
                                     <p style="text-align: left; width:100px; height:100px">D</p>
                                 </div>
@@ -1527,9 +1808,30 @@
                     Collision-CF
                 </div>
             </div>
-            <p class="light-text fontsize-15">Baradel, F., Neverova, N., Mille, J., Mori, G., & Wolf, C. (2019). Cophy:
-                Counterfactual learning of physical dynamics. ICLR</p>
+            <!--            <p class="light-text fontsize-15">Baradel, F., Neverova, N., Mille, J., Mori, G., & Wolf, C. (2019). Cophy:-->
+            <!--                Counterfactual learning of physical dynamics. ICLR</p>-->
 
+        </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 31-->
+        <!--         -->
+        <section data-transition="none">
+            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
+                Counterfactual Physics in Pixel Space</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;"> Model Overview</p>
+
+            <div style="height: 150px;margin-bottom: 20px">
+                <div class="fig-container" data-file="figures/slide_31.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+            </div>
+            <div class="fragment" style="height: 375px">
+                <p class="no_margin fontsize-20"> Counterfactual Dynamics module </p>
+                <div class="fig-container" data-file="figures/slide_31_dyn.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+            </div>
         </section>
         <!--         -->
         <!--         -->
@@ -1538,38 +1840,62 @@
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
                 Counterfactual Physics in Pixel Space</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;"> Identifiability</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Encoder /
+                Decoder with Transporter Network</p>
 
-            <table class="fontsize-20" style="width: 100%;">
-                <tr>
-                    <td style="width: 15%; text-align: center;vertical-align: middle; border:none">Observed Experiment
-                        <b>AB</b>
-                    </td>
-                    <td style="width: 70%; text-align: center;vertical-align: middle;border:none">
-                        <video data-autoplay src="assets/slide32/ident_AB.mp4" autoplay="true" loop="true"
-                               muted="true" width="100%"></video>
-                    </td>
-                    <td style="width: 15%; text-align: center;vertical-align: middle;border:none" rowspan="2"><img
-                            src="assets/slide32/legend.png" width="100%"></td>
-                </tr>
-                <tr>
-                    <td style="width: 15%; text-align: center;vertical-align: middle">CF Experiment
-                        <b>CD</b>
-                    </td>
-                    <td style="width: 70%; text-align: center;vertical-align: middle">
-                        <video data-autoplay src="assets/slide32/ident_CD.mp4" autoplay="true" loop="true"
-                               muted="true" width="100%"></video>
-                    </td>
-                    <td style="width: 15%; text-align: center;vertical-align: middle" rowspan="2"></td>
-                </tr>
-            </table>
-
-            <div class="theorem_title"><b>Identifiability</b> [Janny et al. 2022]</div>
-            <div class="theorem_content"><p style="margin-top: 5px">The experiment $(\mathbf{AB}, \mathbf{CD}, z)$ is
-                <b>identifiable</b> if and only if, for any set of confounders $z'$:
-            </p>
-                $$\psi(\mathbf{A}, z) = \psi(\mathbf{A}, z') \Rightarrow \psi(\mathbf{C}, z) = \psi(\mathbf{C}, z') $$
+            <div style="height:300px">
+                <div class="fig-container" data-file="figures/slide_32.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
             </div>
+
+            <div class="fragment"></div>
+            <div class="fragment"></div>
+            <div class="fragment"></div>
+            <!--            <div class="fragment"></div>-->
+            <div class="row fragment" style="height:175px">
+                <div style="text-align: center" class="no_padding col-33">
+                    <div class="r-stack">
+                        <div style="width: 100%">
+                            <video data-autoplay src="assets/slide32/transporter4.mp4" autoplay="true" loop="true"
+                                   muted="true" height="175px" class="no_margin no_padding"></video>
+                        </div>
+                        <p class="fontsize-20 no_margin no_padding">4 keypoints</p>
+                    </div>
+                </div>
+                <div style="text-align: center" class="no_padding col-33">
+                    <div class="r-stack">
+                        <div style="width: 100%">
+                            <video data-autoplay src="assets/slide32/transporter8.mp4" autoplay="true" loop="true"
+                                   muted="true" height="175px" class="no_margin no_padding"></video>
+                        </div>
+                        <p class="fontsize-20 no_margin no_padding">8 keypoints</p>
+                    </div>
+                </div>
+                <div style="text-align: center" class="no_padding col-33">
+                    <div class="r-stack">
+                        <div style="width: 100%">
+                            <video data-autoplay src="assets/slide32/transporter16.mp4" autoplay="true" loop="true"
+                                   muted="true" height="175px" class="no_margin no_padding"></video>
+                        </div>
+                        <p class="fontsize-20 no_margin no_padding">16 keypoints</p>
+                    </div>
+                </div>
+                <div class="row fontsize-15">
+                    <div class="col-50">
+                        <ul class="rectangle-list" style="width:80%;margin:auto">
+                            <li class="red"> Temporal consistency</li>
+                        </ul>
+                    </div>
+                    <div class="col-50">
+                        <ul class="rectangle-list" style="width:80%;margin:auto">
+                            <li class="red"> Disentengling Features / Keypoints</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="citation">- Kulkarni et al. (2019). Unsupervised learning of
+                object keypoints for perception and control. NeurIPS</p>
         </section>
         <!--         -->
         <!--         -->
@@ -1578,30 +1904,37 @@
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
                 Counterfactual Physics in Pixel Space</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;"> Counterfactuality</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Encoder /
+                Decoder with Keypoints & Coefficient</p>
 
-            <div class="row fontsize-20">
-                <div class="col-50">
-                    <video data-autoplay src="assets/slide33/non_cf.mp4" autoplay="true" loop="true"
-                           muted="true" width="100%"></video>
-                    <!--                    Font awesome for cross symbol-->
-                    <p style="color:#E77475"><i class="fas fa-times"></i> Non-counterfactual experiment</p>
-                </div>
-                <div class="col-50">
-                    <video data-autoplay src="assets/slide33/cf.mp4" autoplay="true" loop="true"
-                           muted="true" width="100%"></video>
-                    <!--                    Font awesome for check symbol-->
-                    <p style="color:#598938"><i class="fas fa-check"></i> Counterfactual experiment</p>
-                </div>
+            <div class="r-stretch">
+                <div class="fig-container" data-file="figures/slide_33.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
             </div>
 
-            <div class="theorem_title"><b>Counterfactuality</b> [Janny et al. 2022]</div>
-            <div class="theorem_content"><p style="margin-top: 5px">Let $z^k$ be the set of confounders $z$ where the
-                $k^{th}$
-                value has been modified. The experiment $(\mathbf{AB}, \mathbf{CD}, z)$ is <b>counterfactual</b> if and
-                only if:
-            </p>
-                $$\exists k: \psi(\mathbf{C}, z) \neq \psi(\mathbf{C}, z^k)$$
+            <div class="row fragment" style="height:200px">
+                <div class="col-50">
+                    <video data-autoplay src="assets/slide33/1.mp4" autoplay="true" loop="true"
+                           muted="true" width="80%" class="no_margin no_padding"></video>
+                </div>
+                <div class="col-50">
+                    <video data-autoplay src="assets/slide33/2.mp4" autoplay="true" loop="true"
+                           muted="true" width="80%" class="no_margin no_padding"></video>
+                </div>
+
+                <div class="row fontsize-15">
+                    <div class="col-50">
+                        <ul class="rectangle-list" style="width:80%;margin:auto">
+                            <li class="green"> Discover keypoints and coefficients</li>
+                        </ul>
+                    </div>
+                    <div class="col-50">
+                        <ul class="rectangle-list" style="width:80%;margin:auto">
+                            <li class="green"> Learn to disentangle shape and position</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
         <!--         -->
@@ -1611,19 +1944,31 @@
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
                 Counterfactual Physics in Pixel Space</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;"> Model Overview</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Results </p>
 
-            <div style="height: 150px;margin-bottom: 20px">
-                <div class="fig-container" data-file="figures/slide_34.html"
+            <div style="height: 125px;margin-bottom: 20px">
+                <div class="fig-container" data-file="figures/slide_31.html"
                      data-style="width:100%; align:center; height:100%" data-preload
                      style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
             </div>
-            <div class="fragment" style="height: 375px">
-                <p class="no_margin fontsize-20"> Counterfactual Dynamics module </p>
-                <div class="fig-container" data-file="figures/slide_34-1.html"
-                     data-style="width:100%; align:center; height:100%" data-preload
-                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+            <div class="row">
+                <div class="col-50">
+                    <p class="fontsize-20"> Results on Filtered-Cophy</p>
+                    <img class="no_margin" src="assets/slide34/blocktower_s.gif" width="100%">
+                    <img class="no_margin" src="assets/slide34/balls_s.gif" width="100%">
+                    <img class="no_margin" src="assets/slide34/collision_s.gif" width="100%">
+                </div>
+                <div class="col-50">
+                    <p class="fontsize-20"> Results on real videos</p>
+                    <div style="margin-top: 75px">
+                        <img class="no_margin" src="assets/slide34/real1.gif" width="100%">
+                        <img class="no_margin" src="assets/slide34/real2.gif" width="100%">
+                    </div>
+                </div>
             </div>
+            <p class="citation">- Lerer et al. (2016). Learning physical intuition of block towers by example. ICML</p>
+            <p class="citation">- Guen et al. (2020). Disentangling physical dynamics from unknown factors for unsupervised video prediction. CVPR</p>
+            <p class="citation">- Li et al. (2020). Causal discovery in physical systems from videos. NeurIPS</p>
         </section>
         <!--         -->
         <!--         -->
@@ -1632,121 +1977,12 @@
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
                 Counterfactual Physics in Pixel Space</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Encoder /
-                Decoder with Transporter Network</p>
-
-            <div class="r-stretch">
-                <div class="fig-container" data-file="figures/slide_35.html"
-                     data-style="width:100%; align:center; height:100%" data-preload
-                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
-            </div>
-
-            <div class="fragment"></div>
-            <div class="fragment"></div>
-            <div class="fragment"></div>
-            <!--            <div class="fragment"></div>-->
-            <div class="row fragment" style="height:200px">
-                <div style="text-align: center" class="no_padding col-33">
-                    <div class="r-stack">
-                        <div style="width: 100%">
-                            <video data-autoplay src="assets/slide35/transporter4.mp4" autoplay="true" loop="true"
-                                   muted="true" height="200px" class="no_margin no_padding"></video>
-                        </div>
-                        <p class="fontsize-20 no_margin no_padding">4 keypoints</p>
-                    </div>
-                </div>
-                <div style="text-align: center" class="no_padding col-33">
-                    <div class="r-stack">
-                        <div style="width: 100%">
-                            <video data-autoplay src="assets/slide35/transporter8.mp4" autoplay="true" loop="true"
-                                   muted="true" height="200px" class="no_margin no_padding"></video>
-                        </div>
-                        <p class="fontsize-20 no_margin no_padding">8 keypoints</p>
-                    </div>
-                </div>
-                <div style="text-align: center" class="no_padding col-33">
-                    <div class="r-stack">
-                        <div style="width: 100%">
-                            <video data-autoplay src="assets/slide35/transporter16.mp4" autoplay="true" loop="true"
-                                   muted="true" height="200px" class="no_margin no_padding"></video>
-                        </div>
-                        <p class="fontsize-20 no_margin no_padding">16 keypoints</p>
-                    </div>
-                </div>
-            </div>
-            <p class="light-text fontsize-15" style="height: 20px">Kulkarni et al. (2019). Unsupervised learning of
-                object keypoints for perception and control. NeurIPS</p>
-        </section>
-        <!--         -->
-        <!--         -->
-        <!-- SLIDE 36-->
-        <!--         -->
-        <section data-transition="none">
-            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
-                Counterfactual Physics in Pixel Space</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Encoder /
-                Decoder with Keypoints & Coefficient</p>
-
-            <div class="r-stretch">
-                <div class="fig-container" data-file="figures/slide_36.html"
-                     data-style="width:100%; align:center; height:100%" data-preload
-                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
-            </div>
-
-            <div class="row fragment" style="height:200px">
-                <div class="col-50">
-                    <video data-autoplay src="assets/slide37/1.mp4" autoplay="true" loop="true"
-                           muted="true" width="80%" class="no_margin no_padding"></video>
-                </div>
-                <div class="col-50">
-                    <video data-autoplay src="assets/slide37/2.mp4" autoplay="true" loop="true"
-                           muted="true" width="80%" class="no_margin no_padding"></video>
-                </div>
-            </div>
-        </section>
-        <!--         -->
-        <!--         -->
-        <!-- SLIDE 38-->
-        <!--         -->
-        <section data-transition="none">
-            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
-                Counterfactual Physics in Pixel Space</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Results </p>
-
-            <div style="height: 125px;margin-bottom: 20px">
-                <div class="fig-container" data-file="figures/slide_34.html"
-                     data-style="width:100%; align:center; height:100%" data-preload
-                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
-            </div>
-            <div class="row">
-                <div class="col-50">
-                    <p class="fontsize-20"> Results on Filtered-Cophy</p>
-                    <img class="no_margin" src="assets/slide38/blocktower_s.gif" width="100%">
-                    <img class="no_margin" src="assets/slide38/balls_s.gif" width="100%">
-                    <img class="no_margin" src="assets/slide38/collision_s.gif" width="100%">
-                </div>
-                <div class="col-50">
-                    <p class="fontsize-20"> Results on real videos</p>
-                    <div style="margin-top: 75px">
-                        <img class="no_margin" src="assets/slide38/real1.gif" width="100%">
-                        <img class="no_margin" src="assets/slide38/real2.gif" width="100%">
-                    </div>
-                </div>
-            </div>
-            <p class="light-text fontsize-10 no_margin no_padding">Lerer, A., Gross, S., & Fergus, R. (2016). Learning
-                physical intuition of block towers by example. ICML</p>
-            <p class="light-text fontsize-10 no_margin no_padding">Guen, V. L., & Thome, N. (2020). Disentangling physical dynamics from unknown factors for unsupervised video prediction. CVPR</p>
-            <p class="light-text fontsize-10 no_margin no_padding">Li, Y., Torralba, A., Anandkumar, A., Fox, D., & Garg, A. (2020). Causal discovery in physical systems from videos. NeurIPS</p>
-        </section>
-        <!--         -->
-        <!--         -->
-        <!-- SLIDE 39-->
-        <!--         -->
-        <section data-transition="none">
-            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
-                Counterfactual Physics in Pixel Space</p>
             <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;">Take home messages</p>
 
+            <div>
+                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Pros</p>
+                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
+            </div>
             <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
                     <ul class="rectangle-list fontsize-20" style="width:90%">
@@ -1760,9 +1996,8 @@
                 </div>
             </div>
             <div>
-                <p style="text-align: left; width: 100%" class="fontsize-30 bold">Pros</p>
-                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
                 <p style="text-align: left; width: 100%" class="fontsize-30 bold">Cons</p>
+                <div style="width: 100%; height: 1px; background-color: black; margin-top: 0px"></div>
             </div>
             <div class="row" style="margin-top:60px; margin-bottom:60px">
                 <div class="col-50">
@@ -1773,19 +2008,19 @@
 
                 <div class="col-50">
                     <ul class="rectangle-list fontsize-20" style="width:90%">
-                        <li class="red">Lot of opportunities for follow-up work</li>
+                        <li class="red">Room for improvements</li>
                     </ul>
                 </div>
             </div>
 
 
             <p class="fontsize-20 bold no_margin" style="text-align: left">Follow-up work</p>
-            <p class="light-text fontsize-15">Yang, T. Y., Rosca, J., Narasimhan, K., & Ramadge, P. J. (2022). Learning physics constrained dynamics using autoencoders. NeurIPS</p>
-            <p class="light-text fontsize-15">Zhao, Y., Deng, P., Liu, J., Jia, X., & Zhang, J. (2023). Generative Causal Interpretation Model for Spatio-Temporal Representation Learning. SIGKDD</p>
+            <p class="citation">- Yang et al. (2022). Learning physics constrained dynamics using autoencoders. NeurIPS</p>
+            <p class="citation">- Zhao et al. (2023). Generative Causal Interpretation Model for Spatio-Temporal Representation Learning. SIGKDD</p>
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 40-->
+        <!-- SLIDE 36-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;">Conclusion and perspectives</p>
@@ -1793,24 +2028,115 @@
         </section>
         <!--         -->
         <!--         -->
-        <!-- SLIDE 41-->
+        <!-- SLIDE 37-->
         <!--         -->
         <section data-transition="none">
             <p class="titlebox" style="margin:0px;">Conclusion and perspectives</p>
             <p class="subtitlebox" style="margin-top:0px;">Where are we, and where are we going ?</p>
 
-            <div class="r-stretch">
-                <div class="fig-container" data-file="figures/slide_41.html"
-                     data-style="width:100%; align:center; height:100%" data-preload
-                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+            <table style="width:100%" class="fontsize-20">
+                <tr>
+                    <td class="td_center border_bottom border_right" style="background-color: #C0C0C0"><p
+                            style="margin:5px;text-align: center">What is the need ?</p></td>
+                    <td class="td_center border_bottom border_right" style="background-color: #C0C0C0; " colspan="2"><p
+                            style="margin:5px;text-align: center">What we did ?</p></td>
+                    <td class="td_center border_bottom" style="background-color: #C0C0C0; "><p
+                            style="margin:5px;text-align: center">What next ?</p></td>
+                </tr>
+
+                <tr>
+                    <td rowspan="2" class="custom-td" style="border-right: 1px solid black;background-color: #EFEFEF"><p style="text-align: center;">More Datasets</p></td>
+                    <td class="custom-td" style=""><img style="margin-left: 20px;margin-top: 0; margin-bottom: 0" src="assets/slide37/cophy.ico" height="40px">
+                    </td>
+                    <td class="custom-td"> <p style="text-align: center" class="no_margin">Causal reasoning</p></td>
+
+                    <td class="custom-td" style="border-bottom: 1px solid "><p style="text-align:center" class="italic no_margin">Electro-magnetism ?</p></td>
+                </tr>
+
+                <tr>
+                    <td class="custom-td" style=""><img style="margin-left: 20px;margin-top: 0; margin-bottom: 0" src="assets/slide37/eagle.ico" height="40px">
+                    </td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="no_margin">Fluid Mechanics</p></td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="italic no_margin">Real-world dataset</p></td>
+                </tr>
+
+
+
+                <tr style="border-top:1px solid black">
+                    <td rowspan="3" class="custom-td" style="border-right: 1px solid black;background-color: #EFEFEF"><p style="text-align: center;">More models</p></td>
+                    <td class="custom-td" style=""><img style="margin-left: 20px;margin-top: 0; margin-bottom: 0" src="assets/slide37/cophy.ico" height="40px">
+                    </td>
+                    <td class="custom-td"> <p style="text-align: center" class="no_margin">Keypoint detector</p></td>
+
+                    <td class="custom-td" style="border-bottom: 1px solid "><p class="italic no_margin" style="text-align:center">Mesh-based simulation ?</p></td>
+                </tr>
+
+                <tr>
+                    <td class="custom-td" style=""><img style="margin-left: 20px;margin-top: 0; margin-bottom: 0" src="assets/slide37/pde.ico" height="40px">
+                    </td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="no_margin">Continuous simulator</p></td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="italic no_margin">Pixel Space ?</p></td>
+                </tr>
+
+                <tr>
+                    <td class="custom-td" style=""><img style="margin-left: 20px;margin-top: 0; margin-bottom: 0" src="assets/slide37/eagle.ico" height="40px">
+                    </td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="no_margin">Mesh-Transformer</p></td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="italic no_margin"></p></td>
+                </tr>
+
+                <tr style="border-top:1px solid black">
+                    <td rowspan="3" class="custom-td" style="border-right: 1px solid black;background-color: #EFEFEF"><p style="text-align: center;">Hybrid</p></td>
+                    <td class="custom-td" style=""><img style="margin-left: 20px;margin-top: 0; margin-bottom: 0" src="assets/slide37/kkl.png" height="40px">
+                    </td>
+                    <td class="custom-td"> <p style="text-align: center" class="no_margin">Deep KKL</p></td>
+
+                    <td class="custom-td" style="border-bottom: 1px solid "><p class="italic no_margin" style="text-align:center">Controller design ?</p></td>
+                </tr>
+
+                <tr>
+                    <td class="custom-td" style=""><img style="margin-left: 20px;margin-top: 0; margin-bottom: 0" src="assets/slide37/ifac.png" height="40px">
+                    </td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="no_margin">Contractive control</p></td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="italic no_margin">Robust forecasting ?</p></td>
+                </tr>
+
+                <tr>
+                    <td class="custom-td" style=""><img style="margin-left: 20px;margin-top: 0; margin-bottom: 0" src="assets/slide37/cdc.png" height="40px">
+                    </td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="no_margin">Canonical SSM</p></td>
+                    <td class="custom-td" style=""><p style="text-align:center" class="italic no_margin"></p></td>
+                </tr>
+            </table>
+
+            <div>
+                <ul class="rectangle-list fontsize-20" style="width: 100%;margin-top: 20px">
+                    <li class="blue"> Long-term objectives</li>
+                </ul>
+            </div>
+            <div class="row fontsize-20">
+                <div class="col-50">
+                    <ul class="ul_fancy">
+                        <li class="blue"> Applications of neural simulators</li>
+                    </ul>
+                </div>
+                <div class="col-50">
+                    <ul class="ul_fancy">
+                        <li class="blue"> Controllers for robotics</li>
+                    </ul>
+                </div>
+
             </div>
 
-
+            <!--            <div class="r-stretch">-->
+            <!--                <div class="fig-container" data-file="figures/slide_41.html"-->
+            <!--                     data-style="width:100%; align:center; height:100%" data-preload-->
+            <!--                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>-->
+            <!--            </div>-->
         </section>
-
         <!--         -->
         <!--         -->
-        <!-- SLIDE 42-->
+        <!-- SLIDE 38-->
         <!--         -->
         <section data-transition="none">
             <p>Thank you for your attention !</p>
@@ -1818,25 +2144,35 @@
             <p class="fontsize-20" style="width: 100%;text-align: left">Collaborators:</p>
             <table class="fontsize-15" style="width:100%">
                 <tr>
-                    <td style="border:none"><img src="assets/slide42/madiha.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/christian.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/julie.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/fabien.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/natalia.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
+                    <td style="border:none"><img src="assets/slide38/madiha.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/christian.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/julie.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/fabien.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/natalia.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
                 </tr>
                 <tr>
                     <td style="border:none; text-align: center">Madiha Nadri</td>
-                    <td style="border:none; text-align: center">Christian Wolf </td>
+                    <td style="border:none; text-align: center">Christian Wolf</td>
                     <td style="border:none; text-align: center">Julie Digne</td>
                     <td style="border:none; text-align: center">Fabien Baradel</td>
                     <td style="border:none; text-align: center">Natalia Neverova</td>
                 </tr>
                 <tr>
-                    <td style="border:none"><img src="assets/slide42/greg.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/vincent.png" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/nicolas.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/aurelien.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/mattia.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
+                    <td style="border:none"><img src="assets/slide38/greg.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/vincent.png" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/nicolas.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/aurelien.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/mattia.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
                 </tr>
                 <tr>
                     <td style="border:none; text-align: center">Greg Mori</td>
@@ -1846,11 +2182,16 @@
                     <td style="border:none; text-align: center">Mattia Giaccagli</td>
                 </tr>
                 <tr>
-                    <td style="border:none"><img src="assets/slide42/samuele.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/quentin.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/laurent.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/mathieu.jpeg" width="150px" class="no_margin no_padding profile_pic"> </td>
-                    <td style="border:none"><img src="assets/slide42/daniele.png" width="150px" class="no_margin no_padding profile_pic"> </td>
+                    <td style="border:none"><img src="assets/slide38/samuele.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/quentin.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/laurent.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/mathieu.jpeg" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
+                    <td style="border:none"><img src="assets/slide38/daniele.png" width="150px"
+                                                 class="no_margin no_padding profile_pic"></td>
                 </tr>
                 <tr>
                     <td style="border:none; text-align: center">Samuele Zoboli</td>
@@ -1862,7 +2203,171 @@
             </table>
 
         </section>
+        <!--         -->
+        <!--         -->
+        <!-- SLIDE 39 -->
+        <!--         -->
+        <section data-transition="none">
+            <p class="bold no_margin">Publication List</p>
 
+            <ul class="rectangle-list fontsize-20" style="width: 100%">
+                <li class="blue"> Publications covered today:</li>
+            </ul>
+
+            <table class="fontsize-15" style="width: 100%;">
+                <tr>
+                    <td style="width: 80%;border:none" class="no_padding">
+                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                            <li class="blue">
+                                Deep KKL: Data-driven Output Prediction for Non-Linear Systems
+                                <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                    Vincent Andrieu ,
+                                    Madiha Nadri,
+                                    Christian Wolf</p>
+                            </li>
+                        </ul>
+
+                    </td>
+
+                    <td style="width: 20%; border:none;vertical-align: middle">
+                        <p class="light-text fontsize-15">CDC, 2021</p>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td style="width: 90%;border:none" class="no_padding">
+                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                            <li class="blue">
+                                EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers
+                                <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                    Aurélien Benetteau,
+                                    Madiha Nadri,
+                                    Julie Digne,
+                                    Nicolas Thome,
+                                    Christian Wolf</p>
+                            </li>
+                        </ul>
+
+                    </td>
+
+                    <td style="width: 20%; border:none;vertical-align: middle">
+                        <p class="light-text fontsize-15">ICLR, 2022 (poster)</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width: 80%;border:none" class="no_padding">
+                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                            <li class="blue">
+                                Filtered-CoPhy: Unsupervised Learning of Counterfactual Physics in Pixel Space
+                                <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                    Fabien Baradel,
+                                    Natalia Neverova,
+                                    Madiha Nadri,
+                                    Greg Mori,
+                                    Christian Wolf</p>
+                            </li>
+                        </ul>
+
+                    </td>
+
+                    <td style="width: 20%; border:none;vertical-align: middle">
+                        <p class="light-text fontsize-15">ICLR, 2021 (oral)</p>
+                    </td>
+                </tr>
+            </table>
+
+
+            <ul class="rectangle-list fontsize-20" style="width: 100%">
+                <li> Others publications:</li>
+            </ul>
+
+            <table class="fontsize-15" style="width: 100%;">
+                <tr>
+                    <td style="width: 90%;border:none" class="no_padding">
+                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                            <li class="">
+                                Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical Approach
+                                <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                    Quentin Possamaï,
+                                    Laurent Bako,
+                                    Madiha Nadri,
+                                    Christian Wolf</p>
+                            </li>
+                        </ul>
+
+                    </td>
+
+                    <td style="width: 20%; vertical-align: middle; border:none">
+                        <p class="light-text fontsize-15">CDC, 2022</p>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td style="width: 90%;border:none" class="no_padding">
+                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                            <li class="">
+                                Deep Learning-based Output Tracking via Regulation and Contraction Theory
+                                <p class="light-text fontsize-15"> Samuele Zoboli,
+                                    <b>Steeven Janny</b>,
+                                    Mattia Giaccagli,
+                                </p>
+                            </li>
+                        </ul>
+
+                    </td>
+
+                    <td style="width: 20%; vertical-align: middle; border:none">
+                        <p class="light-text fontsize-15">IFAC, 2022</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width: 90%;border:none" class="no_padding">
+                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                            <li class="">
+                                Deep Learning of a Communication Policy for an Event-Triggered Observer for Linear
+                                Systems
+                                <p class="light-text fontsize-15"> Mathieu Marchand,
+                                    Vincent Andrieu,
+                                    Sylvain Bertrand,
+                                    <b>Steeven Janny</b>,
+                                    Hélène Piet-Lahanier</p>
+                            </li>
+                        </ul>
+
+                    </td>
+
+                    <td style="width: 20%; vertical-align: middle; border:none">
+                        <p class="light-text fontsize-15">IFAC, 2022</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width: 90%;border:none" class="no_padding">
+                        <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                            <li class="">
+                                Space and time continuous physics simulation from partial observations
+                                <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                    Madiha Nadri,
+                                    Julie Digne,
+                                    Christian Wolf</p>
+                            </li>
+                        </ul>
+
+                    </td>
+
+                    <td style="width: 20%; vertical-align: middle; border:none">
+                        <p class="light-text fontsize-15">ICLR, 2024</p>
+                    </td>
+                </tr>
+
+            </table>
+
+
+        </section>
     </div>
 </div>
 <script src="dist/reveal.js"></script>
