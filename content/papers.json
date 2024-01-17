@@ -1,8 +1,25 @@
 {
+  "continuouspde": {
+    "title": "Space and time continuous physics simulation from partial observations",
+    "authors": "Steeven Janny, Madiha Nadri, Julie Digne, Christian Wolf",
+    "venue": "International Conference on Learning Representations (ICLR)",
+    "year": "2024",
+    "url_pdf": "https://openreview.net/pdf?id=4yaFQ7181M",
+    "url_code": "",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "https://continuous-pde.github.io/",
+    "url_source": "",
+    "url_video": "",
+    "tags": [
+      "highlights",
+      "physics"
+    ]
+  },
   "eagledataset": {
     "title": "EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers",
     "authors": "Steeven Janny, Aurélien Benetteau, Madiha Nadri, Julie Digne, Nicolas Thome, Christian Wolf",
-    "venue": "International Conference on Learning Representations (ICLR), Poster",
+    "venue": "International Conference on Learning Representations (ICLR)",
     "year": "2023",
     "url_pdf": "https://openreview.net/forum?id=mfIX4QpsARJ",
     "url_code": "https://github.com/eagle-dataset/EagleMeshTransformer",
