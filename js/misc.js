@@ -30,7 +30,7 @@ function create_buttons(data) {
         buttons += `<a class="btn btn-outline-primary btn-sm" href="${data["url_poster"]}" target="_blank" rel="noopener" style=" margin: 8px 8px 8px 0">Poster</a>`
     }
     if (data["url_project"] !== "") {
-        buttons += `<a class="btn btn-outline-primary btn-sm" href="${data["url_project"]}" target="_blank" rel="noopener" style=" margin: 8px 8px 8px 0">Project</a>`
+        buttons += `<a class="btn btn-outline-primary btn-sm" href="${data["url_project"]}" target="_blank" rel="noopener" style=" margin: 8px 8px 8px 0">Project Page</a>`
     }
     if (data["url_source"] !== "") {
         buttons += `<a class="btn btn-outline-primary btn-sm" href="${data["url_source"]}" target="_blank" rel="noopener" style=" margin: 8px 8px 8px 0">Source Document</a>`
