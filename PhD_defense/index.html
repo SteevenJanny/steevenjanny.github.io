@@ -2544,14 +2544,14 @@
         plugins: [RevealMarkdown, RevealHighlight, Reveald3, RevealMath.MathJax3],
         viewDistance: 2, // to lazy load iframes
         multiplex: {
-            secret: "17027179297816940686", // null so the clients do not have control of the master presentation
+            secret: "", // null so the clients do not have control of the master presentation
             id: '20da067867ea0afe', // id, obtained from socket.io server
             url: 'https://reveal-multiplex.glitch.me/' // Location of socket.io server
         },
         dependencies: [
             {src: 'https://reveal-multiplex.glitch.me/socket.io/socket.io.js', async: true},
-            // { src: 'https://reveal-multiplex.glitch.me/client.js', async: true }
-            {src: 'https://reveal-multiplex.glitch.me/master.js', async: true},
+            { src: 'https://reveal-multiplex.glitch.me/client.js', async: true }
+            // {src: 'https://reveal-multiplex.glitch.me/master.js', async: true},
         ],
     });
 </script>
