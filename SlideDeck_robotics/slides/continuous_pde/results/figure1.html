@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../css/custom.css">
+
+    <link rel="stylesheet" type="text/css" href="../../../css/fonts.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+    <script src="https://unpkg.com/three@v0.120.0/build/three.js"></script>
+</head>
+<body>
+<div style="width: 100%;text-align: center;font-family: sans-serif;height: 100%">
+        <p><u>Spatial Resolution</u>: <b>25%</b> <u>Temporal resolution</u>: <b>1/4</b></p>
+    </div>
+    <div id="img-container-25-4"></div>
+    <div style="text-align: center;">
+        Time: <input type="range" id="slider-navier-25-4" min="0" max="19" step="1" value="0" style="width: 50%">
+    </div>
+</div>
+</br>
+
+
+<div style="text-align: center;font-family: sans-serif">
+    <p><u>Spatial Resolution</u>: <b>5%</b> <u>Temporal resolution</u>: <b>1/1</b></p>
+</div>
+<div class="row" style="text-align: center;font-family: sans-serif">
+    <div class="col-20">
+        Ground Truth
+        <div id="gt_container_05" class="img-fluid"></div>
+    </div>
+    <div class="col-20">
+        Ours
+        <div id="ours_container_05"></div>
+    </div>
+    <div class="col-20">
+        DINo
+        <div id="dino_container_05"></div>
+    </div>
+    <div class="col-20">
+        MeshGraphNet
+        <div id="mgn_container_05"></div>
+    </div>
+    <div class="col-20">
+        Magnet
+        <div id="magnet_container_05"></div>
+    </div>
+</div>
+<div style="text-align: center">
+    Time: <input type="range" id="slider_shallow_05" min="0" max="19" step="1" value="0" style="width: 50%">
+</div>
+
+
+
+<script>
+    var slider_navier_25_4 = document.getElementById('slider-navier-25-4');
+    var img_container_25_4 = document.getElementById('img-container-25-4');
+
+    var PathImages_navier_25_4 = [];
+    for (var i = 0; i < 20; i++) {
+        PathImages_navier_25_4.push("assets/navier_25_4/" + i + '.png');
+    }
+
+    var Images_navier_25_4 = [];
+    for (var i = 0; i < PathImages_navier_25_4.length; i++) {
+        img = document.createElement('img');
+        img.src = PathImages_navier_25_4[i];
+        img.style.width = 'auto';
+        img.style.height = '150px';
+        img.hidden = true;
+        img_container_25_4.appendChild(img);
+        Images_navier_25_4.push(img);
+    }
+    ;
+
+    Images_navier_25_4[0].hidden = false;
+
+    function updateImage_navier_25_4() {
+        var imageIndex = parseInt(slider_navier_25_4.value);
+        for (var i = 0; i < Images_navier_25_4.length; i++) {
+            Images_navier_25_4[i].hidden = true;
+        }
+        Images_navier_25_4[imageIndex].hidden = false;
+    }
+
+    slider_navier_25_4.addEventListener('input', updateImage_navier_25_4);
+
+
+
+    // ---------------------------------
+    // SPHEREs
+    function toRadians(angle) {
+        return angle * (Math.PI / 180);
+    }
+
+    var spheres = [];
+
+
+    function updateLoadingAnimation(itemsLoaded, itemsTotal) {
+        const progress = itemsLoaded / itemsTotal;
+        loadingMesh.scale.set(progress, progress, progress);
+    }
+
+
+    function loadColors(fileURL, container, slider_name) {
+        // Set up the scene
+        const width = container.clientWidth;
+        const height = container.clientWidth;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(8, width / height, 0.5, 1000);
+        const renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer.setSize(width, height);
+        renderer.setClearColor(0xffffff); // Set the background color to white
+        container.appendChild(renderer.domElement);
+
+        const size = 2;
+        const divisions = 20;
+
+        const gridHelper = new THREE.GridHelper(size, divisions);
+        gridHelper.position.y = -1;
+        scene.add(gridHelper);
+
+        camera.position.z = 20;
+        camera.position.y = 10;
+        camera.position.x = 10;
+        camera.lookAt(0, 0, 0);
+
+        var sphereGeometry = new THREE.SphereGeometry(10, 128, 64);
+        sphereGeometry.mergeVertices();
+
+        var loader = new THREE.FileLoader();
+
+        loader.load(fileURL, (data) => {
+            const colorsData = JSON.parse(data);
+            var colors = colorsData.face_colors[0];
+            var position = colorsData.vertices;
+            for (let i = 0; i < sphereGeometry.faces.length; i++) {
+                var l = sphereGeometry.faces[i].a;
+                var m = sphereGeometry.faces[i].b;
+                var n = sphereGeometry.faces[i].c;
+
+                sphereGeometry.faces[i].vertexColors[0] = new THREE.Color(colors[l][0], colors[l][1], colors[l][2]);
+                sphereGeometry.faces[i].vertexColors[1] = new THREE.Color(colors[m][0], colors[m][1], colors[m][2]);
+                sphereGeometry.faces[i].vertexColors[2] = new THREE.Color(colors[n][0], colors[n][1], colors[n][2]);
+
+                sphereGeometry.vertices[l].x = position[l][0];
+                sphereGeometry.vertices[l].y = position[l][1];
+                sphereGeometry.vertices[l].z = position[l][2];
+
+                sphereGeometry.vertices[m].x = position[m][0];
+                sphereGeometry.vertices[m].y = position[m][1];
+                sphereGeometry.vertices[m].z = position[m][2];
+
+                sphereGeometry.vertices[n].x = position[n][0];
+                sphereGeometry.vertices[n].y = position[n][1];
+                sphereGeometry.vertices[n].z = position[n][2];
+
+            }
+            const material = new THREE.MeshBasicMaterial({vertexColors: THREE.VertexColors});
+            const sphere = new THREE.Mesh(sphereGeometry, material);
+            scene.add(sphere);
+            spheres.push(sphere);
+
+
+            let isDragging = false;
+            let previousMousePosition = {
+                x: 0,
+                y: 0
+            };
+
+            renderer.domElement.addEventListener('mousedown', (event) => {
+                isDragging = true;
+                previousMousePosition = {
+                    x: event.offsetX,
+                    y: event.offsetY,
+                };
+            });
+
+            renderer.domElement.addEventListener('mouseup', (event) => {
+                isDragging = false;
+            });
+
+            renderer.domElement.addEventListener('mouseout', (event) => {
+                isDragging = false;
+            });
+
+            renderer.domElement.addEventListener('mousemove', (event) => {
+                if (!isDragging) return;
+                const deltaMove = {
+                    x: event.offsetX - previousMousePosition.x,
+                    y: event.offsetY - previousMousePosition.y
+                };
+
+                const deltaRotationQuaternion = new THREE.Quaternion()
+                    .setFromEuler(new THREE.Euler(
+                        toRadians(deltaMove.y * 1),
+                        toRadians(deltaMove.x * 1),
+                        0,
+                        'XYZ'
+                    ));
+                for (let i = 0; i < spheres.length; i++) {
+                    spheres[i].quaternion.multiplyQuaternions(deltaRotationQuaternion, spheres[i].quaternion);
+                }
+                previousMousePosition = {
+                    x: event.offsetX,
+                    y: event.offsetY
+                };
+            });
+
+
+            var slider = document.getElementById(slider_name);
+
+            function update() {
+                var imageIndex = parseInt(slider.value);
+                var colors = colorsData.face_colors[imageIndex];
+                for (let i = 0; i < sphereGeometry.faces.length; i++) {
+                    var l = sphereGeometry.faces[i].a;
+                    var m = sphereGeometry.faces[i].b;
+                    var n = sphereGeometry.faces[i].c;
+                    sphereGeometry.faces[i].vertexColors[0] = new THREE.Color(colors[l][0], colors[l][1], colors[l][2]);
+                    sphereGeometry.faces[i].vertexColors[1] = new THREE.Color(colors[m][0], colors[m][1], colors[m][2]);
+                    sphereGeometry.faces[i].vertexColors[2] = new THREE.Color(colors[n][0], colors[n][1], colors[n][2]);
+                }
+                sphereGeometry.elementsNeedUpdate = true;
+            }
+
+            slider.addEventListener('input', update);
+
+            function animate() {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                // update display width and height
+                var width = container.clientWidth;
+                var height = container.clientWidth;
+                // update camera aspect
+                camera.aspect = width / height
+                camera.updateProjectionMatrix()
+                // update renderer
+                renderer.setSize(width, height)
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+                renderer.render(scene, camera)
+            })
+
+        });
+    }
+
+    var ground_truth_container = document.getElementById('gt_container_05');
+    loadColors('assets/shallow_05_1/groundtruth.json', ground_truth_container, "slider_shallow_05");
+
+    var ours_container = document.getElementById('ours_container_05');
+    loadColors('assets/shallow_05_1/gns.json', ours_container, "slider_shallow_05");
+
+    var dino_container = document.getElementById('dino_container_05');
+    loadColors('assets/shallow_05_1/dino.json', dino_container, "slider_shallow_05");
+
+    var mgn_container = document.getElementById('mgn_container_05');
+    loadColors('assets/shallow_05_1/mgn.json', mgn_container, "slider_shallow_05");
+
+    var magnet_container = document.getElementById('magnet_container_05');
+    loadColors('assets/shallow_05_1/magnet.json', magnet_container, "slider_shallow_05");
+
+</script>
+</body>
+</html>

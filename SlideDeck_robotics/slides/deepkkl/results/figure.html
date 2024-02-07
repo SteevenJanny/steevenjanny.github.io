@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../css/custom.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+<script>
+
+    var graph_margin = {
+        top: 40,
+        right: 30,
+        bottom: 40,
+        left: 30,
+        sep: 75
+    };
+
+    // ------------------------------------------------- //
+    // 3D Graph of Linear Dynamics
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var g_vanderpol = graph.append("g");
+    var g_lorenz = graph.append("g");
+    var g_meanfield = graph.append("g");
+    var g_lotkavolterra = graph.append("g");
+
+    var xScale_vdp = d3.scaleLinear()
+        .domain([0, 100])
+        .range([graph_margin.left, width / 2 - graph_margin.right]);
+    var yScale_vdp = d3.scaleLinear()
+        .domain([0.5, -1])
+        .range([graph_margin.top, height / 2 - graph_margin.sep / 2]);
+
+    var xScale_lorenz = d3.scaleLinear()
+        .domain([0, 100])
+        .range([graph_margin.left, width / 2 - graph_margin.right]);
+    var yScale_lorenz = d3.scaleLinear()
+        .domain([0.8, 0])
+        .range([height / 2 + graph_margin.sep / 2, height - graph_margin.bottom]);
+
+    var xScale_meanfield = d3.scaleLinear()
+        .domain([0, 100])
+        .range([width / 2 + graph_margin.left, width - graph_margin.right]);
+    var yScale_meanfield = d3.scaleLinear()
+        .domain([1, -1])
+        .range([graph_margin.top, height / 2 - graph_margin.sep / 2]);
+
+    var xScale_lotkavolterra = d3.scaleLinear()
+        .domain([0, 100])
+        .range([width / 2 + graph_margin.left, width - graph_margin.right]);
+    var yScale_lotkavolterra = d3.scaleLinear()
+        .domain([1.5, -1])
+        .range([height / 2 + graph_margin.sep / 2, height - graph_margin.bottom]);
+
+    var xAxis_vdp = d3.axisBottom(xScale_vdp);
+    var yAxis_vdp = d3.axisLeft(yScale_vdp).ticks(3);
+    var xAxis_lorenz = d3.axisBottom(xScale_lorenz);
+    var yAxis_lorenz = d3.axisLeft(yScale_lorenz).ticks(5);
+    var xAxis_meanfield = d3.axisBottom(xScale_meanfield);
+    var yAxis_meanfield = d3.axisLeft(yScale_meanfield).ticks(5);
+    var xAxis_lotkavolterra = d3.axisBottom(xScale_lotkavolterra);
+    var yAxis_lotkavolterra = d3.axisLeft(yScale_lotkavolterra).ticks(3);
+
+    g_vanderpol.append("text")
+        .attr("x", (width / 4))
+        .attr("y", (graph_margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .text("Van der Pol");
+
+    g_lorenz.append("text")
+        .attr("x", (3*width / 4))
+        .attr("y", (graph_margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .text("Lorenz");
+
+    g_meanfield.append("text")
+        .attr("x", (width / 4))
+        .attr("y", (height / 2 + graph_margin.sep / 2 - 5))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .text("Mean Field");
+
+    g_lotkavolterra.append("text")
+        .attr("x", (3*width / 4))
+        .attr("y", (height / 2 + graph_margin.sep / 2 - 5))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .text("Lotka-Volterra");
+
+    g_vanderpol.append("g")
+        .attr("transform", "translate(0," + (yScale_vdp(-1)) + ")")
+        .call(xAxis_vdp);
+    g_vanderpol.append("g")
+        .attr("transform", "translate(" + (xScale_vdp(0)) + ",0)")
+        .call(yAxis_vdp);
+
+    g_lorenz.append("g")
+        .attr("transform", "translate(0," + (yScale_lorenz(0)) + ")")
+        .call(xAxis_lorenz);
+    g_lorenz.append("g")
+        .attr("transform", "translate(" + (xScale_lorenz(0)) + ",0)")
+        .call(yAxis_lorenz);
+
+    g_meanfield.append("g")
+        .attr("transform", "translate(0," + (yScale_meanfield(-1)) + ")")
+        .call(xAxis_meanfield);
+    g_meanfield.append("g")
+        .attr("transform", "translate(" + (xScale_meanfield(0)) + ",0)")
+        .call(yAxis_meanfield);
+
+    g_lotkavolterra.append("g")
+        .attr("transform", "translate(0," + (yScale_lotkavolterra(-1)) + ")")
+        .call(xAxis_lotkavolterra);
+    g_lotkavolterra.append("g")
+        .attr("transform", "translate(" + (xScale_lotkavolterra(0)) + ",0)")
+        .call(yAxis_lotkavolterra);
+
+    // Grid van der Pol
+    g_vanderpol.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + (yScale_vdp(-1)) + ")")
+        .attr("opacity", 0.2)
+        .call(xAxis_vdp
+            .tickSize(-height / 2 + graph_margin.bottom/2 + graph_margin.sep)
+            .tickFormat("")
+        )
+    g_vanderpol.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(" + (xScale_vdp(0)) + ",0)")
+        .attr("opacity", 0.2)
+        .call(yAxis_vdp
+            .tickSize(-width / 2 + graph_margin.left + graph_margin.right)
+            .tickFormat("")
+        )
+    g_vanderpol.append("rect")
+        .attr("x", xScale_vdp(0))
+        .attr("y", yScale_vdp(0.5))
+        .attr("width", xScale_vdp(5) - xScale_vdp(0))
+        .attr("height", yScale_vdp(-1) - yScale_vdp(0.5))
+        .attr("fill", "rgba(208, 206, 206 ,1)");
+
+    // Grid Lorenz
+    g_lorenz.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + (yScale_lorenz(0)) + ")")
+        .attr("opacity", 0.2)
+        .call(xAxis_lorenz
+            .tickSize(-height / 2 + graph_margin.bottom/2 + graph_margin.sep)
+            .tickFormat("")
+        )
+    g_lorenz.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(" + (xScale_lorenz(0)) + ",0)")
+        .attr("opacity", 0.2)
+        .call(yAxis_lorenz
+            .tickSize(-width / 2 + graph_margin.left + graph_margin.right)
+            .tickFormat("")
+        )
+    g_lorenz.append("rect")
+        .attr("x", xScale_lorenz(0))
+        .attr("y", yScale_lorenz(0.8))
+        .attr("width", xScale_lorenz(5) - xScale_lorenz(0))
+        .attr("height", yScale_lorenz(0) - yScale_lorenz(0.8))
+        .attr("fill", "rgba(208, 206, 206 ,1)");
+
+    // Grid Mean Field
+    g_meanfield.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + (yScale_meanfield(-1)) + ")")
+        .attr("opacity", 0.2)
+        .call(xAxis_meanfield
+            .tickSize(-height / 2 + graph_margin.bottom/2 + graph_margin.sep)
+            .tickFormat("")
+        )
+    g_meanfield.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(" + (xScale_meanfield(0)) + ",0)")
+        .attr("opacity", 0.2)
+        .call(yAxis_meanfield
+            .tickSize(-width / 2 + graph_margin.left + graph_margin.right)
+            .tickFormat("")
+        )
+    g_meanfield.append("rect")
+        .attr("x", xScale_meanfield(0))
+        .attr("y", yScale_meanfield(1))
+        .attr("width", xScale_meanfield(5) - xScale_meanfield(0))
+        .attr("height", yScale_meanfield(-1) - yScale_meanfield(1))
+        .attr("fill", "rgba(208, 206, 206 ,1)");
+
+    // Grid Lotka-Volterra
+    g_lotkavolterra.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + (yScale_lotkavolterra(-1)) + ")")
+        .attr("opacity", 0.2)
+        .call(xAxis_lotkavolterra
+            .tickSize(-height / 2 + graph_margin.bottom/2 + graph_margin.sep)
+            .tickFormat("")
+        )
+    g_lotkavolterra.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(" + (xScale_lotkavolterra(0)) + ",0)")
+        .attr("opacity", 0.2)
+        .call(yAxis_lotkavolterra
+            .tickSize(-width / 2 + graph_margin.left + graph_margin.right)
+            .tickFormat("")
+        )
+    g_lotkavolterra.append("rect")
+        .attr("x", xScale_lotkavolterra(0))
+        .attr("y", yScale_lotkavolterra(1.5))
+        .attr("width", xScale_lotkavolterra(5) - xScale_lotkavolterra(0))
+        .attr("height", yScale_lotkavolterra(-1) - yScale_lotkavolterra(1.5))
+        .attr("fill", "rgba(208, 206, 206 ,1)");
+
+
+
+
+    var vdp = d3.line()
+        .x(function (d, i) {
+            return xScale_vdp(i);
+        })
+        .y(function (d) {
+            return yScale_vdp(d);
+        });
+
+    var lorenz = d3.line()
+        .x(function (d, i) {
+            return xScale_lorenz(i);
+        })
+        .y(function (d) {
+            return yScale_lorenz(d);
+        });
+
+    var meanfield = d3.line()
+        .x(function (d, i) {
+            return xScale_meanfield(i);
+        })
+        .y(function (d) {
+            return yScale_meanfield(d);
+        });
+
+    var lotkavolterra = d3.line()
+        .x(function (d, i) {
+            return xScale_lotkavolterra(i);
+        })
+        .y(function (d) {
+            return yScale_lotkavolterra(d);
+        });
+
+    var data_vdp = {
+        kkl: [],
+        rnn: [],
+        gru: []
+    }
+
+    var data_lorenz = {
+        kkl: [],
+        rnn: [],
+        gru: []
+    }
+
+    var data_meanfield = {
+        kkl: [],
+        rnn: [],
+        gru: []
+    }
+
+    var data_lotkavolterra = {
+        kkl: [],
+        rnn: [],
+        gru: []
+    }
+
+    // load data from json file
+    d3.json("assets/results.json").then(function (data) {
+
+        g_vanderpol.append("path")
+            .datum(data.vanderpol.obs)
+            .attr("fill", "none")
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .attr("d", vdp);
+
+        g_lorenz.append("path")
+            .datum(data.lorenz.obs)
+            .attr("fill", "none")
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .attr("d", lorenz);
+
+        g_meanfield.append("path")
+            .datum(data.meanfield.obs)
+            .attr("fill", "none")
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .attr("d", meanfield);
+
+        g_lotkavolterra.append("path")
+            .datum(data.lotkavolterra.obs)
+            .attr("fill", "none")
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .attr("d", lotkavolterra);
+
+        data_vdp.kkl = g_vanderpol.append("path")
+            .datum(data.vanderpol.kkl)
+            .attr("fill", "none")
+            .attr("stroke", "#598938")
+            .attr("stroke-width", 4)
+            .attr("d", vdp);
+
+        data_vdp.rnn = g_vanderpol.append("path")
+            .datum(data.vanderpol.rnn)
+            .attr("fill", "none")
+            .attr("stroke", "#277C9D")
+            .attr("stroke-width", 2)
+            .attr("d", vdp);
+
+        data_vdp.gru = g_vanderpol.append("path")
+            .datum(data.vanderpol.gru)
+            .attr("fill", "none")
+            .attr("stroke", "#E77475")
+            .attr("stroke-width", 2)
+            .attr("d", vdp);
+
+        data_lorenz.kkl = g_lorenz.append("path")
+            .datum(data.lorenz.kkl)
+            .attr("fill", "none")
+            .attr("stroke", "#598938")
+            .attr("stroke-width", 4)
+            .attr("d", lorenz);
+
+        data_lorenz.rnn = g_lorenz.append("path")
+            .datum(data.lorenz.rnn)
+            .attr("fill", "none")
+            .attr("stroke", "#277C9D")
+            .attr("stroke-width", 2)
+            .attr("d", lorenz);
+
+        data_lorenz.gru = g_lorenz.append("path")
+            .datum(data.lorenz.gru)
+            .attr("fill", "none")
+            .attr("stroke", "#E77475")
+            .attr("stroke-width", 2)
+            .attr("d", lorenz);
+
+        data_meanfield.kkl = g_meanfield.append("path")
+            .datum(data.meanfield.kkl)
+            .attr("fill", "none")
+            .attr("stroke", "#598938")
+            .attr("stroke-width", 4)
+            .attr("d", meanfield);
+
+        data_meanfield.rnn = g_meanfield.append("path")
+            .datum(data.meanfield.rnn)
+            .attr("fill", "none")
+            .attr("stroke", "#277C9D")
+            .attr("stroke-width", 2)
+            .attr("d", meanfield);
+
+        data_meanfield.gru = g_meanfield.append("path")
+            .datum(data.meanfield.gru)
+            .attr("fill", "none")
+            .attr("stroke", "#E77475")
+            .attr("stroke-width", 2)
+            .attr("d", meanfield);
+
+        data_lotkavolterra.kkl = g_lotkavolterra.append("path")
+            .datum(data.lotkavolterra.kkl)
+            .attr("fill", "none")
+            .attr("stroke", "#598938")
+            .attr("stroke-width", 4)
+            .attr("d", lotkavolterra);
+
+        data_lotkavolterra.rnn = g_lotkavolterra.append("path")
+            .datum(data.lotkavolterra.rnn)
+            .attr("fill", "none")
+            .attr("stroke", "#277C9D")
+            .attr("stroke-width", 2)
+            .attr("d", lotkavolterra);
+
+        data_lotkavolterra.gru = g_lotkavolterra.append("path")
+            .datum(data.lotkavolterra.gru)
+            .attr("fill", "none")
+            .attr("stroke", "#E77475")
+            .attr("stroke-width", 2)
+            .attr("d", lotkavolterra);
+
+        toggle_all_off()
+    });
+
+    function toggle_kkl_on() {
+        data_vdp.kkl.transition().duration(100).attr("opacity", 1)
+        data_lorenz.kkl.transition().duration(100).attr("opacity", 1)
+        data_meanfield.kkl.transition().duration(100).attr("opacity", 1)
+        data_lotkavolterra.kkl.transition().duration(100).attr("opacity", 1)
+    }
+
+    function toggle_kkl_off() {
+        data_vdp.kkl.transition().duration(100).attr("opacity", 0)
+        data_lorenz.kkl.transition().duration(100).attr("opacity", 0)
+        data_meanfield.kkl.transition().duration(100).attr("opacity", 0)
+        data_lotkavolterra.kkl.transition().duration(100).attr("opacity", 0)
+    }
+
+    function toggle_rnn_on() {
+        data_vdp.rnn.transition().duration(100).attr("opacity", 1)
+        data_lorenz.rnn.transition().duration(100).attr("opacity", 1)
+        data_meanfield.rnn.transition().duration(100).attr("opacity", 1)
+        data_lotkavolterra.rnn.transition().duration(100).attr("opacity", 1)
+    }
+
+    function toggle_rnn_off() {
+        data_vdp.rnn.transition().duration(100).attr("opacity", 0)
+        data_lorenz.rnn.transition().duration(100).attr("opacity", 0)
+        data_meanfield.rnn.transition().duration(100).attr("opacity", 0)
+        data_lotkavolterra.rnn.transition().duration(100).attr("opacity", 0)
+    }
+
+    function toggle_gru_on() {
+        data_vdp.gru.transition().duration(100).attr("opacity", 1)
+        data_lorenz.gru.transition().duration(100).attr("opacity", 1)
+        data_meanfield.gru.transition().duration(100).attr("opacity", 1)
+        data_lotkavolterra.gru.transition().duration(100).attr("opacity", 1)
+    }
+
+    function toggle_gru_off() {
+        data_vdp.gru.transition().duration(100).attr("opacity", 0)
+        data_lorenz.gru.transition().duration(100).attr("opacity", 0)
+        data_meanfield.gru.transition().duration(100).attr("opacity", 0)
+        data_lotkavolterra.gru.transition().duration(100).attr("opacity", 0)
+    }
+
+    function toggle_all_on() {
+        toggle_kkl_on()
+        toggle_rnn_on()
+        toggle_gru_on()
+    }
+
+    function toggle_all_off() {
+        toggle_kkl_off()
+        toggle_rnn_off()
+        toggle_gru_off()
+    }
+    var _transitions = [
+        {
+            transitionForward: () => toggle_rnn_on(),
+            transitionBackward: () => toggle_rnn_off(),
+            index: 0
+        },
+        {
+            transitionForward: () => toggle_gru_on(),
+            transitionBackward: () => toggle_gru_off(),
+            index: 1
+        },
+        {
+            transitionForward: () => toggle_all_on(),
+            transitionBackward: () => toggle_kkl_off(),
+            index: 2
+        }
+    ]
+
+</script>
+</body>
+</html>

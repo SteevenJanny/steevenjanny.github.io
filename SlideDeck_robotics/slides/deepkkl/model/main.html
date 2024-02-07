@@ -1,0 +1,131 @@
+<section data-menu-title="Model overview">
+
+    <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory meets deep learning</p>
+    <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">KKL Observer</p>
+
+    <div class="fontsize-20 rounded_box green">
+        $$\begin{array}{cl}
+        \dot{\mathbf{z}} &= A \mathbf{z} + b\psi(\mathbf{z}) \\
+        y &= \psi(\mathbf{z})
+        \end{array}$$
+    </div>
+    <div style="text-align: left; width: 100%">
+        <ul class="ul_fancy" style="padding-bottom: 0;padding-top:0;margin-left: 0">
+            <li class="blue bold fontsize-25">Parameters to identify:</li>
+        </ul>
+    </div>
+    <div class="fontsize-25 row fragment" style="margin-top: 5px">
+        <div class="col-10"></div>
+        <div class="col-30">
+            <div class="theorem_title" style="background-color: #598938">
+                $$ A, b $$
+            </div>
+            <div class="theorem_content" style="text-align: center;padding:2px">
+                <p class="no_margin">$A$ Hurwitz</p>
+                <p class="no_margin">$A,b$ controllable</p>
+            </div>
+        </div>
+        <div class="col-10"></div>
+        <div class="col-10"></div>
+        <div class="col-30">
+            <div class="theorem_title" style="background-color: #598938">
+                $$ \psi $$
+            </div>
+            <div class="theorem_content" style="text-align: center;padding:2px">
+                <p class="no_margin">Lipschitz</p>
+                <p class="no_margin" style="opacity: 0"> aaa</p>
+            </div>
+        </div>
+        <div class="col-10"></div>
+    </div>
+
+
+    <div class="fragment" style="margin-top: 20px;">
+        <div class="theorem_title">
+            <b>Theorem:</b> [Andrieu et al., 2006]
+        </div>
+        <div class="theorem_content">
+            <p style="margin: 0px">
+                With $\dim \mathbf{z} = 2\dim \mathbf{s}+2$, there exists a Hurwitz matrix
+                $A$
+                and a
+                function $\psi$ such that the KKL observer is an <b>output observer</b>.
+            </p>
+        </div>
+    </div>
+
+    <table class="fragment" style="width: 100%;vertical-align: middle;margin-top: 0;border-width: 0">
+        <tr>
+            <td style="width:40%;border: none;padding:0">
+                <ul class="ul_fancy" style="padding-bottom: 0;margin-left: 0">
+                    <li class="red bold fontsize-25">Analytic solutions:</li>
+                </ul>
+            </td>
+            <td class="fontsize-25" style="text-align: center;border:none">
+                Good luck.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border: none;padding:0">
+                <p class="citation">- Bernard et al.(2022). KKL
+                    observer design for sensorless induction motors. Conference on Decision and
+                    Control.</p>
+
+                <p class="citation">- Brivadis et al (2019). Luenberger
+                    observers for discrete-time nonlinear systems. Conference on Decision and Control.</p>
+            </td>
+        </tr>
+    </table>
+    <table class="fragment" style="width: 100%;vertical-align: middle;margin-top: 10px;border-width: 0">
+        <tr>
+            <td style="width:40%;border: none;padding:0">
+                <ul class="ul_fancy" style="padding-bottom: 0;margin-left: 0;padding-top:0">
+                    <li class="green bold fontsize-25">Deep Learning</li>
+                </ul>
+            </td>
+            <td class="fontsize-25" style="text-align: center">
+                Model $\psi$ with an MLP,<br/>
+                Learn $A,b$ via gradient descent.
+            </td>
+        </tr>
+    </table>
+    <div class="r-stretch"></div>
+</section>
+<section>
+    <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory meets deep learning</p>
+    <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">Model overview</p>
+
+    <img class="fragment semi-fade-out" data-fragment-index="1" src="slides/deepkkl/model/assets/optim.svg" width="80%"
+         style="margin:auto">
+
+    <div class="fragment" data-fragment-index="1">
+        <div style="height:150px; width:70%;margin:auto">
+            <div class="fig-container" data-file="slides/deepkkl/model/figure1.html"
+                 data-style="width:100%; align:center; height:100%"
+                 style="height: 100%" data-preload
+                 data-scroll="no" data-overflow-shown=true></div>
+        </div>
+
+        <div style="height:125px; width:100%">
+            <div class="fig-container" data-file="slides/deepkkl/model/figure2.html"
+                 data-style="width:100%; align:center; height:100%"
+                 style="height: 100%"
+                 data-scroll="no" data-overflow-shown=true></div>
+        </div>
+
+        <div style="margin-top: 0px;">
+            <div class="theorem_title">
+                <b>Proposition:</b> [Janny et al., 2021]
+            </div>
+            <div class="theorem_content">
+                <p style="margin: 0px">
+                    Assume that $\psi$ is lipschitz continuous, then for all trajectory $y$ known in the
+                    time
+                    interval $[0, \ell]$, the prediction $\hat{y}$ at the prediction horizon $p>0$ is given
+                    as:
+                    $$ | \hat{y}(\ell+p) - y(\ell+p) | \leq k_1 e^{-\lambda\ell + k_2p} |z_0| $$
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

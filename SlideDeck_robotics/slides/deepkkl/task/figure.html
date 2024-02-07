@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../css/custom.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+
+
+<script>
+
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    var show_observation = false;
+    var reset_particles = false;
+
+    var graph_margin = {
+        top: 30,
+        right: 30,
+        bottom: 45,
+        left: 30
+    };
+
+    var graph_lorenz = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var dt = 0.005;
+    var T = 200;
+    var plot_delay = 20;
+
+    function f_lorenz(state) {
+        var x = state.x;
+        var y = state.y;
+        var z = state.z;
+        var dx = 10 * (y - x);
+        var dy = x * (28 - z) - y;
+        var dz = x * y - 8 / 3 * z;
+
+        return {
+            x: x + dt * dx,
+            y: y + dt * dy,
+            z: z + dt * dz
+        };
+    }
+
+    var a11 = -2;
+    var a12 = 1.215;
+    var a21 = 0.11;
+    var a22 = -2;
+
+    function f_linear(state) {
+        var x = state.x;
+        var y = state.y;
+        var z = state.z;
+        var dx = a11 * x + a12 * y;
+        var dy = a21 * x + a22 * y;
+        return {
+            x: x + dt * dx,
+            y: y + dt * dy,
+            z: z,
+        };
+    }
+
+    var dynamics = f_lorenz;
+
+    var xScale = d3.scaleLinear()
+        .domain([-30, 30])
+        .range([graph_margin.left, width / 2 - graph_margin.right]);
+    var yScale = d3.scaleLinear()
+        .domain([40, -40])
+        .range([graph_margin.top, height - graph_margin.bottom]);
+
+    var xScale_obs = d3.scaleLinear()
+        .domain([0, T])
+        .range([width / 2 + graph_margin.left, width - graph_margin.right]);
+    var yScale_obs = d3.scaleLinear()
+        .domain([0, 50])
+        .range([height - graph_margin.bottom, graph_margin.top]);
+
+    // Plot the axis
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+
+    var xAxis_obs = d3.axisBottom(xScale_obs);
+    var yAxis_obs = d3.axisLeft(yScale_obs);
+
+    // Render text label using MathJax
+    graph_lorenz.append("foreignObject")
+        .attr("x", graph_margin.left)
+        .attr("y", yScale(0) - 30)
+        .attr("width", width / 2 - graph_margin.right - graph_margin.left)
+        .attr("height", 50)
+        .append("xhtml:div")
+        .style("font-size", "20px")
+        .style("text-align", "right")
+        .html("pos.");
+
+    graph_lorenz.append("foreignObject")
+        .attr("x", width / 4)
+        .attr("y", graph_margin.top)
+        .attr("width", 100)
+        .attr("height", height - graph_margin.top - graph_margin.bottom)
+        .append("xhtml:div")
+        .style("font-size", "20px")
+        .style("text-align", "center")
+        .html("vel.");
+
+    graph_lorenz.append("foreignObject")
+        .attr("x", (width / 2))
+        .attr("y", height - 30)
+        .attr("width", width / 2)
+        .attr("height", 30)
+        .append("xhtml:div")
+        .style("font-size", "20px")
+        .style("text-align", "center")
+        .html("Time");
+
+    // Rotate this label by 90 degrees
+    graph_lorenz.append("foreignObject")
+        .attr("x", width / 2)
+        .attr("y", 0)
+        .attr("width", width / 2)
+        .attr("height", 50)
+        .append("xhtml:div")
+        .style("text-align", "center")
+        .style("font-size", "20px")
+        .html("<i>Odometry $y = {\\color{#277C9D} h}(\\mathbf{s})$</i>");
+
+    graph_lorenz.append("foreignObject")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", width / 2)
+        .attr("height", 50)
+        .append("xhtml:div")
+        .style("text-align", "center")
+        .style("font-size", "20px")
+        .html("<i>Dynamics of the robot $\\dot{\\mathbf{s}} = {\\color{#277C9D} f}(\\mathbf{s})$</i>");
+
+
+    graph_lorenz.append("g")
+        .attr("transform", "translate(0," + yScale(0) + ")")
+        .call(xAxis);
+    graph_lorenz.append("g")
+        .attr("transform", "translate(" + xScale(0) + ",0)")
+        .call(yAxis);
+
+    graph_lorenz.append("g")
+        .attr("transform", "translate(0," + yScale_obs(0) + ")")
+        .call(xAxis_obs);
+    graph_lorenz.append("g")
+        .attr("transform", "translate(" + xScale_obs(0) + ",0)")
+        .call(yAxis_obs);
+
+    var particle_set = graph_lorenz.append("g")
+        .attr("id", "particle_set");
+
+    var particles = []
+    var observations = []
+    var noise = []
+    var interval;
+    var particle_line;
+
+    var rand = d3.randomNormal(0, 0.5)
+
+    var line = d3.line()
+        .x(function (d, i) {
+            return xScale_obs(i);
+        })
+        .y(function (d, i) {
+            return yScale_obs(d + noise[i]);
+        })
+        .curve(d3.curveMonotoneX);
+
+    var path = graph_lorenz.append("path")
+        .datum(observations)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 1.5)
+        .attr("d", line);
+
+    function update_particles() {
+        for (var i = 0; i < particles.length; i++) {
+            var particle = particles[i]
+            var new_state = dynamics(particle)
+            particle.x = new_state.x
+            particle.y = new_state.y
+            particle.z = new_state.z
+
+            if (reset_particles) {
+                particle.t += 1
+
+                if (particle.t > T) {
+                    particle.x = 20 * (2 * Math.random() - 1);
+                    particle.y = 20 * (2 * Math.random() - 1);
+                    particle.t = 0;
+                    if (i == 0) {
+                        for (var k = 0; i < observations.length; k++) {
+                            observations.pop()
+                            noise.pop()
+                        }
+                    }
+                }
+            }
+            particle.path
+                .attr("cx", xScale(particle.x))
+                .attr("cy", yScale(particle.y))
+                .attr("opacity", 1)
+                .attr("r", 4)
+        }
+        if (show_observation) {
+            for (var i = 1; i < particles.length; i++) {
+                particles[i].path.attr("opacity", 0.2)
+            }
+            particles[0].path.attr("opacity", 1)
+            particles[0].path.attr("r", 8)
+
+            particle_line
+                .attr("x1", xScale(particles[0].x))
+                .attr("y1", yScale(particles[0].y))
+                .attr("x2", xScale(0))
+                .attr("y2", yScale(0))
+                .style("opacity", 1)
+            observations.push(Math.sqrt(Math.pow(particles[0].x, 2) + Math.pow(particles[0].y, 2)))
+            noise.push(rand())
+            path.attr("d", line).style("opacity", 1)
+            if (observations.length > T) {
+                observations.shift()
+                noise.shift()
+            }
+        } else {
+            for (var i = 0; i < observations.length; i++) {
+                observations.pop()
+                noise.pop()
+            }
+            particle_line.style("opacity", 0);
+            path.attr("d", line).style("opacity", 0)
+        }
+
+    }
+
+    function draw_particles(N) {
+        for (var i = 0; i < N; i++) {
+            var particle = {
+                y: 20 * (2 * Math.random() - 1) * 0.001,
+                x: 20 * (2 * Math.random() - 1) * 0.001,
+                z: 20 * (2 * Math.random() - 1) * 0.001,
+                t: Math.random() * T,
+            }
+            particle["path"] = particle_set.append("circle")
+                .attr("cx", xScale(particle.x))
+                .attr("cy", yScale(particle.y))
+                .attr("r", 4)
+                .attr("stroke", "black")
+                .attr("stroke-width", 0.5)
+                .attr("fill", d3.interpolateRainbow(Math.random()))
+                .attr("opacity", 1)
+            particles.push(particle)
+        }
+        particle_line = graph_lorenz.append("line")
+            .attr("x1", xScale(particles[0].x))
+            .attr("y1", yScale(particles[0].y))
+            .attr("x2", xScale(0))
+            .attr("y2", yScale(0))
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .style("opacity", 0)
+        interval = setInterval(update_particles, plot_delay);
+    }
+
+    var delta = 2
+    var box = graph_lorenz.append("rect")
+        .attr("x", delta)
+        .attr("y", delta)
+        .attr("width", width / 2 - 2 * delta)
+        .attr("height", height - 2 * delta)
+        .attr("fill", "white")
+        .style("rx", 10)
+        .style("ry", 10)
+        .style("opacity", 0.75)
+        .attr("visibility", "hidden")
+
+    function set_dynamics_lorenz() {
+        dynamics = f_lorenz;
+        reset_particles = false;
+        show_observation = true;
+        dt = 0.005;
+    }
+
+    function set_dynamics_linear() {
+        dynamics = f_linear;
+        reset_particles = true;
+        show_observation = true;
+        dt = 0.01;
+        graph_lorenz.style("opacity", 1);
+    }
+
+    function toggle_observation_on() {
+        show_observation = true;
+    }
+
+    function toggle_observation_off() {
+        show_observation = false
+    }
+
+    function toggle_box_on() {
+        box.attr("visibility", "visible")
+    }
+
+    function toggle_box_off() {
+        box.attr("visibility", "hidden")
+    }
+
+    var _transitions = [
+        {
+            transitionForward: () => toggle_observation_on(),
+            transitionBackward: () => toggle_observation_off(),
+            index: 0
+        },
+        {
+            transitionForward: () => toggle_box_on(),
+            transitionBackward: () => toggle_box_off(),
+            index: 1
+        },
+    ]
+
+
+    draw_particles(50)
+
+
+</script>
+</body>
+</html>

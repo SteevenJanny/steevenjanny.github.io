@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../css/custom.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+<script>
+
+    var dt=0.05;
+    var T=30;
+    var N_agent= 5;
+
+    var graph_margin = {
+        top: 5,
+        right: 30,
+        bottom: 10,
+        left: 60,
+        sep: 40
+    };
+
+    var ratio = 0.6;
+
+    function f_oscillator(state, is_agent) {
+        // Semi implicit Euler
+        var x = state.x;
+        var y = state.y;
+
+        var omega = 1;
+        if (t>T_lim && is_agent){
+            omega = 0.90;
+        }
+        var dx = y;
+        var dy = -(omega * x + dt*dx)
+
+        return {
+            x: x + dt * dx,
+            y: y + dt * dy
+        };
+    }
+
+    // ------------------------------------------------- //
+    // 3D Graph of Linear Dynamics
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var T_lim = 15.2;
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var g_traj = graph.append("g");
+
+    var xScale = d3.scaleLinear()
+        .domain([0, T])
+        .range([graph_margin.left, width - graph_margin.right]);
+    var yScale = d3.scaleLinear()
+        .domain([2, -2])
+        .range([graph_margin.top, height - graph_margin.sep/2 - graph_margin.bottom]);
+
+    g_traj.append("rect")
+        .attr("x", xScale(0))
+        .attr("y", yScale(2))
+        .attr("width", xScale(T_lim) - xScale(0))
+        .attr("height", yScale(-2) - yScale(2))
+        .attr("fill", "rgba(208, 206, 206 ,1)");
+
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+
+    g_traj.append("g")
+        .attr("transform", "translate(0," + (yScale(-2)) + ")")
+        .call(xAxis);
+    g_traj.append("g")
+        .attr("transform", "translate(" + (graph_margin.left) + ",0)")
+        .call(yAxis);
+
+    // Add labels
+    g_traj.append("text")
+        .attr("x", xScale(T-2))
+        .attr("y", yScale(-2.0))
+        .attr("dy", "-5px")
+        .attr("text-anchor", "end")
+        .attr("font-size", "20px")
+        .text("Time");
+
+    g_traj.append("foreignObject")
+        .attr("x", -yScale(-2))
+        .attr("y", 0)
+        .attr("transform", "rotate(-90)")
+        .attr("font-size", "2Opx")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("width", yScale(-2) - yScale(2))
+        .attr("height", 50)
+        .html("$$\\mathbf{z}(t)$$");
+
+    var z0 = {
+        x: 0,
+        y: 1.5
+    };
+    var z = [z0];
+    var t = 0
+    var i = 0;
+    while (t < T) {
+        z.push(f_oscillator(z[i], false));
+        t = t + dt;
+        i++;
+    }
+
+    var agents= [];
+    var agents_traj= [];
+    for (var i=0; i<N_agent; i++){
+        var agent = {
+            x: Math.random() * 4 - 2,
+            y: Math.random() * 4 - 2
+        }
+        agents.push(agent);
+        agents_traj.push([agent]);
+    }
+
+    var t = 0
+    var time_index = 0;
+
+    // time is dt * i, plot x function of time
+    var line = d3.line()
+        .x(function (d, i) {
+            return xScale(i * dt);
+        })
+        .y(function (d) {
+            return yScale(d.x);
+        });
+
+    g_traj.append("path")
+        .datum(z)
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .attr("d", line);
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    var error_agent = [];
+    for (var i=0; i<N_agent; i++){
+        g_traj.append("path")
+            .attr("id", "agent_traj_"+i)
+            .datum(agents_traj[i])
+            .attr("fill", "none")
+            .attr("stroke", color(i))
+            .attr("stroke-width", 2)
+            .attr("d", line);
+        g_traj.append("circle")
+            .attr("id", "agent_"+i)
+            .attr("cx", xScale(0))
+            .attr("cy", yScale(agents[i].x))
+            .attr("r", 5)
+            .attr("fill", color(i))
+
+        error_agent.push([0]);
+    }
+
+    function simulate(){
+        for (var i = 0; i < N_agent; i++) {
+            var agent = agents[i];
+            agent = f_oscillator(agent, true);
+            var correction = {
+                x: agent.x - z[time_index].x,
+                y: agent.y - z[time_index].y
+            }
+            var correction_strength = 0.01;
+            if (t>T_lim){
+                correction_strength = 0;
+            }
+            agent = {
+                x: agent.x - correction_strength * correction.x,
+                y: agent.y - correction_strength * correction.y
+            }
+            agents[i] = agent;
+            agents_traj[i].push(agent);
+            error_agent[i].push(Math.abs(agent.x - z[time_index].x));
+        }
+        t = t + dt;
+        time_index++;
+
+        if (t > T){
+            t=0;
+            time_index=0;
+            for (var i=0; i<N_agent; i++){
+                agents[i] = {
+                    x: Math.random() * 4 - 2,
+                    y: Math.random() * 4 - 2
+                }
+                error_agent[i] = [0];
+                agents_traj[i] = [agents[i]];
+                g_traj.select("#agent_"+i)
+                    .attr("cx", xScale(0))
+                    .attr("cy", yScale(agents[i].x))
+                    .attr("r", 5)
+            }
+
+        }
+        for (var i=0; i<N_agent; i++){
+            g_traj.select("#agent_traj_"+i)
+                .datum(agents_traj[i])
+                .attr("d", line);
+        }
+    }
+    var interval = setInterval(simulate, 10);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory meets deep learning</p>
+<p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">The Output Prediction task</p>
+<div class="fragment" style="width: 0; height: 0" data-fragment-index="1"></div>
+<div class="row" style="height: 250px">
+    <div class="fig-container" data-file="slides/deepkkl/task/figure.html"
+         data-style="width:100%; align:center" data-preload
+         style="height: 100%; margin-top: 1%"
+         data-scroll="no" data-overflow-shown=true></div>
+</div>
+
+<div style="margin-top: 10px">
+    <div class="theorem_title">
+        <b>Definition:</b> Output Predictor [Janny et al. 2020]
+    </div>
+    <div class="theorem_content">
+        <p style="margin: 0px">
+            An <b>output predictor</b> is defined as a couple $G, \psi$ such as:
+        </p>
+        <ul style="margin-top: 5px">
+            <li>$\dot{z} = G(z, y)$ is a uniform exponential contraction,</li>
+            <li>the couple $(g, \psi)$ with $g(z)= G(z, \psi(z))$ is a generating model.</li>
+        </ul>
+    </div>
+</div>
+
+<p class="fontsize-20" style="width:100%; text-align: left"><u>Example:</u></p>
+<ul class="ul_fancy fontsize-20">
+    <li class="blue">Velocity & Odometry motion models in robotics</li>
+</ul>
+
+<p class="citation">- Thrun, S. (2002). Probabilistic robotics. Communications of the ACM</p>
