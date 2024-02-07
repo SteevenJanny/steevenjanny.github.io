@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../css/custom.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+
+
+<script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var p = {}
+
+    var margins = {
+        "left": 5,
+        "right": 5,
+        "top": 5,
+        "bottom": 5
+    }
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var zone_width = (width - margins.left - margins.right) / 5;
+
+    var xScale_1 = d3.scaleLinear()
+        .domain([0, 1])
+        .range([margins.left, zone_width + margins.left])
+
+    var xScale_2 = d3.scaleLinear()
+        .domain([0, 1])
+        .range([zone_width + margins.left, 2 * zone_width + margins.left])
+
+    var xScale_3 = d3.scaleLinear()
+        .domain([0, 1])
+        .range([2 * zone_width + margins.left, 3 * zone_width + margins.left])
+
+    var xScale_4 = d3.scaleLinear()
+        .domain([0, 1])
+        .range([3 * zone_width + margins.left, 4 * zone_width + margins.left])
+
+    var xScale_5 = d3.scaleLinear()
+        .domain([0, 1])
+        .range([4 * zone_width + margins.left, 5 * zone_width + margins.left])
+
+    var yScale = d3.scaleLinear()
+        .domain([1, 0])
+        .range([height - margins.bottom, margins.top])
+
+
+    // graph.append("line")
+    //     .attr("x1", xScale_1(0))
+    //     .attr("y1", yScale(0.5))
+    //     .attr("x2", xScale_4(0))
+    //     .attr("y2", yScale(0.5))
+    //     .attr("stroke", "black")
+    //     .attr("stroke-width", 2)
+    //     .attr("stroke-dasharray", "5,5")
+
+
+    var g_inputs = graph.append("g")
+    var g_encoder = graph.append("g")
+    var g_decoder = graph.append("g")
+    var g_outputs = graph.append("g")
+
+    // for (var i = 0; i < 6; i++) {
+    //     graph.append("line")
+    //         .attr("x1", i * zone_width + margins.left)
+    //         .attr("y1", yScale(0))
+    //         .attr("x2", i * zone_width + margins.left)
+    //         .attr("y2", yScale(1))
+    //         .attr("stroke", "black")
+    //         .attr("stroke-width", 2)
+    // }
+    //
+    // graph.append("rect")
+    //     .attr("x", margins.left)
+    //     .attr("y", margins.top)
+    //     .attr("width", width - margins.left - margins.right)
+    //     .attr("height", height - margins.top - margins.bottom)
+    //     .attr("stroke", "red")
+    //     .attr("stroke-width", 1)
+    //     .style("fill", "none")
+
+    // --------------------------------------------------------------
+    // Inputs
+    var inputs_size = zone_width * 0.85;
+
+    // assets/slide32/source.png
+    g_inputs.append("foreignObject")
+        .attr("x", xScale_1(0))
+        .attr("y", yScale(0.25) - inputs_size / 2)
+        .attr("width", zone_width)
+        .attr("height", (yScale(0.5) - yScale(0)))
+        .append("xhtml:img")
+        .attr("src", "assets/source.png")
+        .attr("width", inputs_size)
+        .attr("height", inputs_size)
+        .style("border", "1px solid black")
+
+    // assets/slide32/target.png
+    g_inputs.append("foreignObject")
+        .attr("x", xScale_1(0))
+        .attr("y", yScale(0.75) - inputs_size / 2)
+        .attr("width", zone_width)
+        .attr("height", (yScale(1) - yScale(0.5)))
+        .append("xhtml:img")
+        .attr("src", "assets/target.png")
+        .attr("width", inputs_size)
+        .attr("height", inputs_size)
+        .style("border", "1px solid black")
+
+    g_inputs.append("text")
+        .attr("x", xScale_1(0) + 5)
+        .attr("y", yScale(0.25) - inputs_size / 2)
+        .attr("text-anchor", "start")
+        .attr("dominant-baseline", "hanging")
+        .text("source")
+        .style("font-size", "25px")
+        .style("font-family", "sans-serif")
+
+    g_inputs.append("text")
+        .attr("x", xScale_1(0) + 5)
+        .attr("y", yScale(0.75) - inputs_size / 2)
+        .attr("text-anchor", "start")
+        .attr("dominant-baseline", "hanging")
+        .text("target")
+        .style("font-size", "25px")
+        .style("font-family", "sans-serif")
+
+    // --------------------------------------------------------------
+    // Encoder
+
+
+    function draw_encoder(g, x0, x1, y0, y1, y2) {
+        g.append("rect")
+            .attr("x", x0 - h_margin)
+            .attr("y", y0 - encoder_height / 2)
+            .attr("width", encoder_width)
+            .attr("height", encoder_height)
+            .attr("rx", 5)
+            .attr("stroke-width", 2)
+            .attr("stroke", "#277C9D")
+            .style("fill", "#90bed0")
+            .style("filter", "drop-shadow( 5px 5px 5px rgba(0, 0, 0, .7))");
+
+        g.append("polygon")
+            .attr("id", "cnn")
+            .attr("points", x0 + "," + (y0 - large_edge / 2) +
+                " " + (x0 + length) + "," + (y0 - small_edge / 2) +
+                " " + (x0 + length) + "," + (y0 + small_edge / 2) +
+                " " + x0 + "," + (y0 + large_edge / 2))
+            .attr("stroke-width", 2)
+            .attr("stroke", "#277C9D")
+            .style("fill", "white")
+
+        g.append("text")
+            .attr("id", "cnn_text")
+            .attr("x", x0 + length / 2)
+            .attr("y", y0)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .attr("transform", "rotate(-90 " + (x0 + length / 2) + " " + y0 + ")")
+            .text("CNN")
+            .style("font-size", "25px")
+            .style("font-family", "sans-serif")
+
+
+        g.append("polygon")
+            .attr("id", "F")
+            .attr("points", x1 + "," + (y1 - large_edge_s / 2) +
+                " " + (x1 + length) + "," + (y1 - small_edge_s / 2) +
+                " " + (x1 + length) + "," + (y1 + small_edge_s / 2) +
+                " " + x1 + "," + (y1 + large_edge_s / 2))
+            .attr("stroke-width", 2)
+            .attr("stroke", "#277C9D")
+            .style("fill", "white")
+
+        g.append("text")
+            .attr("id", "F_text")
+            .attr("x", x1 + length / 2)
+            .attr("y", y1)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .text("F")
+            .style("font-size", "25px")
+            .style("font-family", "sans-serif")
+
+        g.append("polygon")
+            .attr("id", "C")
+            .attr("points", x1 + "," + (y0 - large_edge_s / 2) +
+                " " + (x1 + length) + "," + (y0 - small_edge_s / 2) +
+                " " + (x1 + length) + "," + (y0 + small_edge_s / 2) +
+                " " + x1 + "," + (y0 + large_edge_s / 2))
+            .attr("stroke-width", 2)
+            .attr("stroke", "#277C9D")
+            .style("fill", "white")
+
+        g.append("text")
+            .attr("id", "C_text")
+            .attr("x", x1 + length / 2)
+            .attr("y", y0)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .text("C")
+            .style("font-size", "25px")
+            .style("font-family", "sans-serif")
+
+
+        g.append("polygon")
+            .attr("id", "C")
+            .attr("points", x1 + "," + (y2 - large_edge_s / 2) +
+                " " + (x1 + length) + "," + (y2 - small_edge_s / 2) +
+                " " + (x1 + length) + "," + (y2 + small_edge_s / 2) +
+                " " + x1 + "," + (y2 + large_edge_s / 2))
+            .attr("stroke-width", 2)
+            .attr("stroke", "#277C9D")
+            .style("fill", "white")
+
+        g.append("text")
+            .attr("id", "C_text")
+            .attr("x", x1 + length / 2)
+            .attr("y", y2)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .text("K")
+            .style("font-size", "25px")
+            .style("font-family", "sans-serif")
+
+        g.append("line")
+            .attr("id", "arrow_cnn_to_F")
+            .attr("x1", x0 + length)
+            .attr("y1", y0)
+            .attr("x2", x1)
+            .attr("y2", y1)
+            .attr("stroke", "#277C9D")
+            .attr("stroke-width", 2)
+            .attr("marker-end", "url(#arrowhead-blue)")
+
+        g.append("line")
+            .attr("id", "arrow_cnn_to_K")
+            .attr("x1", x0 + length)
+            .attr("y1", y0)
+            .attr("x2", x1)
+            .attr("y2", y2)
+            .attr("stroke", "#277C9D")
+            .attr("stroke-width", 2)
+            .attr("marker-end", "url(#arrowhead-blue)")
+
+        g.append("line")
+            .attr("id", "arrow_cnn_to_C")
+            .attr("x1", x0 + length)
+            .attr("y1", y0)
+            .attr("x2", x1)
+            .attr("y2", y0)
+            .attr("stroke", "#277C9D")
+            .attr("stroke-width", 2)
+            .attr("marker-end", "url(#arrowhead-blue)")
+
+        g.append("line")
+            .attr("id", "arrow_input_to_cnn")
+            .attr("x1", xScale_1(0) + inputs_size)
+            .attr("y1", y0)
+            .attr("x2", x0)
+            .attr("y2", y0)
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .attr("marker-end", "url(#arrowhead)")
+
+    }
+
+    var g_encoder_top = g_encoder.append("g")
+    var g_encoder_bottom = g_encoder.append("g")
+
+    var encoder_width = zone_width * 0.8;
+    var encoder_height = (yScale(0.5) - yScale(0)) * 0.8;
+    var h_margin = 0.1 * encoder_width;
+
+    var large_edge = 0.8 * encoder_height;
+    var small_edge = 0.6 * encoder_height
+    var length = (encoder_width - 2 * h_margin) / 3;
+
+    var x0 = xScale_2(0.5) - encoder_width / 2 + h_margin;
+    var x1 = x0 + 2 * length;
+    var y0_up = yScale(0.25)
+    var y1_up = y0_up - large_edge / 3
+    var y2_up = y0_up + large_edge / 3
+
+    var y0_down = yScale(0.75)
+    var y1_down = y0_down - large_edge / 3
+    var y3_down = y0_down + large_edge / 3
+
+    var large_edge_s = large_edge / 3
+    var small_edge_s = small_edge / 3
+
+    draw_encoder(g_encoder_top, x0, x1, y0_up, y1_up, y2_up)
+    draw_encoder(g_encoder_bottom, x0, x1, y0_down, y1_down, y3_down)
+
+    g_encoder_top.selectAll("#C").attr("opacity", 0.5)
+    g_encoder_top.selectAll("#C_text").attr("opacity", 0.5)
+
+    g_encoder_bottom.selectAll("#F").attr("opacity", 0.5)
+    g_encoder_bottom.selectAll("#F_text").attr("opacity", 0.5)
+
+    var feature_size = (height - margins.top - margins.bottom) / 3 * 0.85;
+
+    // assets/slide32/feature_source.png
+    g_encoder.append("foreignObject")
+        .attr("x", xScale_3(0.5) - feature_size / 2)
+        .attr("y", yScale(0.33 / 2) - feature_size / 2)
+        .attr("width", zone_width)
+        .attr("height", (yScale(1) - yScale(0)))
+        .append("xhtml:img")
+        .attr("src", "assets/feature_source.png")
+        .attr("width", feature_size)
+        .attr("height", feature_size)
+        .style("border", "1px solid black")
+
+    g_encoder.append("text")
+        .attr("x", xScale_3(0.5))
+        .attr("y", yScale(0.33 / 2) + feature_size / 2)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "ideographic")
+        .text("feature")
+        .style("font-size", "17px")
+        .style("font-family", "sans-serif")
+        .style("fill", "white")
+
+    g_encoder.append("foreignObject")
+        .attr("x", xScale_3(0.5) - feature_size / 2)
+        .attr("y", yScale(0.5) - feature_size / 2)
+        .attr("width", zone_width)
+        .attr("height", (yScale(0.5) - yScale(0)))
+        .append("xhtml:img")
+        .attr("src", "assets/coefs.png")
+        .attr("width", feature_size)
+        .attr("height", feature_size)
+        .style("border", "1px solid black")
+
+    // assets/slide32/keypoint_source.png
+    g_encoder.append("foreignObject")
+        .attr("x", xScale_3(0.5) - feature_size / 2)
+        .attr("y", yScale(0.66 + 0.33 / 2) - feature_size / 2)
+        .attr("width", zone_width)
+        .attr("height", (yScale(0.5) - yScale(0)))
+        .append("xhtml:img")
+        .attr("src", "assets/keypoints_target.png")
+        .attr("width", feature_size)
+        .attr("height", feature_size)
+        .style("border", "1px solid black")
+
+    g_encoder.append("text")
+        .attr("x", xScale_3(0.5))
+        .attr("y", yScale(0.5) + feature_size / 2)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "ideographic")
+        .text("coefficients")
+        .style("font-size", "17px")
+        .style("font-family", "sans-serif")
+        .style("fill", "black")
+
+    g_encoder.append("text")
+        .attr("x", xScale_3(0.5))
+        .attr("y", yScale(0.66 + 0.33 / 2) + feature_size/2)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "ideographic")
+        .text("keypoints")
+        .style("font-size", "17px")
+        .style("font-family", "sans-serif")
+        .style("fill", "black")
+
+    // arrow F source to transport
+    g_encoder.append("line")
+        .attr("id", "arrow_F_source_to_transport")
+        .attr("x1", x1 + length)
+        .attr("y1", y1_up)
+        .attr("x2", xScale_3(0.5) - feature_size/2)
+        .attr("y2", yScale(0.33 / 2))
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#arrowhead)")
+
+    // arrow F target to transport
+    g_encoder.append("line")
+        .attr("id", "arrow_F_target_to_transport")
+        .attr("x1", x1 + length)
+        .attr("y1", y0_down)
+        .attr("x2", xScale_3(0.5) - feature_size/2)
+        .attr("y2", yScale(0.5))
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#arrowhead)")
+
+    // arrow K target to transport
+    g_encoder.append("line")
+        .attr("id", "arrow_K_target_to_transport")
+        .attr("x1", x1 + length)
+        .attr("y1", y3_down)
+        .attr("x2", xScale_3(0.5) - feature_size/ 2)
+        .attr("y2", yScale(0.66 + 0.33 / 2))
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#arrowhead)")
+
+    // --------------------------------------------------------------
+    // Decoder
+    g_decoder.append("polygon")
+        .attr("id", "F")
+        .attr("points", (xScale_4(0.5) - length / 2) + "," + (yScale(0.5) - large_edge) +
+            " " + (xScale_4(0.5) + length / 2) + "," + (yScale(0.5) - small_edge) +
+            " " + (xScale_4(0.5) + length / 2) + "," + (yScale(0.5) + small_edge) +
+            " " + (xScale_4(0.5) - length / 2) + "," + (yScale(0.5) + large_edge))
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 2)
+        .style("fill", "#a0ce81")
+        .style("filter", "drop-shadow( 5px 5px 5px rgba(0, 0, 0, .7))");
+
+    g_decoder.append("text")
+        .attr("id", "F_text")
+        .attr("x", xScale_4(0.5))
+        .attr("y", yScale(0.5))
+        .attr("transform", "rotate(-90 " + (xScale_4(0.5)) + " " + yScale(0.5) + ")")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .text("CNN")
+        .style("font-size", "25px")
+        .style("font-family", "sans-serif")
+
+    // --------------------------------------------------------------
+    // Outputs
+
+    // assets/slide32/target.png
+    g_outputs.append("foreignObject")
+        .attr("x", xScale_5(0.5) - inputs_size / 2)
+        .attr("y", yScale(0.5) - inputs_size / 2)
+        .attr("width", zone_width)
+        .attr("height", (yScale(0.5) - yScale(0)))
+        .append("xhtml:img")
+        .attr("src", "assets/reconstructed_ours.png")
+        .attr("width", inputs_size)
+        .attr("height", inputs_size)
+        .style("border", "1px solid black")
+
+    g_outputs.append("text")
+        .attr("x", xScale_5(0.5) - inputs_size / 2 + 5)
+        .attr("y", yScale(0.5) - inputs_size / 2 + 5)
+        .attr("text-anchor", "start")
+        .attr("dominant-baseline", "hanging")
+        .text("reconstructed")
+        .style("font-size", "20px")
+        .style("font-family", "sans-serif")
+
+    g_outputs.append("text")
+        .attr("x", xScale_5(0.5) - inputs_size / 2 + 5)
+        .attr("y", yScale(0.5) - inputs_size / 2 + 25)
+        .attr("text-anchor", "start")
+        .attr("dominant-baseline", "hanging")
+        .text("target")
+        .style("font-size", "20px")
+        .style("font-family", "sans-serif")
+
+    // arrow F to output
+    g_outputs.append("line")
+        .attr("id", "arrow_F_to_output")
+        .attr("x1", xScale_4(0.5) + length/2)
+        .attr("y1", yScale(0.5))
+        .attr("x2", xScale_5(0.5) - inputs_size / 2)
+        .attr("y2", yScale(0.5))
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#arrowhead)")
+
+    g_decoder.append("line")
+        .attr("x1", xScale_3(0.5) + feature_size / 2)
+        .attr("y1", yScale(0.33 / 2))
+        .attr("x2", xScale_4(0.5) - length/2)
+        .attr("y2", yScale(0.5) - large_edge/2)
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#arrowhead-green)")
+
+    g_decoder.append("line")
+        .attr("x1", xScale_3(0.5) + feature_size / 2)
+        .attr("y1", yScale(0.5))
+        .attr("x2", xScale_4(0.5) - length/2)
+        .attr("y2", yScale(0.5))
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#arrowhead-green)")
+
+    g_decoder.append("line")
+        .attr("x1", xScale_3(0.5) + feature_size / 2)
+        .attr("y1", yScale(0.66 + 0.33 / 2))
+        .attr("x2", xScale_4(0.5) - length/2)
+        .attr("y2", yScale(0.5) + large_edge/2)
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#arrowhead-green)")
+
+
+    g_encoder.attr("opacity", 0)
+    g_decoder.attr("opacity", 0)
+    g_outputs.attr("opacity", 0)
+
+    function step1() {
+        g_encoder.transition()
+            .duration(250)
+            .attr("opacity", 1)
+        g_decoder.transition()
+            .duration(250)
+            .attr("opacity", 0)
+        g_outputs.transition()
+            .duration(250)
+            .attr("opacity", 0)
+    }
+
+    function step1_reverse() {
+        g_encoder.transition()
+            .duration(250)
+            .attr("opacity", 0)
+        g_decoder.transition()
+            .duration(250)
+            .attr("opacity", 0)
+        g_outputs.transition()
+            .duration(250)
+            .attr("opacity", 0)
+    }
+
+    function step2() {
+        g_encoder.transition()
+            .duration(250)
+            .attr("opacity", 1)
+        g_decoder.transition()
+            .duration(250)
+            .attr("opacity", 1)
+        g_outputs.transition()
+            .duration(250)
+            .attr("opacity", 0)
+    }
+
+    function step2_reverse() {
+        g_encoder.transition()
+            .duration(250)
+            .attr("opacity", 1)
+        g_decoder.transition()
+            .duration(250)
+            .attr("opacity", 0)
+        g_outputs.transition()
+            .duration(250)
+            .attr("opacity", 0)
+    }
+
+    function step3() {
+        g_encoder.transition()
+            .duration(250)
+            .attr("opacity", 1)
+        g_decoder.transition()
+            .duration(250)
+            .attr("opacity", 1)
+        g_outputs.transition()
+            .duration(250)
+            .attr("opacity", 1)
+    }
+
+    function step3_reverse() {
+        g_encoder.transition()
+            .duration(250)
+            .attr("opacity", 1)
+        g_decoder.transition()
+            .duration(250)
+            .attr("opacity", 1)
+        g_outputs.transition()
+            .duration(250)
+            .attr("opacity", 0)
+    }
+
+
+    var _transitions = [
+        {
+            transitionForward: () => step1(),
+            transitionBackward: () => step1_reverse(),
+            index: 0
+        },
+        {
+            transitionForward: () => step2(),
+            transitionBackward: () => step2_reverse(),
+            index: 1
+        },
+        {
+            transitionForward: () => step3(),
+            transitionBackward: () => step3_reverse(),
+            index: 2
+        }
+    ]
+
+    // ------------------------------------------------
+    // Arrows heads
+
+
+    graph.append("svg:defs").append("svg:marker")
+        .attr("id", "arrowhead")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 10)
+        .attr("refY", 0)
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("orient", "auto")
+        .attr("fill", "black")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+    graph.append("svg:defs").append("svg:marker")
+        .attr("id", "arrowhead-blue")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 10)
+        .attr("refY", 0)
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("orient", "auto")
+        .attr("fill", "#277C9D")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+    graph.append("svg:defs").append("svg:marker")
+        .attr("id", "arrowhead-green")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 10)
+        .attr("refY", 0)
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("orient", "auto")
+        .attr("fill", "#598938")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+</script>
+</body>
+</html>

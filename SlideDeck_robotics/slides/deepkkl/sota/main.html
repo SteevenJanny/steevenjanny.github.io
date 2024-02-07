@@ -1,0 +1,66 @@
+<p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory meets deep learning</p>
+<p class="subtitlebox" style="margin-top:0px;margin-bottom: 5px; background-color:#d7eaf1">From Non-Linear
+    to Linear</p>
+
+<div class="row r-stretch">
+    <div class="fig-container" data-file="slides/deepkkl/sota/figurev2.html"
+         data-style="width:100%; align:center;height:100%;"
+         style="height: 100%; margin-top: 0%" data-preload
+         data-scroll="no" data-overflow-shown=true></div>
+</div>
+
+<div class="fragment" data-fragment-index="1"></div>
+
+<div class="r-stack">
+    <div class="fragment fade-in-then-out" style="margin-top: 1%;width: 100%" data-fragment-index="2">
+        <div class="theorem_title" style="width: 100%">
+            Neural-ODE
+        </div>
+        <div class="theorem_content" style="margin-bottom: 20px;width:100%">
+            <p style="margin: 0px"> Free-form for $e$, $f$ and $\psi$. No guarantees.
+                </p>
+        </div>
+
+        <div class="citation">
+            - Chen et al. (2018). Neural ordinary differential equations. NeurIPS
+        </div>
+    </div>
+    <div class="fragment fade-in-then-out" style="margin-top: 1%" data-fragment-index="3">
+        <div class="theorem_title">
+            Koopman theory
+        </div>
+        <div class="theorem_content" style="margin-bottom: 20px">
+            <p style="margin: 0px">
+                For all non-linear system $\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$, there exists
+                an <span style="color:#E77475">infinite dimensional linear</span> operator $\mathcal{K}$
+                such that $\mathcal{K} \mathbf{h}(\mathbf{s}) = \mathbf{h}({\color{#277C9D}
+                f}(\mathbf{s}))$.</p>
+        </div>
+
+        <div class="citation">
+            - Lusch et al. (2018). Deep learning for universal linear embeddings
+            of
+            nonlinear dynamics. Nature communications
+        </div>
+    </div>
+    <div class="fragment fade-in" data-fragment-index="4" style="margin-top: 1%">
+        <div class="theorem_title">
+            Kazantzis-Kravaris-Luenberger <b>(KKL)</b> theory
+        </div>
+        <div class="theorem_content" style="margin-bottom: 20px">
+            <p style="margin: 0px">
+                For any non-linear system $\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$ and <span
+                    style="color:#E77475">for any paire $A, b$</span>, there exists an injective mapping $T$
+                such that
+                $\dot{\mathbf{z}} = A \mathbf{z} + by$ and $\mathbf{y} = \mathbf{h}\Big(T^{-1}(y)\Big)$
+                where
+                <span style="color:#E77475"> $\mathbf{z}$ is of finite dimension.</span>
+            </p>
+
+        </div>
+        <div class="citation">
+            - Andrieu et al. (2006). On the existence of a Kazantzis--Kravaris/Luenberger observer.
+            SIAM Journal on Control and Optimization
+        </div>
+    </div>
+</div>

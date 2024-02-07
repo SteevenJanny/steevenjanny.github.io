@@ -1,0 +1,69 @@
+<section data-menu-title="Results">
+    <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory meets deep learning</p>
+    <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">Comparison with Recurrent Neural
+        Networks</p>
+
+    <div class="row" style="height:200px">
+        <div class="col-30">
+            <p class="fontsize-20 bold no_margin">Deep KKL</p>
+            <div class="fontsize-20 rounded_box green" style="margin-top:40px">
+                <p style="margin:5px">
+                    $$\begin{array}{cl}
+                    \dot{\mathbf{z}} &= A \mathbf{z} + by \\
+                    y &= \psi(\mathbf{z})
+                    \end{array}$$
+                </p>
+            </div>
+            <table class="fontsize-25" style="border:none">
+                <tr>
+                    <td class="fas fa-check-circle" style="color: #598938; border:none"></td>
+                    <td style="border:none">Proof of existence</td>
+                </tr>
+                <tr>
+                    <td class="fas fa-check-circle" style="color: #598938"></td>
+                    <td>Contraction</td>
+            </table>
+        </div>
+        <div class="col-30 fragment" data-fragment-index="1">
+            <p class="fontsize-20 bold no_margin">RNN </p>
+            <div class="fontsize-20 rounded_box blue" style="margin-top:40px">
+                <p style="margin:5px">
+                    $$\begin{array}{cl}
+                    \dot{\mathbf{z}} &= \text{tanh}(A \mathbf{z} + by) \\
+                    y &= \psi(\mathbf{z})
+                    \end{array}$$
+                </p>
+            </div>
+        </div>
+        <div class="col-40 fragment" data-fragment-index="2">
+            <p class="fontsize-20 bold no_margin">GRU </p>
+            <div class="fontsize-20 rounded_box red">
+                <p style="margin:5px">
+                    $$\begin{array}{cl}
+                    \mathbf{r} &= \sigma(W_r \mathbf{z} + U_r y + \mathbf{b}_r) \\
+                    \mathbf{x} &= \sigma(W_x \mathbf{z} + U_x y + \mathbf{b}_x) \\
+                    \mathbf{n} &= \text{tanh}\big(W_n \mathbf{z} + r * (U_n y + \mathbf{b}_n)\big) \\
+                    \dot{\mathbf{z}} &= (1 - \mathbf{x}) * \mathbf{z} + \mathbf{x} * \mathbf{n} \\
+                    \end{array}$$
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div style="width:100%;height:350px">
+        <div class="fig-container" data-file="slides/deepkkl/results/figure.html"
+             data-style="width:100%; align:center; height:100%"
+             style="height: 100%" data-preload
+             data-scroll="no" data-overflow-shown=true></div>
+    </div>
+</section>
+
+<section data-visibility="hidden">
+    <p class="titlebox" style="margin:0px; background-color:#6e6e6e">Going down the rabbit hole: Control theory meets deep learning</p>
+    <p class="subtitlebox" style="margin-top:0px; background-color:#CECECE">More results</p>
+
+    <img src="slides/deepkkl/results/assets/generalisation.png" style="width:50%;" class="no_margin no_padding">
+
+    <img src="slides/deepkkl/results/assets/noise_fig1.png" style="width:50%;" class="no_margin no_padding">
+
+</section>

@@ -1,0 +1,125 @@
+<section data-menu-title="CF prediction in pixel space">
+    <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
+        Counterfactual Physics in Pixel Space</p>
+    <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;"> Model Overview</p>
+
+    <div style="height: 150px;margin-bottom: 20px">
+        <div class="fig-container" data-file="slides/cophy/model/figure1.html"
+             data-style="width:100%; align:center; height:100%" data-preload
+             style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+    </div>
+    <div class="fragment" style="height: 375px">
+        <p class="no_margin fontsize-20"> Counterfactual Dynamics module </p>
+        <div class="fig-container" data-file="slides/cophy/model/figure2.html"
+             data-style="width:100%; align:center; height:100%" data-preload
+             style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+    </div>
+</section>
+<section>
+    <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
+        Counterfactual Physics in Pixel Space</p>
+    <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Encoder /
+        Decoder with Transporter Network</p>
+
+    <div style="height:300px">
+        <div class="fig-container" data-file="slides/cophy/model/figure3.html"
+             data-style="width:100%; align:center; height:100%" data-preload
+             style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+    </div>
+
+    <div class="fragment"></div>
+    <div class="fragment"></div>
+    <div class="fragment"></div>
+    <!--            <div class="fragment"></div>-->
+    <div class="row fragment" style="height:175px">
+        <div style="text-align: center" class="no_padding col-33">
+            <div class="r-stack">
+                <div style="width: 100%">
+                    <video data-autoplay src="slides/cophy/model/assets/transporter4.mp4" autoplay="true" loop="true"
+                           muted="true" height="175px" class="no_margin no_padding"></video>
+                </div>
+                <p class="fontsize-20 no_margin no_padding">4 keypoints</p>
+            </div>
+        </div>
+        <div style="text-align: center" class="no_padding col-33">
+            <div class="r-stack">
+                <div style="width: 100%">
+                    <video data-autoplay src="slides/cophy/model/assets/transporter8.mp4" autoplay="true" loop="true"
+                           muted="true" height="175px" class="no_margin no_padding"></video>
+                </div>
+                <p class="fontsize-20 no_margin no_padding">8 keypoints</p>
+            </div>
+        </div>
+        <div style="text-align: center" class="no_padding col-33">
+            <div class="r-stack">
+                <div style="width: 100%">
+                    <video data-autoplay src="slides/cophy/model/assets/transporter16.mp4" autoplay="true" loop="true"
+                           muted="true" height="175px" class="no_margin no_padding"></video>
+                </div>
+                <p class="fontsize-20 no_margin no_padding">16 keypoints</p>
+            </div>
+        </div>
+        <div class="row fontsize-15">
+            <div class="col-50">
+                <ul class="rectangle-list" style="width:80%;margin:auto">
+                    <li class="red"> Temporal consistency</li>
+                </ul>
+            </div>
+            <div class="col-50">
+                <ul class="rectangle-list" style="width:80%;margin:auto">
+                    <li class="red"> Disentengling Features / Keypoints</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p class="citation">- Kulkarni et al. (2019). Unsupervised learning of
+        object keypoints for perception and control. NeurIPS</p>
+</section>
+
+<section>
+    <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
+        Counterfactual Physics in Pixel Space</p>
+    <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Encoder /
+        Decoder with Keypoints & Coefficient</p>
+
+    <div class="r-stretch">
+        <div class="fig-container" data-file="slides/cophy/model/figure4.html"
+             data-style="width:100%; align:center; height:100%" data-preload
+             style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+    </div>
+
+    <div class="row fragment" style="height:200px">
+        <div class="col-50">
+            <video data-autoplay src="slides/cophy/model/assets/1.mp4" autoplay="true" loop="true"
+                   muted="true" width="80%" class="no_margin no_padding"></video>
+        </div>
+        <div class="col-50">
+            <video data-autoplay src="slides/cophy/model/assets/2.mp4" autoplay="true" loop="true"
+                   muted="true" width="80%" class="no_margin no_padding"></video>
+        </div>
+
+        <div class="row fontsize-15">
+            <div class="col-50">
+                <ul class="rectangle-list" style="width:80%;margin:auto">
+                    <li class="green"> Discover keypoints and coefficients</li>
+                </ul>
+            </div>
+            <div class="col-50">
+                <ul class="rectangle-list" style="width:80%;margin:auto">
+                    <li class="green"> Learn to disentangle shape and position</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-visibility="hidden">
+    <p class="titlebox" style="margin:0px;background-color: #6e6e6e;">Filtered-CoPhy: Unsupervised Learning of
+        Counterfactual Physics in Pixel Space</p>
+    <p class="subtitlebox" style="margin-top:0px;background-color: #CECECE;margin-bottom: 5px"> Model overview</p>
+
+    <img src="slides/cophy/model/assets/keypoints_overview.png" style="width:80%;height:100%;margin:auto" class="no_margin no_padding">
+
+    <img src="slides/cophy/model/assets/model_training.png" style="width:80%;height:100%;margin:auto" class="no_margin no_padding">
+
+</section>

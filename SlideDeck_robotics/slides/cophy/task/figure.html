@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../css/custom.css">
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+<script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var radius= 35;
+    var linetop = 0.2;
+    var linebottom = 0.75;
+    var lineleft = 0.25;
+    var lineright = 0.75;
+
+    var cf_pos = 0.6
+
+    var linewidth = 4;
+    var imgwidth = 125;
+
+    var rect_margin = 10;
+
+    var graph_margin = {top: 0, right: 0, bottom: 0, left: 0};
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    xScale = d3.scaleLinear()
+        .domain([0, 1])
+        .range([graph_margin.left, width - graph_margin.right]);
+
+    yScale = d3.scaleLinear()
+        .domain([1, 0])
+        .range([height - graph_margin.bottom, graph_margin.top]);
+
+    var observed = graph.append("g")
+    var cf = graph.append("g")
+    var confounders = graph.append("g")
+
+    cf.append("rect")
+        .attr("x", xScale(0))
+        .attr("y", yScale(0.5))
+        .attr("width", xScale(1))
+        .attr("height", yScale(1) - yScale(0.5))
+        .attr("fill", "#eed1ae")
+        .attr("rx", 10)
+
+    observed.append("circle")
+        .attr("cx", xScale(lineleft))
+        .attr("cy", yScale(linetop))
+        .attr("r", radius)
+        .attr("fill", "#a7ccda")
+        .style("filter", "drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.55))");
+
+    observed.append("circle")
+        .attr("cx", xScale(lineright))
+        .attr("cy", yScale(linetop))
+        .attr("r", radius)
+        .attr("fill", "#277C9D")
+        .style("filter", "drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.55))");
+
+
+    confounders.append("circle")
+        .attr("cx", xScale(cf_pos))
+        .attr("cy", yScale(0.5))
+        .attr("r", radius)
+        .attr("fill", "#9ebe87")
+        .style("filter", "drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.55))");
+
+    cf.append("circle")
+        .attr("cx", xScale(lineleft))
+        .attr("cy", yScale(linebottom))
+        .attr("r", radius)
+        .attr("fill", "#e7b1b1")
+        .style("filter", "drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.55))");
+
+
+    cf.append("circle")
+        .attr("cx", xScale(lineright))
+        .attr("cy", yScale(linebottom))
+        .attr("r", radius)
+        .attr("fill", "#E77475")
+        .style("filter", "drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.55))");
+
+
+
+    // ----------------------------------------------------
+    // ARROWS
+    observed.append("line")
+        .attr("x1", xScale(lineleft)+ radius)
+        .attr("y1", yScale(linetop))
+        .attr("x2", xScale(lineright) - radius)
+        .attr("y2", yScale(linetop))
+        .attr("stroke-width", linewidth)
+        .attr("stroke", "#277C9D")
+        .attr("marker-end", "url(#arrowhead-blue)");
+
+
+    cf.append("line")
+        .attr("x1", xScale(lineleft)+ radius)
+        .attr("y1", yScale(linebottom))
+        .attr("x2", xScale(lineright) - radius)
+        .attr("y2", yScale(linebottom))
+        .attr("stroke-width", linewidth)
+        .attr("stroke", "#E77475")
+        .attr("marker-end", "url(#arrowhead-red)");
+
+    var cos = Math.cos(Math.PI/4);
+    var sin = Math.sin(Math.PI/4);
+
+    confounders.append("line")
+        .attr("x1", xScale(cf_pos)+ radius*cos)
+        .attr("y1", yScale(0.5) - radius*sin)
+        .attr("x2", xScale(lineright) - radius*cos)
+        .attr("y2", yScale(linetop) + radius*sin)
+        .attr("stroke-width", linewidth)
+        .attr("stroke", "#598938")
+        .attr("marker-end", "url(#arrowhead-green)");
+
+    confounders.append("line")
+        .attr("x1", xScale(cf_pos)+ radius*cos)
+        .attr("y1", yScale(0.5) + radius*sin)
+        .attr("x2", xScale(lineright) - radius*cos)
+        .attr("y2", yScale(linebottom) - radius*sin)
+        .attr("stroke-width", linewidth)
+        .attr("stroke", "#598938")
+        .attr("marker-end", "url(#arrowhead-green)");
+
+    // Curved arrow from A to C
+    var path = d3.path();
+    path.moveTo(xScale(lineleft)+radius*cos, yScale(linetop)+radius*sin);
+    path.bezierCurveTo(xScale(lineleft+0.15), yScale(0.4), xScale(lineleft+0.15), yScale(0.6), xScale(lineleft)+radius*cos, yScale(linebottom)-radius*sin);
+    cf.append("path")
+        .attr("d", path)
+        .attr("stroke-width", linewidth)
+        .attr("stroke", "black")
+        .attr("fill", "none")
+        .attr("marker-end", "url(#arrowhead-black)");
+
+
+    // add the arrowhead
+    graph.append("svg:defs").append("svg:marker")
+        .attr("id", "arrowhead-blue")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 10)
+        .attr("refY", 0)
+        .attr("markerWidth", 15)
+        .attr("markerHeight", 15)
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("orient", "auto")
+        .attr("fill", "#277C9D")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+    graph.append("svg:defs").append("svg:marker")
+        .attr("id", "arrowhead-green")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 10)
+        .attr("refY", 0)
+        .attr("markerWidth", 15)
+        .attr("markerHeight", 15)
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("orient", "auto")
+        .attr("fill", "#598938")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+    graph.append("svg:defs").append("svg:marker")
+        .attr("id", "arrowhead-red")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 10)
+        .attr("refY", 0)
+        .attr("markerWidth", 15)
+        .attr("markerHeight", 15)
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("orient", "auto")
+        .attr("fill", "#E77475")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+    graph.append("svg:defs").append("svg:marker")
+        .attr("id", "arrowhead-black")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 10)
+        .attr("refY", 0)
+        .attr("markerWidth", 15)
+        .attr("markerHeight", 15)
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("orient", "auto")
+        .attr("fill", "black")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+
+    // ----------------------------------------------------
+    // LABELS IN CIRCLES
+    observed.append("text")
+        .attr("x", xScale(lineleft))
+        .attr("y", yScale(linetop)+radius/2)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "50px")
+        .attr("fill", "black")
+        .text("A");
+
+
+    observed.append("text")
+        .attr("x", xScale(lineright))
+        .attr("y", yScale(linetop)+radius/2)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "50px")
+        .attr("fill", "white")
+        .text("B");
+
+
+    cf.append("text")
+        .attr("x", xScale(lineleft))
+        .attr("y", yScale(linebottom)+radius/2)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "50px")
+        .attr("fill", "black")
+        .text("C");
+
+
+    cf.append("text")
+        .attr("x", xScale(lineright))
+        .attr("y", yScale(linebottom)+radius/2)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "50px")
+        .attr("fill", "white")
+        .text("D");
+
+    confounders.append("text")
+        .attr("x", xScale(cf_pos))
+        .attr("y", yScale(0.5)+radius/2)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "50px")
+        .attr("fill", "black")
+        .text("Z");
+
+
+
+    // ----------------------------------------------------
+    // LABELS BELOW CIRCLES
+
+
+    observed.append("text")
+        .attr("x", xScale(lineleft))
+        .attr("y", yScale(linetop)-radius - 5)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "25px")
+        .attr("fill", "black")
+        .style("font-style", "italic")
+        .text("Initial state");
+
+    observed.append("text")
+        .attr("x", xScale(lineright))
+        .attr("y", yScale(linetop)-radius - 5)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "25px")
+        .attr("fill", "black")
+        .style("font-style", "italic")
+        .text("Outcome");
+
+    cf.append("text")
+        .attr("x", xScale(lineleft))
+        .attr("y", yScale(linebottom)+radius*2)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "25px")
+        .attr("fill", "black")
+        .style("font-style", "italic")
+        .text("CF state");
+
+    cf.append("text")
+        .attr("x", xScale(lineright))
+        .attr("y", yScale(linebottom)+radius*2)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "25px")
+        .attr("fill", "black")
+        .style("font-style", "italic")
+        .text("CF outcome");
+
+    confounders.append("text")
+        .attr("x", xScale(cf_pos))
+        .attr("y", yScale(0.5)+radius*2)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "25px")
+        .attr("fill", "black")
+        .style("font-style", "italic")
+        .text("Confounders");
+
+
+    // ----------------------------------------------------
+    // FOREIGN OBJECTS
+
+    // assets/slide29/A.png
+    observed.append("foreignObject")
+        .attr("x", xScale(lineleft)-imgwidth - radius*2)
+        .attr("y", yScale(linetop)-imgwidth/2)
+        .attr("width", imgwidth+10)
+        .attr("height", imgwidth+10)
+        .append("xhtml:img")
+        .attr("src", "assets/A.png")
+        .attr("width", imgwidth)
+        .style("border", "solid 1px black");
+
+    // assets/slide29/B.mp4
+    observed.append("foreignObject")
+        .attr("x", xScale(lineright)+radius*2)
+        .attr("y", yScale(linetop)-imgwidth/2)
+        .attr("width", imgwidth+10)
+        .attr("height", imgwidth+10)
+        .append("xhtml:video")
+        .attr("src", "assets/B.mp4")
+        .attr("width", imgwidth)
+        .attr("autoplay", true)
+        .attr("loop", true)
+        .style("border", "solid 1px black");
+
+    // assets/slide29/C.png
+    cf.append("foreignObject")
+        .attr("x", xScale(lineleft)-imgwidth - radius*2)
+        .attr("y", yScale(linebottom)-imgwidth/2)
+        .attr("width", imgwidth+10)
+        .attr("height", imgwidth+10)
+        .append("xhtml:img")
+        .attr("src", "assets/C.png")
+        .attr("width", imgwidth)
+        .style("border", "solid 1px black");
+
+
+    // assets/slide29/D.mp4
+    cf.append("foreignObject")
+        .attr("x", xScale(lineright)+radius*2)
+        .attr("y", yScale(linebottom)-imgwidth/2)
+        .attr("width", imgwidth+10)
+        .attr("height", imgwidth+10)
+        .append("xhtml:video")
+        .attr("src", "assets/D.mp4")
+        .attr("width", imgwidth)
+        .attr("autoplay", true)
+        .attr("loop", true)
+        .style("border", "solid 1px black");
+
+    observed.attr("opacity", 1)
+    cf.attr("opacity", 0)
+    confounders.attr("opacity", 0)
+
+    function step1() {
+        observed.transition().duration(500).attr("opacity", 1)
+        cf.transition().duration(500).attr("opacity", 1)
+        confounders.transition().duration(500).attr("opacity", 0)
+    }
+    function step1_reverse() {
+        observed.transition().duration(500).attr("opacity", 1)
+        cf.transition().duration(500).attr("opacity", 0)
+        confounders.transition().duration(500).attr("opacity", 0)
+    }
+
+    function step2() {
+        observed.transition().duration(500).attr("opacity", 1)
+        cf.transition().duration(500).attr("opacity", 1)
+        confounders.transition().duration(500).attr("opacity", 1)
+    }
+
+    function step2_reverse() {
+        observed.transition().duration(500).attr("opacity", 1)
+        cf.transition().duration(500).attr("opacity", 1)
+        confounders.transition().duration(500).attr("opacity", 0)
+    }
+
+    var _transitions = [
+        {
+            transitionForward: () => step1(),
+            transitionBackward: () => step1_reverse(),
+            index: 0
+        },
+        {
+            transitionForward: () => step2(),
+            transitionBackward: () => step2_reverse(),
+            index: 1
+        },
+    ]
+
+
+
+
+</script>
+</body>
+</html>

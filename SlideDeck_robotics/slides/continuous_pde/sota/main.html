@@ -1,0 +1,47 @@
+
+
+<section data-menu-title="SOTA in dense prediction">
+    <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+        dynamics</p>
+    <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Litterature on space & time continuous
+        simulation</p>
+
+    <div>
+        <p class="theorem_title" style="margin: auto">DINo</p>
+        <div class="fig-container theorem_content" data-file="slides/continuous_pde/sota/figure1.html"
+             data-style="width:100%; align:center; height:200px" data-preload
+             style="height: 100%;padding: 0;margin-bottom: 20px" data-scroll="no"
+             data-overflow-shown=true></div>
+
+        <p class="citation">-Yin et al. (2022). Continuous PDE Dynamics Forecasting with Implicit Neural
+            Representations. In
+            ICLR</p>
+    </div>
+    <div class="fragment">
+        <p class="theorem_title" style="margin: auto">MaGNet</p>
+        <div class="fig-container theorem_content" data-file="slides/continuous_pde/sota/figure2.html"
+             data-style="width:100%; align:center; height:200px" data-preload
+             style="height: 100%;padding: 0;margin-bottom: 20px" data-scroll="no"
+             data-overflow-shown=true></div>
+
+        <p class="citation">-Boussif et al. (2022). MAgnet: Mesh agnostic neural PDE solver. In NeurIPS</p>
+    </div>
+</section>
+
+<section data-visibility="hidden" class="optional">
+    <p class="titlebox" style="margin:0px;background-color: #6E6E6E;">Transformers for computational fluid
+        dynamics</p>
+    <p class="subtitlebox" style="margin-top:0px;background-color: #CECECE;">Litterature on space & time continuous
+        simulation</p>
+
+    <button class="button" onclick="toggleVisibility()">DINo</button>
+    <div id="test_stuff">
+        <img class="no_padding" src="slides/continuous_pde/sota/assets/magnet.svg" width="100%">
+        <p class="fontsize-20 no_padding no_margin">MaGNet suffers from drastic shifts in distribution between training
+            and evaluation. The model is trained on points from X , which corresponds to a small portion of the domain.
+            We used our subsampling trick to artificially generate queries. During evaluation, we require the prediction
+            at every available point in the complete simulation, hence, MaGNet must interpolate the initial condition to
+            a large number of query points, filling the input of the auto-regressive model with noisy estimates of the
+            IC.</p>
+    </div>
+</section>

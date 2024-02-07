@@ -1,0 +1,137 @@
+<section data-menu-title="Simulating fluids">
+<p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+    dynamics</p>
+<p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Simulating fluid is difficult </p>
+<p class="no_margin fontsize-30"></p>
+<table style="width: 100%">
+    <tr>
+        <td class="no_padding"
+            style="align-content: center;vertical-align: middle; text-align: center;width:60%">
+            <video data-autoplay src="slides/eagle/intro_navier/assets/coffee.mp4" autoplay="true" loop="true"
+                   data-ignore muted="true" width="100%"></video>
+        </td>
+        <td style="align-content: center;vertical-align: middle; text-align: center;width:40%">
+            <div class="theorem_title">The Navier-Stokes equations:</div>
+            <div class="theorem_content">
+                $$\begin{array}{cl}
+                \dot{\mathbf{u}} + (\mathbf{u}\cdot \nabla) \mathbf{u} &= -\nabla p + \nu \Delta
+                \mathbf{u} + \mathbf{f} \\
+                \nabla \cdot \mathbf{u} &= 0 \\
+                \end{array}$$
+            </div>
+            <ul class="ul_fancy fontsize-20 no_margin">
+                <li class="red">No known general solution</li>
+                <li class="red">Direct simulation is difficult</li>
+                <li class="red">Multi-scale dynamics</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+<br/>
+<div class="fontsize-20">
+    <u>Example</u>: Simulating air flow from the AC in this room
+    <table style="width: 50%;border:1px solid black">
+        <tr>
+            <td style="text-align: center;border:1px solid black">Space discretization</td>
+            <td style="text-align: center">Time discretization</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;border:1px solid black">1mm</td>
+            <td style="text-align: center;border:1px solid black">1ms</td>
+        </tr>
+    </table>
+    <p class="citation">-Wang, M., & Chen, Q. (2010). On a hybrid rans/les approach for indoor airflow
+        modeling.
+        HVAC&R Research.</p>
+</div>
+
+</section>
+<section>
+    <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+        dynamics</p>
+    <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Tricks for CFD </p>
+    <div class="row">
+        <div class="col-50" style="border-right:1px solid black">
+            <div>
+                <p class="bold no_margin fontsize-25" style="color: #277C9D;">Smoothed Particles
+                    Hydrodynamics</p>
+                <p class="light-text">Lagrangian approach of fluids : simulate
+                    particles interactions.</p>
+                <ul class="ul_fancy fontsize-20">
+                    <li class="green">Real-time, good-looking</li>
+                    <li class="red"># of particles, physical accuracy</li>
+                </ul>
+            </div>
+            <div>
+                <video data-autoplay data-src="slides/eagle/intro_navier/assets/liquid.mp4" autoplay="true" loop="true"
+                       muted="true"></video>
+                <p class="citation">- Gingold et al. (1977). Smoothed
+                    particle hydrodynamics: theory and application to non-spherical stars. Royal
+                    Astronomical Society.</p>
+            </div>
+        </div>
+        <div class="col-50">
+            <div>
+                <p class="bold no_margin fontsize-25" style="color: #277C9D;">Stable Fluid Simulation </p>
+                <p class="light-text">Lagrangian/Eulerian approach of fluid: fixed
+                    cell and study I/O</p>
+                <ul class="ul_fancy fontsize-20">
+                    <li class="green">Fast, and plausible</li>
+                    <li class="red">Physical accuracy (for CG only)</li>
+                </ul>
+            </div>
+            <div>
+                <video data-autoplay data-src="slides/eagle/intro_navier/assets/smoke.mp4" autoplay="true" loop="true"
+                       muted="true"></video>
+            </div>
+            <p class="citation">- Stam, J. (1999). Stable Fluids.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+        dynamics</p>
+    <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Engineer-grade simulations</p>
+    <div>
+        <video data-autoplay data-src="slides/eagle/intro_navier/assets/rans.mp4" autoplay="true" loop="true"
+               muted="true" height="200px"></video>
+    </div>
+    <div>
+        <p class="bold no_margin" style="color: #277C9D">RANS Simulations</p>
+        <div class="row">
+            <div class="col-60">
+                <div class="theorem_title" style="background-color: #598938">
+                    Reynolds-Averaged Navier-Stokes (RANS)
+                </div>
+                <div class="theorem_content fontsize-20">
+                    <span>Continuity:</span>
+                    $$\text{div}(\mathbf{\tilde{U}})=0$$
+                    <span>Reynolds equations:</span>
+                    $$\begin{array}{ll}
+                    \frac{\partial \tilde{U}}{\partial t} + \text{div}(\tilde{U}\mathbf{\tilde{U}}) &=
+                    -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial x} + \mu
+                    \text{div}(\text{grad}(\tilde{U})) + \rho \color{#E77475}{\tau_x}\\
+                    \frac{\partial \tilde{V}}{\partial t} + \text{div}(\tilde{V}\mathbf{\tilde{U}}) &=
+                    -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial y} + \mu
+                    \text{div}(\text{grad}(\tilde{V})) + \rho \color{#E77475}{\tau_y}\\
+                    \frac{\partial \tilde{W}}{\partial t} + \text{div}(\tilde{W}\mathbf{\tilde{U}}) &=
+                    -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial z} + \mu
+                    \text{div}(\text{grad}(\tilde{W})) + \rho \color{#E77475}{\tau_z}\\
+                    \end{array}$$
+                </div>
+            </div>
+            <div class="col-40 fontsize-17" style="margin-top: 30px;padding-left: 30px">
+                <ul class="rectangle-list">
+                    <li class="blue" value="1">Standard in engineering, works with irregular meshes</li>
+                    <li class="blue" value="2">Computation time is controlled (depending on the mesh
+                        resolution)
+                    </li>
+                    <li class="blue" value="3">Accuracy is handled via the turbulence model</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p class="citation" style="padding-top: 10px">- Versteeg et al. (2007). An
+        introduction to computational fluid dynamics: the finite volume method. Pearson education.</p>
+</section>

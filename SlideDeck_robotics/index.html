@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>S. Janny - PhD Defense</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/simple.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <script src="https://kit.fontawesome.com/170d25c765.js" crossorigin="anonymous"></script>
+    <!--    <link rel="stylesheet" href="css/styles.css">-->
+    
+    <link rel="stylesheet" href="css/custom.css">
+
+
+</head>
+<body>
+
+<div class="reveal">
+
+    <div class="slides">
+        <section id="title-sec"
+                 data-external="slides/title_page/main.html"
+                 data-menu-title="Title Page">
+        </section>
+
+        <section id="education"
+                 data-external="slides/introduction/biography/main.html"
+                 data-menu-title="Biography"></section>
+
+        <section id="context"
+                 data-external="slides/introduction/context/main.html"
+                 data-menu-title="Context"></section>
+
+        <section id="intro_simulation"
+                 data-external="slides/introduction/intro_simulation/main.html"></section>
+
+        <section id="agenda1"
+                 data-external="slides/agenda/main.html"
+                 data-menu-title="Agenda (Eagle)"></section>
+
+        <section id="intro_navier"
+                 data-external="slides/eagle/intro_navier/main.html"></section>
+
+        <section id="public-datasets"
+                 data-external="slides/eagle/public_datasets/main.html"
+                 data-menu-title="Existing Dataset"></section>
+
+        <section id="intro-eagle"
+                 data-external="slides/eagle/intro_eagle/main.html"></section>
+
+        <section id="sota_eagle"
+                 data-external="slides/eagle/sota/main.html"></section>
+
+        <section id="mesh_transformer"
+                 data-external="slides/eagle/model/main.html"
+                 data-menu-title="Mesh Transformer"></section>
+
+        <section id="results_eagle"
+                 data-external="slides/eagle/results/main.html"></section>
+
+
+        <section id="followup"
+                 data-external="slides/continuous_pde/followup/main.html"
+                 data-menu-title="A step toward real world"></section>
+
+        <section id="sota_continuous_pde"
+                 data-external="slides/continuous_pde/sota/main.html"></section>
+
+        <section id="method_continuous_pde"
+                 data-external="slides/continuous_pde/method/main.html"></section>
+
+        <section id="results_continuous_pde"
+                 data-external="slides/continuous_pde/results/main.html"></section>
+
+        <section id="fluid_conclusion"
+                 data-external="slides/continuous_pde/conclusion/main.html"
+                 data-menu-title="Conclusion Eagle"></section>
+
+
+        <section id="agenda2"
+                 data-external="slides/agenda/main.html"
+                 data-menu-title="Agenda (Filtered-CoPhy)"></section>
+
+
+        <section id="cophy_introduction"
+                 data-external="slides/cophy/introduction/main.html"
+                 data-menu-title="Ladder of causation"></section>
+
+        <section id="cophy_task"
+                 data-external="slides/cophy/task/main.html"
+                 data-menu-title="Task definition"></section>
+
+        <section id="cophy_dataset"
+                 data-external="slides/cophy/dataset/main.html"></section>
+
+        <section id="cophy_model"
+                 data-external="slides/cophy/model/main.html"></section>
+
+        <section id="cophy_results"
+                 data-external="slides/cophy/results/main.html"></section>
+
+
+        <section id="conclusion_cophy"
+                 data-external="slides/cophy/conclusion/main.html"
+                 data-menu-title="Conclusion Filtered-CoPhy"></section>
+
+
+        <section id="agenda3"
+                 data-external="slides/agenda/main.html"
+                 data-menu-title="Agenda (Deep-KKL)"></section>
+
+        <section id="kkl-introduction"
+                 data-external="slides/deepkkl/introduction/main.html"
+                 data-menu-title="Introduction"></section>
+
+        <section id="kkl-task"
+                 data-external="slides/deepkkl/task/main.html"
+                 data-menu-title="Task definition"></section>
+
+        <section id="kkl-sota"
+                 data-external="slides/deepkkl/sota/main.html"
+                 data-menu-title="State of the art"></section>
+
+        <section id="kkl-model"
+                 data-external="slides/deepkkl/model/main.html"></section>
+
+        <section id="kkl-results"
+                 data-external="slides/deepkkl/results/main.html"></section>
+
+        <section id="kkl-conclusion"
+                 data-external="slides/deepkkl/conclusion/main.html"
+                 data-menu-title="Conclusion Deep-KKL"></section>
+
+        <section id="general-conclusion"
+                 data-external="slides/conclusion/main.html"
+                 data-menu-title="General Conclusion"></section>
+
+    </div>
+</div>
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/reveald3.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="plugin/math/math.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script>
+    Reveal.initialize({
+        showHiddenSlides: false,
+        hash: true,
+        slideNumber: 'c/t',
+        navigationMode: 'linear',
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, Reveald3, RevealMath.MathJax3, RevealMenu],
+        viewDistance: 1, // to lazy load iframes
+        multiplex: {
+            secret: "", // null so the clients do not have control of the master presentation
+            id: '4840247df96b7483', // id, obtained from socket.io server
+            url: 'https://reveal-multiplex.glitch.me/' // Location of socket.io server
+        },
+        dependencies: [
+            {src: 'https://reveal-multiplex.glitch.me/socket.io/socket.io.js', async: true},
+            { src: 'https://reveal-multiplex.glitch.me/client.js', async: true }
+            // {src: 'https://reveal-multiplex.glitch.me/master.js', async: true},
+            {
+                src: 'plugin/external.js',
+                condition: function () {
+                    return !!document.querySelector('[data-external],[data-external-replace]');
+                }
+            },
+        ],
+        menu: {
+            side: 'left',
+            hideMissingTitles: true,
+            markers: true,
+            numbers: true,
+        }
+    })
+
+</script>
+
+
+</body>
+</html>
