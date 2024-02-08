@@ -75,7 +75,7 @@
             if (true_n == 2 * p.kernel_size.length - 2) {
                 g.append("image")
                     .attr("transform", "translate(" + (layers_width - block_size) / 2 + "," + (height - block_size) / 2 + ")")
-                    .attr("xlink:href", "assets/out.png")
+                    .attr("xlink:href", "assets/out.jpg")
                     .attr("width", block_size)
                     .attr("height", block_size);
             }
@@ -183,7 +183,7 @@
 
     layers[0].layer.append("image")
         .attr("transform", "translate(" + (layers_width - block_size) / 2 + "," + (height - block_size) / 2 + ")")
-        .attr("xlink:href", "assets/in.png")
+        .attr("xlink:href", "assets/in.jpg")
         .attr("width", block_size)
         .attr("height", block_size);
 

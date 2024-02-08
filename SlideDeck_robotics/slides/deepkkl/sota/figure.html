@@ -24,278 +24,444 @@
     var dt = 0.005;
     var T = 200;
 
-    var figure_margin = {
-        top: 5,
-        right: 0,
-        bottom: 0,
-        left: 0
-    };
+    var margins = {
+        top: 10,
+        bottom: 10,
+        left: 10,
+        right: 10
+    }
+
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var xScale = d3.scaleLinear()
+        .domain([0, 1])
+        .range([margins.left, width - margins.right]);
+    var yScale = d3.scaleLinear()
+        .domain([0, 1])
+        .range([margins.top, height - margins.bottom]);
 
 
     var p = {
-        dyn_block_width: 200,
-        dyn_block_height: 60,
-        obs_block_width: 125,
-        obs_block_height: 60,
-        block_margin_w: 50,
-        block_margin_h: 10,
-        sim_dim_w: 200,
-        sim_dim_h: 150,
-        models_dist: 20,
-        obs_width: 300,
-        obs_height: 150,
+        graph_y_width: xScale(0.2),
+        graph_x_height: yScale(0.2),
+        dyn_width: xScale(0.2),
+        dyn_height: yScale(0.1),
+        trapez_correction_y: 1.5,
+        trapez_correction_x: 0.5,
+        shift_gt: height * 0.15,
+        baseline_y_ml: yScale(0.7)
     }
 
     var n_particles_linear = 50;
     var n_particles_non_linear = 50;
 
-    function linear_dynamics(state) {
-        var x = state.x;
-        var y = state.y;
-        var z = state.z;
-        var dx = -x / 2;
-        var dy = -y / 2;
-        var dz = -z / 2;
 
-        return {
-            x: x + dt * dx,
-            y: y + dt * dy,
-            z: z + dt * dz
-        };
+    var gt_block = graph.append("g")
+    var ml_block = graph.append("g")
+    var obs_block = graph.append("g")
+
+    var gt_simulation = gt_block.append("g")
+    var particle_set = gt_simulation.append("g")
+
+    var ml_simulation = ml_block.append("g")
+
+    // -------------------------------------------
+    // Draw observation
+
+    var xscale_obs = d3.scaleLinear()
+        .domain([0, T])
+        .range([xScale(1) - p.graph_y_width + 20, xScale(1)]);
+    var yscale_obs = d3.scaleLinear()
+        .domain([0, 50])
+        .range([yScale(0.5) + p.graph_x_height / 2, yScale(0.5) - p.graph_x_height / 2]);
+
+    var xaxis_obs = d3.axisBottom(xscale_obs).ticks(5);
+    var yaxis_obs = d3.axisLeft(yscale_obs).ticks(5);
+
+    obs_block.append("g")
+        .attr("transform", "translate(0," + (yScale(0.5) + p.graph_x_height / 2) + ")")
+        .call(xaxis_obs);
+
+    obs_block.append("g")
+        .attr("transform", "translate(" + (xscale_obs(0)) + ",0)")
+        .call(yaxis_obs);
+
+    var line_obs = d3.line()
+        .x(function (d, i) {
+            return xscale_obs(i);
+        })
+        .y(function (d) {
+            return yscale_obs(d);
+        })
+        .curve(d3.curveMonotoneX);
+
+
+    function update_particles() {
+        for (var i = 0; i < particles_d3.length; i++) {
+            var particle = particles_d3[i]
+            var new_state = lorenz_dynamics(particle)
+            particle.x = new_state.x
+            particle.y = new_state.y
+            particle.z = new_state.z
+
+            particle.path
+                .attr("cx", xScale(particle.x))
+                .attr("cy", yScale(particle.y))
+                .attr("opacity", 1)
+                .attr("r", 4)
+        }
+
+        observations.push(Math.sqrt(Math.pow(particles_d3[0].x, 2) + Math.pow(particles_d3[0].y, 2)))
+        path.attr("d", line_obs).style("opacity", 1)
+        if (observations.length > T) {
+            observations.shift()
+        }
     }
 
-    function lorenz_dynamics(state) {
-        var x = state.x;
-        var y = state.y;
-        var z = state.z;
-        var dx = 10 * (y - x);
-        var dy = x * (28 - z) - y;
-        var dz = x * y - 8 / 3 * z;
 
-        return {
-            x: x + dt * dx,
-            y: y + dt * dy,
-            z: z + dt * dz
-        };
+    // -------------------------------------------------------------
+    // Non-linear dynamics
+    var space = (xScale(1) - p.graph_y_width) - xScale(0)
+    space = space / 3
+
+    gt_block.append("foreignObject")
+        .attr("x", xScale(0))
+        .attr("y", yScale(0.5) - p.dyn_height / 2)
+        .attr("width", p.dyn_width / 2)
+        .attr("height", p.dyn_height)
+        .append("xhtml:div")
+        .style("font-size", "30px")
+        .style("dominant-baseline", "top")
+        .style("height", p.dyn_height + "px")
+        .html("<table style='width:100%;height:100%'><tr><td class='custom-td'>$$\\mathbf{s}_0$$</td></tr></table>")
+
+
+    var x_center = xScale(0.3)
+    var y_center = yScale(0.5)
+
+    gt_block.append("rect")
+        .attr("x", x_center - p.dyn_width / 2)
+        .attr("y", y_center - p.dyn_height / 2)
+        .attr("width", p.dyn_width)
+        .attr("height", p.dyn_height)
+        .attr("fill", "#7fadbb")
+        .attr("stroke", "#277C9D")
+        .attr("stroke-width", 4)
+        .attr("rx", 10)
+        .style("filter", "drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.55))")
+
+
+    gt_block.append("foreignObject")
+        .attr("x", x_center - p.dyn_width / 2)
+        .attr("y", y_center - p.dyn_height / 2)
+        .attr("width", p.dyn_width)
+        .attr("height", p.dyn_height)
+        .append("xhtml:div")
+        .style("font-size", "30px")
+        .style("dominant-baseline", "top")
+        .style("height", p.dyn_height + "px")
+        .html("<table style='width:100%;height:100%'><tr><td class='custom-td'>$$\\dot{\\mathbf{s}} = f(\\mathbf{s})$$</td></tr></table>")
+
+    var x = xScale(0.6)
+    var y = yScale(0.5)
+    var width = p.dyn_width * p.trapez_correction_x
+    var height = p.dyn_height * p.trapez_correction_y
+
+    gt_block.append("path")
+        .attr("d", "M " + (x - width / 2) + " " + (y - height / 2) +
+            " L " + (x + width / 2) + " " + (y - p.dyn_height / 2) +
+            " L " + (x + width / 2) + " " + (y + p.dyn_height / 2) +
+            " L " + (x - width / 2) + " " + (y + height / 2) + " Z")
+        .attr("fill", "#7fadbb")
+        .attr("stroke", "#277C9D")
+        .attr("stroke-width", 4)
+        .style("filter", "drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.55)")
+
+    gt_block.append("foreignObject")
+        .attr("x", x - width / 2)
+        .attr("y", y - height / 2)
+        .attr("width", width)
+        .attr("height", height)
+        .append("xhtml:div")
+        .style("font-size", "30px")
+        .style("dominant-baseline", "top")
+        .style("height", height + "px")
+        .html("<table style='width:100%;height:100%'><tr><td class='custom-td'>$$y{=}h(\\mathbf{s})$$</td></tr></table>")
+
+
+    gt_block.append("line")
+        .attr("x1", xScale(0.1))
+        .attr("y1", yScale(0.5))
+        .attr("x2", x_center - p.dyn_width / 2 - 5)
+        .attr("y2", yScale(0.5))
+        .attr("stroke", "#277C9D")
+        .attr("stroke-width", 4)
+        .attr("marker-end", "url(#arrow_blue)")
+
+    gt_block.append("line")
+        .attr("x1", x_center + p.dyn_width / 2)
+        .attr("y1", yScale(0.5))
+        .attr("x2", x - width / 2 - 5)
+        .attr("y2", yScale(0.5))
+        .attr("stroke", "#277C9D")
+        .attr("stroke-width", 4)
+        .attr("marker-end", "url(#arrow_blue)")
+
+    var arrow_obs_gt = gt_block.append("line")
+        .attr("x1", x + width / 2)
+        .attr("y1", yScale(0.5))
+        .attr("x2", xScale(1) - p.graph_y_width)
+        .attr("y2", yScale(0.5))
+        .attr("stroke", "#277C9D")
+        .attr("stroke-width", 4)
+        .attr("marker-end", "url(#arrow_blue)")
+
+    var xscale_gt = d3.scaleLinear()
+        .domain([-30, 30])
+        .range([x_center - p.dyn_width / 2, x_center + p.dyn_width / 2]);
+    var yscale_gt = d3.scaleLinear()
+        .domain([-40, 40])
+        .range([y_center - height / 2, y_center - height / 2 - p.dyn_width * 0.5]);
+
+    var xaxis_gt = d3.axisBottom(xscale_gt).ticks(5);
+    var yaxis_gt = d3.axisLeft(yscale_gt).ticks(5);
+
+    gt_block.append("g")
+        .attr("transform", "translate(0," + yscale_gt(0) + ")")
+        .call(xaxis_gt);
+
+    gt_block.append("g")
+        .attr("transform", "translate(" + xscale_gt(0) + ",0)")
+        .call(yaxis_gt);
+
+
+    //--------------------------------------
+    // Simulate lorenz
+    var particles_d3 = []
+    var observations = []
+
+    for (var i = 0; i < n_particles_non_linear; i++) {
+        var particle = {
+            y: 20 * (2 * Math.random() - 1) * 0.1,
+            x: 20 * (2 * Math.random() - 1) * 0.1,
+            z: 20 * (2 * Math.random() - 1) * 0.1,
+            t: Math.random() * T,
+        }
+        particle["path"] = particle_set.append("circle")
+            .attr("cx", xscale_gt(particle.x))
+            .attr("cy", yscale_gt(particle.y))
+            .attr("r", 4)
+            .attr("stroke", "black")
+            .attr("stroke-width", 0.5)
+            .attr("fill", d3.interpolateRainbow(Math.random()))
+            .attr("opacity", 1)
+        particles_d3.push(particle)
+    }
+    var path = obs_block.append("path")
+        .datum(observations)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 1.5)
+        .attr("d", line_obs);
+
+
+    function update_particles() {
+        for (var i = 0; i < particles_d3.length; i++) {
+            var particle = particles_d3[i]
+            var new_state = lorenz_dynamics(particle)
+            particle.x = new_state.x
+            particle.y = new_state.y
+            particle.z = new_state.z
+
+            particle.path
+                .attr("cx", xscale_gt(particle.x))
+                .attr("cy", yscale_gt(particle.y))
+                .attr("opacity", 1)
+                .attr("r", 4)
+        }
+
+        observations.push(Math.sqrt(Math.pow(particles_d3[0].x, 2) + Math.pow(particles_d3[0].y, 2)))
+        path.attr("d", line_obs).style("opacity", 1)
+        if (observations.length > T) {
+            observations.shift()
+        }
     }
 
-
-    // ------------------------------------------------- //
-    // 3D Graph of Linear Dynamics
-
-    var width = window.innerWidth;
-    var height = figure_margin.top + 2 * p.sim_dim_h + 2 * p.block_margin_h + 2 * p.dyn_block_height + p.models_dist
-
-    var correction = window.innerHeight / height
-
-    height = height * correction
-
-    p.block_margin_h = p.block_margin_h * correction
-    p.models_dist = p.models_dist * correction
-    p.sim_dim_h = p.sim_dim_h * correction
-    p.dyn_block_height = p.dyn_block_height * correction
-    p.obs_height = p.obs_height * correction
-    p.obs_block_height = p.obs_block_height * correction
-
-    var figure = d3.select("body").append("svg")
-        .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", [0, 0, width, height])
-
-    var defs = figure.append("svg:defs");
-    defs.append("svg:marker")
-        .attr("id", "arrowhead")
-        .attr("refX", 5)
-        .attr("refY", 2)
-        .attr("markerWidth", 6)
-        .attr("markerHeight", 4)
-        .attr("orient", "auto")
-        .append("path")
-        .attr("d", "M 0,0 V 4 L6,2 Z")
-        .style("fill", "#277C9D");
+    var interval = setInterval(update_particles, 20);
 
 
-    var x_center = (width - p.dyn_block_width - p.obs_block_width - 3 * p.block_margin_w - p.obs_width) / 2
+    // ----------------------------------------------------------
+    // ML
 
-    var nl_block = figure.append("g")
-        .attr("transform", "translate(" + x_center + "," + (p.sim_dim_h / 2 + figure_margin.top + 50) + ")")
 
-    var delta_y = (p.sim_dim_h + figure_margin.top) + p.block_margin_h + p.dyn_block_height + p.models_dist
+    var input_height = 3 * p.dyn_height
 
-    var l_block = figure.append("g")
-        .attr("transform", "translate(" + (x_center) + "," + (delta_y) + ")")
+    ml_block.append("foreignObject")
+        .attr("x", xScale(0))
+        .attr("y", p.baseline_y_ml - input_height / 2)
+        .attr("width", p.dyn_width / 2)
+        .attr("height", input_height)
+        .append("xhtml:div")
+        .style("font-size", "30px")
+        .style("dominant-baseline", "top")
+        .style("height", input_height + "px")
+        .html("<table style='width:100%;height:100%'><tr><td class='custom-td'>" +
+            "$$\\begin{array}{c} \\mathbf{y}_{0} \\\\ \\mathbf{y}_{-1}" +
+            "\\\\ \\vdots \\\\ \\mathbf{y}_{-\\ell}\\end{array}$$</td></tr></table>")
 
-    var nl_dynamics = nl_block.append('g');
-    var nl_observation = nl_block.append('g');
 
-    var l_dynamics = l_block.append('g');
-    var l_observation = l_block.append('g');
+    var x = xScale(0.2)
+    var y = p.baseline_y_ml
+    var width = p.dyn_width * p.trapez_correction_x
+    var height = p.dyn_height * p.trapez_correction_y
 
-    // ------------------------------------------------- //
-    // Block diagram for Non-Linear Dynamics
-    nl_dynamics.append("rect")
-        .attr("x", 0)
-        .attr("y", p.sim_dim_h / 2 + p.block_margin_h)
-        .attr("width", p.dyn_block_width)
-        .attr("height", p.dyn_block_height)
-        .attr("fill", "rgba(39,124,157,0.25)")
-        .attr("stroke", "#277C9D")
-        .attr("stroke-width", 2)
-        .attr("rx", 10)
-
-    nl_dynamics.append("foreignObject")
-        .attr("x", 0)
-        .attr("y", p.sim_dim_h / 2 + p.block_margin_h)
-        .attr("font-size", "6vh")
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "middle")
-        .attr("width", p.dyn_block_width)
-        .attr("height", p.dyn_block_height - 10)
-        .html("<table style='margin:0px;width:100%;height:100%;'><tr><td style='text-align:center;vertical-align:middle;'>$$\\dot{\\mathbf{s}} = {\\color{#277C9D} f}(\\mathbf{s})$$</td></tr></table>")
-
-    var x = p.dyn_block_width + 2 * p.block_margin_w
-    var y = (p.dyn_block_height - p.obs_block_height) / 2 + p.block_margin_h + p.sim_dim_h / 2
-    var width = p.obs_block_width
-    var height = 2 * p.obs_block_height
-
-    nl_observation.append("path")
-        .attr("d", "M " + x + " " + y +
-            " L " + (x + width) + " " + (y) +
-            " L " + (x + width - 20) + " " + (y + height / 2) +
-            " L " + (x + width) + " " + (y + height) +
-            " L " + x + " " + (y + height) +
-            " Z")
-        .attr("fill", "rgba(39,124,157,0.25)")
-        .attr("stroke", "#277C9D")
-        .attr("stroke-width", 2)
-
-    nl_observation.append("rect")
-        .attr("x", p.dyn_block_width + 2 * p.block_margin_w)
-        .attr("y", (p.dyn_block_height - p.obs_block_height) / 2 + p.sim_dim_h / 2 + p.block_margin_h)
-        .attr("width", p.obs_block_width)
-        .attr("height", p.obs_block_height)
-        .attr("fill", "rgba(39,124,157,0.25)")
-        .attr("stroke", "#277C9D")
-        .attr("stroke-width", 2)
-        .attr("rx", 10)
-
-    nl_observation.append("foreignObject")
-        .attr("x", p.dyn_block_width + 2 * p.block_margin_w)
-        .attr("y", (p.dyn_block_height - p.obs_block_height) / 2 + p.sim_dim_h / 2 + p.block_margin_h)
-        .attr("font-size", "6vh")
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "middle")
-        .attr("width", p.obs_block_width)
-        .attr("height", p.obs_block_height - 10)
-        .html("<table style='margin:0px;width:100%;height:100%;'><tr><td style='text-align:center;vertical-align:middle;'>$$y = {\\color{#277C9D} h}(\\mathbf{s})$$</td></tr></table>")
-
-    nl_block.append("line")
-        .attr("x1", p.dyn_block_width)
-        .attr("y1", p.dyn_block_height / 2 + p.sim_dim_h / 2 + p.block_margin_h)
-        .attr("x2", p.dyn_block_width + 2 * p.block_margin_w)
-        .attr("y2", p.dyn_block_height / 2 + p.sim_dim_h / 2 + p.block_margin_h)
-        .attr("stroke", "#277C9D")
-        .attr("stroke-width", 2)
-        .attr("marker-end", "url(#arrowhead)")
-
-    var nl_sim_placeholder = nl_block.append("g")
-        .attr("transform", "translate(" + p.dyn_block_width / 2 + ", 0)")
-        .attr("width", p.sim_dim_w)
-        .attr("height", p.sim_dim_h)
-
-    // ------------------------------------------------- //
-    // Block diagram for Linear Dynamics
-    var l_dyn_rect = l_dynamics.append("rect")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", p.dyn_block_width)
-        .attr("height", p.dyn_block_height)
-        .attr("fill", "rgba(89,137,56,0.25)")
+    ml_block.append("path")
+        .attr("d", "M " + (x - width / 2) + " " + (y - p.dyn_height / 2) +
+            " L " + (x + width / 2) + " " + (y - height / 2) +
+            " L " + (x + width / 2) + " " + (y + height / 2) +
+            " L " + (x - width / 2) + " " + (y + p.dyn_height / 2) + " Z")
+        .attr("fill", "#98b283")
         .attr("stroke", "#598938")
-        .attr("stroke-width", 2)
-        .attr("rx", 10)
+        .attr("stroke-width", 4)
+        .style("filter", "drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.55)")
 
-    var dynamics_default = l_dynamics.append("foreignObject")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("font-size", "6vh")
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "middle")
-        .attr("width", p.dyn_block_width)
-        .attr("height", p.dyn_block_height - 10)
-        .html("<table style='margin:0px;width:100%;height:100%;'><tr><td style='text-align:center;vertical-align:middle;'>$$\\dot{\\mathbf{z}} = {\\color{#598938} g}(\\mathbf{z})$$</td></tr></table>")
-
-    var dynamics_koopman = l_dynamics.append("foreignObject")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("font-size", "6vh")
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "middle")
-        .attr("width", p.dyn_block_width)
-        .attr("height", p.dyn_block_height - 10)
-        .html("<table style='margin:0px;width:100%;height:100%;'><tr><td style='text-align:center;vertical-align:middle;'>$$\\dot{\\mathbf{z}} = {\\color{#598938} A}\\mathbf{z}$$</td></tr></table>")
-        .style("opacity", 0)
-
-    var dynamics_kkl = l_dynamics.append("foreignObject")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("font-size", "6vh")
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "middle")
-        .attr("width", p.dyn_block_width)
-        .attr("height", p.dyn_block_height - 10)
-        .html("<table style='margin:0px;width:100%;height:100%;'><tr><td style='text-align:center;vertical-align:middle;'>$$\\dot{\\mathbf{z}} = {\\color{#598938} A}\\mathbf{z} + {\\color{#598938} b}\\psi(\\mathbf{z})$$</td></tr></table>")
-        .style("opacity", 0)
+    ml_block.append("foreignObject")
+        .attr("x", x - width / 2)
+        .attr("y", y - height / 2)
+        .attr("width", width)
+        .attr("height", height)
+        .append("xhtml:div")
+        .style("font-size", "30px")
+        .style("dominant-baseline", "top")
+        .style("height", height + "px")
+        .html("<table style='width:100%;height:100%'><tr><td class='custom-td'>$$e$$</td></tr></table>")
 
 
-    l_observation.append("rect")
-        .attr("x", p.dyn_block_width + 2 * p.block_margin_w)
-        .attr("y", (p.dyn_block_height - p.obs_block_height))
-        .attr("width", p.obs_block_width)
-        .attr("height", p.obs_block_height)
-        .attr("fill", "rgba(89,137,56,0.25)")
+    var x_center = xScale(0.4)
+    var y_center = p.baseline_y_ml
+
+    ml_block.append("rect")
+        .attr("x", x_center - p.dyn_width / 2)
+        .attr("y", y_center - p.dyn_height / 2)
+        .attr("width", p.dyn_width)
+        .attr("height", p.dyn_height)
+        .attr("fill", "#98b283")
         .attr("stroke", "#598938")
-        .attr("stroke-width", 2)
+        .attr("stroke-width", 4)
         .attr("rx", 10)
+        .style("filter", "drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.55))")
 
-    l_observation.append("foreignObject")
-        .attr("x", p.dyn_block_width + 2 * p.block_margin_w)
-        .attr("y", (p.dyn_block_height - p.obs_block_height) / 2)
-        .attr("font-size", "6vh")
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "middle")
-        .attr("width", p.obs_block_width)
-        .attr("height", p.obs_block_height - 10)
-        .html("<table style='margin:0px;width:100%;height:100%;'><tr><td style='text-align:center;vertical-align:middle;'>$$y = {\\color{598938} \\psi}(\\mathbf{z})$$</td></tr></table>")
+    var txt_dyn_kkl = ml_block.append("foreignObject")
+        .attr("x", x_center - p.dyn_width / 2)
+        .attr("y", y_center - p.dyn_height / 2)
+        .attr("width", p.dyn_width)
+        .attr("height", p.dyn_height)
+        .append("xhtml:div")
+        .style("font-size", "27px")
+        .style("dominant-baseline", "top")
+        .style("height", p.dyn_height + "px")
+        .html("<table style='width:100%;height:100%'><tr><td class='custom-td'>$$\\dot{\\mathbf{z}} = A \\mathbf{z} + b\\psi(\\mathbf{z})$$</td></tr></table>")
 
-    l_block.append("line")
-        .attr("x1", p.dyn_block_width)
-        .attr("y1", p.dyn_block_height / 2)
-        .attr("x2", p.dyn_block_width + 2 * p.block_margin_w)
-        .attr("y2", p.dyn_block_height / 2)
+    var txt_dyn_nl = ml_block.append("foreignObject")
+        .attr("x", x_center - p.dyn_width / 2)
+        .attr("y", y_center - p.dyn_height / 2)
+        .attr("width", p.dyn_width)
+        .attr("height", p.dyn_height)
+        .append("xhtml:div")
+        .style("font-size", "30px")
+        .style("dominant-baseline", "top")
+        .style("height", p.dyn_height + "px")
+        .html("<table style='width:100%;height:100%'><tr><td class='custom-td'>$$\\dot{\\mathbf{z}} = f(\\mathbf{z})$$</td></tr></table>")
+
+    var txt_dyn_koopman = ml_block.append("foreignObject")
+        .attr("x", x_center - p.dyn_width / 2)
+        .attr("y", y_center - p.dyn_height / 2)
+        .attr("width", p.dyn_width)
+        .attr("height", p.dyn_height)
+        .append("xhtml:div")
+        .style("font-size", "30px")
+        .style("dominant-baseline", "top")
+        .style("height", p.dyn_height + "px")
+        .html("<table style='width:100%;height:100%'><tr><td class='custom-td'>$$\\dot{\\mathbf{z}} = A\\mathbf{z}$$</td></tr></table>")
+
+    var x = xScale(0.6)
+    var y = p.baseline_y_ml
+    var width = p.dyn_width * p.trapez_correction_x
+    var height = p.dyn_height * p.trapez_correction_y
+
+    ml_block.append("path")
+        .attr("d", "M " + (x - width / 2) + " " + (y - height / 2) +
+            " L " + (x + width / 2) + " " + (y - p.dyn_height / 2) +
+            " L " + (x + width / 2) + " " + (y + p.dyn_height / 2) +
+            " L " + (x - width / 2) + " " + (y + height / 2) + " Z")
+        .attr("fill", "#98b283")
         .attr("stroke", "#598938")
-        .attr("stroke-width", 2)
-        .attr("marker-end", "url(#arrowhead)")
+        .attr("stroke-width", 4)
+        .style("filter", "drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.55)")
+
+    ml_block.append("foreignObject")
+        .attr("x", x - width / 2)
+        .attr("y", y - height / 2)
+        .attr("width", width)
+        .attr("height", height)
+        .append("xhtml:div")
+        .style("font-size", "30px")
+        .style("dominant-baseline", "top")
+        .style("height", height + "px")
+        .html("<table style='width:100%;height:100%'><tr><td class='custom-td'>$$\\psi$$</td></tr></table>")
 
 
-    var l_sim_placeholder = l_block.append("g")
-        .attr("transform", "translate(0, " + (p.dyn_block_height + p.block_margin_h) + ")")
-        .attr("width", p.sim_dim_w)
-        .attr("height", p.sim_dim_h);
+    ml_block.append("line")
+        .attr("x1", x + width / 2)
+        .attr("y1", y)
+        .attr("x2", xScale(1) - p.graph_y_width)
+        .attr("y2", yScale(0.5) + 5)
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 4)
+        .attr("marker-end", "url(#arrow_green)")
 
-    l_sim_placeholder.append("foreignObject")
+    ml_block.append("line")
+        .attr("x1", x_center + p.dyn_width / 2)
+        .attr("y1", y)
+        .attr("x2", x - width / 2 - 5)
+        .attr("y2", y)
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 4)
+        .attr("marker-end", "url(#arrow_green)")
+
+    ml_block.append("line")
+        .attr("x1", xScale(0.2) + (p.dyn_width * p.trapez_correction_x) / 2)
+        .attr("y1", y)
+        .attr("x2", x_center - p.dyn_width / 2)
+        .attr("y2", y)
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 4)
+        .attr("marker-end", "url(#arrow_green)")
+
+    ml_block.append("line")
+        .attr("x1", xScale(0.1))
+        .attr("y1", y)
+        .attr("x2", xScale(0.2) - (p.dyn_width * p.trapez_correction_x) / 2)
+        .attr("y2", y)
+        .attr("stroke", "#598938")
+        .attr("stroke-width", 4)
+        .attr("marker-end", "url(#arrow_green)")
+
+
+    var max_height = Math.min(p.dyn_width * 0.7, yScale(1) - (y_center + p.dyn_height / 2 + 10))
+
+    ml_simulation.append("foreignObject")
         .attr("id", "viz2")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", p.sim_dim_w)
-        .attr("height", p.sim_dim_h)
+        .attr("x", x_center - p.dyn_width / 2)
+        .attr("y", y_center + p.dyn_height / 2 + 10)
+        .attr("width", p.dyn_width)
+        .attr("height", max_height)
         .html("<div id='viz2'></div>")
-
-
-    // ------------------------------------------------- //
-    // Graph with Linear Dynamics
-
-    var p5_width = p.sim_dim_w;
-    var p5_height = p.sim_dim_h;
 
     var particles_linear = [];
     for (var i = 0; i < n_particles_linear; i++) {
@@ -310,21 +476,23 @@
 
     var scaling_factor = (1 / Math.sqrt(2))
     var scale_xy = d3.scaleLinear()
-        .domain([-20, 20])
-        .range([-p5_width / 2 * scaling_factor, p5_width / 2 * scaling_factor]);
+        .domain([-15, 15])
+        .range([-max_height / 2 * scaling_factor, max_height / 2 * scaling_factor]);
+
 
     function setup() {
-        const w = p5_width
-        const h = p5_height
+        const w = p.dyn_width
+        const h = max_height
         var canvas = createCanvas(w, h, WEBGL);
         canvas.parent('viz2');
         pixelDensity(3)
     }
 
+
     function draw() {
 
         var length = scale_xy(13)
-        var particle_size = scale_xy(3)
+        var particle_size = scale_xy(5)
         var n_lines = 10
 
         background(255);
@@ -372,6 +540,7 @@
             var alpha = 1 - particle.t / T
             var color = d3.interpolateRainbow(i / n_particles_linear);
 
+
             color = color.replace("rgb", "rgba").replace(")", "," + alpha + ")");
             stroke('rgba(0,0,0,' + alpha + ')')
             strokeWeight(particle_size * 1.5)
@@ -385,206 +554,150 @@
     }
 
 
-    // ------------------------------------------------- //
-    // Graph with Lorenz Dynamics
+    gt_block.style("transition", "transform 0.25s")
 
-
-    var xScale = d3.scaleLinear()
-        .domain([-30, 30])
-        .range([-p.sim_dim_w / 2, p.sim_dim_w / 2]);
-    var yScale = d3.scaleLinear()
-        .domain([40, -40])
-        .range([-p.sim_dim_h / 2, p.sim_dim_h / 2]);
-
-    var particle_set = nl_sim_placeholder.append("g")
-        .attr("id", "particle_set");
-
-    var particles_d3 = []
-    for (var i = 0; i < n_particles_non_linear; i++) {
-        var particle = {
-            y: 20 * (2 * Math.random() - 1) * 0.1,
-            x: 20 * (2 * Math.random() - 1) * 0.1,
-            z: 20 * (2 * Math.random() - 1) * 0.1,
-            t: Math.random() * T,
-        }
-        particle["path"] = particle_set.append("circle")
-            .attr("cx", xScale(particle.x))
-            .attr("cy", yScale(particle.y))
-            .attr("r", 4)
-            .attr("stroke", "black")
-            .attr("stroke-width", 0.5)
-            .attr("fill", d3.interpolateRainbow(Math.random()))
-            .attr("opacity", 1)
-        particles_d3.push(particle)
+    function step0(){
+        ml_block.attr("opacity", 0)
+        gt_block.transition().duration(250).attr("opacity", 1)
+        gt_block.attr("transform", "translate(0, 0)")
+        arrow_obs_gt.transition().duration(250).attr("y2", yScale(0.5))
+        txt_dyn_nl.transition().duration(250).style("opacity", 0)
+        txt_dyn_koopman.transition().duration(250).style("opacity", 0)
+        txt_dyn_kkl.transition().duration(250).style("opacity", 0)
     }
 
-    var xAxis = d3.axisBottom(xScale);
-    var yAxis = d3.axisLeft(yScale);
-
-    nl_sim_placeholder.append("g")
-        .attr("transform", "translate(0," + yScale(0) + ")")
-        .call(xAxis);
-    nl_sim_placeholder.append("g")
-        .attr("transform", "translate(" + xScale(0) + ",0)")
-        .call(yAxis);
-
-    // ------------------------------------------------- //
-    // Graph with Observations
-
-    nl_block_pos = nl_block.node().getBoundingClientRect()
-    l_block_pos = l_block.node().getBoundingClientRect()
-
-    x_right = nl_block_pos.x + nl_block_pos.width
-    y_center = (l_block_pos.y + l_block_pos.height) / 2
-
-    var xScale_obs = d3.scaleLinear()
-        .domain([0, T])
-        .range([0, p.obs_width]);
-    var yScale_obs = d3.scaleLinear()
-        .domain([0, 50])
-        .range([p.obs_height, 0]);
-
-    var arrow_nl = nl_block.append("line")
-        .attr("x1", p.dyn_block_width + 2 * p.block_margin_w + p.obs_block_width)
-        .attr("y1", p.dyn_block_height / 2 + p.sim_dim_h / 2 + p.block_margin_h)
-        .attr("x2", x_right - 15)
-        .attr("y2", p.dyn_block_height + p.sim_dim_h / 2 + p.block_margin_h + p.models_dist / 2 - 37)
-        .attr("stroke", "#277C9D")
-        .attr("stroke-width", 2)
-        .attr("marker-end", "url(#arrowhead)")
-
-    l_block.append("line")
-        .attr("x1", p.dyn_block_width + 2 * p.block_margin_w + p.obs_block_width)
-        .attr("y1", p.dyn_block_height / 2)
-        .attr("x2", x_right - 15)
-        .attr("y2", 0)
-        .attr("stroke", "#598938")
-        .attr("stroke-width", 2)
-        .attr("marker-end", "url(#arrowhead)")
-
-    var obs_block = figure.append("g")
-        .attr("transform", "translate(" + (x_right + 2 * p.block_margin_w) + "," + (y_center - p.obs_height / 2) + ")")
-        .attr("width", p.obs_width)
-        .attr("height", p.obs_height);
-
-
-    var xAxis_obs = d3.axisBottom(xScale_obs);
-    var yAxis_obs = d3.axisLeft(yScale_obs);
-
-    var observations = []
-    obs_block.append("g")
-        .attr("transform", "translate(0," + yScale_obs(0) + ")")
-        .call(xAxis_obs);
-    obs_block.append("g")
-        .attr("transform", "translate(" + xScale_obs(0) + ",0)")
-        .call(yAxis_obs);
-
-    var line_obs = d3.line()
-        .x(function (d, i) {
-            return xScale_obs(i);
-        })
-        .y(function (d) {
-            return yScale_obs(d);
-        })
-        .curve(d3.curveMonotoneX);
-
-    var path = obs_block.append("path")
-        .datum(observations)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 1.5)
-        .attr("d", line_obs);
-
-    var _transitions = []
-
-    function update_particles() {
-        for (var i = 0; i < particles_d3.length; i++) {
-            var particle = particles_d3[i]
-            var new_state = lorenz_dynamics(particle)
-            particle.x = new_state.x
-            particle.y = new_state.y
-            particle.z = new_state.z
-
-            particle.path
-                .attr("cx", xScale(particle.x))
-                .attr("cy", yScale(particle.y))
-                .attr("opacity", 1)
-                .attr("r", 4)
-        }
-
-        observations.push(Math.sqrt(Math.pow(particles_d3[0].x, 2) + Math.pow(particles_d3[0].y, 2)))
-        path.attr("d", line_obs).style("opacity", 1)
-        if (observations.length > T) {
-            observations.shift()
-        }
+    function step1(){
+        ml_block.transition().duration(250).attr("opacity", 0)
+        gt_block.transition().duration(250).attr("opacity", 0.5)
+        gt_block.attr("transform", "translate(0, " + (-p.shift_gt) + ")")
+        arrow_obs_gt.transition().duration(250).attr("y2", yScale(0.5) + p.shift_gt)
+        txt_dyn_nl.transition().duration(250).style("opacity", 0)
+        txt_dyn_koopman.transition().duration(250).style("opacity", 0)
+        txt_dyn_kkl.transition().duration(250).style("opacity", 0)
     }
 
-    var interval = setInterval(update_particles, 20);
-
-    l_block.style("opacity", 0)
-
-    function toggle_nl_on() {
-        nl_block.transition().duration(250).style("opacity", 1)
-            .attr("transform", "translate(" + x_center + "," + (p.sim_dim_h / 2 + figure_margin.top + 50) + ")")
-        l_block.transition().duration(250).style("opacity", 0)
-        arrow_nl.transition().duration(250).attr("y2", p.dyn_block_height + p.sim_dim_h / 2 + p.block_margin_h + p.models_dist / 2 - 37)
+    function step2(){
+        ml_block.transition().duration(250).attr("opacity", 1)
+        gt_block.transition().duration(250).attr("opacity", 0.5)
+        gt_block.attr("transform", "translate(0, " + (-p.shift_gt) + ")")
+        arrow_obs_gt.transition().duration(250).attr("y2", yScale(0.5) + p.shift_gt)
+        txt_dyn_nl.transition().duration(250).style("opacity", 1)
+        txt_dyn_koopman.transition().duration(250).style("opacity", 0)
+        txt_dyn_kkl.transition().duration(250).style("opacity", 0)
+    }
+    function step3(){
+        ml_block.transition().duration(250).attr("opacity", 1)
+        gt_block.transition().duration(250).attr("opacity", 0.5)
+        gt_block.attr("transform", "translate(0, " + (-p.shift_gt) + ")")
+        arrow_obs_gt.transition().duration(250).attr("y2", yScale(0.5) + p.shift_gt)
+        txt_dyn_nl.transition().duration(250).style("opacity", 0)
+        txt_dyn_koopman.transition().duration(250).style("opacity", 1)
+        txt_dyn_kkl.transition().duration(250).style("opacity", 0)
+    }
+    function step4(){
+        ml_block.transition().duration(250).attr("opacity", 1)
+        gt_block.transition().duration(250).attr("opacity", 0.5)
+        gt_block.attr("transform", "translate(0, " + (-p.shift_gt) + ")")
+        arrow_obs_gt.transition().duration(250).attr("y2", yScale(0.5) + p.shift_gt)
+        txt_dyn_nl.transition().duration(250).style("opacity", 0)
+        txt_dyn_koopman.transition().duration(250).style("opacity", 0)
+        txt_dyn_kkl.transition().duration(250).style("opacity", 1)
     }
 
-    function toggle_nl_off() {
-        nl_block.transition().duration(250).style("opacity", 0.25)
-            .attr("transform", "translate(" + x_center + "," + (p.sim_dim_h / 2 + figure_margin.top) + ")")
-        l_block.transition().duration(250).style("opacity", 1)
-        arrow_nl.transition().duration(250).attr("y2", p.dyn_block_height + p.sim_dim_h / 2 + p.block_margin_h + p.models_dist / 2)
-    }
-
-    function set_dynamics_koopman() {
-        toggle_nl_off()
-        dynamics_default.transition().duration(500).style("opacity", 0)
-        dynamics_koopman.transition().duration(500).style("opacity", 1)
-        dynamics_kkl.transition().duration(500).style("opacity", 0)
-        l_dyn_rect.transition().duration(500)
-            .attr("fill", "rgba(89,137,56,0.25)")
-            .attr("stroke-width", 2)
-    }
-
-    function set_dynamics_default() {
-        toggle_nl_off()
-        dynamics_default.transition().duration(500).style("opacity", 1)
-        dynamics_koopman.transition().duration(500).style("opacity", 0)
-        dynamics_kkl.transition().duration(500).style("opacity", 0)
-        l_dyn_rect.transition().duration(500)
-            .attr("fill", "rgba(89,137,56,0.25)")
-            .attr("stroke-width", 2)
-    }
-
-    function set_dynamics_kkl() {
-        toggle_nl_off()
-        dynamics_default.transition().duration(500).style("opacity", 0)
-        dynamics_koopman.transition().duration(500).style("opacity", 0)
-        dynamics_kkl.transition().duration(500).style("opacity", 1)
-        l_dyn_rect.transition().duration(500)
-            .attr("fill", "rgba(89,137,56,0.5)")
-            .attr("stroke-width", 4)
-    }
+    step0()
 
     var _transitions = [
         {
-            transitionForward: () => toggle_nl_off(),
-            transitionBackward: () => toggle_nl_on(),
+            transitionForward: () => step1(),
+            transitionBackward: () => step0(),
             index: 0
         },
         {
-            transitionForward: () => set_dynamics_koopman(),
-            transitionBackward: () => set_dynamics_default(),
+            transitionForward: () => step2(),
+            transitionBackward: () => step1(),
             index: 1
         },
         {
-            transitionForward: () => set_dynamics_kkl(),
-            transitionBackward: () => set_dynamics_koopman(),
+            transitionForward: () => step3(),
+            transitionBackward: () => step2(),
             index: 2
         },
+        {
+            transitionForward: () => step4(),
+            transitionBackward: () => step3(),
+            index: 3
+        }
+
     ]
 
+
+    function linear_dynamics(state) {
+        var x = state.x;
+        var y = state.y;
+        var z = state.z;
+        var dx = -x / 2;
+        var dy = -y / 2;
+        var dz = -z / 2;
+
+        return {
+            x: x + dt * dx,
+            y: y + dt * dy,
+            z: z + dt * dz
+        };
+    }
+
+    function lorenz_dynamics(state) {
+        var x = state.x;
+        var y = state.y;
+        var z = state.z;
+        var dx = 10 * (y - x);
+        var dy = x * (28 - z) - y;
+        var dz = x * y - 8 / 3 * z;
+
+        return {
+            x: x + dt * dx,
+            y: y + dt * dy,
+            z: z + dt * dz
+        };
+    }
+
+    var defs = graph.append("defs");
+    defs.append("marker")
+        .attr("id", "arrow")
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("refX", 5)
+        .attr("refY", 3)
+        .attr("orient", "auto")
+        .attr("markerUnits", "strokeWidth")
+        .append("path")
+        .attr("d", "M0,0 L0,6 L6,3 z")
+
+
+    defs.append("marker")
+        .attr("id", "arrow_blue")
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("refX", 5)
+        .attr("refY", 3)
+        .attr("orient", "auto")
+        .attr("markerUnits", "strokeWidth")
+        .append("path")
+        .attr("fill", "#277C9D")
+        .attr("d", "M0,0 L0,6 L6,3 z")
+
+
+    defs.append("marker")
+        .attr("id", "arrow_green")
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .attr("refX", 5)
+        .attr("refY", 3)
+        .attr("orient", "auto")
+        .attr("markerUnits", "strokeWidth")
+        .append("path")
+        .attr("fill", "#598938")
+        .attr("d", "M0,0 L0,6 L6,3 z")
 
 </script>
 </body>

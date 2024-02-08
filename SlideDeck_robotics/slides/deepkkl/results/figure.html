@@ -404,7 +404,7 @@
             .attr("stroke-width", 2)
             .attr("d", lotkavolterra);
 
-        toggle_all_off()
+        step0()
     });
 
     function toggle_kkl_on() {
@@ -460,20 +460,44 @@
         toggle_rnn_off()
         toggle_gru_off()
     }
+
+    function step0(){
+        toggle_all_off()
+    }
+
+    function step1(){
+        toggle_rnn_on()
+        toggle_kkl_off()
+        toggle_gru_off()
+    }
+
+    function step2(){
+        toggle_rnn_on()
+        toggle_kkl_off()
+        toggle_gru_on()
+    }
+
+    function step3(){
+        toggle_rnn_on()
+        toggle_kkl_on()
+        toggle_gru_on()
+    }
+
+
     var _transitions = [
         {
-            transitionForward: () => toggle_rnn_on(),
-            transitionBackward: () => toggle_rnn_off(),
+            transitionForward: () => step1(),
+            transitionBackward: () => step0(),
             index: 0
         },
         {
-            transitionForward: () => toggle_gru_on(),
-            transitionBackward: () => toggle_gru_off(),
+            transitionForward: () => step2(),
+            transitionBackward: () => step1(),
             index: 1
         },
         {
-            transitionForward: () => toggle_all_on(),
-            transitionBackward: () => toggle_kkl_off(),
+            transitionForward: () => step3(),
+            transitionBackward: () => step2(),
             index: 2
         }
     ]
