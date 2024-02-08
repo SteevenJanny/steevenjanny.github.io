@@ -47,7 +47,7 @@
     var n_cells = 5
     var cell_size = (xScale(1) - xScale(0)) / n_cells
 
-    // assets/initial.png
+    // assets/initial.jpg
     img_size = (yScale(1) - yScale(0)) * 0.8
     graph.append("foreignObject")
         .attr("x", xScale(0))
@@ -55,7 +55,7 @@
         .attr("width", img_size)
         .attr("height", img_size)
         .append("xhtml:body")
-        .html('<img src="assets/initial.png" style="width:100%;height:100%;object-fit: contain;border:1px solid black">')
+        .html('<img src="assets/initial.jpg" style="width:100%;height:100%;object-fit: contain;border:1px solid black">')
     graph.append("text")
         .attr("x", xScale(0) + img_size / 2)
         .attr("y", yScale(0.5) - img_size / 2)
@@ -149,7 +149,7 @@
         .attr("width", img_size)
         .attr("height", img_size)
         .append("xhtml:body")
-        .html('<img src="assets/interpolation.png" style="width:100%;height:100%;object-fit: contain;border:1px solid black">')
+        .html('<img src="assets/interpolation.jpg" style="width:100%;height:100%;object-fit: contain;border:1px solid black">')
     graph.append("text")
         .attr("x", 2.5*cell_size)
         .attr("y", yScale(0.5) - img_size / 2)

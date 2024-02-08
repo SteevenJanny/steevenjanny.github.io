@@ -320,14 +320,14 @@
     // ----------------------------------------------------
     // FOREIGN OBJECTS
 
-    // assets/slide29/A.png
+    // assets/slide29/A.jpg
     observed.append("foreignObject")
         .attr("x", xScale(lineleft)-imgwidth - radius*2)
         .attr("y", yScale(linetop)-imgwidth/2)
         .attr("width", imgwidth+10)
         .attr("height", imgwidth+10)
         .append("xhtml:img")
-        .attr("src", "assets/A.png")
+        .attr("src", "assets/A.jpg")
         .attr("width", imgwidth)
         .style("border", "solid 1px black");
 
@@ -344,14 +344,14 @@
         .attr("loop", true)
         .style("border", "solid 1px black");
 
-    // assets/slide29/C.png
+    // assets/slide29/C.jpg
     cf.append("foreignObject")
         .attr("x", xScale(lineleft)-imgwidth - radius*2)
         .attr("y", yScale(linebottom)-imgwidth/2)
         .attr("width", imgwidth+10)
         .attr("height", imgwidth+10)
         .append("xhtml:img")
-        .attr("src", "assets/C.png")
+        .attr("src", "assets/C.jpg")
         .attr("width", imgwidth)
         .style("border", "solid 1px black");
 

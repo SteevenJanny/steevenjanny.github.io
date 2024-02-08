@@ -103,26 +103,26 @@
     // Inputs
     var inputs_size = zone_width * 0.7;
 
-    // assets/slide32/source.png
+    // assets/slide32/source.jpg
     g_inputs.append("foreignObject")
         .attr("x", xScale_1(0))
         .attr("y", yScale(0.25) - inputs_size / 2)
         .attr("width", zone_width)
         .attr("height", (yScale(0.5) - yScale(0)))
         .append("xhtml:img")
-        .attr("src", "assets/source.png")
+        .attr("src", "assets/source.jpg")
         .attr("width", inputs_size)
         .attr("height", inputs_size)
         .style("border", "1px solid black")
 
-    // assets/slide32/target.png
+    // assets/slide32/target.jpg
     g_inputs.append("foreignObject")
         .attr("x", xScale_1(0))
         .attr("y", yScale(0.75) - inputs_size / 2)
         .attr("width", zone_width)
         .attr("height", (yScale(1) - yScale(0.5)))
         .append("xhtml:img")
-        .attr("src", "assets/target.png")
+        .attr("src", "assets/target.jpg")
         .attr("width", inputs_size)
         .attr("height", inputs_size)
         .style("border", "1px solid black")
@@ -285,26 +285,26 @@
     draw_encoder(g_encoder_bottom, x0, x1, y0_down, y1_down, y3_down)
 
 
-    // assets/slide32/feature_source.png
+    // assets/slide32/feature_source.jpg
     g_encoder.append("foreignObject")
         .attr("x", xScale_3(0.5) - inputs_size / 4)
         .attr("y", yScale(0.25 / 2) - inputs_size / 4)
         .attr("width", zone_width)
         .attr("height", (yScale(0.5) - yScale(0)))
         .append("xhtml:img")
-        .attr("src", "assets/feature_source.png")
+        .attr("src", "assets/feature_source.jpg")
         .attr("width", inputs_size / 2)
         .attr("height", inputs_size / 2)
         .style("border", "1px solid black")
 
-    // assets/slide32/keypoint_source.png
+    // assets/slide32/keypoint_source.jpg
     g_encoder.append("foreignObject")
         .attr("x", xScale_3(0.5) - inputs_size / 4)
         .attr("y", yScale(0.25 + 0.25 / 2) - inputs_size / 4)
         .attr("width", zone_width)
         .attr("height", (yScale(0.5) - yScale(0)))
         .append("xhtml:img")
-        .attr("src", "assets/keypoints_source.png")
+        .attr("src", "assets/keypoints_source.jpg")
         .attr("width", inputs_size / 2)
         .attr("height", inputs_size / 2)
         .style("border", "1px solid black")
@@ -335,19 +335,19 @@
         .attr("width", zone_width)
         .attr("height", (yScale(0.5) - yScale(0)))
         .append("xhtml:img")
-        .attr("src", "assets/feature_target.png")
+        .attr("src", "assets/feature_target.jpg")
         .attr("width", inputs_size / 2)
         .attr("height", inputs_size / 2)
         .style("border", "1px solid black")
 
-    // assets/slide32/keypoint_source.png
+    // assets/slide32/keypoint_source.jpg
     g_encoder.append("foreignObject")
         .attr("x", xScale_3(0.5) - inputs_size / 4)
         .attr("y", yScale(0.75 + 0.25 / 2) - inputs_size / 4)
         .attr("width", zone_width)
         .attr("height", (yScale(0.5) - yScale(0)))
         .append("xhtml:img")
-        .attr("src", "assets/keypoints_target.png")
+        .attr("src", "assets/keypoints_target.jpg")
         .attr("width", inputs_size / 2)
         .attr("height", inputs_size / 2)
         .style("border", "1px solid black")
@@ -518,14 +518,14 @@
     // --------------------------------------------------------------
     // Outputs
 
-    // assets/slide32/target.png
+    // assets/slide32/target.jpg
     g_outputs.append("foreignObject")
         .attr("x", xScale_5(0.5) - inputs_size / 2)
         .attr("y", yScale(0.5) - inputs_size / 2)
         .attr("width", zone_width)
         .attr("height", (yScale(0.5) - yScale(0)))
         .append("xhtml:img")
-        .attr("src", "assets/reconstructed.png")
+        .attr("src", "assets/reconstructed.jpg")
         .attr("width", inputs_size)
         .attr("height", inputs_size)
         .style("border", "1px solid black")
