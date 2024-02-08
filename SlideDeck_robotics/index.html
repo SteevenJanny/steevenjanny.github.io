@@ -25,63 +25,1070 @@
 <div class="reveal">
 
     <div class="slides">
-        <section id="title-sec"
-                 data-external="slides/title_page/main.html"
-                 data-menu-title="Title Page">
+        <section id="title-sec" data-menu-title="Title Page">
+            <div class="title">
+                Integrating Deep Learning with Physics and Control Theory
+            </div>
+            <div style="margin-top: 50px">Steeven Janny</div>
+            <div>
+                <video data-autoplay data-src="slides/title_page/assets/teaser.mp4" autoplay="true" loop="true"
+                       muted="true" width="80%"></video>
+                <!--    <img class="no_margin" src="slides/title_page/assets/teaser.gif">-->
+            </div>
+            <div style="margin-top: 0px; margin-bottom: 15px">
+                <div class="grid_row">
+                    <img src="slides/title_page/assets/logo_insa.jpg" class="logo" alt="logo_insa">
+                    <img src="slides/title_page/assets/logo_liris.jpg" class="logo zero-padding" alt="logo_liris">
+                    <img src="slides/title_page/assets/logo_lagepp.jpg" class="logo" alt="logo_lagepp">
+                    <img src="slides/title_page/assets/logo_univ.jpg" class="logo" alt="logo_univ">
+                </div>
+            </div>
+            <table class="row fontsize-15" style="height:25px; color: white; width:100%">
+                <tr>
+                    <td style="background-color: #16485b;text-align: center; vertical-align: middle">
+                        Steeven Janny
+                    </td>
+                    <td style="background-color: #277C9D;text-align: center; vertical-align: middle">
+                        Identification and Simulation of Physical Systems
+                    </td>
+                    <td style="background-color: #43c7fc;text-align: center; vertical-align: middle">
+                        February 13th, 2024
+                    </td>
+                </tr>
+            </table>
+
         </section>
 
-        <section id="education"
-                 data-external="slides/introduction/biography/main.html"
-                 data-menu-title="Biography"></section>
+        <section id="education" data-menu-title="Biography">
+            <div class="row">
+                <p class="bold">Biography</p>
+            </div>
 
-        <section id="context"
-                 data-external="slides/introduction/context/main.html"
-                 data-menu-title="Context"></section>
+            <div class="row" style="height:100px">
+                <div class="col-10" style="height:100%">
+                    <span class="badge" style="background-color: #277c9d;margin-top:40%">&nbsp;</span>
+                </div>
+                <div class="col-90 card" style="height: 100%">
+                    <div class="row" style="height:100px; padding:10px">
+                        <div class="col-10">
+                            <img src="slides/introduction/biography/assets/ens.svg" width="100%">
+                        </div>
+                        <div class="col-90 fontsize-20" style="text-align:left">
+                            <div>Master Degree in Electrical Engineering</div>
+                            <div>ENS Paris-Saclay</div>
+                            <div style="font-size: small">
+                                Sept. 2016 – Sept. 2020
+                                <span class="middot-divider"></span>
+                                <span>Cachan, France</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <section id="intro_simulation"
-                 data-external="slides/introduction/intro_simulation/main.html"></section>
+            <div class="row" style="height:100px;margin-top:10px">
+                <div class="col-10" style="height:100%">
+                    <span class="badge" style="background-color: #277c9d;margin-top:40%">&nbsp;</span>
+                </div>
+                <div class="col-90 card" style="height: 100%">
+                    <div class="row" style="height:100px; padding:10px">
+                        <div class="col-10">
+                            <img src="slides/introduction/biography/assets/insa.svg" width="100%">
+                        </div>
+                        <div class="col-90 fontsize-20" style="text-align:left">
+                            <div>Ph.D. on Physical simulation with deep learning</div>
+                            <div>INSA Lyon</div>
+                            <div style="font-size: small">
+                                Sept. 2020 – Sept. 2023
+                                <span class="middot-divider"></span>
+                                <span>Villeurbanne, France</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="height:100px;margin-top:10px">
+                <div class="col-10" style="height:100%">
+                    <span class="badge" style="background-color: #277c9d;margin-top:40%">&nbsp;</span>
+                </div>
+                <div class="col-90 card" style="height: 100%">
+                    <div class="row" style="height:100px; padding:10px">
+                        <div class="col-10">
+                            <img src="slides/introduction/biography/assets/alstom.jpg" width="100%">
+                        </div>
+                        <div class="col-90 fontsize-20" style="text-align:left">
+                            <div>Senior Data Scientist</div>
+                            <div>Alstom Group</div>
+                            <div style="font-size: small">
+                                Nov. 2023 – Present
+                                <span class="middot-divider"></span>
+                                <span>Villeurbanne, France</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="height:100px;margin-top:40px">
+                <div class="col-10" style="height:100%">
+                    <span class="badge" style="background-color: #598938;margin-top:40%">&nbsp;</span>
+                </div>
+                <div class="col-90 card" style="height: 100%">
+                    <div class="row" style="height:100px; padding:10px">
+                        <div class="col-10">
+                            <img src="slides/introduction/biography/assets/univ.svg" width="100%"
+                                 style="margin-top: 10px">
+                        </div>
+                        <div class="col-90 fontsize-20" style="text-align:left">
+                            <div>Assistant teacher</div>
+                            <div>Université Claude Bernard</div>
+                            <div style="font-size: small">
+                                Sept. 2020 – Sept. 2023
+                                <span class="middot-divider"></span>
+                                <span>Villeurbanne, France</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="height:100px;margin-top:10px">
+                <div class="col-10" style="height:100%">
+                    <span class="badge" style="background-color: #598938;margin-top:40%">&nbsp;</span>
+                </div>
+                <div class="col-90 card" style="height: 100%">
+                    <div class="row" style="height:100px; padding:10px">
+                        <div class="col-10">
+                            <img src="slides/introduction/biography/assets/en.svg" width="100%" style="margin-top: 5px">
+                        </div>
+                        <div class="col-90 fontsize-20" style="text-align:left">
+                            <div>Agregation</div>
+                            <div>Engineering science, minor in computer science</div>
+                            <div style="font-size: small">
+                                Jul. 2019
+                                <span class="middot-divider"></span>
+                                <!--                                <span>Villeurbanne, France</span>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="context" data-menu-title="Context">
+            <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
+            <p class="subtitlebox" style="margin-top:0px;">Three use cases for ML & Physics</p>
+            <table style="width:100%;text-align: center" class="fontsize-20 no_margin">
+                <tr>
+                    <td style="border: none;text-align: center;border-right:1px solid black; background-color: #C0C0C0; border-bottom: 1px solid black;width:33%">
+                        <ol class="rectangle-list">
+                            <li class="blue" value="1"><b>Complex dynamics</b> we don't want/can not model</li>
+                        </ol>
+                    </td>
+                    <td style="border: none;text-align: center;border-right:1px solid black; background-color: #C0C0C0; border-bottom: 1px solid black;width:33%">
+                        <ol class="rectangle-list">
+                            <li class="blue" value="2"><b>Trial & Error</b> process for engineering</li>
+                        </ol>
+                    </td>
+                    <td style="border: none;text-align: center; background-color: #C0C0C0; border-bottom: 1px solid black;width:33%">
+                        <ol class="rectangle-list">
+                            <li class="blue" value="3"><b>Planning actions</b> in simulation in robotics</li>
+                        </ol>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="border: none;border-right:1px solid black;padding-top:20px">
+                        <video data-autoplay data-src="slides/introduction/context/assets/scalar_flow_final.mp4"
+                               autoplay="true" loop="true"
+                               muted="true" width="720"></video>
+                        <p class="citation">Eckert et al. (2019). ScalarFlow: a large-scale volumetric
+                            data set of real-world scalar transport flows for computer
+                            animation and machine learning. TOG</p>
+                    </td>
+                    <td style="border: none;border-right:1px solid black">
+                        <video data-autoplay data-src="slides/introduction/context/assets/fluid.mp4" autoplay="true"
+                               loop="true"
+                               muted="true" width="720"></video>
+                        <p class="citation">Allen et al. (2019), Physical design using
+                            differentiable learned simulators. arXiv preprint.</p>
+                    </td>
+                    <td style="border: none">
+                        <video data-autoplay data-src="slides/introduction/context/assets/boston_dynamics.mp4"
+                               autoplay="true" loop="true"
+                               muted="true" width="720"></video>
+                        <p class="citation">Boston Dynamics</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="border: none;text-align: center;border-right:1px solid black;padding-top: 25px">
+                        <ul class="ul_fancy" style="margin-left:0">
+                            <li class="blue">No expert knowledge</li>
+                            <li class="blue">Automatic identification</li>
+                        </ul>
+                    </td>
+                    <td style="border: none;text-align: center;border-right:1px solid black;padding-top: 25px">
+                        <ul class="ul_fancy" style="margin-left:0">
+                            <li class="blue">Faster simulation ...</li>
+                            <li class="blue">...means more iterations</li>
+                        </ul>
+                    </td>
+                    <td style="border: none;text-align: center;padding-top: 25px">
+                        <ul class="ul_fancy" style="margin-left:0">
+                            <li class="blue">Real-time planning</li>
+                            <li class="blue">Complex dynamics</li>
+                        </ul>
+                    </td>
+                </tr>
+
+            </table>
+        </section>
+
+        <section id="intro_simulation">
+            <section data-menu-title="Introduction">
+
+                <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
+                <p class="subtitlebox" style="margin-top:0px;">Recipe for physical simulation</p>
+                <div>
+                    <ol class="rounded-list fontsize-20" style="margin-right: 25px">
+                        <li class="blue" value="1">From <b>Physics</b> and First Principles</li>
+                    </ol>
+                    <ol class="rounded-list fontsize-20" style="margin-left: 25px">
+                        <li class="red" value="2">From <b>Data</b> and Machine Learning</li>
+                    </ol>
+                </div>
+
+                <div class="r-stretch">
+                    <div class="fig-container" data-file="slides/introduction/intro_simulation/figure.html"
+                         data-style="width:100%; align:center"
+                         style="height: 100%; margin-top: 1%" data-scroll="no" data-preload
+                         data-overflow-shown=true></div>
+                </div>
+
+                <table class="fontsize-25" style="width: 100%;text-align: center">
+                    <tr>
+                        <td class="custom-td" style="width:20%;">Initial
+                            Condition
+                        </td>
+                        <td class="custom-td fontsize-30">→</td>
+                        <td class="custom-td">
+                            <div style="border:2px solid black; border-radius: 10px;padding: 15px;">
+                                <div class="row">
+                                    <div class="col-45 rounded_box fontsize-20"
+                                         style="height:100px;padding-top: 10px; text-align: center">
+                                        <b>Dynamics</b>
+                                        $$\frac{\partial \mathbf{s}}{\partial t} = {\color{#277C9D}
+                                        f}(\mathbf{s})$$
+                                    </div>
+                                    <div class="col-10" style="height:100px;padding-top: 40px">+</div>
+                                    <div class="col-45 rounded_box fontsize-20"
+                                         style="height:100px;padding-top: 10px; text-align:center">
+                                        <p class="bold no_padding no_margin">Numerical solver</p>
+                                        <p class="fas fa-cogs no_margin no_padding" style="font-size: 30px;"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="custom-td fontsize-30">→</td>
+                        <td class="custom-td"><p>Trajectory</p></td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
+                <p class="subtitlebox" style="margin-top:0px;">How ?</p>
+                <div class="row">
+                    <div class="col-50">
+                        <ol class="rounded-list fontsize-20">
+                            <li class="blue" value="1">From <b>Physics</b> and First Principles</li>
+                        </ol>
+
+                        <ul class="ul_fancy fontsize-20" style="width: 50%; margin-left: 10%">
+                            <li class="blue"> Fiability <p class="light-text fontsize-15"> physics laws are thoroughly
+                                validated, well known, and generalizable</p></li>
+                            <li class="blue"> Explicability <p class="light-text fontsize-15"> models are easier to
+                                understand, at least at a high level of abstraction </p></li>
+                        </ul>
+                        </br>
+                        <ul class="ul_fancy fontsize-20" style="width: 50%; margin-left: 10%">
+                            <li class="red"> Difficulty <p class="light-text fontsize-15"> building a model from first
+                                principle is hard, not always possible.</p></li>
+                            <li class="red"> Slow <p class="light-text fontsize-15"> in general case, simulation is
+                                computationnally intensive</p></li>
+                        </ul>
+
+                    </div>
+                    <div class="col-50">
+                        <ol class="rounded-list fontsize-20" style="margin-left: 25px" data-fragment-index="1">
+                            <li class="red" value="2">From <b>Data</b> and Machine Learning</li>
+                        </ol>
+
+                        <ul class="ul_fancy fontsize-20" style="width: 50%; margin-left: 10%">
+                            <li class="blue"> Easier <p class="light-text fontsize-15"> we let the neural network and
+                                the
+                                optimization extract patterns from the data</p></li>
+                            <li class="blue"> Faster <p class="light-text fontsize-15"> once trained, they are faster
+                                than
+                                most simulation algorithms </p></li>
+                        </ul>
+                        </br>
+                        <ul class="ul_fancy fontsize-20" style="width: 50%; margin-left: 10%">
+                            <li class="red"> Generalizability <p class="light-text fontsize-15"> no guarantee that the
+                                model will generalize outside training domain</p></li>
+                            <li class="red"> Reliability <p class="light-text fontsize-15"> no guarantee of robustness
+                                to
+                                noise and/or stability</p></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fragment">
+                    <p> Then, why not do both ?</p>
+                    <p class="fontsize-20"> Hybrid simulation with Physics + Machine Learning</p>
+                </div>
+            </section>
+            <section>
+                <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
+                <p class="subtitlebox" style="margin-top:0px;">SOTA on Physics + Deep Learning</p>
+
+                <div class="row fontsize-20">
+                    <div class="col-40"></div>
+                    <div class="col-10">
+                        <div style="background-color: #1D7C9D99; border-radius: 10px"> Physics</div>
+                    </div>
+                    <div class="col-10">
+                        <div style="background-color: #59893899; border-radius: 10px"> Learning</div>
+                    </div>
+                </div>
+
+                <div class="row fragment semi-fade-out" data-fragment-index="1">
+                    <ol class="rectangle-list fontsize-20" style="width: 100%">
+                        <li class="" value="1"> When the <b>Dynamics</b> is known:</li>
+                    </ol>
+
+                    <table class="fontsize-20" style="width: 100%;">
+                        <tr>
+                            <td class="custom-td">
+                                <div class="rounded_box blue fontsize-20"
+                                     style="padding-top: 10px;width:200px; text-align: center">
+                                    $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                                </div>
+                            </td>
+                            <td class="custom-td">+</td>
+                            <td class="custom-td">
+                                <div class="rounded_box green fontsize-20"
+                                     style="padding-top: 10px;width:200px; text-align: center;height:20px">
+                                    <span class="bold no_padding no_margin"> Solver</span>
+                                    <span class="fas fa-cogs no_margin no_padding"></span>
+                                </div>
+                            </td>
+                            <td class="custom-td">=</td>
+                            <td class="custom-td"><a
+                                    href="https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125"
+                                    target="_blank">PINNs</a></td>
+                        </tr>
+                    </table>
+                    <p class="citation">- Raissi et al. (2019). PINNs: A DL framework
+                        for solving forward and inverse problems involving nonlinear PDEs. JCP</p>
+                </div>
+
+                <div class="row fragment fade-in-then-semi-out" data-fragment-index="1">
+                    <ol class="rectangle-list fontsize-20" style="width: 100%">
+                        <li class="" value="2"> When the <b>Solver</b> is known:</li>
+                    </ol>
+
+                    <table class="fontsize-20" style="width: 100%">
+
+                        <tr>
+                            <td class="custom-td" style="text-align: right"> Physics from learning</td>
+                            <td class="custom-td">
+                                <div class="rounded_box fontsize-20"
+                                     style="padding-top: 10px;width:200px; text-align: center;margin:auto;background-color: rgba(89,137,56,0.5)">
+                                    $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                                </div>
+                            </td>
+                            <td class="custom-td" rowspan="4">+</td>
+                            <td class="custom-td" rowspan="4">
+                                <div class="rounded_box blue fontsize-20"
+                                     style="height:20px;padding-top: 10px;width:200px; text-align: center">
+                                    <span class="bold no_padding no_margin">Solver</span>
+                                    <span class="fas fa-cogs no_margin no_padding"></span>
+                                </div>
+                            </td>
+                            <td class="custom-td" rowspan="4"> =</td>
+                            <td class="custom-td" style="text-align: center;"><a href="https://arxiv.org/abs/1806.07366"
+                                                                                 target="_blank">Neural-ODE</a></td>
+                        </tr>
+
+                        <tr>
+                            <td class="custom-td" style="text-align: right"> Learning residual</td>
+                            <td class="custom-td">
+                                <table class="no_margin no_padding" style="width:100%">
+                                    <tr>
+                                        <td class="custom-td">
+                                            <div class="rounded_box fontsize-20"
+                                                 style="text-align: center; background-color: rgba(39,124,157,0.5);margin:auto">
+                                                $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                                            </div>
+                                        </td>
+                                        <td class="custom-td">+</td>
+                                        <td class="custom-td">
+                                            <div class="rounded_box fontsize-20"
+                                                 style="text-align: center; background-color: rgba(89,137,56,0.5);margin:auto">
+                                                $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <td class="custom-td" style="text-align: center;"><a
+                                    href="https://arxiv.org/pdf/2010.04456.pdf"
+                                    target="_blank">Aphinity</a></td>
+                        </tr>
+                        <tr>
+                            <td class="custom-td" style="text-align: right"> Inductive biases</td>
+                            <td class="custom-td">
+                                <div class="rounded_box fontsize-20"
+                                     style="padding-top: 10px;width:200px; text-align: center;background: rgb(89,137,56); background: linear-gradient(45deg, rgba(89,137,56,0.5) 40%, rgba(29,124,157,0.5) 60%);margin:auto">
+                                    $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                                </div>
+                            </td>
+                            <td class="custom-td" style="text-align: center;"><a href="https://arxiv.org/abs/2003.14162"
+                                                                                 target="_blank"
+                            >Deep SSM</a></td>
+
+
+                        </tr>
+                    </table>
+                    <p class="citation">- Chen et al. (2018). Neural ordinary differential equations. NeurIPS</p>
+                    <p class="citation">- Yin et al. (2021). Augmenting physical models with deep networks for complex
+                        dynamics forecasting. JSM</p>
+                    <p class="citation">- Gedon et al. (2021). Deep state space models for nonlinear system
+                        identification.
+                        IFAC</p>
+                </div>
+
+                <div class="row fragment" data-fragment-index="3">
+                    <ol class="rectangle-list fontsize-20" style="width: 100%">
+                        <li class="" value="3"> When everything needs to be learned:</li>
+                    </ol>
+
+                    <table class="fontsize-20" style="width: 100%">
+                        <tr>
+                            <td class="custom-td" style="text-align: right; width:24%"> End-to-end</td>
+                            <td class="custom-td">
+
+                                <div class="rounded_box fontsize-20"
+                                     style="padding-top: 10px;width:400px; text-align: center;background: rgb(89,137,56); background: linear-gradient(45deg, rgba(89,137,56,0.5) 40%, rgba(29,124,157,0.5) 60%);">
+
+                                    <span class="no_padding no_margin">$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$</span>
+                                    <span class="bold no_padding no_margin">+</span>
+                                    <span class="bold no_padding no_margin">Solver</span>
+                                    <span class="fas fa-cogs no_margin no_padding"></span>
+                                </div>
+                            </td>
+
+                            <td class="custom-td">=</td>
+                            <td class="custom-td">
+                                <p class="no_margin"><a href="https://arxiv.org/abs/2003.01460"
+                                                        target="_blank">PhyDNet</a>
+                                </p>
+                                <p class="no_margin"><a href="https://arxiv.org/abs/2010.03409"
+                                                        target="_blank">MeshGraphNet</a></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <p class="citation">- Guen et al. (2020). Disentangling physical dynamics from unknown factors for
+                        unsupervised video prediction. CVPR</p>
+                    <p class="citation">- Pfaff et al. (2020). Learning Mesh-Based Simulation with Graph Networks.
+                        ICLR</p>
+
+                </div>
+            </section>
+        </section>
 
         <section id="agenda1"
                  data-external="slides/agenda/main.html"
                  data-menu-title="Agenda (Eagle)"></section>
 
-        <section id="intro_navier"
-                 data-external="slides/eagle/intro_navier/main.html"></section>
+        <section id="intro_navier" data-menu-title="Simulating fluids">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Simulating fluid is
+                difficult </p>
+            <p class="no_margin fontsize-30"></p>
+            <table style="width: 100%">
+                <tr>
+                    <td class="no_padding"
+                        style="align-content: center;vertical-align: middle; text-align: center;width:60%">
+                        <video data-autoplay src="slides/eagle/intro_navier/assets/coffee.mp4" autoplay="true"
+                               loop="true"
+                               data-ignore muted="true" width="100%"></video>
+                    </td>
+                    <td style="align-content: center;vertical-align: middle; text-align: center;width:40%">
+                        <div class="theorem_title">The Navier-Stokes equations:</div>
+                        <div class="theorem_content">
+                            $$\begin{array}{cl}
+                            \dot{\mathbf{u}} + (\mathbf{u}\cdot \nabla) \mathbf{u} &= -\nabla p + \nu \Delta
+                            \mathbf{u} + \mathbf{f} \\
+                            \nabla \cdot \mathbf{u} &= 0 \\
+                            \end{array}$$
+                        </div>
+                        <ul class="ul_fancy fontsize-20 no_margin">
+                            <li class="red">No known general solution</li>
+                            <li class="red">Direct simulation is difficult</li>
+                            <li class="red">Multi-scale dynamics</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <div class="fontsize-20">
+                <u>Example</u>: Simulating air flow from the AC in this room
+                <table style="width: 50%;border:1px solid black">
+                    <tr>
+                        <td style="text-align: center;border:1px solid black">Space discretization</td>
+                        <td style="text-align: center">Time discretization</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;border:1px solid black">1mm</td>
+                        <td style="text-align: center;border:1px solid black">1ms</td>
+                    </tr>
+                </table>
+                <p class="citation">-Wang, M., & Chen, Q. (2010). On a hybrid rans/les approach for indoor airflow
+                    modeling.
+                    HVAC&R Research.</p>
+            </div>
+        </section>
+        <section>
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Tricks for CFD </p>
+            <div class="row">
+                <div class="col-50" style="border-right:1px solid black">
+                    <div>
+                        <p class="bold no_margin fontsize-25" style="color: #277C9D;">Smoothed Particles
+                            Hydrodynamics</p>
+                        <p class="light-text">Lagrangian approach of fluids : simulate
+                            particles interactions.</p>
+                        <ul class="ul_fancy fontsize-20">
+                            <li class="green">Real-time, good-looking</li>
+                            <li class="red"># of particles, physical accuracy</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <video data-autoplay src="slides/eagle/intro_navier/assets/liquid.mp4" autoplay="true"
+                               loop="true" width="100%" muted="true"></video>
+                        <p class="citation">- Gingold et al. (1977). Smoothed
+                            particle hydrodynamics: theory and application to non-spherical stars. Royal
+                            Astronomical Society.</p>
+                    </div>
+                </div>
+                <div class="col-50">
+                    <div>
+                        <p class="bold no_margin fontsize-25" style="color: #277C9D;">Stable Fluid Simulation </p>
+                        <p class="light-text">Lagrangian/Eulerian approach of fluid: fixed
+                            cell and study I/O</p>
+                        <ul class="ul_fancy fontsize-20">
+                            <li class="green">Fast, and plausible</li>
+                            <li class="red">Physical accuracy (for CG only)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <video data-autoplay src="slides/eagle/intro_navier/assets/smoke.mp4" autoplay="true"
+                               loop="true" muted="true" width="100%"></video>
+                    </div>
+                    <p class="citation">- Stam, J. (1999). Stable Fluids.</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Engineer-grade simulations</p>
+            <div>
+                <video data-autoplay data-src="slides/eagle/intro_navier/assets/rans.mp4" autoplay="true"
+                       loop="true"
+                       muted="true" height="200px"></video>
+            </div>
+            <div>
+                <p class="bold no_margin" style="color: #277C9D">RANS Simulations</p>
+                <div class="row">
+                    <div class="col-60">
+                        <div class="theorem_title" style="background-color: #598938">
+                            Reynolds-Averaged Navier-Stokes (RANS)
+                        </div>
+                        <div class="theorem_content fontsize-20">
+                            <span>Continuity:</span>
+                            $$\text{div}(\mathbf{\tilde{U}})=0$$
+                            <span>Reynolds equations:</span>
+                            $$\begin{array}{ll}
+                            \frac{\partial \tilde{U}}{\partial t} + \text{div}(\tilde{U}\mathbf{\tilde{U}}) &=
+                            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial x} + \mu
+                            \text{div}(\text{grad}(\tilde{U})) + \rho \color{#E77475}{\tau_x}\\
+                            \frac{\partial \tilde{V}}{\partial t} + \text{div}(\tilde{V}\mathbf{\tilde{U}}) &=
+                            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial y} + \mu
+                            \text{div}(\text{grad}(\tilde{V})) + \rho \color{#E77475}{\tau_y}\\
+                            \frac{\partial \tilde{W}}{\partial t} + \text{div}(\tilde{W}\mathbf{\tilde{U}}) &=
+                            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial z} + \mu
+                            \text{div}(\text{grad}(\tilde{W})) + \rho \color{#E77475}{\tau_z}\\
+                            \end{array}$$
+                        </div>
+                    </div>
+                    <div class="col-40 fontsize-17" style="margin-top: 30px;padding-left: 30px">
+                        <ul class="rectangle-list">
+                            <li class="blue" value="1">Standard in engineering, works with irregular meshes</li>
+                            <li class="blue" value="2">Computation time is controlled (depending on the mesh
+                                resolution)
+                            </li>
+                            <li class="blue" value="3">Accuracy is handled via the turbulence model</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="citation" style="padding-top: 10px">- Versteeg et al. (2007). An
+                introduction to computational fluid dynamics: the finite volume method. Pearson education.</p>
+        </section>
 
-        <section id="public-datasets"
-                 data-external="slides/eagle/public_datasets/main.html"
-                 data-menu-title="Existing Dataset"></section>
+        <section id="public-datasets" data-menu-title="Existing Dataset">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;"> Public Datasets for Learning Fluid
+                Dynamics</p>
+            <div class="r-stretch">
+                <div class="fig-container" data-file="slides/eagle/public_datasets/figure.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
+            </div>
+            <p class='citation'> [1] Pfaff et al. (2020). Learning Mesh-Based Simulation with Graph Networks. ICLR </p>
+            <p class='citation'> [2] Han et al. (2021). Predicting Physics in Mesh-reduced Space with Temporal
+                Attention. ICLR </p>
+            <p class='citation'> [3] Eckert et al. (2019). A large-scale volumetric data set of real-world scalar
+                transport flows for computer animation and ML. TOG.</p>
+            <p class='citation'> [4] Kanov et al. (2015). The JHTB: An open simulation laboratory for turbulence
+                research. Computing in Science & Engineering </p>
+        </section>
 
-        <section id="intro-eagle"
-                 data-external="slides/eagle/intro_eagle/main.html"></section>
+        <section id="intro-eagle">
+            <section data-menu-title="EAGLE Dataset">
+                <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                    dynamics</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
+                    <img class="no_margin" src="slides/eagle/intro_eagle/assets/eagle.ico" width="30"> EAGLE Dataset
+                </p>
 
-        <section id="sota_eagle"
-                 data-external="slides/eagle/sota/main.html"></section>
+                <div class="r-stretch">
+                    <div class="fig-container" data-file="slides/eagle/intro_eagle/figure.html"
+                         data-style="width:100%; align:center; height:100%" data-preload
+                         style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
+                </div>
+                <div class="row">
+                    <video data-autoplay data-src="slides/eagle/intro_eagle/assets/neural_lander.mp4" autoplay="true"
+                           loop="true"
+                           muted="true" height="150px"></video>
+                    <p class="citation">- Shi et al. (2019). Neural lander: Stable drone landing control using learned
+                        dynamics. ICRA</p>
+                </div>
+            </section>
+            <section>
+                <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                    dynamics</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
+                    <img class="no_margin" src="slides/eagle/intro_eagle/assets/eagle.ico" width="30"> EAGLE Dataset
+                </p>
 
-        <section id="mesh_transformer"
-                 data-external="slides/eagle/model/main.html"
-                 data-menu-title="Mesh Transformer"></section>
+                <div class="row fontsize-15 bold">
+                    <div class="col-33 no_padding">
+                        <p class="no_margin">Step</p>
+                        <video data-autoplay data-src="slides/eagle/intro_eagle/assets/crenellation.mp4" autoplay="true"
+                               loop="true"
+                               muted="true" width="100%"></video>
+                    </div>
+                    <div class="col-33 no_padding">
+                        <p class="no_margin">Triangular</p>
+                        <video data-autoplay data-src="slides/eagle/intro_eagle/assets/triangular.mp4" autoplay="true"
+                               loop="true"
+                               muted="true" width="100%"></video>
+                    </div>
+                    <div class="col-33 no_padding">
+                        <p class="no_margin">Splines</p>
+                        <video data-autoplay data-src="slides/eagle/intro_eagle/assets/splines.mp4" autoplay="true"
+                               loop="true"
+                               muted="true"></video>
+                    </div>
+                </div>
+                <div class="row">
 
-        <section id="results_eagle"
-                 data-external="slides/eagle/results/main.html"></section>
+                    <div class="col-50 no_padding">
+                        <video data-autoplay data-src="slides/eagle/intro_eagle/assets/downsampled_mesh.mp4"
+                               autoplay="true" loop="true"
+                               muted="true" width="100%"></video>
+                    </div>
+                    <div class="col-50 no_padding fontsize-15">
+                        <ul class="rectangle-list" style="padding-top: 25px">
+                            <li class="blue" style="width:300px"> 1,200 different simulations</li>
+                            <li class="blue" style="width:300px"> Irregular mesh / Dynamic</li>
+                            <li class="blue" style="width:300px; margin-bottom: 25px"> Accurate turbulence model</li>
+
+                            <li class="green" style="width:300px"> 2 months of simulation on 8x A100 GPUs</li>
+                            <li class="green" style="width:300px"> $\sim$4TB of raw mesh data to post-process</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="light-text fontsize-12"> Simulations realized by <a
+                        href="https://fr.linkedin.com/in/aur%C3%A9lien-b%C3%A9n%C3%A9teau" target="_blank">Aurélien
+                    Bénéteau</a> during is Master internship with us.</p>
+            </section>
+        </section>
+
+        <section id="sota_eagle">
+            <section data-menu-title="SOTA in fluid dynamics">
+                <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                    dynamics</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Deep Learning for Fluid
+                    Mechanics</p>
+                <table style="width: 100%">
+                    <tr>
+                        <td class="no_padding"
+                            style="align-content: center;vertical-align: middle; text-align: center;width:70%">
+                            <p class="theorem_title" style="margin: auto">Convolutional Neural
+                                Networks</p>
+                            <div class="fig-container theorem_content" data-file="slides/eagle/sota/figure1.html"
+                                 data-style="width:100%; align:center; height:100%"
+                                 style="height: 100%;padding: 0;margin-bottom: 20px" data-scroll="no"
+                                 data-overflow-shown=true data-preload></div>
+
+                            <p class="citation">- Stachenfeld et al. (2021). Learned simulators for turbulence. ICLR</p>
+                        </td>
+                        <td style="align-content: center;vertical-align: middle; text-align: center;width:30%;padding: 0">
+                            <ul class="ul_fancy no_margin fontsize-20">
+                                <li class="blue">Well-mastered tool by DL community</li>
+                                <li class="red">No adaptive resolution, no complex geometry</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%;margin-top: 20px" class="fragment">
+                    <tr>
+                        <td style="align-content: center;vertical-align: middle; text-align: center;width:33%">
+                            <p class="no_margin fontsize-15">High resolution sim. on <b>irregular mesh</b></p>
+                            <img src="slides/eagle/sota/assets/ferret_1.jpg" width="100%">
+                        </td>
+                        <td class="no_padding"
+                            style="align-content: center;vertical-align: middle; text-align: center;width:66%">
+                            <div class="fig-container" data-file="slides/eagle/sota/figure2.html"
+                                 data-style="width:100%; align:center; height:250px"
+                                 data-scroll="no" data-overflow-shown=true data-preload></div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                    dynamics</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
+                    Receptive field of Graph Neural Networks
+                </p>
+                <table style="width: 100%;margin-top: 20px">
+                    <tr>
+                        <td style="align-content: center;vertical-align: middle; text-align: center;width:40%">
+
+                            <div class="fig-container" data-file="slides/eagle/sota/figure3.html"
+                                 data-style="width:100%; align:center; height:100%" data-preload
+                                 style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
+                        </td>
+                        <td class="no_padding"
+                            style="align-content: center;vertical-align: middle; text-align: center;width:60%">
+                            <p class="theorem_title" style="margin: auto;">Graph Neural Networks</p>
+                            <div class="theorem_content" style="padding: 0">
+                                <div class="fig-container" data-file="slides/eagle/sota/figure4.html"
+                                     data-style="width:100%; align:center; height:120px" style="margin-bottom: 20px"
+                                     data-scroll="no" data-overflow-shown=true></div>
+                            </div>
+                            <p class="citation">- Pfaff et al. (2020). Learning Mesh-Based Simulation with Graph
+                                Networks. ICLR</p>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="fragment" style="height: 400px">
+                    <div class="fig-container" data-file="slides/eagle/sota/figure5.html"
+                         data-style="width:100%; align:center; height:100%" data-preload
+                         style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
+                </div>
+            </section>
+        </section>
+
+        <section id="mesh_transformer" data-menu-title="Mesh Transformer">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
+                Mesh Transformer
+            </p>
+
+            <div class="r-stretch">
+                <div class="fig-container" data-file="slides/eagle/model/figure.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overflow-shown=true></div>
+            </div>
+        </section>
+
+        <section id="results_eagle">
+            <section data-menu-title="Results">
+                <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                    dynamics</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
+                    Comparison with State-of-the-Art
+                </p>
+
+                <video data-autoplay src="slides/eagle/results/assets/eagle.mp4" autoplay="true" loop="true"
+                       muted="true" width="100%"></video>
+
+                <video data-autoplay src="slides/eagle/results/assets/cylinderflow.mp4" autoplay="true" loop="true"
+                       muted="true" width="100%"></video>
+
+                <video data-autoplay src="slides/eagle/results/assets/scalarflow.mp4" autoplay="true" loop="true"
+                       muted="true" width="100%"></video>
+
+            </section>
+            <section>
+
+                <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                    dynamics</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">
+                    Comparison with State-of-the-Art
+                </p>
 
 
-        <section id="followup"
-                 data-external="slides/continuous_pde/followup/main.html"
-                 data-menu-title="A step toward real world"></section>
+                <div style="height: 200px;width:100%">
+                    <div class="fig-container" data-file="slides/eagle/results/figure1.html"
+                         data-style="width:100%; align:center; height:100%"
+                         style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+                </div>
 
-        <section id="sota_continuous_pde"
-                 data-external="slides/continuous_pde/sota/main.html"></section>
 
-        <section id="method_continuous_pde"
-                 data-external="slides/continuous_pde/method/main.html"></section>
+                <img src="slides/eagle/results/assets/table1.jpg" style="width:70%;margin-top:0;margin-bottom:0">
+                <img src="slides/eagle/results/assets/table2.jpg" style="width:70%;margin-top:0;margin-bottom:0">
 
-        <section id="results_continuous_pde"
-                 data-external="slides/continuous_pde/results/main.html"></section>
+                <div class="row fontsize-15">
+                    <div class="col-50">
+                        <ul class="rectangle-list" style="width:80%; margin:auto">
+                            <li class="blue"> More accurate forecasting</li>
+                        </ul>
+                    </div>
+                    <div class="col-50">
+                        <ul class="rectangle-list" style="width:80%; margin:auto">
+                            <li class="blue"> Faster inference</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <section id="fluid_conclusion"
-                 data-external="slides/continuous_pde/conclusion/main.html"
-                 data-menu-title="Conclusion Eagle"></section>
+                <div class="">
+                    <p class="citation">- Stachenfeld et al. (2021). Learned simulators for turbulence. ICLR</p>
+                    <p class="citation">- Pfaff et al. (2020). Learning Mesh-Based Simulation with Graph Networks.
+                        ICLR</p>
+                </div>
+
+            </section>
+            <section>
+                <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                    dynamics</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Attention maps</p>
+
+                <div class="r-stretch">
+                    <div class="fig-container" data-file="slides/eagle/results/figure2.html"
+                         data-style="width:100%; align:center; height:100%" data-preload
+                         style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+                </div>
+            </section>
+        </section>
+
+
+        <section id="followup" data-menu-title="A step toward real world">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">A step toward real world</p>
+
+            <div class="row fontsize-25">
+                <div class="col-50">
+                    <p class="bold no_margin fontsize-25" style="color: #277C9D;">Simulation data</p>
+                    <video data-autoplay data-src="slides/continuous_pde/followup/assets/airfoil_sim.mp4"
+                           autoplay="true"
+                           loop="true"
+                           muted="true" height="200px"
+                           style="padding:10px; border:1px solid black; border-radius: 5px; background-color: #EFEFEF"></video>
+                </div>
+                <div class="col-50">
+                    <p class="bold no_margin fontsize-25" style="color: #277C9D;">Real world measurements</p>
+                    <video data-autoplay data-src="slides/continuous_pde/followup/assets/airfoil_real.mp4"
+                           autoplay="true"
+                           loop="true" muted="true" height="200px"
+                           style="padding:10px; border:1px solid black; border-radius: 5px; background-color: #EFEFEF"></video>
+                </div>
+            </div>
+
+            <div class="fontsize-25" style="margin-top:100px">
+                <ul class="rectangle-list" style="width:100%">
+                    <li> How to learn continuous simulation from partial observations ?</li>
+                </ul>
+                <ul class="ul_fancy">
+                    <li class="blue"> Training data are sparse in space and time</li>
+                    <li class="blue"> Simulation can be queried at any location in space and time</li>
+                </ul>
+            </div>
+
+            <div class="r-stretch"></div>
+            <p class="citation">- Department of Engineering, University of Cambridge, multimedia video from Physics
+                Education, 2003, by Holger Babinsky.</p>
+            <p class="citation">- CFD Ninja</p>
+        </section>
+
+        <section id="sota_continuous_pde" data-menu-title="SOTA in dense prediction">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Litterature on space & time
+                continuous
+                simulation</p>
+
+            <div>
+                <p class="theorem_title" style="margin: auto">DINo</p>
+                <div class="fig-container theorem_content" data-file="slides/continuous_pde/sota/figure1.html"
+                     data-style="width:100%; align:center; height:200px" data-preload
+                     style="height: 100%;padding: 0;margin-bottom: 20px" data-scroll="no"
+                     data-overflow-shown=true></div>
+
+                <p class="citation">-Yin et al. (2022). Continuous PDE Dynamics Forecasting with Implicit Neural
+                    Representations. In
+                    ICLR</p>
+            </div>
+            <div class="fragment">
+                <p class="theorem_title" style="margin: auto">MaGNet</p>
+                <div class="fig-container theorem_content" data-file="slides/continuous_pde/sota/figure2.html"
+                     data-style="width:100%; align:center; height:200px" data-preload
+                     style="height: 100%;padding: 0;margin-bottom: 20px" data-scroll="no"
+                     data-overflow-shown=true></div>
+
+                <p class="citation">-Boussif et al. (2022). MAgnet: Mesh agnostic neural PDE solver. In NeurIPS</p>
+            </div>
+        </section>
+
+        <section id="method_continuous_pde" data-menu-title="Continuous solver">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;margin-bottom: 0px">Our method</p>
+
+
+            <div class="r-stretch">
+                <div class="fig-container" data-file="slides/continuous_pde/method/figure1.html"
+                     data-style="width:100%; align:center" data-preload
+                     style="height: 100%;padding: 0" data-scroll="no"
+                     data-overflow-shown=true></div>
+            </div>
+
+            <div class="r-stack" style="margin-bottom: 10px">
+                <div class="fragment"></div>
+                <div class="fontsize-15 fragment fade-in-then-out" style="margin-top: 10px;width:100%">
+                    <div class="theorem_title">Proposition 1 [Janny et al. (2024)]</div>
+                    <div class="theorem_content">
+                        <b>System 1</b> holds smaller error upper bounds than the
+                        standard <b>encode-process-decode</b> approach.
+                    </div>
+                </div>
+
+                <div class="fragment"></div>
+
+                <div class="fontsize-15 fragment" style="margin-top: 10px;width:100%">
+                    <div class="theorem_title">Proposition 2 [Janny et al. (2024)]</div>
+                    <div class="theorem_content">
+                        <b>System 2</b> exists, and takes benefits from gathering information at different time scales.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="results_continuous_pde" data-menu-title="Results">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;margin-bottom: 0px">Results</p>
+
+            <div class="r-stretch">
+                <div class="fig-container" data-file="slides/continuous_pde/results/figure1.html"
+                     data-style="width:100%; align:center;" data-preload
+                     style="height: 100%;padding: 0" data-scroll="no"
+                     data-overflow-shown=true></div>
+            </div>
+        </section>
+
+        <section id="fluid_conclusion" data-menu-title="Conclusion Eagle">
+            <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
+                dynamics</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Towards applications in
+                robotics</p>
+
+            <table class="fontsize-20" style="width: 100%">
+                <tr>
+                    <td class="custom-td" style="text-align: center;width:50%">
+                        <ul class="rectangle-list" style="width: 90%">
+                            <li>Turbulence modeling for UAV control</li>
+                        </ul>
+                    </td>
+                    <td class="custom-td fragment" data-fragment-index="1" style="text-align: center;width:50%">
+                        <ul class="rectangle-list" style="width: 90%">
+                            <li>High-speed flight in the wild</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="custom-td" style="text-align: center;;width:50%">
+                        <img src="slides/continuous_pde/conclusion/assets/teaser.jpg" style="width: 60%;margin:auto">
+                    </td>
+                    <td class="custom-td fragment" data-fragment-index="1" style="text-align: center;;width:50%">
+                        <video data-autoplay data-src="slides/continuous_pde/conclusion/assets/drone_real.mp4"
+                               autoplay="true"
+                               loop="true" muted="true" width="49%"></video>
+                        <video data-autoplay data-src="slides/continuous_pde/conclusion/assets/drone_simu.mp4"
+                               autoplay="true"
+                               loop="true" muted="true" width="49%"></video>
+                        <p class="citation">- Loquercio et al. (2021). Learning high-speed flight in the wild. Science
+                            Robotics</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="custom-td fragment" data-fragment-index="2" style="text-align: center">
+                        <ul class="rectangle-list" style="width: 90%">
+                            <li>Drag control in turbulent air flow</li>
+                        </ul>
+                    </td>
+                    <td class="custom-td fragment" data-fragment-index="3" style="text-align: center">
+                        <ul class="rectangle-list" style="width: 90%">
+                            <li>Learning to swim with aquatic robots</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="custom-td fragment" data-fragment-index="2" style="text-align: center;">
+                        <img src="slides/continuous_pde/conclusion/assets/drag_control.jpg"
+                             style="width: 90%;margin:auto">
+                        <p class="citation">Rabault et al. (2019). Artificial neural networks trained through deep
+                            reinforcement learning discover control strategies for active flow control. Journal of fluid
+                            mechanics</p>
+                    </td>
+                    <td class="custom-td fragment" data-fragment-index="3" style="text-align: center;">
+                        <video data-autoplay data-src="slides/continuous_pde/conclusion/assets/fish.mp4" autoplay="true"
+                               loop="true" muted="true" width="70%"></video>
+                        <p class="citation">- Verma et al. (2018). Efficient collective swimming by harnessing vortices
+                            through deep reinforcement learning. National Academy of Sciences</p>
+                    </td>
+                </tr>
+            </table>
+
+        </section>
 
 
         <section id="agenda2"
@@ -89,58 +1096,1122 @@
                  data-menu-title="Agenda (Filtered-CoPhy)"></section>
 
 
-        <section id="cophy_introduction"
-                 data-external="slides/cophy/introduction/main.html"
-                 data-menu-title="Ladder of causation"></section>
+        <section id="cophy_introduction" data-menu-title="Ladder of causation">
+            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
+                Counterfactual Physics in Pixel Space</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;">Ladder of Causation</p>
 
-        <section id="cophy_task"
-                 data-external="slides/cophy/task/main.html"
-                 data-menu-title="Task definition"></section>
+            <div class="">
+                <ul class="rectangle-list fontsize-20" style="width: 100%">
+                    <li class="blue">Level 1 : <b>Association</b> $$P(y | x)$$</li>
+                </ul>
+                <div class="row">
+                    <div class="col-25">
+                        <video data-autoplay src="slides/cophy/introduction/assets/0_fixed.mp4" autoplay="true"
+                               loop="true"
+                               muted="true" height="100px"></video>
+                    </div>
+                    <div class="col-25">
+                        <video data-autoplay src="slides/cophy/introduction/assets/1_fixed.mp4" autoplay="true"
+                               loop="true"
+                               muted="true" height="100px"></video>
+                    </div>
+                    <div class="col-25">
+                        <video data-autoplay src="slides/cophy/introduction/assets/2_fixed.mp4" autoplay="true"
+                               loop="true"
+                               muted="true" height="100px"></video>
+                    </div>
+                    <div class="col-25">
+                        <video data-autoplay src="slides/cophy/introduction/assets/3_fixed.mp4" autoplay="true"
+                               loop="true"
+                               muted="true" height="100px"></video>
+                    </div>
+                    <p class="citation">- Lerer et al. (2016).
+                        Learning physical
+                        intuition of block towers by example. ICML</p>
+                </div>
+            </div>
 
-        <section id="cophy_dataset"
-                 data-external="slides/cophy/dataset/main.html"></section>
+            <div class="fragment">
+                <ul class="rectangle-list fontsize-20" style="width: 100%">
+                    <li class="blue">Level 2 : <b>Intervention</b> $$ P(y | do(x), z) $$</li>
+                </ul>
+                <div class="row">
+                    <div class="col-33">
+                        <img src="slides/cophy/introduction/assets/phyre1.gif" height="100px"
+                             style="border: solid 1px black">
+                    </div>
+                    <div class="col-33">
+                        <img src="slides/cophy/introduction/assets/phyre2.gif" height="100px"
+                             style="border: solid 1px black">
+                    </div>
+                    <div class="col-33">
+                        <img src="slides/cophy/introduction/assets/phyre3.gif" height="100px"
+                             style="border: solid 1px black">
+                    </div>
+                    <p class="citation">- Bakhtin et al (2019). Phyre: A new benchmark for physical reasoning.
+                        NeurIPS</p>
+                </div>
+            </div>
 
-        <section id="cophy_model"
-                 data-external="slides/cophy/model/main.html"></section>
+            <div class="fragment" style="margin-bottom: 40px">
+                <ul class="rectangle-list fontsize-20" style="width: 100%">
+                    <li class="blue">Level 3 : <b>Counterfactuals</b> $$ P(y_x | x', y')$$</li>
+                </ul>
+            </div>
+            <p class="citation">- Judea Pearl. Causal and counterfactual inference. The Handbook of
+                Rationality.</p>
+        </section>
 
-        <section id="cophy_results"
-                 data-external="slides/cophy/results/main.html"></section>
+        <section id="cophy_task" data-menu-title="Task definition">
+            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
+                Counterfactual Physics in Pixel Space</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;"> Counterfactual reasoning in
+                Physics</p>
+
+            <div class="r-stretch" style="margin-bottom: 20px">
+                <div class="fig-container" data-file="slides/cophy/task/figure.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+            </div>
+            <div class="fragment">
+                <div class="theorem_title">Task Definition</div>
+                <div class="theorem_content">Given visual observation of A, B and C, can we predict the outcome video D
+                    ?
+                </div>
+            </div>
+            <div class="row fontsize-25 fragment" style="margin-top: 20px">
+                <div class="col-50">
+                    <ul class="ul_fancy">
+                        <li class="red">Unknown confounders</li>
+                        <li class="red">Unkown GT positions</li>
+                    </ul>
+                </div>
+                <div class="col-50">
+                    <ul class="ul_fancy">
+                        <li class="red">Collisions</li>
+                        <li class="red">Reason in pixel space</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="cophy_dataset" data-menu-title="Filtered-CoPhy Dataset">
+            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
+                Counterfactual Physics in Pixel Space</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;"> Filtered-CoPhy Benchmark</p>
+
+            <div class="row fontsize-25" style="margin-top: 100px; height:400px">
+                <div class="col-30">
+                    <div class="rounded_box red dropshadow" style="padding: 10px; background-color: #dc9f9f">
+                        <div class="row">
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <img src="slides/cophy/dataset/assets/BT_A.jpg"
+                                         style="border: solid 1px black; width: 112px"/>
+                                    <p style="text-align: left; width:100px; height:100px">A</p>
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <video data-autoplay src="slides/cophy/dataset/assets/BT-B.mp4" autoplay="true"
+                                           loop="true"
+                                           muted="true" style="border: solid 1px black;"></video>
+                                    <p style="text-align: left; width:100px; height:100px">B</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <img src="slides/cophy/dataset/assets/BT_C.jpg"
+                                         style="border: solid 1px black; width: 112px"/>
+                                    <p style="text-align: left; width:100px; height:100px">C</p>
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <video data-autoplay src="slides/cophy/dataset/assets/BT-D.mp4" autoplay="true"
+                                           loop="true"
+                                           muted="true" style="border: solid 1px black;"></video>
+                                    <p style="text-align: left; width:100px; height:100px">D</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    BlockTower-CF
+                </div>
+                <div class="col-5"></div>
+                <div class="col-30">
+                    <div class="rounded_box green dropshadow"
+                         style="padding-top: 10px; padding-bottom: 10px; background-color: #98af89">
+                        <div class="row">
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <img src="slides/cophy/dataset/assets/B-A.jpg"
+                                         style="border: solid 1px black; width: 112px"/>
+                                    <p style="text-align: left; width:100px; height:100px">A</p>
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <video data-autoplay src="slides/cophy/dataset/assets/B-B.mp4" autoplay="true"
+                                           loop="true"
+                                           muted="true" style="border: solid 1px black;"></video>
+                                    <p style="text-align: left; width:100px; height:100px">B</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <img src="slides/cophy/dataset/assets/B-C.jpg"
+                                         style="border: solid 1px black; width: 112px"/>
+                                    <p style="text-align: left; width:100px; height:100px">C</p>
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <video data-autoplay src="slides/cophy/dataset/assets/B-D.mp4" autoplay="true"
+                                           loop="true"
+                                           muted="true" style="border: solid 1px black;"></video>
+                                    <p style="text-align: left; width:100px; height:100px">D</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    Balls-CF
+                </div>
+                <div class="col-5"></div>
+                <div class="col-30">
+                    <div class="rounded_box blue dropshadow"
+                         style="padding-top: 10px; padding-bottom: 10px;background-color: #89bdd2">
+                        <div class="row">
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <img src="slides/cophy/dataset/assets/C-A.jpg"
+                                         style="border: solid 1px black; width: 112px"/>
+                                    <p style="text-align: left; width:100px; height:100px">A</p>
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <video data-autoplay src="slides/cophy/dataset/assets/C-B.mp4" autoplay="true"
+                                           loop="true"
+                                           muted="true" style="border: solid 1px black;"></video>
+                                    <p style="text-align: left; width:100px; height:100px">B</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <img src="slides/cophy/dataset/assets/C-C.jpg"
+                                         style="border: solid 1px black; width: 112px"/>
+                                    <p style="text-align: left; width:100px; height:100px">C</p>
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="r-stack">
+                                    <video data-autoplay src="slides/cophy/dataset/assets/C-D.mp4" autoplay="true"
+                                           loop="true"
+                                           muted="true" style="border: solid 1px black;"></video>
+                                    <p style="text-align: left; width:100px; height:100px">D</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    Collision-CF
+                </div>
+            </div>
+        </section>
+
+        <section id="cophy_model">
+            <section data-menu-title="CF prediction in pixel space">
+                <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning
+                    of
+                    Counterfactual Physics in Pixel Space</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;"> Model Overview</p>
+
+                <div style="height: 150px;margin-bottom: 20px">
+                    <div class="fig-container" data-file="slides/cophy/model/figure1.html"
+                         data-style="width:100%; align:center; height:100%" data-preload
+                         style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+                </div>
+                <div class="fragment" style="height: 375px">
+                    <p class="no_margin fontsize-20"> Counterfactual Dynamics module </p>
+                    <div class="fig-container" data-file="slides/cophy/model/figure2.html"
+                         data-style="width:100%; align:center; height:100%" data-preload
+                         style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+                </div>
+            </section>
+            <section>
+                <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning
+                    of
+                    Counterfactual Physics in Pixel Space</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Encoder /
+                    Decoder with Transporter Network</p>
+
+                <div style="height:300px">
+                    <div class="fig-container" data-file="slides/cophy/model/figure3.html"
+                         data-style="width:100%; align:center; height:100%" data-preload
+                         style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+                </div>
+
+                <div class="fragment"></div>
+                <div class="fragment"></div>
+                <div class="fragment"></div>
+                <!--            <div class="fragment"></div>-->
+                <div class="row fragment" style="height:175px">
+                    <div style="text-align: center" class="no_padding col-33">
+                        <div class="r-stack">
+                            <div style="width: 100%">
+                                <video data-autoplay src="slides/cophy/model/assets/transporter4.mp4" autoplay="true"
+                                       loop="true"
+                                       muted="true" height="175px" class="no_margin no_padding"></video>
+                            </div>
+                            <p class="fontsize-20 no_margin no_padding">4 keypoints</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center" class="no_padding col-33">
+                        <div class="r-stack">
+                            <div style="width: 100%">
+                                <video data-autoplay src="slides/cophy/model/assets/transporter8.mp4" autoplay="true"
+                                       loop="true"
+                                       muted="true" height="175px" class="no_margin no_padding"></video>
+                            </div>
+                            <p class="fontsize-20 no_margin no_padding">8 keypoints</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center" class="no_padding col-33">
+                        <div class="r-stack">
+                            <div style="width: 100%">
+                                <video data-autoplay src="slides/cophy/model/assets/transporter16.mp4" autoplay="true"
+                                       loop="true"
+                                       muted="true" height="175px" class="no_margin no_padding"></video>
+                            </div>
+                            <p class="fontsize-20 no_margin no_padding">16 keypoints</p>
+                        </div>
+                    </div>
+                    <div class="row fontsize-15">
+                        <div class="col-50">
+                            <ul class="rectangle-list" style="width:80%;margin:auto">
+                                <li class="red"> Temporal consistency</li>
+                            </ul>
+                        </div>
+                        <div class="col-50">
+                            <ul class="rectangle-list" style="width:80%;margin:auto">
+                                <li class="red"> Disentengling Features / Keypoints</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <p class="citation">- Kulkarni et al. (2019). Unsupervised learning of
+                    object keypoints for perception and control. NeurIPS</p>
+            </section>
+            <section>
+                <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning
+                    of
+                    Counterfactual Physics in Pixel Space</p>
+                <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Encoder /
+                    Decoder with Keypoints & Coefficient</p>
+
+                <div class="r-stretch">
+                    <div class="fig-container" data-file="slides/cophy/model/figure4.html"
+                         data-style="width:100%; align:center; height:100%" data-preload
+                         style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+                </div>
+
+                <div class="row fragment" style="height:200px">
+                    <div class="col-50">
+                        <video data-autoplay src="slides/cophy/model/assets/1.mp4" autoplay="true" loop="true"
+                               muted="true" width="80%" class="no_margin no_padding"></video>
+                    </div>
+                    <div class="col-50">
+                        <video data-autoplay src="slides/cophy/model/assets/2.mp4" autoplay="true" loop="true"
+                               muted="true" width="80%" class="no_margin no_padding"></video>
+                    </div>
+
+                    <div class="row fontsize-15">
+                        <div class="col-50">
+                            <ul class="rectangle-list" style="width:80%;margin:auto">
+                                <li class="green"> Discover keypoints and coefficients</li>
+                            </ul>
+                        </div>
+                        <div class="col-50">
+                            <ul class="rectangle-list" style="width:80%;margin:auto">
+                                <li class="green"> Learn to disentangle shape and position</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="cophy_results" data-menu-title="Results">
+            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
+                Counterfactual Physics in Pixel Space</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Results </p>
+
+            <div style="height: 125px;margin-bottom: 20px">
+                <div class="fig-container" data-file="slides/cophy/model/figure1.html"
+                     data-style="width:100%; align:center; height:100%" data-preload
+                     style="height: 100%" data-scroll="no" data-overfslow-shown=true></div>
+            </div>
+            <div class="row">
+                <div class="col-50">
+                    <p class="fontsize-20"> Results on Filtered-Cophy</p>
+                    <img class="no_margin" src="slides/cophy/results/assets/blocktower_s.gif" width="100%">
+                    <img class="no_margin" src="slides/cophy/results/assets/balls_s.gif" width="100%">
+                    <img class="no_margin" src="slides/cophy/results/assets/collision_s.gif" width="100%">
+                </div>
+                <div class="col-50">
+                    <p class="fontsize-20"> Results on real videos</p>
+                    <div style="margin-top: 75px">
+                        <img class="no_margin" src="slides/cophy/results/assets/real1.gif" width="100%">
+                        <img class="no_margin" src="slides/cophy/results/assets/real2.gif" width="100%">
+                    </div>
+                </div>
+            </div>
+            <p class="citation">- Lerer et al. (2016). Learning physical intuition of block towers by example. ICML</p>
+            <p class="citation">- Guen et al. (2020). Disentangling physical dynamics from unknown factors for
+                unsupervised video prediction. CVPR</p>
+            <p class="citation">- Li et al. (2020). Causal discovery in physical systems from videos. NeurIPS</p>
+        </section>
 
 
-        <section id="conclusion_cophy"
-                 data-external="slides/cophy/conclusion/main.html"
-                 data-menu-title="Conclusion Filtered-CoPhy"></section>
+        <section id="conclusion_cophy" data-menu-title="Conclusion Filtered-CoPhy">
+            <p class="titlebox" style="margin:0px;background-color: #598938;">Filtered-CoPhy: Unsupervised Learning of
+                Counterfactual Physics in Pixel Space</p>
+            <p class="subtitlebox" style="margin-top:0px;background-color: #ddeed1;margin-bottom: 5px"> Towards
+                application in robotics</p>
+
+            <div class="row">
+                <div class="fontsize-20 col-47">
+                    <ul class="rectangle-list" style="width: 100%">
+                        <li>Robotics manipulation</li>
+                    </ul>
+
+
+                    <video data-autoplay data-src="slides/cophy/conclusion/assets/rlbench.mp4" autoplay="true"
+                           loop="true" muted="true" width="60%"></video>
+                    <table style="width: 100%">
+                        <tr>
+                            <td class="custom-td" style="text-align: center">
+                                <video data-autoplay data-src="slides/cophy/conclusion/assets/no_intervention.mp4" autoplay="true"
+                                       loop="true" muted="true" width="75%" style="margin-top: 0;margin-bottom: 0"></video>
+                            </td>
+                            <td class="custom-td" style="text-align: center">
+                                <video data-autoplay data-src="slides/cophy/conclusion/assets/do_blocksize.mp4" autoplay="true"
+                                       loop="true" muted="true" width="75%" style="margin-top: 0;margin-bottom: 0"></video>
+                            </td>
+                            <td class="custom-td" style="text-align: center">
+                                <video data-autoplay data-src="slides/cophy/conclusion/assets/do_blockmass.mp4" autoplay="true"
+                                       loop="true" muted="true" width="75%" style="margin-top: 0;margin-bottom: 0"></video>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-6"></div>
+                <div class="fontsize-20 col-47 fragment">
+                    <ul class="rectangle-list" style="width: 100%">
+                        <li>Sim2Real gap</li>
+                    </ul>
+                    <video data-autoplay data-src="slides/cophy/conclusion/assets/robot1.mp4" autoplay="true"
+                           loop="true" muted="true" width="50%"></video>
+                    <video data-autoplay data-src="slides/cophy/conclusion/assets/robot2.mp4" autoplay="true"
+                           loop="true" muted="true" width="50%"></video>
+                </div>
+            </div>
+            <div class="fontsize-20 fragment">
+                <ul class="rectangle-list" style="width: 100%">
+                    <li>Counterfactual reasonning in navigation</li>
+                </ul>
+                <img src="slides/cophy/conclusion/assets/navigation.jpg"
+                     style="width: 70%;margin-top: 0;margin-bottom: 0"/>
+
+            </div>
+
+            <div class="citation" style="font-size: 14px !important;">
+                - Parvaneh et al. (2020). Counterfactual vision-and-language navigation: Unravelling the unseen.
+                NeurIPS<br/>
+                - Tan et al. (2018). Sim-to-Real: Learning Agile Locomotion For Quadruped Robots. Robotics:
+                Science and Systems.<br/>
+                - Rudin et al. (2022). Learning to walk in minutes using massively parallel deep
+                reinforcement learning. In CoRL<br/>
+                - James et al. (2020). Rlbench: The robot learning benchmark & learning environment. IEEE
+                Robotics and Automation Letters.<br/>
+                - Ahmed et al. (2020). CausalWorld: A Robotic Manipulation Benchmark for Causal Structure
+                and Transfer Learning. ICLR<br/>
+            </div>
+
+        </section>
 
 
         <section id="agenda3"
                  data-external="slides/agenda/main.html"
                  data-menu-title="Agenda (Deep-KKL)"></section>
 
-        <section id="kkl-introduction"
-                 data-external="slides/deepkkl/introduction/main.html"
-                 data-menu-title="Introduction"></section>
+        <section id="kkl-introduction" data-menu-title="Introduction">
+            <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory
+                meets deep learning</p>
+            <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">Introduction</p>
 
-        <section id="kkl-task"
-                 data-external="slides/deepkkl/task/main.html"
-                 data-menu-title="Task definition"></section>
+            <video data-autoplay src="slides/deepkkl/introduction/assets/navigate.mp4" autoplay="true" loop="true"
+                   muted="true" width="70%"></video>
 
-        <section id="kkl-sota"
-                 data-external="slides/deepkkl/sota/main.html"
-                 data-menu-title="State of the art"></section>
+            <p class="fontsize-25 italic">The action space is discrete: "move", "turn". There is no dynamics, the robot
+                gets teleported to the next position.</p>
+            <p style="width: 100%;text-align: right;font-size: 20px">Assem Sadek, during his PhD Defense</p>
 
-        <section id="kkl-model"
-                 data-external="slides/deepkkl/model/main.html"></section>
+            <p class="citation">Sadek et al. (2022). An in-depth experimental study of sensor usage and visual reasoning
+                of robots navigating in real environments. In ICRA</p>
+        </section>
 
-        <section id="kkl-results"
-                 data-external="slides/deepkkl/results/main.html"></section>
+        <section id="kkl-task" data-menu-title="Task definition">
+            <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory
+                meets deep learning</p>
+            <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">The Output Prediction task</p>
+            <div class="fragment" style="width: 0; height: 0" data-fragment-index="1"></div>
+            <div class="row" style="height: 250px">
+                <div class="fig-container" data-file="slides/deepkkl/task/figure.html"
+                     data-style="width:100%; align:center" data-preload
+                     style="height: 100%; margin-top: 1%"
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
 
-        <section id="kkl-conclusion"
-                 data-external="slides/deepkkl/conclusion/main.html"
-                 data-menu-title="Conclusion Deep-KKL"></section>
+            <div style="margin-top: 10px">
+                <div class="theorem_title">
+                    <b>Definition:</b> Output Predictor [Janny et al. 2020]
+                </div>
+                <div class="theorem_content">
+                    <p style="margin: 0px">
+                        An <b>output predictor</b> is defined as a couple $G, \psi$ such as:
+                    </p>
+                    <ul style="margin-top: 5px">
+                        <li>$\dot{z} = G(z, y)$ is a uniform exponential contraction,</li>
+                        <li>the couple $(g, \psi)$ with $g(z)= G(z, \psi(z))$ is a generating model.</li>
+                    </ul>
+                </div>
+            </div>
 
-        <section id="general-conclusion"
-                 data-external="slides/conclusion/main.html"
-                 data-menu-title="General Conclusion"></section>
+            <p class="fontsize-20" style="width:100%; text-align: left"><u>Example:</u></p>
+            <ul class="ul_fancy fontsize-20">
+                <li class="blue">Velocity & Odometry motion models in robotics</li>
+            </ul>
+
+            <p class="citation">- Thrun, S. (2002). Probabilistic robotics. Communications of the ACM</p>
+
+        </section>
+
+        <section id="kkl-sota" data-menu-title="State of the art">
+            <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory
+                meets deep learning</p>
+            <p class="subtitlebox" style="margin-top:0px;margin-bottom: 5px; background-color:#d7eaf1">From Non-Linear
+                to Linear</p>
+
+            <div class="row r-stretch">
+                <div class="fig-container" data-file="slides/deepkkl/sota/figure.html"
+                     data-style="width:100%; align:center;height:100%;"
+                     style="height: 100%; margin-top: 0%" data-preload
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+
+            <div class="fragment" data-fragment-index="1"></div>
+
+            <div class="r-stack">
+                <div class="fragment fade-in-then-out" style="margin-top: 1%;width: 100%" data-fragment-index="2">
+                    <div class="theorem_title" style="width: 100%">
+                        Neural-ODE
+                    </div>
+                    <div class="theorem_content" style="margin-bottom: 20px;width:100%">
+                        <p style="margin: 0px"> Free-form for $e$, $f$ and $\psi$. No guarantees.
+                        </p>
+                    </div>
+
+                    <div class="citation">
+                        - Chen et al. (2018). Neural ordinary differential equations. NeurIPS
+                    </div>
+                </div>
+                <div class="fragment fade-in-then-out" style="margin-top: 1%" data-fragment-index="3">
+                    <div class="theorem_title">
+                        Koopman theory
+                    </div>
+                    <div class="theorem_content" style="margin-bottom: 20px">
+                        <p style="margin: 0px">
+                            For all non-linear system $\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$, there exists
+                            an <span style="color:#E77475">infinite dimensional linear</span> operator $\mathcal{K}$
+                            such that $\mathcal{K} \mathbf{h}(\mathbf{s}) = \mathbf{h}({\color{#277C9D}
+                            f}(\mathbf{s}))$.</p>
+                    </div>
+
+                    <div class="citation">
+                        - Lusch et al. (2018). Deep learning for universal linear embeddings
+                        of
+                        nonlinear dynamics. Nature communications
+                    </div>
+                </div>
+                <div class="fragment fade-in" data-fragment-index="4" style="margin-top: 1%">
+                    <div class="theorem_title">
+                        Kazantzis-Kravaris-Luenberger <b>(KKL)</b> theory
+                    </div>
+                    <div class="theorem_content" style="margin-bottom: 20px">
+                        <p style="margin: 0px">
+                            For any non-linear system $\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$ and <span
+                                style="color:#E77475">for any paire $A, b$</span>, there exists an injective mapping $T$
+                            such that
+                            $\dot{\mathbf{z}} = A \mathbf{z} + by$ and $\mathbf{y} = \mathbf{h}\Big(T^{-1}(y)\Big)$
+                            where
+                            <span style="color:#E77475"> $\mathbf{z}$ is of finite dimension.</span>
+                        </p>
+
+                    </div>
+                    <div class="citation">
+                        - Andrieu et al. (2006). On the existence of a Kazantzis--Kravaris/Luenberger observer.
+                        SIAM Journal on Control and Optimization
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kkl-model">
+            <section data-menu-title="Model overview">
+
+                <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control
+                    theory meets deep learning</p>
+                <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">KKL Observer</p>
+
+                <div class="fontsize-20 rounded_box green">
+                    $$\begin{array}{cl}
+                    \dot{\mathbf{z}} &= A \mathbf{z} + b\psi(\mathbf{z}) \\
+                    y &= \psi(\mathbf{z})
+                    \end{array}$$
+                </div>
+                <div style="text-align: left; width: 100%">
+                    <ul class="ul_fancy" style="padding-bottom: 0;padding-top:0;margin-left: 0">
+                        <li class="blue bold fontsize-25">Parameters to identify:</li>
+                    </ul>
+                </div>
+                <div class="fontsize-25 row fragment" style="margin-top: 5px">
+                    <div class="col-10"></div>
+                    <div class="col-30">
+                        <div class="theorem_title" style="background-color: #598938">
+                            $$ A, b $$
+                        </div>
+                        <div class="theorem_content" style="text-align: center;padding:2px">
+                            <p class="no_margin">$A$ Hurwitz</p>
+                            <p class="no_margin">$A,b$ controllable</p>
+                        </div>
+                    </div>
+                    <div class="col-10"></div>
+                    <div class="col-10"></div>
+                    <div class="col-30">
+                        <div class="theorem_title" style="background-color: #598938">
+                            $$ \psi $$
+                        </div>
+                        <div class="theorem_content" style="text-align: center;padding:2px">
+                            <p class="no_margin">Lipschitz</p>
+                            <p class="no_margin" style="opacity: 0"> aaa</p>
+                        </div>
+                    </div>
+                    <div class="col-10"></div>
+                </div>
+
+
+                <div class="fragment" style="margin-top: 20px;">
+                    <div class="theorem_title">
+                        <b>Theorem:</b> [Andrieu et al., 2006]
+                    </div>
+                    <div class="theorem_content">
+                        <p style="margin: 0px">
+                            With $\dim \mathbf{z} = 2\dim \mathbf{s}+2$, there exists a Hurwitz matrix
+                            $A$
+                            and a
+                            function $\psi$ such that the KKL observer is an <b>output observer</b>.
+                        </p>
+                    </div>
+                </div>
+
+                <table class="fragment" style="width: 100%;vertical-align: middle;margin-top: 0;border-width: 0">
+                    <tr>
+                        <td style="width:40%;border: none;padding:0">
+                            <ul class="ul_fancy" style="padding-bottom: 0;margin-left: 0">
+                                <li class="red bold fontsize-25">Analytic solutions:</li>
+                            </ul>
+                        </td>
+                        <td class="fontsize-25" style="text-align: center;border:none">
+                            Good luck.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border: none;padding:0">
+                            <p class="citation">- Bernard et al.(2022). KKL
+                                observer design for sensorless induction motors. Conference on Decision and
+                                Control.</p>
+
+                            <p class="citation">- Brivadis et al (2019). Luenberger
+                                observers for discrete-time nonlinear systems. Conference on Decision and Control.</p>
+                        </td>
+                    </tr>
+                </table>
+                <table class="fragment" style="width: 100%;vertical-align: middle;margin-top: 10px;border-width: 0">
+                    <tr>
+                        <td style="width:40%;border: none;padding:0">
+                            <ul class="ul_fancy" style="padding-bottom: 0;margin-left: 0;padding-top:0">
+                                <li class="green bold fontsize-25">Deep Learning</li>
+                            </ul>
+                        </td>
+                        <td class="fontsize-25" style="text-align: center">
+                            Model $\psi$ with an MLP,<br/>
+                            Learn $A,b$ via gradient descent.
+                        </td>
+                    </tr>
+                </table>
+                <div class="r-stretch"></div>
+            </section>
+            <section>
+                <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control
+                    theory meets deep learning</p>
+                <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">Model overview</p>
+
+                <img class="fragment semi-fade-out" data-fragment-index="1" src="slides/deepkkl/model/assets/optim.svg"
+                     width="80%"
+                     style="margin:auto">
+
+                <div class="fragment" data-fragment-index="1">
+                    <div style="height:150px; width:70%;margin:auto">
+                        <div class="fig-container" data-file="slides/deepkkl/model/figure1.html"
+                             data-style="width:100%; align:center; height:100%"
+                             style="height: 100%" data-preload
+                             data-scroll="no" data-overflow-shown=true></div>
+                    </div>
+
+                    <div style="height:125px; width:100%">
+                        <div class="fig-container" data-file="slides/deepkkl/model/figure2.html"
+                             data-style="width:100%; align:center; height:100%"
+                             style="height: 100%"
+                             data-scroll="no" data-overflow-shown=true></div>
+                    </div>
+
+                    <div style="margin-top: 0px;">
+                        <div class="theorem_title">
+                            <b>Proposition:</b> [Janny et al., 2021]
+                        </div>
+                        <div class="theorem_content">
+                            <p style="margin: 0px">
+                                Assume that $\psi$ is lipschitz continuous, then for all trajectory $y$ known in the
+                                time
+                                interval $[0, \ell]$, the prediction $\hat{y}$ at the prediction horizon $p>0$ is given
+                                as:
+                                $$ | \hat{y}(\ell+p) - y(\ell+p) | \leq k_1 e^{-\lambda\ell + k_2p} |z_0| $$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="kkl-results" data-menu-title="Results">
+            <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory
+                meets deep learning</p>
+            <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1">Comparison with Recurrent Neural
+                Networks</p>
+
+            <div class="row" style="height:200px">
+                <div class="col-30">
+                    <p class="fontsize-20 bold no_margin">Deep KKL</p>
+                    <div class="fontsize-20 rounded_box green" style="margin-top:40px">
+                        <p style="margin:5px">
+                            $$\begin{array}{cl}
+                            \dot{\mathbf{z}} &= A \mathbf{z} + by \\
+                            y &= \psi(\mathbf{z})
+                            \end{array}$$
+                        </p>
+                    </div>
+                    <table class="fontsize-25" style="border:none">
+                        <tr>
+                            <td class="fas fa-check-circle" style="color: #598938; border:none"></td>
+                            <td style="border:none">Proof of existence</td>
+                        </tr>
+                        <tr>
+                            <td class="fas fa-check-circle" style="color: #598938"></td>
+                            <td>Contraction</td>
+                    </table>
+                </div>
+                <div class="col-30 fragment" data-fragment-index="1">
+                    <p class="fontsize-20 bold no_margin">RNN </p>
+                    <div class="fontsize-20 rounded_box blue" style="margin-top:40px">
+                        <p style="margin:5px">
+                            $$\begin{array}{cl}
+                            \dot{\mathbf{z}} &= \text{tanh}(A \mathbf{z} + by) \\
+                            y &= \psi(\mathbf{z})
+                            \end{array}$$
+                        </p>
+                    </div>
+                </div>
+                <div class="col-40 fragment" data-fragment-index="2">
+                    <p class="fontsize-20 bold no_margin">GRU </p>
+                    <div class="fontsize-20 rounded_box red">
+                        <p style="margin:5px">
+                            $$\begin{array}{cl}
+                            \mathbf{r} &= \sigma(W_r \mathbf{z} + U_r y + \mathbf{b}_r) \\
+                            \mathbf{x} &= \sigma(W_x \mathbf{z} + U_x y + \mathbf{b}_x) \\
+                            \mathbf{n} &= \text{tanh}\big(W_n \mathbf{z} + r * (U_n y + \mathbf{b}_n)\big) \\
+                            \dot{\mathbf{z}} &= (1 - \mathbf{x}) * \mathbf{z} + \mathbf{x} * \mathbf{n} \\
+                            \end{array}$$
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="width:100%;height:350px">
+                <div class="fig-container" data-file="slides/deepkkl/results/figure.html"
+                     data-style="width:100%; align:center; height:100%"
+                     style="height: 100%" data-preload
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+        </section>
+
+        <section id="kkl-conclusion" data-menu-title="Conclusion Deep-KKL">
+            <p class="titlebox" style="margin:0px; background-color:#62BCDD">Going down the rabbit hole: Control theory
+                meets deep
+                learning</p>
+            <p class="subtitlebox" style="margin-top:0px; background-color:#d7eaf1;margin-bottom: 0">Towards application
+                in robotics</p>
+
+
+            <div class="fontsize-20">
+                <ul class="rectangle-list" style="width: 100%">
+                    <li>Contraction theory for output tracking</li>
+                </ul>
+
+
+                <table style="width: 100%">
+                    <tr>
+                        <td class="custom-td" style="text-align: center;width:50%">
+                            <img src="slides/deepkkl/conclusion/assets/yoda.jpeg"
+                                 style="width:70%;margin-top: 0;margin-bottom: 0"/>
+                        </td>
+                        <td class="custom-td" style="text-align: center">
+                            <video data-autoplay data-src="slides/deepkkl/conclusion/assets/ifac.mp4" autoplay="true"
+                                   loop="true" muted="true" width="100%"></video>
+                        </td>
+                    </tr>
+                </table>
+                <p class="citation">- Zoboli, S., Janny, S., & Giaccagli, M. (2023). Deep learning-based output tracking
+                    via regulation and contraction theory. IFAC</p>
+            </div>
+
+            <div class="fontsize-20 fragment">
+                <ul class="rectangle-list" style="width: 100%">
+                    <li>You are starting to look into it !</li>
+                </ul>
+
+                <img src="slides/deepkkl/conclusion/assets/bono.jpg" style="width: 50%;margin-top: 0;margin-bottom: 0"/>
+
+                <p class="citation">- Bono et al. (2024). Learning to navigate efficiently and precisely in real
+                    environments. arXiv preprint</p>
+            </div>
+        </section>
+
+        <section id="general-conclusion" data-menu-title="General Conclusion">
+            <section>
+                <p> Wrapping-up !</p>
+                <p class="fontsize-20"> Deep Learning & Physics, and Robotics ?</p>
+
+                <div class="fragment">
+                    <ul class="rectangle-list fontsize-20" style="width: 100%">
+                        <li class="blue">Design neural simulators</li>
+                    </ul>
+                    <div class="row fontsize-20">
+                        <div class="col-50">
+                            <p class="fontsize-20 bold no_margin">What we saw:</p>
+                            <ul class="ul_fancy">
+                                <li class="green">Mesh-Transformer (Non-local interaction)</li>
+                                <li class="green">Continuous simulator (Control-theory inspired)</li>
+                            </ul>
+                        </div>
+                        <div class="col-50">
+                            <p class="fontsize-20 bold no_margin">Extension to robotics:</p>
+                            <ul class="ul_fancy">
+                                <li class="red">As an environment</li>
+                                <li class="red">Integrated to the policy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fragment">
+                    <ul class="rectangle-list fontsize-20" style="width: 100%">
+                        <li class="blue">Causal reasonning</li>
+                    </ul>
+                    <div class="row fontsize-20">
+                        <div class="col-50">
+                            <p class="fontsize-20 bold no_margin">What we saw:</p>
+                            <ul class="ul_fancy">
+                                <li class="green">Filtered-CoPhy (Counterfactuals)</li>
+                            </ul>
+                        </div>
+                        <div class="col-50">
+                            <p class="fontsize-20 bold no_margin">Extension to robotics:</p>
+                            <ul class="ul_fancy">
+                                <li class="red">For generalization</li>
+                                <li class="red">For sim2real <i>(todo)</i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fragment">
+                    <ul class="rectangle-list fontsize-20" style="width: 100%">
+                        <li class="blue">Dynamics, controllers and observers</li>
+                    </ul>
+                    <div class="row fontsize-20">
+                        <div class="col-50">
+                            <p class="fontsize-20 bold no_margin">What we saw:</p>
+                            <ul class="ul_fancy">
+                                <li class="green">Deep-KKL (Contraction theory)</li>
+                            </ul>
+                        </div>
+                        <div class="col-50">
+                            <p class="fontsize-20 bold no_margin">Extension to robotics:</p>
+                            <ul class="ul_fancy">
+                                <li class="red">For robustness</li>
+                                <li class="red">For faster navigation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <p>Thank you for your attention !</p>
+
+                <p class="fontsize-20" style="width: 100%;text-align: left">Collaborators:</p>
+                <table class="fontsize-15" style="width:100%">
+                    <tr>
+                        <td style="border:none"><img src="slides/conclusion/assets/madiha.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/christian.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/julie.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/fabien.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/natalia.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                    </tr>
+                    <tr>
+                        <td style="border:none; text-align: center">Madiha Nadri</td>
+                        <td style="border:none; text-align: center">Christian Wolf</td>
+                        <td style="border:none; text-align: center">Julie Digne</td>
+                        <td style="border:none; text-align: center">Fabien Baradel</td>
+                        <td style="border:none; text-align: center">Natalia Neverova</td>
+                    </tr>
+                    <tr>
+                        <td style="border:none"><img src="slides/conclusion/assets/greg.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/vincent.jpg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/nicolas.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/aurelien.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/mattia.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                    </tr>
+                    <tr>
+                        <td style="border:none; text-align: center">Greg Mori</td>
+                        <td style="border:none; text-align: center">Vincent Andrieu</td>
+                        <td style="border:none; text-align: center">Nicolas Thome</td>
+                        <td style="border:none; text-align: center">Aurélien Bénéteau</td>
+                        <td style="border:none; text-align: center">Mattia Giaccagli</td>
+                    </tr>
+                    <tr>
+                        <td style="border:none"><img src="slides/conclusion/assets/samuele.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/quentin.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/laurent.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/mathieu.jpeg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                        <td style="border:none"><img src="slides/conclusion/assets/daniele.jpg" width="150px"
+                                                     class="no_margin no_padding profile_pic"></td>
+                    </tr>
+                    <tr>
+                        <td style="border:none; text-align: center">Samuele Zoboli</td>
+                        <td style="border:none; text-align: center">Quentin Possamaï</td>
+                        <td style="border:none; text-align: center">Laurent Bako</td>
+                        <td style="border:none; text-align: center">Mathieu Marchand</td>
+                        <td style="border:none; text-align: center">Daniele Astolfi</td>
+                    </tr>
+                </table>
+
+            </section>
+            <section>
+                <p class="bold no_margin">Publication List</p>
+
+                <ul class="rectangle-list fontsize-20" style="width: 100%">
+                    <li class="blue"> Publications covered today:</li>
+                </ul>
+
+                <table class="fontsize-15" style="width: 100%;">
+                    <tr>
+                        <td style="width: 80%;border:none" class="no_padding">
+                            <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                                <li class="blue">
+                                    Deep KKL: Data-driven Output Prediction for Non-Linear Systems
+                                    <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                        Vincent Andrieu ,
+                                        Madiha Nadri,
+                                        Christian Wolf</p>
+                                </li>
+                            </ul>
+
+                        </td>
+
+                        <td style="width: 20%; border:none;vertical-align: middle">
+                            <p class="light-text fontsize-15">CDC, 2021</p>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="width: 90%;border:none" class="no_padding">
+                            <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                                <li class="blue">
+                                    EAGLE: Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers
+                                    <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                        Aurélien Benetteau,
+                                        Madiha Nadri,
+                                        Julie Digne,
+                                        Nicolas Thome,
+                                        Christian Wolf</p>
+                                </li>
+                            </ul>
+
+                        </td>
+
+                        <td style="width: 20%; border:none;vertical-align: middle">
+                            <p class="light-text fontsize-15">ICLR, 2022 </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 80%;border:none" class="no_padding">
+                            <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                                <li class="blue">
+                                    Filtered-CoPhy: Unsupervised Learning of Counterfactual Physics in Pixel Space
+                                    <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                        Fabien Baradel,
+                                        Natalia Neverova,
+                                        Madiha Nadri,
+                                        Greg Mori,
+                                        Christian Wolf</p>
+                                </li>
+                            </ul>
+
+                        </td>
+
+                        <td style="width: 20%; border:none;vertical-align: middle">
+                            <p class="light-text fontsize-15">ICLR, 2021 (oral)</p>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <ul class="rectangle-list fontsize-20" style="width: 100%">
+                    <li> Others publications:</li>
+                </ul>
+
+                <table class="fontsize-15" style="width: 100%;">
+                    <tr>
+                        <td style="width: 90%;border:none" class="no_padding">
+                            <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                                <li class="">
+                                    Learning Reduced Nonlinear State-Space Models: an Output-Error Based Canonical
+                                    Approach
+                                    <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                        Quentin Possamaï,
+                                        Laurent Bako,
+                                        Madiha Nadri,
+                                        Christian Wolf</p>
+                                </li>
+                            </ul>
+
+                        </td>
+
+                        <td style="width: 20%; vertical-align: middle; border:none">
+                            <p class="light-text fontsize-15">CDC, 2022</p>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="width: 90%;border:none" class="no_padding">
+                            <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                                <li class="">
+                                    Deep Learning-based Output Tracking via Regulation and Contraction Theory
+                                    <p class="light-text fontsize-15"> Samuele Zoboli,
+                                        <b>Steeven Janny</b>,
+                                        Mattia Giaccagli,
+                                    </p>
+                                </li>
+                            </ul>
+
+                        </td>
+
+                        <td style="width: 20%; vertical-align: middle; border:none">
+                            <p class="light-text fontsize-15">IFAC, 2022</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 90%;border:none" class="no_padding">
+                            <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                                <li class="">
+                                    Deep Learning of a Communication Policy for an Event-Triggered Observer for Linear
+                                    Systems
+                                    <p class="light-text fontsize-15"> Mathieu Marchand,
+                                        Vincent Andrieu,
+                                        Sylvain Bertrand,
+                                        <b>Steeven Janny</b>,
+                                        Hélène Piet-Lahanier</p>
+                                </li>
+                            </ul>
+
+                        </td>
+
+                        <td style="width: 20%; vertical-align: middle; border:none">
+                            <p class="light-text fontsize-15">IFAC, 2022</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 90%;border:none" class="no_padding">
+                            <ul class="ul_fancy fontsize-20" style="padding-top: 0;padding-bottom: 0;">
+                                <li class="">
+                                    Space and time continuous physics simulation from partial observations
+                                    <p class="light-text fontsize-15"><b>Steeven Janny</b>,
+                                        Madiha Nadri,
+                                        Julie Digne,
+                                        Christian Wolf</p>
+                                </li>
+                            </ul>
+
+                        </td>
+
+                        <td style="width: 20%; vertical-align: middle; border:none">
+                            <p class="light-text fontsize-15">ICLR, 2024 (spotlight)</p>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+            </section>
+        </section>
 
     </div>
 </div>
@@ -161,14 +2232,14 @@
         plugins: [RevealMarkdown, RevealHighlight, Reveald3, RevealMath.MathJax3, RevealMenu],
         viewDistance: 1, // to lazy load iframes
         multiplex: {
-            secret: "", // null so the clients do not have control of the master presentation
+            secret: "170734042888610794", // null so the clients do not have control of the master presentation
             id: '4840247df96b7483', // id, obtained from socket.io server
             url: 'https://reveal-multiplex.glitch.me/' // Location of socket.io server
         },
         dependencies: [
             {src: 'https://reveal-multiplex.glitch.me/socket.io/socket.io.js', async: true},
-            { src: 'https://reveal-multiplex.glitch.me/client.js', async: true },
-            // {src: 'https://reveal-multiplex.glitch.me/master.js', async: true},
+            // { src: 'https://reveal-multiplex.glitch.me/client.js', async: true },
+            {src: 'https://reveal-multiplex.glitch.me/master.js', async: true},
             {
                 src: 'plugin/external.js',
                 condition: function () {
