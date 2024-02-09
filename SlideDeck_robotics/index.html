@@ -177,74 +177,71 @@
 
         </section>
 
-        <section id="context" data-menu-title="Context">
+        <section id="robotics" data-menu-title="Context">
             <p class="titlebox" style="margin:0px;">Modeling and Simulation of Physical Systems</p>
-            <p class="subtitlebox" style="margin-top:0px;">Three use cases for ML & Physics</p>
+            <p class="subtitlebox" style="margin-top:0px;">Physics, Deep Learning & robotics</p>
             <table style="width:100%;text-align: center" class="fontsize-20 no_margin">
-                <tr>
-                    <td style="border: none;text-align: center;border-right:1px solid black; background-color: #C0C0C0; border-bottom: 1px solid black;width:33%">
-                        <ol class="rectangle-list">
-                            <li class="blue" value="1"><b>Complex dynamics</b> we don't want/can not model</li>
-                        </ol>
-                    </td>
-                    <td style="border: none;text-align: center;border-right:1px solid black; background-color: #C0C0C0; border-bottom: 1px solid black;width:33%">
-                        <ol class="rectangle-list">
-                            <li class="blue" value="2"><b>Trial & Error</b> process for engineering</li>
-                        </ol>
-                    </td>
-                    <td style="border: none;text-align: center; background-color: #C0C0C0; border-bottom: 1px solid black;width:33%">
-                        <ol class="rectangle-list">
-                            <li class="blue" value="3"><b>Planning actions</b> in simulation in robotics</li>
-                        </ol>
-                    </td>
-                </tr>
 
                 <tr>
-                    <td style="border: none;border-right:1px solid black;padding-top:20px">
-                        <video data-autoplay data-src="slides/introduction/context/assets/scalar_flow_final.mp4"
+                    <td style="border: none;padding-top:20px;width:33%;text-align: center">
+                        <b>Grasping / Manipulation</b>
+                        <video data-autoplay data-src="slides/introduction/context/assets/grasping.mp4"
                                autoplay="true" loop="true"
                                muted="true" width="720"></video>
-                        <p class="citation">Eckert et al. (2019). ScalarFlow: a large-scale volumetric
-                            data set of real-world scalar transport flows for computer
-                            animation and machine learning. TOG</p>
+                        <p class="citation">Kalashnikov et al. (2018). Qt-opt: Scalable deep reinforcement learning for vision-based robotic manipulation. arXiv preprint</p>
                     </td>
-                    <td style="border: none;border-right:1px solid black">
-                        <video data-autoplay data-src="slides/introduction/context/assets/fluid.mp4" autoplay="true"
+                    <td style="border: none;width:33%;text-align:center">
+                        <b>Walking / Robot control</b>
+                        <video data-autoplay data-src="slides/introduction/context/assets/walking.mp4" autoplay="true"
                                loop="true"
                                muted="true" width="720"></video>
-                        <p class="citation">Allen et al. (2019), Physical design using
-                            differentiable learned simulators. arXiv preprint.</p>
+                        <p class="citation">Aractingi et al. (2023). Controlling the Solo12 quadruped robot with deep reinforcement learning. Scientific Reports</p>
                     </td>
-                    <td style="border: none">
-                        <video data-autoplay data-src="slides/introduction/context/assets/boston_dynamics.mp4"
+                    <td style="border: none;width:33%;text-align: center">
+                        <b>Physics-based RL</b>
+                        <video data-autoplay data-src="slides/introduction/context/assets/tokamak.mp4"
                                autoplay="true" loop="true"
                                muted="true" width="720"></video>
-                        <p class="citation">Boston Dynamics</p>
+                        <p class="citation">Degrave et al. (2022). Magnetic control of tokamak plasmas through deep reinforcement learning. Nature.</p>
                     </td>
                 </tr>
+                <tr style="padding-top: 20px">
+                    <td colspan="3" style="text-align: center;border:none;font-size: 25px"><b>Key challenges</b></td>
+                </tr>
 
-                <tr>
-                    <td style="border: none;text-align: center;border-right:1px solid black;padding-top: 25px">
+                <tr style="padding-top: 10px">
+                    <td style="border: none;text-align: center">
                         <ul class="ul_fancy" style="margin-left:0">
-                            <li class="blue">No expert knowledge</li>
-                            <li class="blue">Automatic identification</li>
+                            <li class="blue">Rigid body dynamics</li>
+                            <li class="blue">Physics from vision</li>
                         </ul>
                     </td>
-                    <td style="border: none;text-align: center;border-right:1px solid black;padding-top: 25px">
+                    <td style="border: none;text-align: center">
                         <ul class="ul_fancy" style="margin-left:0">
-                            <li class="blue">Faster simulation ...</li>
-                            <li class="blue">...means more iterations</li>
+                            <li class="blue">Dynamical model</li>
+                            <li class="blue">Sim2Real gap</li>
                         </ul>
                     </td>
-                    <td style="border: none;text-align: center;padding-top: 25px">
+                    <td style="border: none;text-align: center">
                         <ul class="ul_fancy" style="margin-left:0">
-                            <li class="blue">Real-time planning</li>
-                            <li class="blue">Complex dynamics</li>
+                            <li class="blue">Learning a controller</li>
+                            <li class="blue">System identification</li>
                         </ul>
                     </td>
                 </tr>
-
             </table>
+            <table class="fontsize-20 fragment" style="margin-top: 40px">
+                <tr>
+                    <td class="custom-td" style=><span class="bold" style="margin-right:20px">In general case, we need physics simulators: </span></td>
+                    <td class="custom-td">
+                        <ul class="rectangle-list" style="width:125%">
+                            <li class="green" value="1">For simulating the environment</li>
+                            <li class="green" value="2">To improve the policy</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
         </section>
 
         <section id="intro_simulation">
@@ -950,7 +947,7 @@
         <section id="sota_continuous_pde" data-menu-title="SOTA in dense prediction">
             <p class="titlebox" style="margin:0px;background-color: #3EC3B2;">Transformers for computational fluid
                 dynamics</p>
-            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Litterature on space & time
+            <p class="subtitlebox" style="margin-top:0px;background-color: #d0eeea;">Literature on space & time
                 continuous
                 simulation</p>
 
@@ -1093,7 +1090,8 @@
 
         <section id="agenda2"
                  data-external="slides/agenda/main.html"
-                 data-menu-title="Agenda (Filtered-CoPhy)"></section>
+                 data-menu-title="Agenda (Filtered-CoPhy)">
+        </section>
 
 
         <section id="cophy_introduction" data-menu-title="Ladder of causation">
@@ -1526,7 +1524,7 @@
             </div>
             <div class="fontsize-20 fragment">
                 <ul class="rectangle-list" style="width: 100%">
-                    <li>Counterfactual reasonning in navigation</li>
+                    <li>Counterfactual reasoning in navigation</li>
                 </ul>
                 <img src="slides/cophy/conclusion/assets/navigation.jpg"
                      style="width: 70%;margin-top: 0;margin-bottom: 0"/>
@@ -1944,7 +1942,7 @@
 
                 <div class="fragment">
                     <ul class="rectangle-list fontsize-20" style="width: 100%">
-                        <li class="blue">Causal reasonning</li>
+                        <li class="blue">Causal reasoning</li>
                     </ul>
                     <div class="row fontsize-20">
                         <div class="col-50">
@@ -2232,14 +2230,14 @@
         plugins: [RevealMarkdown, RevealHighlight, Reveald3, RevealMath.MathJax3, RevealMenu],
         viewDistance: 1, // to lazy load iframes
         multiplex: {
-            secret: "170734042888610794", // null so the clients do not have control of the master presentation
+            secret: "", // null so the clients do not have control of the master presentation
             id: '4840247df96b7483', // id, obtained from socket.io server
             url: 'https://reveal-multiplex.glitch.me/' // Location of socket.io server
         },
         dependencies: [
             {src: 'https://reveal-multiplex.glitch.me/socket.io/socket.io.js', async: true},
-            // { src: 'https://reveal-multiplex.glitch.me/client.js', async: true },
-            {src: 'https://reveal-multiplex.glitch.me/master.js', async: true},
+            { src: 'https://reveal-multiplex.glitch.me/client.js', async: true },
+            // {src: 'https://reveal-multiplex.glitch.me/master.js', async: true},
             {
                 src: 'plugin/external.js',
                 condition: function () {
