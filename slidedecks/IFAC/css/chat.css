@@ -1,0 +1,115 @@
+
+.inbox_msg {
+    border: 1px solid #c4c4c4;
+    clear: both;
+    overflow: hidden;
+    margin-top: 20px;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.chat_title {
+    background: #128C7E;
+    color: #fff;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.members {
+    color: #fff;
+    text-align: left;
+    font-size: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.incoming_msg_img {
+    display: inline-block;
+    width: 3%;
+}
+
+.incoming_msg_img img {
+    width: 100%;
+    border-radius: 50%;
+    padding: 0px;
+    margin: 0px;
+    background: #ffffff;
+}
+
+.received_msg {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    text-align: left;
+    width: 92%;
+}
+
+.received_withd_msg p {
+    /*float: left;*/
+    background: #ffffff;
+    border-radius: 10px;
+    color: #646464;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    width: fit-content;
+    border: 1px solid #c4c4c4;
+}
+
+.time_date {
+    color: #747474;
+    display: block;
+    font-size: 10px;
+    margin: 3px 0 0;
+}
+
+.received_withd_msg {
+    float: left;
+    width: 90%;
+    text-align: left;
+}
+
+.mesgs {
+    float: left;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 5px;
+}
+
+.sent_msg p {
+    background: #DCF8C6 none repeat scroll 0 0;
+    border-radius: 3px;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    border-radius: 10px;
+    border: 1px solid #c4c4c4;
+}
+
+.outgoing_msg {
+    overflow: hidden;
+    margin: 6px 0 6px;
+}
+
+.sent_msg {
+    float: right;
+    max-width: 70%;
+    text-align: right;
+}
+
+.type_msg {
+    border-top: 1px solid #c4c4c4;
+    position: relative;
+}
+
+.messaging {
+    background: #eee8de;
+    background-size: 20%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}

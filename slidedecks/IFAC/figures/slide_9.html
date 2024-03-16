@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+    <script src="../node_modules/d3/dist/d3.js"></script>
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" src="../node_modules/mathjax/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div id="fig1"></div>
+<div class="slider-container">
+    <label for="slider">Model noise:</label> <span id="slider-value">1</span>
+    <input type="range" id="slider" min="0" max="3" value="0" class="slider">
+
+</div>
+
+<script>
+
+    var dt = 0.002
+
+    var graph_margin = {
+        top: 10,
+        right: 10,
+        bottom: 40,
+        left: 40
+    };
+
+    var colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+    var width = window.innerWidth;
+    var height = 175;
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var axes = graph.append("g")
+    var reference = graph.append("g")
+    var state = graph.append("g")
+
+    var xScale = d3.scaleLinear()
+        .domain([0, 600])
+        .range([graph_margin.left, width - graph_margin.right]);
+    var yScale = d3.scaleLinear()
+        .domain([3, -3])
+        .range([graph_margin.top, height - graph_margin.bottom]);
+
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+
+    axes.append("g")
+        .attr("transform", "translate(0," + (yScale(-3)) + ")")
+        .call(xAxis);
+    axes.append("g")
+        .attr("transform", "translate(" + (xScale(0)) + ",0)")
+        .call(yAxis.ticks(5));
+
+    axes.append("rect")
+        .attr("x", xScale(0))
+        .attr("y", yScale(3))
+        .attr("width", xScale(600) - xScale(0))
+        .attr("height", yScale(-3) - yScale(3))
+        .attr("fill", "#EFEFEF")
+        .attr("stroke", "none")
+        .attr("stroke-width", 2)
+    // Add a grid
+
+    axes.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + (yScale(-3)) + ")")
+        .call(d3.axisBottom(xScale)
+            .tickSize(-height + graph_margin.top + graph_margin.bottom)
+            .tickFormat("")
+        ).selectAll("line")
+        .style("stroke", "white")
+
+    axes.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(" + (xScale(0)) + ",0)")
+        .call(d3.axisLeft(yScale)
+            .tickSize(-width + graph_margin.left + graph_margin.right)
+            .tickFormat(""))
+        .style("stroke", "white").selectAll("line")
+        .style("stroke", "white")
+
+    // Add labels
+    axes.append("text")
+        .attr("x", xScale(300))
+        .attr("y", yScale(-3))
+        .attr("dy", "20px")
+        .attr("text-anchor", "end")
+        .attr("font-size", "15px")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "hanging")
+        .text("Time");
+
+    axes.append("foreignObject")
+        .attr("x", -yScale(-5))
+        .attr("y", xScale(0) - 35)
+        .attr("transform", "rotate(-90)")
+        .attr("font-size", "15px")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "hanging")
+        .attr("width", yScale(-5) - yScale(5))
+        .attr("height", 50)
+        .html("$$r(t)$$");
+
+    noise_level = ["0.0", "0.001", "0.01", "0.05"]
+
+    current_slider = 0
+    // Load ../assets/slide9/data.json
+    d3.json("../assets/slide9/data.json").then(function (data) {
+        d = data[noise_level[current_slider]]
+        var line = d3.line()
+            .x(function (d, i) {
+                return xScale(i);
+            })
+            .y(function (d) {
+                return yScale(d);
+            });
+
+        reference = graph.append("path")
+            .datum(d[0].ref)
+            .attr("fill", "none")
+            .attr("stroke", "black")
+            .attr("stroke-width", 4.5)
+            .attr("d", line);
+
+        state = graph.append("path")
+            .datum(d[0].pred)
+            .attr("fill", "none")
+            .attr("stroke", "#E77475")
+            .attr("stroke-width", 4)
+            .attr("d", line);
+
+        const slider = document.getElementById('slider');
+        const sliderValue = document.getElementById('slider-value');
+
+        // Initial value display
+        sliderValue.textContent = noise_level[slider.value];
+
+        // Update value display on slider change
+        slider.addEventListener('input', function () {
+            sliderValue.textContent = noise_level[slider.value];
+            current_slider = slider.value
+            d = data[noise_level[current_slider]]
+        });
+
+        current_time = 1
+        current_index = 0
+
+        function update() {
+            // Show trajectory up to current time
+
+            traj = d[current_index].pred.slice(0, current_time)
+            state.datum(traj)
+                .attr("d", line)
+            current_time += 10
+            if (current_time > 600) {
+                current_time = 0
+                current_index += 1
+                if (current_index > d.length - 1) {
+                    current_index = 0
+                }
+                reference.datum(d[current_index].ref).transition()
+                    .attr("d", line)
+            }
+        }
+
+        d3.interval(update, 20)
+
+    });
+
+    function simulate() {
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

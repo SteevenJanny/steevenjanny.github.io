@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+
+    <title>IFAC</title>
+
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css">
+    <link rel="stylesheet" href="node_modules/fontawesome-free/css/fontawesome.css">
+
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/chat.css">
+
+
+</head>
+<body>
+
+<div class="reveal">
+
+    <div class="slides">
+        <section id="title-sec" data-menu-title="Title Page">
+            <div class="title">
+                Deep Learning-based Output Tracking via Regulation and Contraction Theory
+            </div>
+            <div style="text-align: right">
+                <img height="50px" src="assets/slide1/ifac.png">
+            </div>
+            <table style="width: 100%;margin-top: 0px" class="fontsize-25">
+                <tr>
+                    <td class="custom-td" style="text-align: center">Samuele Zoboli</td>
+                    <td class="custom-td" style="text-align: center">Steeven Janny</td>
+                    <td class="custom-td" style="text-align: center">Mattia Giaccagli</td>
+                </tr>
+                <tr>
+                    <td class="custom-td" style="text-align: center"><img height="100px"
+                                                                          src="assets/slide1/samuele.jpeg"></td>
+                    <td class="custom-td" style="text-align: center"><img height="100px"
+                                                                          src="assets/slide1/steeven.jpg"></td>
+                    <td class="custom-td" style="text-align: center"><img height="100px"
+                                                                          src="assets/slide1/mattia.jpeg"></td>
+                </tr>
+            </table>
+            <div style="margin-top: 100px; margin-bottom: 15px">
+                <div class="grid_row">
+                    <img src="assets/slide1/logo_insa.jpg" class="logo" alt="logo_insa">
+                    <img src="assets/slide1/logo_liris.jpg" class="logo zero-padding" alt="logo_liris">
+                    <img src="assets/slide1/logo_lagepp.jpg" class="logo" alt="logo_lagepp">
+                    <img src="assets/slide1/logo_univ.jpg" class="logo" alt="logo_univ">
+                </div>
+            </div>
+            <table class="row fontsize-15" style="height:25px; color: white; width:100%">
+                <tr>
+                    <td style="background-color: #16485b;text-align: center; vertical-align: middle">
+                        Steeven Janny
+                    </td>
+                    <td style="background-color: #277C9D;text-align: center; vertical-align: middle">
+                        Identification and Simulation of Physical Systems
+                    </td>
+                    <td style="background-color: #43c7fc;text-align: center; vertical-align: middle">
+                        February 13th, 2024
+                    </td>
+                </tr>
+            </table>
+
+        </section>
+        <section data-menu-title="Task Definition">
+            <p class="titlebox" style="margin:0px;">Task definition</p>
+            <p class="subtitlebox" style="margin-top:0px;">Output prediction</p>
+
+            <p style="width: 100%; text-align: left;margin-bottom: 0px" class="fontsize-20">
+                We consider a system of the following form:
+                $$ \begin{array}{ll}
+                \dot x &= f(x) + g(x)u \\
+                e &= h(x) - r(t)
+                \end{array}$$
+                Assumptions:
+
+            </p>
+            <ul class="ul_fancy fontsize-20" style="width: 100%;">
+                <li>$f$, $g$, $h$, $r$ sufficiently smooth.</li>
+                <li>Forward completeness in compact $\mathcal{F}$.</li>
+            </ul>
+            <div class="fragment">
+                <div class="theorem_title">Output tracking problem</div>
+                <div class="theorem_content"> $$\lim_{t\rightarrow\infty} |e(t)| \leq c$$</div>
+            </div>
+            <div class="row fragment" style="height: 250px;">
+                <div class="fig-container" data-file="figures/slide_2.html"
+                     data-style="width:100%; align:center;height:100%;"
+                     style="height: 100%; margin-top: 0%" data-preload
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+
+        </section>
+        <section data-menu-title="Related works">
+            <p class="titlebox" style="margin:0px;">Task definition</p>
+            <p class="subtitlebox" style="margin-top:0px;">Related work</p>
+            <div class="fontsize-20">
+
+                <div class="">
+                    <ul class="rectangle-list" style="width: 100%; margin-top: 0px">
+                        <li class="blue">Model inversion</li>
+                    </ul>
+                    <span class="fontsize-20">$y = \psi(u) = h(x)\text{ s.t. }\left\{\begin{array}{cl} \dot x &= f(x, u)\\x(0) &= x_0\end{array}\right.
+                    \quad \Rightarrow \quad \boxed{u(t) = \psi^{-1}(y)}$</span>
+                    <ul class="ul_fancy">
+                        <li class="red">Strongly model dependent</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <ul class="rectangle-list" style="width: 100%; margin-top:50px">
+                        <li class="blue">Regulation Theory</li>
+                    </ul>
+                    <table style="width: 100%">
+                        <tr>
+                            <td class="custom-td">1) <b>Steady-state generator</b>: $\boxed{r \mapsto \pi, v} \text{
+                                s.t.
+                                }\left\{\begin{array}{cl} \dot\pi &= f(\pi, v)\\r(t)&=h(\pi)\end{array}\right. $
+                            </td>
+                            <td class="custom-td" rowspan="2">
+                                <ul class="ul_fancy">
+                                    <li class="red">Challenging analytical consideration</li>
+                                </ul>
+                        </tr>
+                        <tr>
+                            <td class="custom-td">2) <b>Stabilizer</b>: $\boxed{u = \psi(x, \pi, v)}\text{ s.t. }
+                                \lim_\infty \|x - \pi\| = 0$
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="fragment">
+                    <ul class="rectangle-list" style="width: 100%; margin-top: 50px">
+                        <li class="blue">Optimization</li>
+                    </ul>
+                    <span> $\boxed{\arg \min_u \|r -h(x)\|} \text{ s.t. } \dot x = f(x, u)$</span>
+                    <ul class="ul_fancy">
+                        <li class="red">Computational effort (online)</li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+
+        <section data-menu-title="Proposed approach">
+            <p class="titlebox" style="margin:0px;">Task definition</p>
+            <p class="subtitlebox" style="margin-top:0px;">Proposed approach</p>
+            <div class="fontsize-20">
+                <div>$\mathcal{S}: \left\{\begin{array}{cl}\dot x &= \varphi(x, u) = f(x) + g(x)u \\ y &= h(x)
+                    \end{array}\right.$
+                </div>
+
+                <div class="row">
+                    <div class="col-45">
+                        <div class="fragment">
+                            <p class="fontsize-25"><b>Step 1</b>: Regulation Equations</p>
+                            <p style="text-align: left">Given a <b>reference signal</b> <span
+                                    style="color: #277C9D">$r(t)$</span>, find $\big(\textcolor{#598938}{\pi_r}(t),
+                                \textcolor{#598938}{\psi_r}(t)\big)$ such that:</p>
+                            <p>$$\left\{\begin{array}{cl}\dot{\textcolor{#598938}{\pi_r}} &=
+                                f(\textcolor{#598938}{\pi_r}) +
+                                g(\textcolor{#598938}{\pi_r}) \textcolor{#598938}{\psi_r} \\ 0 &=
+                                h(\textcolor{#598938}{\pi_r}) - \textcolor{#277C9D}{r} \end{array}\right.$$</p>
+                        </div>
+                        <div class="row fragment" style="height: 250px;">
+                            <div class="fig-container" data-file="figures/slide_4_left.html"
+                                 data-style="width:100%; align:center;height:100%;"
+                                 style="height: 100%; margin-top: 0%" data-preload
+                                 data-scroll="no" data-overflow-shown=true></div>
+                        </div>
+
+                    </div>
+                    <div class="col-10"></div>
+                    <div class="col-45">
+                        <div class="fragment">
+                            <p class="fontsize-25"><b>Step 2</b>: Stabilizer</p>
+                            <p style="text-align: left">Find $\textcolor{#598938}{\alpha}(x, \pi, t)$ such that:</p>
+                            <p>$$\left\{\begin{array}{l} \textcolor{#598938}{u}(r,x,t) = \textcolor{#598938}{\psi_r}(t)
+                                +
+                                \textcolor{#598938}{\alpha}(x, \textcolor{#598938}{\pi_r}, t) \\
+                                \lim_{t\mapsto \infty} \|X\big(x(0), u, t\big) - \Pi_r\big(\pi_r(0), \psi_r, t\big)\| =
+                                0\end{array}\right.$$</p>
+                        </div>
+                        <div class="row fragment" style="height: 250px;">
+                            <div class="fig-container" data-file="figures/slide_4_right.html"
+                                 data-style="width:100%; align:center;height:100%;"
+                                 style="height: 100%; margin-top: 0%" data-preload
+                                 data-scroll="no" data-overflow-shown=true></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section data-menu-title="Controller design">
+            <p class="titlebox" style="margin:0px;">Theoretical results</p>
+            <p class="subtitlebox" style="margin-top:0px;">Controller design</p>
+            <div class="fontsize-20">
+                <p style="width: 100%; text-align: left" class="bold fontsize-25 no_padding no_margin">Assumptions:</p>
+                <div style="width:90%; margin:auto">
+                    <p style="text-align: left;width:100%">
+                        $
+                        \textbf{1. }\exists \textcolor{#598938}{P}(x,t)\text{ bounded } C^1\text{ matrix, symmetric and
+                        positive definite s.t. }\quad
+                        L_\varphi \textcolor{#598938}{P} -
+                        \rho\textcolor{#598938}{P}gg^\top\textcolor{#598938}{P} \preceq -\epsilon\textcolor{#598938}{P}
+                        $
+                    </p>
+                    <p style="text-align: left;width:100%">
+                        $
+                        \textbf{2. }\exists \textcolor{#598938}{\beta}\text{ a }C^2 \text{ function s.t. }\quad
+                        \frac{\partial \textcolor{#598938}{\beta}^\top}{\partial x} = \textcolor{#598938}{P}g
+                        $
+                    </p>
+                    <p style="text-align: left;width:100%">
+                        $
+                        \textbf{3.}\text{ The Killing property holds } \quad L_g \textcolor{#598938}{P} = 0
+                        $
+                    </p>
+                </div>
+            </div>
+
+            <div class="fragment">
+                <div class="theorem_title">Proposition 1 [Zoboli et al. 2023]</div>
+                <div class="theorem_content">Consider system $\mathcal{S}$. Let assumption 1 hold and let $\omega(t)$ be
+                    a $\mathcal{L}_2$ function.
+                    Then, for any $\kappa>\rho/2$, the trajectories of $\mathcal{S}$ in closed loop with
+                    $$u = \psi(t) - \kappa\big(\textcolor{#598938}{\beta}(x, t) - \textcolor{#598938}{\beta}(\pi,
+                    t)\big) + \omega(t)$$
+                    satisfy
+                    $$\Big| X\big(x(0), t_0, t) - \Pi\big(\pi(0), t_0, t)\Big| \leq k\big|x(0) -
+                    \pi(0)\big|\exp\big(-\lambda(t-t_0)\big) + \zeta\big(|\omega|\big)$$
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <p class="titlebox" style="margin:0px;">Theoretical results</p>
+            <p class="subtitlebox" style="margin-top:0px;">Controller design</p>
+            <div class="fontsize-20">
+
+                <div>
+                    <div class="theorem_title">Proposition 1 [Zoboli et al. 2023]</div>
+                    <div class="theorem_content">Consider system $\mathcal{S}$. Let assumption 1 hold and let
+                        $\omega(t)$ be a $\mathcal{L}_2$ function.
+                        Then, for any $\kappa>\rho/2$, the trajectories of $\mathcal{S}$ in closed loop with
+                        $$u = \psi(t) - \kappa\big(\textcolor{#598938}{\beta}(x, t) - \textcolor{#598938}{\beta}(\pi,
+                        t)\big) + \omega(t)$$
+                        satisfy
+                        $$\Big| X\big(x(0), t_0, t) - \Pi\big(\pi(0), t_0, t)\Big| \leq k\big|x(0) -
+                        \pi(0)\big|\exp\big(-\lambda(t-t_0)\big) + \zeta\big(|\omega|\big)$$
+                    </div>
+                </div>
+
+
+                <div class="messaging fragment">
+                    <div class="inbox_msg">
+                        <div class="chat_title">
+                            <div>IFAC -- Contractive output tracking -- Group chat</div>
+                            <div class="members">Samuele, Mattia, Me</div>
+                        </div>
+                        <div class="mesgs">
+                            <div class="outgoing_msg fragment">
+                                <div class="sent_msg">
+                                    <p>Guys, wtf ???</p>
+                                    <!--                                    <span class="time_date"> 11:01 AM    |    June 9</span>-->
+                                </div>
+                            </div>
+                            <div class="incoming_msg fragment">
+                                <div class="incoming_msg_img"><img src="assets/slide5/italy.png"></div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>No, no, don't worry</p>
+                                        <p>Remember the assumptions ?</p>
+                                        <p>Just learn $\textcolor{#598938}{P}$ and $(\textcolor{#598938}{\pi},
+                                            \textcolor{#598938}{\beta})$.
+                                            If we do, this theorem states that we can do output control</p>
+                                        <!--                                        <span class="time_date"> 11:01 AM    |    June 9</span>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="outgoing_msg fragment">
+                                <div class="sent_msg">
+                                    <p>Ok, but we'll learn an approximation... </p>
+                                    <!--                                    <span class="time_date"> 11:01 AM    |    June 9</span>-->
+                                </div>
+                            </div>
+                            <div class="incoming_msg fragment">
+                                <div class="incoming_msg_img"><img src="assets/slide5/italy.png"></div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>Yes, we know</p>
+                                        <!--                                        <span class="time_date"> 11:01 AM    |    June 9</span>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section data-menu-title="Approximation ">
+            <p class="titlebox" style="margin:0px;">Theoretical results</p>
+            <p class="subtitlebox" style="margin-top:0px;">Controller design</p>
+            <div class="fontsize-20">
+                <p> And they knew.</p>
+                <div>
+                    <div class="theorem_title">Proposition 2 [Zoboli et al. 2023]</div>
+                    <div class="theorem_content">Consider system $\mathcal{S}$ in closed loop with the control law
+                        defined earlier.
+                        Let $(\pi, \psi)$ be the solution of the regulator equations, and $(\kappa, \beta)$ chosen as in
+                        Proposition 1.
+                        Then, for any compact sets $\mathcal{W}_{\tilde{x}} \subset \mathbb{R}^{n_x},
+                        \mathcal{R}\subset\mathbb{R}^{n_e}$
+                        such that $r(t)\in\mathcal{R}$ for all $t\geq t_0$ and for any $\delta\leq 0$, there
+                        exists a compact set $\mathcal{W}_x$ and scalar $\mu_\delta\leq 0$ such that, if
+                        $$\begin{array}{rl}
+                        \big|\textcolor{#598938}{\hat\beta}(x,t) - \beta(x,t)\big| &\leq \mu_\delta \\
+                        \big|\textcolor{#598938}{\hat\pi}(t) - \pi(t)\big| &\leq \mu_\delta \\
+                        \big|\textcolor{#598938}{\hat \psi}(t) - \psi(t)\big| &\leq \mu_\delta
+                        \end{array}$$
+                        hold for all $x\in\mathcal{W}_x$ and for all $t\geq t_0$, then
+                        $$\lim_{t\mapsto \infty} \Big|X\big(x(0), t, t_0\big) - \Pi\big(\pi(0), t, t_0\big)\Big| <
+                        \delta$$
+                        for any $\big(x(0), \pi(0)\big)$ satisfying $\big(x(0) - \pi(0)\big)\in\mathcal{W}_{\tilde{x}}$.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section data-menu-title="Step 1">
+            <p class="titlebox" style="margin:0px;">Deep learning</p>
+            <p class="subtitlebox" style="margin-top:0px;"> Step 1: Solving the regulator equations</p>
+            <div class="fontsize-20">
+                <div class="row fragment semi-fade-out" data-fragment-index=0>
+                    <div class="col-45">
+                        <div class="">
+                            <p class="fontsize-25"><b>Step 1</b>: Regulation Equations</p>
+                            <p style="text-align: left">Given a <b>reference signal</b> <span
+                                    style="color: #277C9D">$r(t)$</span>, find $\big(\textcolor{#598938}{\pi_r}(t),
+                                \textcolor{#598938}{\psi_r}(t)\big)$ such that:</p>
+                            <p>$$\left\{\begin{array}{cl}\dot{\textcolor{#598938}{\pi_r}} &=
+                                f(\textcolor{#598938}{\pi_r}) +
+                                g(\textcolor{#598938}{\pi_r}) \textcolor{#598938}{\psi_r} \\ 0 &=
+                                h(\textcolor{#598938}{\pi_r}) - \textcolor{#277C9D}{r} \end{array}\right.$$</p>
+                        </div>
+                    </div>
+                    <div class="col-45">
+                        <div class="row" style="height: 250px;">
+                            <div class="fig-container" data-file="figures/slide_4_left.html"
+                                 data-style="width:100%; align:center;height:100%;"
+                                 style="height: 100%; margin-top: 0%" data-preload
+                                 data-scroll="no" data-overflow-shown=true></div>
+                        </div>
+                    </div>
+                </div>
+
+                <table style="width: 100%">
+                    <tr class="fragment fade-in-then-semi-out" data-fragment-index=0>
+                        <td class="custom-td" style="width:50%; height: 100px">
+                            <div class="fig-container" data-file="figures/slide_8_ic.html"
+                                 data-style="width:100%; align:center;height:100%;"
+                                 style="height: 100%; margin-top: 0%"
+                                 data-scroll="no" data-overflow-shown=true></div>
+                        </td>
+                        <td class="custom-td" style="width:50%">
+                            <ul class="ul_fancy">
+                                <li class="blue">Estimate $\textcolor{#598938}{\pi_r[0]}$ (observer-like design)</li>
+                            </ul>
+                            <p style="margin-left: 100px; margin-top: 10px">$
+                                \left\{\begin{array}{cl}
+                                \textcolor{#E77475}{q[t+1]} &= \mathfrak{g}_1\big(\textcolor{#277C9D}{r[t]},
+                                \textcolor{#E77475}{q[t]}\big) \\
+                                \textcolor{#598938}{\pi[0]} &= \mathfrak{f}_1\big(\textcolor{#E77475}{q[T]})
+                                \end{array}\right.$</p>
+                        </td>
+
+                    </tr>
+                    <tr class="fragment">
+                        <td class="custom-td" style="width:50%">
+                            <ul class="ul_fancy">
+                                <li class="blue">Compute $\pi[0...T]$ and $\psi[0...T]$ using $\mathcal{S}$
+                                    (controller-like
+                                    design)
+                                </li>
+                            </ul>
+                            <p style="margin-left: 100px; margin-top: 10px">$ \textcolor{#598938}{\psi[t+1]},
+                                \textcolor{#E77475}{z[t+1]} =
+                                \mathfrak{g}_2\big(\textcolor{#598938}{\pi[t]},\textcolor{#277C9D}{r[t+1]},
+                                \textcolor{#E77475}{z[t]} \big) $</p>
+                        </td>
+                        <td class="custom-td" style="width:50%; text-align: center">
+                            <img src="assets/slide8/fig_ifac.svg" style="height: 150px">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+
+        <section data-menu-title="Step 1: Results">
+            <p class="titlebox" style="margin:0px;">Deep learning</p>
+            <p class="subtitlebox" style="margin-top:0px;"> Step 1: Solving the regulator equations</p>
+            <div class="fontsize-20">
+                <p>$$\mathfrak{f}_1, \mathfrak{g}_1, \mathfrak{f}_2 = \arg \min \sum_{t=0}^T \Big| r(t) -
+                    h\big(\pi[t]\big)\Big|^2$$</p>
+            </div>
+            <div class="row fontsize-20">
+                <div class="col-50">
+                    $$\mathcal{S} : \begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix} = \begin{bmatrix}
+                    x_2\\B(x_1x_4^2 - g\sin x_3)\\x_4\\0\end{bmatrix}+\begin{bmatrix}0\\0\\0\\1\end{bmatrix}u$$
+                </div>
+                <div class="col-50">
+                    <img src="assets/slide9/bab.png" style="height: 100px">
+                </div>
+            </div>
+            <div style="height:250px">
+                <div class="fig-container" data-file="figures/slide_9.html"
+                     data-style="width:100%; align:center;height:100%;"
+                     style="height: 100%; margin-top: 0%"
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+        </section>
+
+        <section data-menu-title="Step 2: Stabilizer">
+            <p class="titlebox" style="margin:0px;">Deep learning</p>
+            <p class="subtitlebox" style="margin-top:0px;"> Step 2: Stabilizer</p>
+            <div class="fontsize-20">
+                <p style="width: 100%; text-align: left" class="bold fontsize-20 no_padding no_margin">Assumptions:</p>
+                <div style="width:90%; margin:auto">
+                    <p style="text-align: left;width:100%">
+                        $
+                        \textbf{1. }\exists \textcolor{#598938}{P}(x,t)\text{ bounded } C^1\text{ matrix, symmetric and
+                        positive definite s.t. }\quad
+                        L_\varphi \textcolor{#598938}{P} -
+                        \rho\textcolor{#598938}{P}gg^\top\textcolor{#598938}{P} \preceq -\epsilon\textcolor{#598938}{P}
+                        $
+                        $
+                        \textbf{2. }\exists \textcolor{#598938}{\beta}\text{ a }C^2 \text{ function s.t. }\quad
+                        \frac{\partial \textcolor{#598938}{\beta}^\top}{\partial x} = \textcolor{#598938}{P}g
+                        $ <br/>
+                        $
+                        \textbf{3.}\text{ The Killing property holds } \quad L_g \textcolor{#598938}{P} = 0
+                        $
+                    </p>
+                </div>
+
+                <table style="width:100%">
+                    <tr>
+                        <td class="custom-td" style="width:60%">
+                            <div class="fragment" style="background: #EFEFEF; height:250px; margin-right: 15px">
+                                <ul class="ul_fancy">
+                                    <li class="blue">Convert assumptions to matrix inequalities</li>
+                                </ul>
+                                <p style="text-align: left">
+                                <ul>
+                                    <li>Riccati-like:</li>
+                                </ul>
+                                $$ \textcolor{#227C9D}{M_1 = L_\varphi P(x,\psi) -\rho P(x,\psi) g(x) g^\top(x)
+                                P(x,\psi) +\varepsilon I},$$
+                                <ul>
+                                    <li>Killing vector field:</li>
+                                </ul>
+                                $$ \textcolor{#EC7677}{M_2 = L_g P(x,\psi) -\epsilon I}$$
+                                $$\textcolor{#EC7677}{M_3 = -L_g P(x,\psi) -\epsilon I}$$
+                                <ul>
+                                    <li>Boundedness:</li>
+                                </ul>
+                                $$\textcolor{#70AD47}{M_4 = -P(x,\psi) + \underline p I}$$
+                                </p>
+                            </div>
+                        </td>
+                        <td class="custom-td" style="width:40%">
+                            <div class="fragment" style="background: #EFEFEF; height:250px;">
+                                <ul class="ul_fancy">
+                                    <li class="blue">Minimize the eigenvalues:</li>
+                                </ul>
+                                <p style="text-align: left">
+
+                                    $$ \begin{array}{c}
+                                    \mathcal{L} = \lambda(\textcolor{#227C9D}{M_1}) +
+                                    \lambda(\textcolor{#EC7677}{M_2}) + \lambda(\textcolor{#EC7677}{M_3}) +
+                                    \lambda(\textcolor{#70AD47}{M_4}) \\
+                                    P(x, \psi) = \arg \min \mathcal{L}\end{array}$$
+                            </div>
+                        </td>
+
+
+                    </tr>
+                </table>
+            </div>
+            <div class=" r-stretch">
+                <img class="fragment" src="assets/slide10/P.svg" height="100%">
+            </div>
+        </section>
+
+
+        <section data-menu-title="Results">
+            <p class="titlebox" style="margin:0px;">Results</p>
+            <p class="subtitlebox" style="margin-top:0px;"> Ball & Beam</p>
+            <div class="row fontsize-20">
+                <div class="col-50">
+                    <p>$$\mathcal{S} : \begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix} = \begin{bmatrix}
+                    x_2\\B(x_1x_4^2 - g\sin x_3)\\x_4\\0\end{bmatrix}+\begin{bmatrix}0\\0\\0\\1\end{bmatrix}u$$</p>
+                    <p>$$u(t) = \psi_r(t) + \kappa\big( \beta(x, t) - \beta(\pi_r, t)\big) $$</p>
+                </div>
+                <div class="col-50">
+                    <img src="assets/slide9/bab.png" style="height: 100px">
+                </div>
+            </div>
+            <div style="height:350px">
+                <div class="fig-container" data-file="figures/slide_11.html"
+                     data-style="width:100%; align:center;height:100%;"
+                     style="height: 100%; margin-top: 0%"
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+        </section>
+
+        <section data-menu-title="Conclusion">
+            <p class="titlebox" style="margin:0px;">Conclusion</p>
+            <p class="subtitlebox" style="margin-top:0px;"> Limitations and Follow-up</p>
+
+            <div class="fontsize-20">
+                <div class="">
+                    <ul class="rectangle-list" style="width: 100%">
+                        <li class="blue">Sometimes it works !</li>
+                    </ul>
+                    <ul class="ul_fancy">
+                        <li class="blue"> Theoretically capable of handling any system</li>
+                        <li class="blue"> No online optimization</li>
+                        <li class="blue"> Can also find approximate solution when no exact solution exists</li>
+                    </ul>
+                </div>
+                <div class="fragment">
+                    <ul class="rectangle-list" style="width: 100%">
+                        <li class="red">Sometimes it doesn't...</li>
+                    </ul>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="custom-td" style="width: 50%">
+                                <ul class="ul_fancy">
+                                    <li class="blue"> Failure cases on unstable systems (e.g. VTOL)</li>
+                                    <li class="blue"> No guarantess about the domain of validity of $P$</li>
+                                    <li class="blue"> Generalization to very different references</li>
+                                </ul>
+                            </td>
+                            <td class="custom-td" style="width: 10%; text-align: center"> →</td>
+                            <td class="custom-td" style="width: 40%">
+                                <p class="italic">Constrained the controller to stay in a region of the state space
+                                    ?</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="fragment">
+                    <ul class="rectangle-list" style="width: 100%">
+                        <li class="green">Derivative in the loss: difficult to train</li>
+                    </ul>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="custom-td" style="width: 50%">
+                                <ul class="ul_fancy">
+                                    <li class="blue"> Finding $P$ satisfying all matrix inequalities is hard</li>
+                                    <li class="blue"> Known problem with PINNs</li>
+                                </ul>
+                            </td>
+                            <td class="custom-td" style="width: 10%; text-align: center"> →</td>
+                            <td class="custom-td" style="width: 40%">
+                                <p class="italic">Train P using local solution of the Ricatti equation ?</p>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+
+            <p class="fragment">Thank you !</p>
+        </section>
+
+
+    </div>
+</div>
+<script src="node_modules/reveal.js/dist/reveal.js"></script>
+<script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
+<script src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="node_modules/reveal.js/plugin/reveald3/reveald3.js"></script>
+<script src="node_modules/reveal.js/plugin/math/math.js"></script>
+<script src="node_modules/reveal.js/plugin/menu/menu.js"></script>
+<script>
+    Reveal.initialize({
+        viewDistance: 2, // to lazy load iframes
+        showHiddenSlides: false,
+        hash: true,
+        slideNumber: 'c/t',
+        navigationMode: 'linear',
+        mathjax3: {
+            mathjax: 'node_modules/mathjax/es5/tex-chtml-full.js',
+            // config: 'TeX-AMS_HTML-full',
+
+        },
+        menu: {
+            side: 'left',
+            hideMissingTitles: true,
+            markers: true,
+            numbers: true,
+        },
+        plugins: [RevealMarkdown, RevealHighlight, Reveald3, RevealMath.MathJax3, RevealMenu],
+    })
+
+</script>
+
+
+</body>
+</html>
