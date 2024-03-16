@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+    <script src="../node_modules/d3/dist/d3.js"></script>
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" src="../node_modules/mathjax/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div id="fig1"></div>
+
+
+<script>
+
+    var N_points=500;
+    var dt = 0.002
+
+    var graph_margin = {
+        top: 10,
+        right: 10,
+        bottom: 40,
+        left: 40
+    };
+
+    var colors = d3.scaleOrdinal(d3.schemeCategory10);
+    // ------------------------------------------------- //
+    // 3D Graph of Linear Dynamics
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var graph = d3.select("body").append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+    var axes = graph.append("g")
+    var reference = graph.append("g")
+    var state = graph.append("g")
+
+    var xScale = d3.scaleLinear()
+        .domain([0, N_points*dt])
+        .range([graph_margin.left, width - graph_margin.right]);
+    var yScale = d3.scaleLinear()
+        .domain([5, 0])
+        .range([graph_margin.top, height - graph_margin.bottom]);
+
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+
+    axes.append("g")
+        .attr("transform", "translate(0," + (yScale(0)) + ")")
+        .call(xAxis);
+    axes.append("g")
+        .attr("transform", "translate(" + (xScale(0)) + ",0)")
+        .call(yAxis.ticks(5));
+
+    // Add labels
+    axes.append("text")
+        .attr("x", xScale(N_points*dt/2))
+        .attr("y", yScale(0))
+        .attr("dy", "20px")
+        .attr("text-anchor", "end")
+        .attr("font-size", "15px")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "hanging")
+        .text("Time");
+
+    axes.append("foreignObject")
+        .attr("x", -yScale(0))
+        .attr("y", xScale(0) - 35)
+        .attr("transform", "rotate(-90)")
+        .attr("font-size", "15px")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "hanging")
+        .attr("width", yScale(-2) - yScale(2))
+        .attr("height", 50)
+        .html("$$r(t)$$");
+
+
+    r = []
+    for (var i=0; i<N_points; i++){
+        r.push(
+            0.25*Math.sin(3* i * dt * 2*Math.PI) +
+            0.15 * Math.sin(7.15 * i * dt * 2*Math.PI) +
+            0.854 * Math.sin(2.5 * i * dt * 2*Math.PI) + 3)
+    }
+    const max_r = d3.max(r);
+    for (var i=0; i<N_points; i++){
+        r[i] = r[i] - max_r + 5;
+    }
+
+    // time is dt * i, plot x function of time
+    var line = d3.line()
+        .x(function (d, i) {
+            return xScale(i*dt);
+        })
+        .y(function (d) {
+            return yScale(d);
+        });
+
+    reference.append("path")
+        .datum(r)
+        .attr("fill", "none")
+        .attr("stroke", colors(0))
+        .attr("stroke-width", 2)
+        .attr("d", line);
+
+
+    rects = []
+    rect_size= 15
+
+    // gradient color white - red - black
+    const color_gradient = d3.scaleLinear()
+        .domain([0, 0.5, 1])
+        .range(["white", "#E77475", "black"]);
+
+    dot = state.append("circle")
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", 5)
+        .attr("fill", color_gradient(0.5))
+
+    for (var i=0; i<4; i++){
+        rects.push(state.append("rect")
+            .attr("x", - rect_size/2)
+            .attr("y",(rect_size+2)*(i+1))
+            .attr("width", rect_size)
+            .attr("height", rect_size)
+            .attr("fill", color_gradient(0.5))
+            .attr("target_color", Math.random())
+            .attr("opacity", 1)
+        )
+    }
+
+    state.append("foreignObject")
+        .attr("x", -rect_size*3)
+        .attr("y", (rect_size+2)*2.5)
+        .attr("width", rect_size*2)
+        .attr("height", rect_size)
+        .html("$$q[t]$$");
+
+
+    state.attr("transform", "translate(" + xScale(0) + ", " + yScale(r[0]) +")")
+    var current_index = 0;
+    function simulate(){
+        state.transition()
+            .duration(10)
+            .attr("transform", "translate(" + xScale(current_index*dt) + ", " + yScale(r[current_index]) +")")
+        current_index += 1;
+        for (var i=0; i<4; i++){
+            b = 0.5
+            a = (rects[i].attr("target_color") - b)/N_points
+            rects[i].transition()
+                .duration(10)
+                .attr("fill", color_gradient(a*current_index + b))
+        }
+        if (current_index >= N_points) {
+            current_index = 0;
+        }
+    }
+    var interval = setInterval(simulate, 10);
+
+
+</script>
+
+
+</body>
+</html>
