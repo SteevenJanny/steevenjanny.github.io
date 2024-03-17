@@ -84,7 +84,11 @@
             </ul>
             <div class="fragment">
                 <div class="theorem_title">Output tracking problem</div>
-                <div class="theorem_content"> $$\lim_{t\rightarrow\infty} |e(t)| \leq c$$</div>
+                <div class="theorem_content"> $$\lim_{t\rightarrow\infty} |e(t)| \leq c$$
+                <ul>
+                    <li>Asymptotic output tracking if $c = 0$</li>
+                    <li>Approximate output tracking if $c\neq 0$</li>
+                </ul></div>
             </div>
             <div class="row fragment" style="height: 250px;">
                 <div class="fig-container" data-file="figures/slide_2.html"
@@ -127,7 +131,7 @@
                         </tr>
                         <tr>
                             <td class="custom-td">2) <b>Stabilizer</b>: $\boxed{u = \psi(x, \pi, v)}\text{ s.t. }
-                                \lim_\infty \|x - \pi\| = 0$
+                                \lim_{t\mapsto\infty} \|x - \pi\| = 0$
                             </td>
                         </tr>
 
@@ -158,7 +162,7 @@
                 <div class="row">
                     <div class="col-45">
                         <div class="fragment">
-                            <p class="fontsize-25"><b>Step 1</b>: Regulation Equations</p>
+                            <p class="fontsize-25"><b>Step 1</b>: Regulator Equations</p>
                             <p style="text-align: left">Given a <b>reference signal</b> <span
                                     style="color: #277C9D">$r(t)$</span>, find $\big(\textcolor{#598938}{\pi_r}(t),
                                 \textcolor{#598938}{\psi_r}(t)\big)$ such that:</p>
@@ -205,8 +209,7 @@
                 <div style="width:90%; margin:auto">
                     <p style="text-align: left;width:100%">
                         $
-                        \textbf{1. }\exists \textcolor{#598938}{P}(x,t)\text{ bounded } C^1\text{ matrix, symmetric and
-                        positive definite s.t. }\quad
+                        \textbf{1. }\exists \textcolor{#598938}{P}(x,t)>0\text{ a }C^1\text{ matrix-valued function s.t. }\;
                         L_\varphi \textcolor{#598938}{P} -
                         \rho\textcolor{#598938}{P}gg^\top\textcolor{#598938}{P} \preceq -\epsilon\textcolor{#598938}{P}
                         $
@@ -343,7 +346,7 @@
                 <div class="row fragment semi-fade-out" data-fragment-index=0>
                     <div class="col-45">
                         <div class="">
-                            <p class="fontsize-25"><b>Step 1</b>: Regulation Equations</p>
+                            <p class="fontsize-25"><b>Step 1</b>: Regulator Equations</p>
                             <p style="text-align: left">Given a <b>reference signal</b> <span
                                     style="color: #277C9D">$r(t)$</span>, find $\big(\textcolor{#598938}{\pi_r}(t),
                                 \textcolor{#598938}{\psi_r}(t)\big)$ such that:</p>
@@ -438,8 +441,7 @@
                 <div style="width:90%; margin:auto">
                     <p style="text-align: left;width:100%">
                         $
-                        \textbf{1. }\exists \textcolor{#598938}{P}(x,t)\text{ bounded } C^1\text{ matrix, symmetric and
-                        positive definite s.t. }\quad
+                        \textbf{1. }\exists \textcolor{#598938}{P}(x,t)>0\text{ a }C^1\text{ matrix-valued function s.t. }\;
                         L_\varphi \textcolor{#598938}{P} -
                         \rho\textcolor{#598938}{P}gg^\top\textcolor{#598938}{P} \preceq -\epsilon\textcolor{#598938}{P}
                         $
