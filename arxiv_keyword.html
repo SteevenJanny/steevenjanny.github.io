@@ -8,20 +8,33 @@
     <title>Steeven Janny</title>
     <!--    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>-->
     <link href="css/styles.css" rel="stylesheet"/>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-            type="text/javascript"></script>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300ital…alic%7CVarela+Round:400%7CBungee+Shade:regular%7CRoboto:300,regular,500"
           media="all">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        #placeholder h1 {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
 
 </head>
 <body>
@@ -44,112 +57,125 @@
     </div>
 </nav>
 <div class="container">
-    <!--    Simple form with a button to send inputs-->
-    </br>
     <div class="row">
         <div class="col">
-            <h1 class="display-4 text-center">ArXiv authors by Keywords</h1>
-            <p class="lead text-center">Enter keywords in the field below. The tool will query the ArXiv API for papers
-                containing them either in <b>title</b> or in the <b>abstract</b> (or both), and display each author with
-                a square,
-                which color depends on the number of papers co-authored by this author.</p>
+            <h1 class="display-4 text-center">Who leads my field ?</h1>
+            <p class="lead text-center">Discover the most prolific authors in your research domain. Enter keywords and
+                find out who leads your field based on arXiv publications.</p>
         </div>
     </div>
     </br>
     <div class="row">
         <div class="col text-center">
-            <form id="myForm" style="margin:auto">
+            <form id="search_form" style="margin:auto">
                 Keywords:
                 <input type="text" name="keyword" value="" id="keywords_field">
                 <input class="btn btn-primary" type="button" name="button" value="Search"
-                       onClick="testResults(this.form)" id="submit_button">
-                <!-- add radio for search in title, abstract, or global-->
-                </br>
+                       onClick="launchSearch(this.form)" id="submit_button" style="margin-right: 30px">
+                <!--                </br>-->
                 <input type="radio" id="title" name="search_type" value="title" checked>
-                <label for="title">Search in title</label>
+                <label for="title">In title</label>
                 <input type="radio" id="abstract" name="search_type" value="abstract">
-                <label for="abstract">Search in abstract</label>
+                <label for="abstract">In abstract</label>
                 <input type="radio" id="all" name="search_type" value="all">
-                <label for="all">Search all</label>
-                </br>
-                <input type="checkbox" id="singleton" name="singleton" value="singleton" checked>
-                <label for="singleton">Include single-paper authors</label>
+                <label for="all">In both</label>
             </form>
             <div id="loading_anim"></div>
         </div>
     </div>
 
-    <div class="row" style="border:none;padding-top: 20px">
-        <div class="col text-center"><h4 id="graph_title"  style="font-size: 3vw;">Enter keywords</h4>
-            <div id="svg_container2" style="width: 100%; margin:auto"></div> </div>
-        <div class="col-5 justify-content-evenly">
-            <div class="text-center">
-                <h2 style="font-size: 3vw;">Paper list:</h2>
-            </div>
-            <div id="paper_list"></div>
-        </div>
+    <div id="placeholder" class="text-center"
+         style="height:500px;display:flex;align-items:center;justify-content:center">
+        <h1>What are we looking for today?</h1>
     </div>
 
-    <br/>
-    <div class="row">
-        <div class="col justify-content-evenly text-info">
-            <p> Usage: </p>
-            <ul>
-                <li>Enter keywords in the field above, for instance "<i>physics</i>" and click on the button
-                    "<i>Search</i>".
-                </li>
-                <li>Wait for the results to appear. It may take a few seconds...</li>
-                <li>Hover the squares to see the author's name and number of papers.</li>
-                <li>Click on a square to see the list of its publication (below the figure)</li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-black-50 justify-content-evenly">
-            <p>Caveat: I am still trying to understand how the ArXiv API works: search results differ from the ones on
-                the website. Stemming does not work,
-                "<i>navigat</i>" returns nothing... I suggest to try different keywords to compare results, like "<i>navigate</i>","<i>navigating</i>"
-                and "<i>navigation</i>". Also, it is limited to the first 10,000 results.
-            </p>
-        </div>
-    </div>
-    <hr/>
-    <div class="row" style="border:none">
-        <div class="col">
-            <div class="text-center">
-                <h2>Looking for someone ?</h2>
-                <div class="col justify-content-evenly text-info">
-                    <p> Enter the name in the field below, and we will highlight the matching squares.</p>
+    <div id="main_container" style="display: none">
+        <div class="row" style="border:none;padding-top: 20px">
+            <div class="col text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" id="graph_title">Waiting for keywords...</h4>
+                    </div>
+                    <div class="card-body p-1  overflow-auto">
+                        <div id="author_block_container" style="width: 100%; margin:auto"></div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="checkbox" id="singleton" name="singleton" value="singleton" checked
+                                       class="form-check-input">
+                                <label for="singleton">Include single-paper authors</label>
+                            </div>
+                            <div class="col">
+                                <input type="checkbox" id="first_authors" name="first_authors" value="first_authors"
+                                       class="form-check-input">
+                                <label for="singleton">First author only</label>
+                            </div>
+                            <div class="col">
+                                <label for="start_date">Starting from</label>
+                                <input type="date" id="start_date" name="start_date" value="1995-04-04"
+                                       class="form-control form-control-sm" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <form id="myForm2" style="margin:auto">
-                    <!--                    This form calls highlightAuthor every time the user enter something, immediately-->
-                    <input type="text" name="name" value="" id="name_field" oninput="highlightAuthor(this.form)">
-                </form>
+
+            </div>
+            <div class="col-5 justify-content-evenly">
+                <div class="card" style="height: 750px">
+                    <div class="card-header">
+                        <h4 class="card-title">Author list</h4>
+                    </div>
+                    <div class="card-body p-1  overflow-auto">
+                        <div id="paper_list">
+                            <p class="text-center fst-italic">Nothing to show yet !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:50px; margin-bottom:50px">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Looking for someone ?</h4>
+                        <p class="card-subtitle">Enter a name below, and we will highlight the corresponding square.</p>
+                        <form id="myForm2" class="text-center mt-4">
+                            <input type="text" name="name" value="" id="name_field"
+                                   oninput="highlightAuthor(this.form)">
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
 
-    <!--    <div class="row" style="border:none">-->
-    <!--        <div class="col-sm" style="padding-top: 20px">-->
-    <!--            <div id="svg_container1" style="width: 100%; margin:auto"></div>-->
-    <!--        </div>-->
-    <!--        <div class="col-sm" style="padding-top: 20px">-->
-    <!--            <div class="container" style="padding-top: 20px"></div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--    <br/>-->
-    <!--    <hr/>-->
-    <!--    <div class="row">-->
-    <!--        <div class="col">-->
-    <!--            <div id="results"></div>-->
-    <!--        </div>-->
-    <!--    </div>-->
+    <div class="container mt-4 overflow-auto" style="max-height: 500px">
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs" id="categoryTabs"></ul>
+
+        <!-- Tabs Content -->
+        <div class="tab-content" id="tabContent"></div>
+    </div>
+
+    <h5 class="text-danger mt-5">Caveats</h5>
+    <ul class="list-group">
+        <li class="list-group-item text-danger">Sometimes, the API returns too fast with partial results... Try to
+            search again !
+        </li>
+        <li class="list-group-item text-danger">The API is a bit slow, be patient, especially if you search for a
+            very common keyword.
+        </li>
+        <li class="list-group-item text-danger"> The results are limited to the first 10,000 papers.</li>
+        <li class="list-group-item text-danger">Authors are merged by their names, so "Steven L. Brunton", "Steve
+            Brunton" and
+            "Steeven Brunton" are considered as different authors.
+        </li>
+
+    </ul>
+
+    <p class="mt-4">
+        Thanks to ArXiv for providing a well documented and freely accessible API !
+    </p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/d3-color@3"></script>
@@ -157,7 +183,6 @@
 <script src="https://cdn.jsdelivr.net/npm/d3-scale-chromatic@3"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="js/arxiv_api.js"></script>
-<script src="js/graph1.js"></script>
-<script src="js/graph2.js"></script>
+<script src="js/author_blocks.js"></script>
 </body>
 </html>
