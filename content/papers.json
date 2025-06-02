@@ -1,4 +1,21 @@
 {
+  "reasoningnavigation": {
+    "title": "Reasoning in visual navigation of end-to-end trained agents: a dynamical systems approach",
+    "authors": "Steeven Janny, Hervé Poirier, Leonid Antsfeld, Guillaume Bono, Gianluca Monaci, Boris Chidlovskii, Francesco Giuliari, Alessio Del Bue, Christian Wolf",
+    "venue": "Computer Vision and Pattern Recognition  (CVPR)",
+    "year": "2025",
+    "url_pdf": "https://arxiv.org/abs/2503.08306",
+    "url_code": "",
+    "url_dataset": "",
+    "url_poster": "",
+    "url_project": "https://europe.naverlabs.com/research/publications/reasoning-in-visual-navigation-of-end-to-end-trained-agents/",
+    "url_source": "",
+    "url_video": "",
+    "tags": [
+      "Navigation",
+      "Highlight"
+    ]
+  },
   "continuouspde": {
     "title": "Space and time continuous physics simulation from partial observations",
     "authors": "Steeven Janny, Madiha Nadri, Julie Digne, Christian Wolf",
@@ -12,8 +29,8 @@
     "url_source": "",
     "url_video": "",
     "tags": [
-      "highlights",
-      "physics"
+      "Physics & DL",
+      "Highlight"
     ]
   },
   "eagledataset": {
@@ -29,8 +46,8 @@
     "url_source": "",
     "url_video": "",
     "tags": [
-      "highlights",
-      "physics"
+      "Physics & DL",
+      "Highlight"
     ]
   },
   "filteredcophy": {
@@ -46,8 +63,8 @@
     "url_source": "",
     "url_video": "https://www.youtube.com/watch?v=y40wzlfIr8g&t=7s&ab_channel=SteevenJanny",
     "tags": [
-      "highlights",
-      "physics"
+      "Physics & DL",
+      "Highlight"
     ]
   },
   "deepkkl": {
@@ -63,8 +80,7 @@
     "url_source": "",
     "url_video": "https://www.youtube.com/watch?v=UsqLK2ONA3c",
     "tags": [
-      "highlights",
-      "control"
+      "Control & DL"
     ]
   },
   "reducedstatespace": {
@@ -80,8 +96,7 @@
     "url_source": "",
     "url_video": "",
     "tags": [
-      "highlights",
-      "control"
+      "Control & DL"
     ]
   },
   "outputregulation": {
@@ -97,7 +112,7 @@
     "url_source": "",
     "url_video": "",
     "tags": [
-      "control"
+      "Control & DL"
     ]
   },
   "eventtrigger": {
@@ -113,7 +128,7 @@
     "url_source": "",
     "url_video": "",
     "tags": [
-      "control"
+      "Control & DL"
     ]
   },
   "turbulences": {
@@ -143,7 +158,7 @@
     "url_source": "https://www.amazon.fr/ITC-informatique-tronc-commun-PSI/dp/2340068827",
     "url_video": "",
     "tags": [
-      "books"
+      "Teaching/Books"
     ]
   },
   "physiqueellipses": {
@@ -159,7 +174,7 @@
     "url_source": "https://www.amazon.fr/Oraux-corrig%5c%C3%5c%A9s-comment%5c%C3%5c%A9s-physique-chimie-PSI-PSI/dp/2340037514",
     "url_video": "",
     "tags": [
-      "books"
+      "Teaching/Books"
     ]
   },
   "mocapless": {

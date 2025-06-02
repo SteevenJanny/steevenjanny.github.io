@@ -1,20 +1,3 @@
-// read "content/papers/json" which contains a list of directories
-
-
-var template = `<div class="row" style="position: relative;width:auto;margin-bottom: 50px">
-<div class="col-9">
-    <p style="font-weight: 700;font-size: 18px;margin-bottom: 0">{paper_title}</p>
-<p style="font-size: small"> {paper_venue} - {date} <br/> <span class="text-muted"> {paper_authors}</span></p>
-<div class="btn-links" style="margin-top: -20px">
-    {buttons}
-</div>
-</div>
-<div class="col">
-    <img src="/content/{paper_folder}/featured.png" style="width: 100%;" alt="{paper_title}" loading="lazy">
-</div>
-</div>`
-
-
 function create_buttons(data) {
     var buttons = "";
     if (data["url_pdf"] !== "") {
@@ -70,56 +53,105 @@ function copy_to_clipboard() {
 
 function loadPapers() {
     d3.json("content/papers.json").then(function (json) {
+        // Step 1: Extract all tags from the dataset
+        const allTagsSet = new Set(["All"]); // "all" as default
+        for (let key in json) {
+            let paperTags = json[key].tags || [];
+            paperTags.forEach(tag => allTagsSet.add(tag));
+        }
 
-        // Get the tags from buttons in btn-group-toggle; name="tags"
+        const allTags = Array.from(allTagsSet).sort();
 
-        var tags_elements = document.getElementsByName("tags");
-        for (var i = 0; i < tags_elements.length; i++) {
-            if (tags_elements[i].checked) {
-                var tag = tags_elements[i].id;
+        // Step 2: Build filter buttons dynamically if not already done
+        const filterContainer = document.getElementById("tag_filters");
+        if (filterContainer.dataset.initialized==="false") {
+            filterContainer.innerHTML = ""; // clear if necessary
+
+            // Sort tags
+            allTags.sort((a, b) => a.localeCompare(b));
+
+            allTags.forEach((tag, i) => {
+                const label = document.createElement("label");
+                label.className = "btn btn-outline-primary"
+
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = "tags";
+                input.id = tag;
+                input.className = "btn-check";
+                if (tag === "all") input.checked = true;
+
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(" " + tag));
+                filterContainer.appendChild(label);
+            });
+
+            filterContainer.dataset.initialized = "true";
+            // Rebind event listeners
+            const tag_elements = document.getElementsByName("tags");
+            for (let i = 0; i < tag_elements.length; i++) {
+                tag_elements[i].addEventListener("change", function () {
+                    loadPapers(); // reload on filter change
+                });
             }
         }
 
-        var n_papers = 0;
-        var keys = Object.keys(json);
-        var to_push_str = "";
-        for (k = 0; k < keys.length; k++) {
-            var paper_folder = keys[k];
-            var paper_title = json[paper_folder]["title"];
-            var paper_venue = json[paper_folder]["venue"];
-            var paper_year = json[paper_folder]["year"];
-            var paper_authors = json[paper_folder]["authors"];
-            var paper_tags = json[paper_folder]["tags"];
-
-
-            if (tag === "all" || paper_tags.includes(tag)) {
-                paper_authors = paper_authors.replace("Steeven Janny", "<b>Steeven Janny</b>");
-                var buttons = create_buttons(json[paper_folder]);
-                buttons += create_cite_button(paper_folder);
-
-                // fill the template
-                var html = template.replace("{paper_folder}", paper_folder);
-                html = html.replace("{paper_title}", paper_title);
-                html = html.replace("{paper_venue}", paper_venue);
-                html = html.replace("{paper_authors}", paper_authors);
-                html = html.replace("{buttons}", buttons);
-                html = html.replace("{date}", paper_year);
-
-                to_push_str += "\n\n" + html;
-                n_papers += 1;
+        // Step 3: Filter papers by selected tag
+        let selectedTag = "All";
+        const tag_elements = document.getElementsByName("tags");
+        for (let i = 0; i < tag_elements.length; i++) {
+            if (tag_elements[i].checked) {
+                selectedTag = tag_elements[i].id;
             }
         }
 
-        // Select div id="papers_items"
-        var div = document.getElementById("papers_items");
-        div.innerHTML = to_push_str;
+        const keys = Object.keys(json);
+        const filteredPapers = keys.filter(k => selectedTag === "All" || json[k]["tags"].includes(selectedTag));
 
-        // Update the number of papers
-        var n_papers_str = n_papers + " elements";
-        var n_papers_div = document.getElementById("n_papers");
-        n_papers_div.innerHTML = n_papers_str;
+        const div = document.getElementById("papers_items");
+        div.innerHTML = ""; // Clear list
 
+        const n_papers_div = document.getElementById("n_papers");
+        n_papers_div.innerHTML = filteredPapers.length + " elements";
+
+        // Step 4: Add filtered papers with animation
+        filteredPapers.forEach((key, index) => {
+            const paper = json[key];
+            const authors = paper["authors"].replace("Steeven Janny", "<b>Steeven Janny</b>");
+            let buttons = create_buttons(paper) + create_cite_button(key);
+
+            const card = document.createElement("div");
+            const badges = paper["tags"].map(tag => `<span class="badge bg-secondary p-1 m-1">#${tag}</span>`).join(" ");
+            card.className = "paper-card card mb-2";
+            card.style.maxHeight = "200px";
+            card.innerHTML = `
+                <div class="row g-0 h-100">
+                    <div class="col-md-2 h-100 border-end align-content-center">
+                        <img src="content/${key}/featured.png" class="rounded-start img-fluid" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">${paper["title"]}</h5>
+                            <div class="card-text">${paper["venue"]} - ${paper["year"]}</div>
+                            <div class="card-text"><small class="text-body-secondary">${authors}</small></div>
+                            <div class="btn-links">${buttons}</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        ${badges}
+                    </div>
+                </div>
+            `;
+
+            div.appendChild(card);
+
+            // Animate each card with a staggered delay
+            setTimeout(() => {
+                card.classList.add("visible");
+            }, index * 100);
+        });
     });
 }
 
-loadPapers();
+
+window.addEventListener("DOMContentLoaded", loadPapers);

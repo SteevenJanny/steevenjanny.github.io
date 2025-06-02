@@ -54,3 +54,14 @@ ul.network-icon {
     flex: auto;
     padding: 1rem
 }
+
+.paper-card {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.paper-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
