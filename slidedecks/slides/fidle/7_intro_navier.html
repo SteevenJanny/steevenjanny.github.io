@@ -1,0 +1,91 @@
+<div class="shadow bg-primary-subtle rounded">
+    <div class="fs-3 fw-bold p-2 border-bottom border-white">Dataset & Method selection</div>
+    <div class="fs-4 mb-3 p-2"> Computation Fluid Dynamics techniques</div>
+</div>
+
+<div class="r-stack">
+    <div class="container-lg fragment fade-out" data-fragment-index="1">
+        <div class="row align-items-center">
+            <div class="col-7">
+                <video data-autoplay src="assets/eagle/intro_navier/coffee.mp4" loop autoplay muted
+                       width="100%" class="rounded img-fluid"></video>
+            </div>
+            <div class="col fs-5 shadow rounded">
+                <div class="fw-bold mb-4 border-bottom">The Navier-Stokes equations:</div>
+                <div>
+                    $$\begin{array}{cl}
+                    \dot{\mathbf{u}} + (\mathbf{u}\cdot \nabla) \mathbf{u} &= -\nabla p + \nu \Delta
+                    \mathbf{u} + \mathbf{f} \\
+                    \nabla \cdot \mathbf{u} &= 0 \\
+                    \end{array}$$
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                <ul class="ul-fancy fs-4">
+                    <li class="red">No known general solution (1M$ cash-prize)</li>
+                    <li class="red">Direct simulation is extremely difficult</li>
+                    <li class="red">Multi-scale dynamics</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="fragment fade-in-then-out" data-fragment-index="1">
+        <div class="r-stack">
+            <div>
+                <video data-autoplay data-src="assets/eagle/intro_navier/liquid.mp4" loop autoplay
+                       muted height="500px" class="rounded"></video>
+                <ul class="fs-6 citation-list text-start w-100">
+                    <li class="citation-item" style="display: block">
+                        <a href="https://academic.oup.com/mnras/article/181/3/375/988212" class="citation-link"
+                                   target="_blank"> Gingold et al.</a>
+                        <div class="citation-popup">
+                            <div class="fw-bold">Smoothed
+                                particle hydrodynamics: theory and application to non-spherical stars</div>
+                            <div>Royal Astronomical Society</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-5">
+                <div class="fw-bold text-primary fs-2">Smoothed Particles Hydrodynamics</div>
+                <p class="text-secondary fs-4">Lagrangian approach of fluids : simulate
+                    particles interactions.</p>
+                <ul class="ul-fancy fs-5">
+                    <li class="green">Real-time, good-looking</li>
+                    <li class="red"># of particles, physical accuracy</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="fragment" data-fragment-index="2">
+        <div class="r-stack">
+            <div>
+                <video data-autoplay data-src="assets/eagle/intro_navier/smoke.mp4" loop autoplay muted
+                       height="500px" class="rounded"></video>
+                <ul class="fs-6 citation-list text-start w-100">
+                    <li class="citation-item" style="display: block">
+                        <a href="https://pages.cs.wisc.edu/~chaol/data/cs777/stam-stable_fluids.pdf" class="citation-link"
+                           target="_blank"> Jos Stam</a>
+                        <div class="citation-popup">
+                            <div class="fw-bold">Stable Fluid</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-5">
+                <div class="fw-bold text-primary fs-2" >Stable Fluid Simulation </div>
+                <p class="text-secondary fs-4">Lagrangian/Eulerian approach of fluid: fixed
+                    cell and study I/O</p>
+                <ul class="ul-fancy fs-5">
+                    <li class="green">Fast, and plausible</li>
+                    <li class="red">Physical accuracy (for CG only)</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

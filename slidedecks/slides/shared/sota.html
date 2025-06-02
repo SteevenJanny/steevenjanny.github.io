@@ -1,0 +1,122 @@
+
+<p class="title-box blue">Modeling and Simulation of Physical Systems</p>
+<p class="subtitle-box blue mb-2">SOTA on Physics + Deep Learning</p>
+<div class="container-lg fs-6">
+    <div class="mb-1 fragment semi-fade-out" data-fragment-index="1">
+        <div class="row">
+            <ol class="rectangle-list w-100 ms-3 mb-0">
+                <li class="" value="1"> When the <b>Dynamics</b> is known:</li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
+                <div class="rounded-box blue" style="width:200px">
+                    $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                </div>
+                +
+                <div class="rounded-box green p-2 text-center" style="width:200px">
+                    <span class="fw-bold"> Solver</span>
+                    <span class="fas fa-cogs no_margin no_padding"></span>
+                </div>
+                <div><a href="https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125"
+                        target="_blank">PINNs</a></div>
+            </div>
+        </div>
+        <p class="citation">- Raissi et al. (2019). PINNs: A DL framework
+            for solving forward and inverse problems involving nonlinear PDEs. JCP</p>
+    </div>
+
+    <div class="mb-1 fragment fade-in-then-semi-out" data-fragment-index="1">
+        <div class="row">
+            <ol class="rectangle-list w-100 ms-3 mb-0">
+                <li class="" value="2"> When the <b>Solver</b> is known:</li>
+            </ol>
+        </div>
+        <div class="row">
+            <table>
+                <tr>
+                    <td class="fw-bold text-start ps-3 border-0"> Physics from learning:</td>
+                    <td class="align-middle border-0">
+                        <div class="rounded-box green" style="padding-top: 10px;width:200px">
+                            $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                        </div>
+                    </td>
+                    <td class="align-middle border-0" rowspan="4">+</td>
+                    <td class="align-middle border-0" rowspan="4">
+                        <div class="text-center rounded-box blue p-2" style="width:200px">
+                            <span class="fw-bold"> Solver</span>
+                            <span class="fas fa-cogs"></span>
+                        </div>
+                    </td>
+                    <td class="align-middle border-0"><a href="https://arxiv.org/abs/1806.07366"
+                                                         target="_blank">Neural-ODE</a></td>
+                </tr>
+
+                <tr>
+                    <td class="fw-bold text-start ps-3 align-middle border-0">Learning residual:</td>
+                    <td class="align-middle border-0">
+                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
+                            <div class="rounded-box blue">
+                                $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                            </div>
+                            +
+                            <div class="rounded-box green">
+                                $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="align-middle border-0"><a href="https://arxiv.org/pdf/2010.04456.pdf"
+                                                         target="_blank">Aphinity</a></td>
+                </tr>
+                <tr>
+                    <td class="fw-bold text-start ps-3  align-middle border-0">Inductive biases</td>
+                    <td class="align-middle border-0">
+                        <div class="rounded-box "
+                             style="padding-top: 10px;width:200px; background: linear-gradient(45deg, rgba(89,137,56,0.5) 40%, rgba(29,124,157,0.5) 60%)">
+                            $$\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$$
+                        </div>
+                    </td>
+                    <td class="align-middle border-0">
+                        <a href="https://arxiv.org/abs/2003.14162" target="_blank">Deep SSM</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <p class="citation">- Chen et al. (2018). Neural ordinary differential equations. NeurIPS</p>
+        <p class="citation">- Yin et al. (2021). Augmenting physical models with deep networks for
+            complex
+            dynamics forecasting. JSM</p>
+        <p class="citation">- Gedon et al. (2021). Deep state space models for nonlinear system
+            identification.
+            IFAC</p>
+    </div>
+
+    <div class="mb-1 fragment fade-in-then-semi-out" data-fragment-index="2">
+        <div class="row">
+            <ol class="rectangle-list w-100 ms-3 mb-0">
+                <li class="" value="3"> When everything needs to be learned:</li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="d-flex flex-row align-items-center">
+                <div class="fw-bold">End-to-end</div>
+                <div class="rounded-box text-center"
+                     style="padding-top: 10px;width:400px; background: linear-gradient(45deg, rgba(89,137,56,0.5) 40%, rgba(29,124,157,0.5) 60%);">
+                    $\dot{\mathbf{s}} = {\color{#277C9D} f}(\mathbf{s})$ + <strong>Solver</strong> <span
+                        class="fas fa-cogs"></span>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="https://arxiv.org/abs/2003.01460" target="_blank">PhyDNet</a>
+                    <a href="https://arxiv.org/abs/2010.03409" target="_blank">MeshGraphNet</a>
+                </div>
+            </div>
+            <p class="citation">- Guen et al. (2020). Disentangling physical dynamics from unknown
+                factors
+                for unsupervised video prediction. CVPR</p>
+            <p class="citation">- Pfaff et al. (2020). Learning Mesh-Based Simulation with Graph
+                Networks.
+                ICLR</p>
+        </div>
+    </div>
+</div>

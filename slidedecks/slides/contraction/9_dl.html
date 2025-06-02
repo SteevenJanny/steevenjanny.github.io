@@ -1,0 +1,63 @@
+<p class="title-box blue">Deep learning</p>
+<p class="subtitle-box blue"> Step 2: Stabilizer</p>
+
+<div class="fs-5 mt-3">
+    <p class="fw-bold text-start">Assumptions:</p>
+    <div class="w-100 ms-4">
+        <p class="text-start">
+            $
+            \textbf{1. }\exists \textcolor{#598938}{P}(x,t)>0\text{ a }C^1\text{ matrix-valued function s.t. }\;
+            L_\varphi \textcolor{#598938}{P} -
+            \rho\textcolor{#598938}{P}gg^\top\textcolor{#598938}{P} \preceq -\epsilon\textcolor{#598938}{P}
+            $</p>
+        <p class="text-start">
+            $
+            \textbf{2. }\exists \textcolor{#598938}{\beta}\text{ a }C^2 \text{ function s.t. }\quad
+            \frac{\partial \textcolor{#598938}{\beta}^\top}{\partial x} = \textcolor{#598938}{P}g
+            $ </p>
+        <p class="text-start">
+            $
+            \textbf{3.}\text{ The Killing property holds } \quad L_g \textcolor{#598938}{P} = 0
+            $
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-7 bg-light m-1 p-2 text-start align-content-center fragment">
+            <ul class="ul_fancy">
+                <li class="blue">Convert assumptions to matrix inequalities</li>
+            </ul>
+            <p style="text-align: left">
+            <ul>
+                <li>Riccati-like:</li>
+            </ul>
+            $$ \textcolor{#227C9D}{M_1 = L_\varphi P(x,\psi) -\rho P(x,\psi) g(x) g^\top(x)
+            P(x,\psi) +\varepsilon I},$$
+            <ul>
+                <li>Killing vector field:</li>
+            </ul>
+            $$ \textcolor{#EC7677}{M_2 = L_g P(x,\psi) -\epsilon I}$$
+            $$\textcolor{#EC7677}{M_3 = -L_g P(x,\psi) -\epsilon I}$$
+            <ul>
+                <li>Boundedness:</li>
+            </ul>
+            $$\textcolor{#70AD47}{M_4 = -P(x,\psi) + \underline p I}$$
+            </p>
+        </div>
+        <div class="col bg-light m-1 p-2 text-start align-content-center fragment">
+            <ul class="ul_fancy">
+                <li class="blue">Minimize the eigenvalues:</li>
+            </ul>
+            <p style="text-align: left">
+
+                $$ \begin{array}{c}
+                \mathcal{L} = \lambda(\textcolor{#227C9D}{M_1}) +
+                \lambda(\textcolor{#EC7677}{M_2}) + \lambda(\textcolor{#EC7677}{M_3}) +
+                \lambda(\textcolor{#70AD47}{M_4}) \\
+                P(x, \psi) = \arg \min \mathcal{L}\end{array}$$
+        </div>
+    </div>
+</div>
+<div class=" r-stretch">
+    <img class="fragment" src="assets/ifac/P.svg" height="100%">
+</div>

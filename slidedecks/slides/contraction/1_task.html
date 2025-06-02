@@ -1,0 +1,30 @@
+<p class="title-box blue">Task definition</p>
+<p class="subtitle-box blue">Output prediction</p>
+
+<p class="fs-5 text-start">
+    We consider a system of the following form:
+    $$ \begin{array}{ll}
+    \dot x &= f(x) + g(x)u \\
+    e &= h(x) - r(t)
+    \end{array}$$
+    Assumptions:
+
+</p>
+<ul class="ul_fancy fs-5 w-100">
+    <li>$f$, $g$, $h$, $r$ sufficiently smooth.</li>
+    <li>Forward completeness in compact $\mathcal{F}$.</li>
+</ul>
+<div class="fragment mt-1">
+    <div class="theorem_title">Output tracking problem</div>
+    <div class="theorem_content pb-0"> $$\lim_{t\rightarrow\infty} |e(t)| \leq c$$
+        <ul>
+            <li>Asymptotic output tracking if $c = 0$</li>
+            <li>Approximate output tracking if $c\neq 0$</li>
+        </ul></div>
+</div>
+<div class="row fragment mt-4" style="height: 250px;">
+    <div class="fig-container" data-file="figures/contraction/task.html"
+         data-style="width:100%; align:center;height:100%;"
+         style="height: 100%; margin-top: 0%" data-preload
+         data-scroll="no" data-overflow-shown=true></div>
+</div>

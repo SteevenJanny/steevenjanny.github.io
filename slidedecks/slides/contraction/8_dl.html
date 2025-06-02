@@ -1,0 +1,22 @@
+<p class="title-box blue">Deep learning</p>
+<p class="subtitle-box blue"> Step 1: Solving the regulator equations</p>
+
+<div class="fs-5">
+    <p>$$\mathfrak{f}_1, \mathfrak{g}_1, \mathfrak{f}_2 = \arg \min \sum_{t=0}^T \Big| r(t) -
+        h\big(\pi[t]\big)\Big|^2$$</p>
+</div>
+<div class="row fs-5">
+    <div class="col">
+        $$\mathcal{S} : \begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix} = \begin{bmatrix}
+        x_2\\B(x_1x_4^2 - g\sin x_3)\\x_4\\0\end{bmatrix}+\begin{bmatrix}0\\0\\0\\1\end{bmatrix}u$$
+    </div>
+    <div class="col">
+        <img src="assets/ifac/bab.png" style="height: 100px">
+    </div>
+</div>
+<div style="height:250px">
+    <div class="fig-container" data-file="figures/contraction/results1.html"
+         data-style="width:100%; align:center;height:100%;"
+         style="height: 100%; margin-top: 0%"
+         data-scroll="no" data-overflow-shown=true></div>
+</div>

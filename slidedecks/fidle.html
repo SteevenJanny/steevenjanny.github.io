@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>JDLS: Deep Learning for Fluid Mechanics</title>
+
+    <link rel="stylesheet" href="_dist/reset.css">
+    <link rel="stylesheet" href="_dist/reveal.css">
+    <link rel="stylesheet" href="_dist/theme/simple.css">
+    <link rel="stylesheet" href="_css/fonts.css">
+    <link rel="stylesheet" href="_css/bootstrap.min.css">
+    <link rel="stylesheet" href="_css/custom.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="_plugin/highlight/monokai.css">
+    <script src="_js/fontawesome.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+
+    <style>
+        .equation-term {
+            overflow: hidden;
+            opacity: 0;
+            max-width: 0;
+            transform: translateX(30px);
+            transition: all 0.5s ease;
+            white-space: nowrap;
+        }
+
+        .equation-term.visible {
+            opacity: 1;
+            max-width: 1000px; /* enough to show full content */
+            transform: translateX(0);
+        }
+
+        .equation-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            /*flex-wrap: nowrap;*/
+            flex-direction: row;
+            gap: 1rem;
+            transition: all 0.5s ease;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <section id="title" data-external="slides/fidle/0_title.html" data-menu-title="Title"></section>
+        <section id="education" data-external="slides/fidle/1_education.html" data-menu-title="Education"></section>
+        <section id="motivation" data-external="slides/fidle/2_motivation.html" data-menu-title="Motivation"></section>
+        <section data-external="slides/fidle/3_motivation.html"></section>
+        <section id="sota" data-external="slides/fidle/4_pinn.html" data-menu-title="SOTA"></section>
+        <section data-external="slides/fidle/5_node.html"></section>
+        <section data-external="slides/fidle/6_endtoend.html"></section>
+
+        <section>
+            <div class="shadow bg-primary-subtle rounded">
+                <div class="fs-3 fw-bold p-2">Dataset & Method selection</div>
+            </div>
+        </section>
+
+        <section id="intro_navier" data-external="slides/fidle/7_intro_navier.html" data-menu-title="CFD"></section>
+        <section data-external="slides/fidle/8_intro_navier.html"></section>
+        <section id="dataset" data-external="slides/fidle/9_eagle_dataset.html" data-menu-title="Dataset"></section>
+        <section data-external="slides/fidle/10_eagle_dataset.html"></section>
+        <section data-external="slides/fidle/11_eagle_dataset.html"></section>
+
+        <section>
+            <div class="shadow bg-primary-subtle rounded">
+                <div class="fs-3 fw-bold p-2">Model architecture & design</div>
+            </div>
+
+        </section>
+
+        <section id="cnn" data-external="slides/fidle/12_eagle_cnn.html" data-menu-title="SOTA"></section>
+        <section data-external="slides/fidle/13_eagle_gnn.html"></section>
+        <section id="mesh_tf" data-external="slides/fidle/14_mesh_tf.html" data-menu-title="Model"></section>
+        <section id="results" data-external="slides/fidle/15_eagle_results.html" data-menu-title="Results"></section>
+        <section data-external="slides/fidle/16_result_eagle.html"></section>
+
+        <section>
+            <div class="shadow bg-primary-subtle rounded">
+                <div class="fs-3 fw-bold p-2">Limitations and perspectives</div>
+            </div>
+        </section>
+
+        <section id="limits" data-external="slides/fidle/17_clustering.html" data-menu-title="Limitations"></section>
+        <section data-external="slides/fidle/18_sim3d.html"></section>
+        <section data-external="slides/fidle/19_generative.html"></section>
+    </div>
+</div>
+
+<script src="_dist/reveal.js"></script>
+<script src="_plugin/notes/notes.js"></script>
+<script src="_plugin/markdown/markdown.js"></script>
+<script src="_plugin/highlight/highlight.js"></script>
+<script src="_plugin/reveald3.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="_plugin/math/math.js"></script>
+<script src="_plugin/menu/menu.js"></script>
+<script>
+    Reveal.initialize({
+        showHiddenSlides: false,
+        hash: true,
+        slideNumber: 'c/t',
+        autoPlayMedia: true,
+        navigationMode: 'linear',
+        plugins: [RevealMarkdown, RevealHighlight, Reveald3, RevealMath.MathJax3, RevealMenu],
+        viewDistance: 1,
+        dependencies: [
+            {
+                src: '_plugin/external.js',
+                condition: function () {
+                    return !!document.querySelector('[data-external],[data-external-replace]');
+                }
+            },
+        ],
+        menu: {
+            side: 'left',
+            hideMissingTitles: true,
+            markers: true,
+            numbers: true,
+        }
+    })
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+</script>
+
+</body>
+</html>

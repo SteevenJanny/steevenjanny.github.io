@@ -1,0 +1,49 @@
+<p class="title-box blue">Task definition</p>
+<p class="subtitle-box blue">Proposed approach</p>
+
+<div class="fs-5 mt-4">
+    <div>
+        $\mathcal{S}: \left\{\begin{array}{cl}\dot x &= \varphi(x, u) = f(x) + g(x)u \\ y &= h(x)
+        \end{array}\right.$
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="fragment">
+                <p class="fs-4"><b>Step 1</b>: Regulator Equations</p>
+                <p class="text-start">Given a <b>reference signal</b> <span
+                        style="color: #277C9D">$r(t)$</span>, find $\big(\textcolor{#598938}{\pi_r}(t),
+                    \textcolor{#598938}{\psi_r}(t)\big)$ such that:</p>
+                <p>$$\left\{\begin{array}{cl}\dot{\textcolor{#598938}{\pi_r}} &=
+                    f(\textcolor{#598938}{\pi_r}) +
+                    g(\textcolor{#598938}{\pi_r}) \textcolor{#598938}{\psi_r} \\ 0 &=
+                    h(\textcolor{#598938}{\pi_r}) - \textcolor{#277C9D}{r} \end{array}\right.$$</p>
+            </div>
+            <div class="fragment" style="height: 250px;">
+                <div class="fig-container" data-file="figures/contraction/regulator.html"
+                     data-style="width:100%; align:center;height:100%;"
+                     style="height: 100%; margin-top: 0%" data-preload
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+
+        </div>
+        <div class="col-1"></div>
+        <div class="col">
+            <div class="fragment">
+                <p class="fs-4"><b>Step 2</b>: Stabilizer</p>
+                <p class="text-start">Find $\textcolor{#598938}{\alpha}(x, \pi, t)$ such that:</p>
+                <p>$$\left\{\begin{array}{l} \textcolor{#598938}{u}(r,x,t) = \textcolor{#598938}{\psi_r}(t)
+                    +
+                    \textcolor{#598938}{\alpha}(x, \textcolor{#598938}{\pi_r}, t) \\
+                    \lim_{t\mapsto \infty} \|X\big(x(0), u, t\big) - \Pi_r\big(\pi_r(0), \psi_r, t\big)\| =
+                    0\end{array}\right.$$</p>
+            </div>
+            <div class="fragment" style="height: 250px;">
+                <div class="fig-container" data-file="figures/contraction/stabilizer.html"
+                     data-style="width:100%; align:center;height:100%;"
+                     style="height: 100%; margin-top: 0%" data-preload
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+        </div>
+    </div>
+</div>

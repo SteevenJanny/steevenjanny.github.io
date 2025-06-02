@@ -1,0 +1,75 @@
+<p class="title-box cyan">Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers</p>
+<p class="subtitle-box cyan">How do we address larger-scale problems?</p>
+<div class="fs-3 mt-3"> An infamous example: Simulation of Fluid Mechanics</div>
+
+<div class="r-stack">
+    <div class="container-lg fragment fade-out" data-fragment-index="1">
+        <div class="row align-items-center">
+            <div class="col-7">
+                <video data-autoplay src="assets/eagle/intro_navier/coffee.mp4" loop="loop"
+                       data-ignore width="100%" class="rounded img-fluid"></video>
+            </div>
+            <div class="col">
+                <div class="theorem_title">The Navier-Stokes equations:</div>
+                <div class="theorem_content">
+                    $$\begin{array}{cl}
+                    \dot{\mathbf{u}} + (\mathbf{u}\cdot \nabla) \mathbf{u} &= -\nabla p + \nu \Delta
+                    \mathbf{u} + \mathbf{f} \\
+                    \nabla \cdot \mathbf{u} &= 0 \\
+                    \end{array}$$
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                <ul class="ul-fancy fs-4">
+                    <li class="red">No known general solution (1M$ cash-prize)</li>
+                    <li class="red">Direct simulation is extremely difficult</li>
+                    <li class="red">Multi-scale dynamics</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="fragment fade-in-then-out" data-fragment-index="1">
+        <div class="r-stack">
+            <div>
+                <video data-autoplay data-src="assets/eagle/intro_navier/liquid.mp4" loop="loop"
+                       muted="muted" height="500px" class="rounded img-fluid"></video>
+                <p class="citation">- Gingold et al. (1977). Smoothed
+                    particle hydrodynamics: theory and application to non-spherical stars. Royal
+                    Astronomical Society.</p>
+            </div>
+            <div class="mt-5">
+                <div class="fw-bold" style="color: #277C9D;">Smoothed Particles Hydrodynamics</div>
+                <p class="text-secondary">Lagrangian approach of fluids : simulate
+                    particles interactions.</p>
+                <ul class="ul-fancy fs-5">
+
+                    <li class="green">Real-time, good-looking</li>
+                    <li class="red"># of particles, physical accuracy</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="fragment" data-fragment-index="2">
+        <div class="r-stack">
+            <div>
+                <video data-autoplay data-src="assets/eagle/intro_navier/smoke.mp4" loop="loop"
+                       muted="muted" height="500px" class="rounded img-fluid"></video>
+            </div>
+            <div class="mt-5">
+                <div class="fw-bold" style="color: #277C9D;">Stable Fluid Simulation </div>
+                <p class="text-secondary">Lagrangian/Eulerian approach of fluid: fixed
+                    cell and study I/O</p>
+                <ul class="ul-fancy fs-5">
+                    <li class="green">Fast, and plausible</li>
+                    <li class="red">Physical accuracy (for CG only)</li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="citation">- Stam, J. (1999). Stable Fluids.</p>
+    </div>
+</div>

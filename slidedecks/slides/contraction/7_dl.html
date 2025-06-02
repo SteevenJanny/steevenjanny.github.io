@@ -1,0 +1,61 @@
+<p class="title-box blue">Deep learning</p>
+<p class="subtitle-box blue"> Step 1: Solving the regulator equations</p>
+
+<div class="fs-5 mt-3">
+    <div class="row fragment semi-fade-out" data-fragment-index=0>
+        <div class="col">
+            <p class="fs-4"><b>Step 1</b>: Regulator Equations</p>
+            <p style="text-align: left">Given a <b>reference signal</b> <span
+                    style="color: #277C9D">$r(t)$</span>, find $\big(\textcolor{#598938}{\pi_r}(t),
+                \textcolor{#598938}{\psi_r}(t)\big)$ such that:</p>
+            <p>$$\left\{\begin{array}{cl}\dot{\textcolor{#598938}{\pi_r}} &=
+                f(\textcolor{#598938}{\pi_r}) +
+                g(\textcolor{#598938}{\pi_r}) \textcolor{#598938}{\psi_r} \\ 0 &=
+                h(\textcolor{#598938}{\pi_r}) - \textcolor{#277C9D}{r} \end{array}\right.$$</p>
+        </div>
+        <div class="col">
+            <div style="height: 250px;">
+                <div class="fig-container" data-file="figures/contraction/regulator.html"
+                     data-style="width:100%; align:center;height:100%;"
+                     style="height: 100%; margin-top: 0" data-preload
+                     data-scroll="no" data-overflow-shown=true></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row fragment fade-in-then-semi-out mt-3" data-fragment-index=0 style="height: 100px">
+        <div class="col">
+            <div class="fig-container" data-file="figures/contraction/initial_cond.html"
+                 data-style="width:100%; align:center;height:100%;"
+                 style="height: 100%; margin-top: 0%"
+                 data-scroll="no" data-overflow-shown=true></div>
+        </div>
+        <div class="col">
+            <ul class="ul_fancy">
+                <li class="blue">Estimate $\textcolor{#598938}{\pi_r[0]}$ (observer-like design)</li>
+            </ul>
+            <p style="margin-left: 100px; margin-top: 10px">$
+                \left\{\begin{array}{cl}
+                \textcolor{#E77475}{q[t+1]} &= \mathfrak{g}_1\big(\textcolor{#277C9D}{r[t]},
+                \textcolor{#E77475}{q[t]}\big) \\
+                \textcolor{#598938}{\pi[0]} &= \mathfrak{f}_1\big(\textcolor{#E77475}{q[T]})
+                \end{array}\right.$</p>
+        </div>
+    </div>
+
+    <div class="row fragment mt-5">
+        <div class="col align-content-center">
+            <ul class="ul_fancy">
+                <li class="blue">Compute $\pi[0...T]$ and $\psi[0...T]$ using $\mathcal{S}$
+                    (controller-like
+                    design)
+                </li>
+            </ul>
+            <p style="margin-left: 100px; margin-top: 10px">$ \textcolor{#598938}{\psi[t+1]},
+                \textcolor{#E77475}{z[t+1]} =
+                \mathfrak{g}_2\big(\textcolor{#598938}{\pi[t]},\textcolor{#277C9D}{r[t+1]},
+                \textcolor{#E77475}{z[t]} \big) $</p>
+        </div>
+        <div class="col"><img src="assets/ifac/fig_ifac.svg" style="height: 150px"></div>
+    </div>
+</div>

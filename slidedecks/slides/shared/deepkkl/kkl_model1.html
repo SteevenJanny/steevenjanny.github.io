@@ -1,0 +1,81 @@
+<p class="title-box blue">Deep KKL: Data-driven Output Prediction for Non-Linear Systems</p>
+<p class="subtitle-box blue">KKL Observer</p>
+
+<div class="fs-5 rounded-box green mt-3">
+    $$\begin{array}{cl}
+    \dot{\mathbf{z}} &= A \mathbf{z} + b\psi(\mathbf{z}) \\
+    y &= \psi(\mathbf{z})
+    \end{array}$$
+</div>
+<ul class="ul-fancy m-0 text-start w-100 pb-0">
+    <li class="blue fw-bold fs-4">Parameters to identify:</li>
+</ul>
+<div class="fs-5 row fragment mt-0">
+    <ddiv class="col">
+        <div class="theorem_title" style="background-color: #598938">
+            $$ A, b $$
+        </div>
+        <div class="theorem_content" style="text-align: center;padding:2px">
+            <div>$A$ Hurwitz</div>
+            <div>$A,b$ controllable</div>
+        </div>
+    </ddiv >
+    <div class="col">
+        <div class="theorem_title" style="background-color: #598938">
+            $$ \psi $$
+        </div>
+        <div class="theorem_content" style="text-align: center;padding:2px">
+            <div >Lipschitz</div>
+            <div  style="opacity: 0"> aaa</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="fragment" style="margin-top: 20px;">
+    <div class="theorem_title">
+        <b>Theorem:</b> [Andrieu et al., 2006]
+    </div>
+    <div class="theorem_content">
+        <p style="margin:0">
+            With $\dim \mathbf{z} = 2\dim \mathbf{s}+2$, there exists a Hurwitz matrix
+            $A$
+            and a
+            function $\psi$ such that the KKL observer is an <b>output observer</b>.
+        </p>
+    </div>
+</div>
+<div class="container-lg fs-5">
+    <div class="fragment">
+        <div class="row fs-4 align-items-center">
+            <div class="col text-start">
+                <ul class="ul-fancy">
+                    <li class="red fw-bold">Analytic solutions:</li>
+                </ul>
+            </div>
+            <div class="col text-end">Good luck.</div>
+        </div>
+        <div class="row">
+            <p class="citation">- Bernard et al.(2022). KKL
+                observer design for sensorless induction motors. Conference on Decision and
+                Control.</p>
+
+            <p class="citation">- Brivadis et al (2019). Luenberger
+                observers for discrete-time nonlinear systems. Conference on Decision and Control.</p>
+        </div>
+    </div>
+    <div class="fragment">
+        <div class="row fs-4 align-items-center">
+            <div class="col text-start">
+                <ul class="ul-fancy">
+                    <li class="green fw-bold fs-4">Deep Learning</li>
+                </ul>
+            </div>
+            <div class="col text-end">
+                Model $\psi$ with an MLP,<br/>
+                Learn $A,b$ via gradient descent.
+            </div>
+        </div>
+    </div>
+</div>
+<div class="r-stretch"></div>

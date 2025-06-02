@@ -1,0 +1,533 @@
+/* --------------------------------------------------------------------- */
+/* MISC */
+/* --------------------------------------------------------------------- */
+.reveal {
+    font-family: "Computer Modern Sans";
+}
+
+mjx-container[display="true"] {
+    margin: 0 ! important;
+    font-size: 100% !important;
+}
+
+.MathJax_SVG_Display {
+    margin: 0 ! important
+}
+
+.citation {
+    font-size: 14px;
+    text-align: left;
+    width: 100%;
+    margin: 0 !important;
+    color: #606060;
+}
+
+a {
+    color: #606060;
+}
+
+a:hover {
+    color: #277C9D;
+}
+
+/* --------------------------------------------------------------------- */
+/* TITLES */
+/* --------------------------------------------------------------------- */
+.title {
+    background-color: #277C9D;
+    color: white;
+    border-radius: .3em;
+    padding: 1vh;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.55));
+}
+
+.timeline-image {
+    width: 100px;
+    height: auto;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+.title-box {
+    color: white;
+    border-top-left-radius: .3em;
+    border-top-right-radius: .3em;
+    padding: 1vh;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 !important;
+}
+
+.subtitle-box {
+    border-bottom-left-radius: .3em;
+    border-bottom-right-radius: .3em;
+    padding: 1vh;
+    margin: 0 !important;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.title-box.blue {
+    background-color: #277C9D;
+}
+
+.subtitle-box.blue {
+    background-color: #d2e6f3;
+}
+
+.title-box.green {
+    background-color: #598938;
+}
+
+.subtitle-box.green {
+    background-color: #ddeed1;
+}
+
+.title-box.cyan {
+    background-color: #3EC3B2;
+}
+
+.subtitle-box.cyan {
+    background-color: #d0eeea;
+}
+
+
+/* --------------------------------------------------------------------- */
+/* UL FANCY */
+/* --------------------------------------------------------------------- */
+
+
+.ul-fancy {
+    padding: 0.5em 0em 0.5em 2.3em;
+    position: relative;
+}
+
+.ul-fancy li {
+    line-height: 1.5;
+    padding: 0.1em 0;
+    list-style-type: none !important;
+}
+
+.ul-fancy li:before {
+    font-family: FontAwesome;
+    content: "\f138";
+    position: absolute;
+    left: 1em;
+    color: #5b5b5b;
+    margin: 0px;
+    padding: 0px;
+}
+
+.ul-fancy li.blue:before {
+    color: #277C9D;
+}
+
+.ul-fancy li.primary:before {
+    color: var(--bs-primary, #0d6efd);
+}
+
+.ul-fancy li.red:before {
+    color: #E77475;
+}
+
+.ul-fancy li.green:before {
+    color: #598938;
+}
+
+.ul-fancy li:hover {
+    color: #5b5b5b;
+}
+
+.ul-fancy li.blue:hover {
+    color: #277C9D;
+}
+
+.ul-fancy li.primary:hover {
+    color: var(--bs-primary, #0d6efd);
+}
+
+.ul-fancy li.red:hover {
+    color: #E77475;
+}
+
+.ul-fancy li.green:hover {
+    color: #598938;
+}
+
+
+/* --------------------------------------------------------------------- */
+/*RECTANGLE LIST*/
+/* --------------------------------------------------------------------- */
+
+.rectangle-list {
+    list-style-type: none;
+    counter-reset: li;
+}
+
+.rectangle-list li {
+    position: relative;
+    display: block;
+    padding: 5px 0px 5px 15px;
+    *padding: .4em;
+    margin: .5em 0 .5em 1.5em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: #ddd;
+    color: #444;
+    text-decoration: none;
+    transition: all .3s ease-out;
+}
+
+.rectangle-list li:hover {
+    background: #444;
+    color: #fff; /* White text color */
+}
+
+
+.rectangle-list li.red:hover {
+    background: #E77475;
+    color: #fff; /* White text color */
+}
+
+.rectangle-list li.green:hover {
+    background: #598938;
+    color: #fff; /* White text color */
+}
+
+.rectangle-list li.blue:hover {
+    background: #277C9D;
+    color: #fff; /* White text color */
+}
+
+.rectangle-list li.blue:before {
+    background-color: #277C9D;
+}
+
+.rectangle-list li.primary:hover {
+    background: var(--bs-primary, #0d6efd);
+    color: #fff; /* White text color */
+}
+
+.rectangle-list li.primary:before {
+    background-color: var(--bs-primary, #0d6efd);
+}
+
+.rectangle-list li.success:hover {
+    background: var(--bs-success, #198754FF);
+    color: #fff; /* White text color */
+}
+
+.rectangle-list li.success:before {
+    background-color: var(--bs-success, #198754FF);
+}
+
+.rectangle-list li.red:before {
+    background-color: #E77475;
+}
+
+.rectangle-list li.green:before {
+    background-color: #598938;
+}
+
+.rectangle-list li:before {
+    content: attr(value);
+    counter-increment: value;
+    position: absolute;
+    left: -2.5em;
+    top: 50%;
+    margin-top: -1em;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    background-color: #555;
+}
+
+.rectangle-list li:after {
+    position: absolute;
+    content: '';
+    border: .5em solid transparent;
+    left: -1em;
+    top: 50%;
+    margin-top: -.5em;
+    transition: all .3s ease-out;
+}
+
+.rectangle-list li.red:hover:after {
+    left: -.5em;
+    border-left-color: #fa8072;
+}
+
+.rectangle-list li.blue:hover:after {
+    left: -.5em;
+    border-left-color: #277C9D;
+}
+
+.rectangle-list li.green:hover:after {
+    left: -.5em;
+    border-left-color: #598938;
+}
+
+/* --------------------------------------------------------------------- */
+/*ROUNDED LIST*/
+/* --------------------------------------------------------------------- */
+
+.rounded-list li {
+    position: relative;
+    padding: .4em .4em .4em 1em;
+    background: #ddd;
+    color: #444;
+    border-radius: .3em;
+    transition: all .3s ease-out;
+}
+
+.rounded-list li:hover {
+    background: #277C9D;
+    color: #fff;
+}
+
+.rounded-list li:before {
+    content: attr(value);
+    counter-increment: value;
+    position: absolute;
+    left: -1.3em;
+    top: 0;
+    background: #277C9D;
+    color: white;
+    height: 2em;
+    width: 2em;
+    line-height: 1.5em;
+    border: .3em solid #fff;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2em;
+    transition: all .3s ease-out;
+}
+
+.rounded-list li.red:hover:after {
+    left: -.5em;
+    border-left-color: #fa8072;
+}
+
+.rounded-list li.blue:hover:after {
+    left: -.5em;
+    border-left-color: #277C9D;
+}
+
+.rounded-list li.red:hover {
+    background: #E77475;
+    color: #fff; /* White text color */
+}
+
+.rounded-list li.blue:hover {
+    background: #277C9D;
+    color: #fff; /* White text color */
+}
+
+.rounded-list li:hover {
+    background: #fa8072;
+    color: #fff;
+}
+
+.rounded-list li.blue:before {
+    background-color: #277C9D;
+}
+
+.rounded-list li.red:before {
+    background-color: #E77475;
+}
+
+/* --------------------------------------------------------------------- */
+/* ROUNDED BOX */
+/* --------------------------------------------------------------------- */
+
+.rounded-box {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 4px;
+    width: fit-content;
+    margin: 5px auto;
+    padding: 5px;
+
+    background-color: #C0C0C0;
+    border-color: #9B9B9B;
+}
+
+.rounded-box.green {
+    background-color: rgba(89, 137, 56, 0.5);
+    border-color: #598938;
+}
+
+
+.rounded-box.red {
+    background-color: rgba(231, 116, 117, 0.5);
+    border-color: #E77475;
+}
+
+.rounded-box.blue {
+    background-color: rgba(39, 124, 157, 0.5);
+    border-color: #277C9D;
+}
+
+/*Reproduce the beamer theorem box style*/
+.theorem_title {
+    background-color: #277C9D;
+    color: white;
+    border-top-left-radius: .3em;
+    border-top-right-radius: .3em;
+    padding: 1vh;
+    font-size: 20px;
+    text-align: left;
+    padding-left: 2%;
+    filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.55));
+}
+
+/*Text content in italic, dropped shadow with blur*/
+.theorem_content {
+    background-color: #eaedf1;
+    border-bottom-left-radius: .3em;
+    border-bottom-right-radius: .3em;
+    padding: 2vh;
+    margin-top: 0px;
+    font-size: 20px;
+    text-align: left;
+    text-justify: inter-word;
+    padding-left: 2%;
+    font-style: italic;
+    filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.55));
+}
+
+
+/* ---------------------------------------------------------- */
+/* LINKS */
+.material-link {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.material-link:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+    box-shadow: 0 0 4px rgba(13, 110, 253, 0.4);
+    text-decoration: none;
+}
+
+.modern-link {
+    position: relative;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.modern-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #007bff;
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.modern-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.modern-link:hover {
+    color: #0056b3;
+}
+
+/* ---------------------------------------------------------- */
+/* CITATION */
+
+.citation-list {
+    padding-left:0;
+    list-style:none
+}
+.citation-list li {
+    display:inline-block;
+    position:relative;
+    margin-bottom: 0.75rem;
+
+}
+
+.citation-link {
+    cursor: pointer;
+    color: var(--bs-primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.citation-link:before {
+    font-family: FontAwesome;
+    content: "\f02d";
+    position: absolute;
+    left: 0;
+    color: var(--bs-primary, #0d6efd);
+    margin: 0px;
+    padding: 0px;
+}
+
+.citation-link:hover {
+    color: var(--bs-link-hover-color, #0056b3);
+}
+
+.citation-popup {
+    display: none;
+    position: absolute;
+    text-align: left;
+    bottom: 1.5rem;
+    left: 0;
+    z-index: 10;
+    width: 280px;
+    background-color: #fff;
+    color: #212529;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+.citation-item:hover .citation-popup {
+    display: block;
+}
+
+
+/* ---------------------------------------------------------- */
+/* Hover Effects */
+
+.hover-block:hover {
+    background-color: var(--bs-primary-bg-subtle);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-block .hover-title {
+    width: 100%;
+    border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+    color: var(--bs-primary);
+}
+
+.hover-block:hover .hover-title {
+    border-bottom:  var(--bs-border-width) var(--bs-border-style) white !important;
+}

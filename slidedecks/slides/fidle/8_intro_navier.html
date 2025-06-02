@@ -1,0 +1,51 @@
+<div class="shadow bg-primary-subtle rounded">
+    <div class="fs-3 fw-bold p-2 border-bottom border-white">Dataset & Method selection</div>
+    <div class="fs-4 mb-3 p-2"> Computation Fluid Dynamics techniques</div>
+</div>
+
+<video data-autoplay data-src="assets/eagle/intro_navier/rans.mp4" height="200px" autoplay muted loop></video>
+
+<div class="fw-bold text-primary fs-2">RANS Simulations</div>
+<div class="row align-items-center fs-5 w-100">
+    <div class="col-7 shadow rounded">
+        <div class="fs-5 fw-bold border-bottom text-primary mb-2 p-2"> Reynolds-Averaged Navier-Stokes
+            (RANS)
+        </div>
+        <div class="text-start">
+            <div class="fw-bold">Continuity:</div>
+            $$\text{div}(\mathbf{\tilde{U}})=0$$
+            <div class="fw-bold">Reynolds equations:</div>
+            $$\begin{array}{ll}
+            \frac{\partial \tilde{U}}{\partial t} + \text{div}(\tilde{U}\mathbf{\tilde{U}}) &=
+            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial x} + \mu
+            \text{div}(\text{grad}(\tilde{U})) + \rho \color{#E77475}{\tau_x}\\
+            \frac{\partial \tilde{V}}{\partial t} + \text{div}(\tilde{V}\mathbf{\tilde{U}}) &=
+            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial y} + \mu
+            \text{div}(\text{grad}(\tilde{V})) + \rho \color{#E77475}{\tau_y}\\
+            \frac{\partial \tilde{W}}{\partial t} + \text{div}(\tilde{W}\mathbf{\tilde{U}}) &=
+            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial z} + \mu
+            \text{div}(\text{grad}(\tilde{W})) + \rho \color{#E77475}{\tau_z}\\
+            \end{array}$$
+        </div>
+    </div>
+    <div class="col fs-6">
+        <ul class="rectangle-list">
+            <li class="primary" value="1">Standard in engineering, works with irregular meshes</li>
+            <li class="primary" value="2">Computation time is controlled (depending on the mesh
+                resolution)
+            </li>
+            <li class="primary" value="3">Accuracy is handled via the turbulence model</li>
+        </ul>
+    </div>
+</div>
+<ul class="fs-6 citation-list text-start w-100">
+    <li class="citation-item" style="display: block">
+        <a href="https://www.researchgate.net/profile/Ghassan-Smaisim/post/FEM_mesh_generator/attachment/59d655b479197b80779acc78/AS%3A526908706508800%401502636233004/download/110+Versteeg+2007+an+introduction+to+computational+fluid+dynamics+the+finite+volume+method+2nd+edition.pdf" class="citation-link"
+           target="_blank">Versteeg et al.</a>
+        <div class="citation-popup">
+            <div class="fw-bold">
+                An introduction to computational fluid dynamics: the finite volume method
+            </div>
+        </div>
+    </li>
+</ul>

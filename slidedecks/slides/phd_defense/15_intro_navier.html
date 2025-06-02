@@ -1,0 +1,40 @@
+<p class="title-box cyan">Large-scale Learning of Turbulent Fluid Dynamics with Mesh Transformers</p>
+<p class="subtitle-box cyan">Engineer-grade simulations</p>
+
+<video data-autoplay data-src="assets/eagle/intro_navier/rans.mp4" height="200px"></video>
+
+<div class="fw-bold" style="color: #277C9D">RANS Simulations</div>
+<div class="row align-items-center fs-5 w-100">
+    <div class="col-7 fs-6">
+        <div class="theorem_title" style="background-color: #598938"> Reynolds-Averaged Navier-Stokes
+            (RANS)
+        </div>
+        <div class="theorem_content w-100">
+            <span>Continuity:</span>
+            $$\text{div}(\mathbf{\tilde{U}})=0$$
+            <span>Reynolds equations:</span>
+            $\begin{array}{ll}
+            \frac{\partial \tilde{U}}{\partial t} + \text{div}(\tilde{U}\mathbf{\tilde{U}}) &=
+            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial x} + \mu
+            \text{div}(\text{grad}(\tilde{U})) + \rho \color{#E77475}{\tau_x}\\
+            \frac{\partial \tilde{V}}{\partial t} + \text{div}(\tilde{V}\mathbf{\tilde{U}}) &=
+            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial y} + \mu
+            \text{div}(\text{grad}(\tilde{V})) + \rho \color{#E77475}{\tau_y}\\
+            \frac{\partial \tilde{W}}{\partial t} + \text{div}(\tilde{W}\mathbf{\tilde{U}}) &=
+            -\frac{1}{\rho}\frac{\partial \tilde{P}}{\partial z} + \mu
+            \text{div}(\text{grad}(\tilde{W})) + \rho \color{#E77475}{\tau_z}\\
+            \end{array}$
+        </div>
+    </div>
+    <div class="col">
+        <ul class="rectangle-list">
+            <li class="blue" value="1">Standard in engineering, works with irregular meshes</li>
+            <li class="blue" value="2">Computation time is controlled (depending on the mesh
+                resolution)
+            </li>
+            <li class="blue" value="3">Accuracy is handled via the turbulence model</li>
+        </ul>
+    </div>
+</div>
+<p class="citation" style="padding-top: 10px">- Versteeg et al. (2007). An
+    introduction to computational fluid dynamics: the finite volume method. Pearson education.</p>

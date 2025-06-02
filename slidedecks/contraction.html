@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>S. Janny - PhD Defense</title>
+
+    <link rel="stylesheet" href="_dist/reset.css">
+    <link rel="stylesheet" href="_dist/reveal.css">
+    <link rel="stylesheet" href="_dist/theme/simple.css">
+    <link rel="stylesheet" href="_css/fonts.css">
+    <link rel="stylesheet" href="_css/bootstrap.min.css">
+    <link rel="stylesheet" href="_css/custom.css">
+    <link rel="stylesheet" href="_css/chat.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="_plugin/highlight/monokai.css">
+    <script src="_js/fontawesome.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section id="title" data-external="slides/contraction/0_title.html" data-menu-title="Title"></section>
+        <section id="task" data-external="slides/contraction/1_task.html" data-menu-title="Task"></section>
+        <section id="sota" data-external="slides/contraction/2_sota.html" data-menu-title="SOTA"></section>
+        <section id="approach" data-external="slides/contraction/3_approach.html" data-menu-title="Approach"></section>
+        <section id="theory" data-external="slides/contraction/4_theory.html" data-menu-title="Theory"></section>
+        <section data-external="slides/contraction/5_theory.html"></section>
+        <section data-external="slides/contraction/6_theory.html"></section>
+        <section id="dl" data-external="slides/contraction/7_dl.html" data-menu-title="Deep Learning"></section>
+        <section data-external="slides/contraction/8_dl.html"></section>
+        <section data-external="slides/contraction/9_dl.html"></section>
+        <section id="results" data-external="slides/contraction/10_results.html" data-menu-title="Results"></section>
+        <section id="conclusion" data-external="slides/contraction/11_conclusion.html" data-menu-title="Conclusion"></section>
+
+    </div>
+</div>
+
+<script src="_dist/reveal.js"></script>
+<script src="_plugin/notes/notes.js"></script>
+<script src="_plugin/markdown/markdown.js"></script>
+<script src="_plugin/highlight/highlight.js"></script>
+<script src="_plugin/reveald3.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="_plugin/math/math.js"></script>
+<script src="_plugin/menu/menu.js"></script>
+<script>
+    Reveal.initialize({
+        showHiddenSlides: false,
+        hash: true,
+        slideNumber: 'c/t',
+        navigationMode: 'linear',
+        plugins: [RevealMarkdown, RevealHighlight, Reveald3, RevealMath.MathJax3, RevealMenu],
+        viewDistance: 1, // to lazy load iframes
+        dependencies: [
+           {
+                src: '_plugin/external.js',
+                condition: function () {
+                    return !!document.querySelector('[data-external],[data-external-replace]');
+                }
+            },
+        ],
+        menu: {
+            side: 'left',
+            hideMissingTitles: true,
+            markers: true,
+            numbers: true,
+        }
+    })
+
+</script>
+
+
+</body>
+</html>

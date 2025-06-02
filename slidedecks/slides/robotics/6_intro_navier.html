@@ -1,0 +1,38 @@
+<p class="title-box cyan" style="background-color: #3EC3B2;">Transformers for computational fluid dynamics</p>
+<p class="subtitle-box cyan" style="background-color: #d0eeea;">Simulating fluid is difficult </p>
+
+<div class="row align-items-center fs-4 mt-3 mb-5">
+    <div class="col-7">
+        <video src="assets/eagle/intro_navier/coffee.mp4" data-autoplay></video>
+    </div>
+    <div class="col">
+        <div class="theorem_title">The Navier-Stokes equations:</div>
+        <div class="theorem_content">
+            $$\begin{array}{cl}
+            \dot{\mathbf{u}} + (\mathbf{u}\cdot \nabla) \mathbf{u} &= -\nabla p + \nu \Delta
+            \mathbf{u} + \mathbf{f} \\
+            \nabla \cdot \mathbf{u} &= 0 \\
+            \end{array}$$
+        </div>
+        <ul class="ul-fancy no_margin">
+            <li class="red">No known general solution</li>
+            <li class="red">Direct simulation is difficult</li>
+            <li class="red">Multi-scale dynamics</li>
+        </ul>
+    </div>
+</div>
+<div class="fs-4 mb-4">
+    <u>Example</u>: Simulating air flow from the AC in this room
+    <table class="table w-50 table-bordered border-black">
+        <tr>
+            <td class="text-center">Space discretization</td>
+            <td class="text-center">Time discretization</td>
+        </tr>
+        <tr>
+            <td class="text-center">1mm</td>
+            <td class="text-center">1ms</td>
+        </tr>
+    </table>
+</div>
+<p class="citation">-Wang, M., & Chen, Q. (2010). On a hybrid rans/les approach for indoor airflow
+    modeling. HVAC&R Research.</p>

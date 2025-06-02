@@ -1,0 +1,30 @@
+<p class="title-box blue">Deep KKL: Data-driven Output Prediction for Non-Linear Systems</p>
+<p class="subtitle-box blue">The Output Prediction task</p>
+
+<div class="fragment" data-fragment-index="1"></div>
+<div class="row" style="height: 250px">
+    <div class="fig-container" data-file="figures/deepkkl/task.html"
+         data-style="width:100%; align:center" data-preload
+         style="height: 100%; margin-top: 1%"
+         data-scroll="no" data-overflow-shown=true></div>
+</div>
+
+<div class="mt-4">
+    <div class="theorem_title">
+        <b>Definition:</b> Output Predictor [Janny et al. 2020]
+    </div>
+    <div class="theorem_content">
+        <p style="margin:0">
+            An <b>output predictor</b> is defined as a couple $G, \psi$ such as:
+        </p>
+        <ul style="margin-top: 5px">
+            <li>$\dot{z} = G(z, y)$ is a uniform exponential contraction,</li>
+            <li>the couple $(g, \psi)$ with $g(z)= G(z, \psi(z))$ is a generating model.</li>
+        </ul>
+    </div>
+</div>
+<div class="fs-5 mt-4" style="width:100%; text-align: left"><u>Example:</u></div>
+<ul class="ul-fancy fs-5">
+    <li class="blue">Velocity & Odometry motion models in robotics</li>
+</ul>
+<p class="citation">- Thrun, S. (2002). Probabilistic robotics. Communications of the ACM</p>

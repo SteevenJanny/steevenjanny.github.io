@@ -1,0 +1,46 @@
+<p class="title-box blue">Task definition</p>
+<p class="subtitle-box blue">Related work</p>
+<div class="fs-5 mt-4 container-lg">
+    <div class="row">
+        <ul class="rectangle-list w-100 ps-0">
+            <li class="blue">Model inversion</li>
+        </ul>
+        <span>$y = \psi(u) = h(x)\text{ s.t. }\left\{\begin{array}{cl} \dot x &= f(x, u)\\x(0) &= x_0\end{array}\right.
+                    \quad \Rightarrow \quad \boxed{u(t) = \psi^{-1}(y)}$</span>
+        <ul class="ul_fancy">
+            <li class="red">Strongly model dependent</li>
+        </ul>
+    </div>
+    <div class="row fragment mt-4">
+        <ul class="rectangle-list w-100 ps-0 mb-2">
+            <li class="blue">Regulation Theory</li>
+        </ul>
+        <div class="col-8 text-start">
+            1) <b>Steady-state generator</b>: $\boxed{r \mapsto \pi, v} \text{
+            s.t.
+            }\left\{\begin{array}{cl} \dot\pi &= f(\pi, v)\\r(t)&=h(\pi)\end{array}\right. $
+            <br/>
+            2) <b>Stabilizer</b>: $\boxed{u = \psi(x, \pi, v)}\text{ s.t. }
+            \lim_{t\mapsto\infty} \|x - \pi\| = 0$
+        </div>
+        <div class="col text-start align-content-center">
+            <ul class="ul_fancy">
+                <li class="red">Challenging analytical consideration</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="fragment row mt-4">
+        <ul class="rectangle-list w-100 ps-0 mb-2">
+            <li class="blue">Optimization</li>
+        </ul>
+        <div class="col align-content-center">
+            <span> $\boxed{\arg \min_u \|r -h(x)\|} \text{ s.t. } \dot x = f(x, u)$</span>
+        </div>
+        <div class="col">
+            <ul class="ul_fancy">
+                <li class="red">Computational effort (online)</li>
+            </ul>
+        </div>
+    </div>
+</div>

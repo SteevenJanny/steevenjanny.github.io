@@ -1,0 +1,45 @@
+<div class="shadow bg-primary-subtle rounded">
+    <div class="fs-3 fw-bold p-2 border-bottom border-white">Combining ML & Physics</div>
+    <div class="fs-4 mb-3 p-2 fragment" data-fragment-index="1">Case n°3: <strong>End-to-end</strong> sequence
+    </div>
+</div>
+
+<div class="container-lg mt-4 fs-4">
+    <div class="row align-items-center fragment" data-fragment-index="1">
+        <div class="col-2 fs-4">Init. Cond. →</div>
+        <div class="col shadow hover-block border rounded">
+            <div class="hover-title">
+                End-to-end
+            </div>
+            <div> Dynamics + Numerical Solver</div>
+        </div>
+        <div class="col-2 fs-4">→Trajectory</div>
+    </div>
+
+    <div class="row mt-4 fragment" data-fragment-index="2">
+        <div class="fig-container" data-file="figures/sota/endtoend.html"
+             data-style="width:100%; align:center; height:100%" data-preload
+             style="height: 100%" data-scroll="no" data-overflow-shown=true>
+        </div>
+    </div>
+    <div class="row shadow fragment" data-fragment-index="2">
+        <div class="fs-3 border-bottom text-start text-primary"><strong>Auto-regressive</strong> next-step forecating
+        </div>
+        <div class="row fs-5">
+            <ul class="ul-fancy w-75">
+                <li class="primary mt-1">Encode current time-step $t$</li>
+                <li class="primary mt-1 fragment" data-fragment-index="3">Forecast next time-step $t+1$
+                </li>
+                <li class="primary mt-1 fragment" data-fragment-index="4">Repeat</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row fragment mt-3">
+        <div class="col alert alert-success">Scalable !</div>
+        <div class="col-1"></div>
+        <div class="col alert alert-success">Generalizable !</div>
+    </div>
+
+
+</div>
