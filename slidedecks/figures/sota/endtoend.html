@@ -52,25 +52,20 @@
         img_urls.push("../../assets/sota/gt/" + i + '.jpg');
     }
 
-
-    const modelGroup = svg.append("g")
-        .attr("class", "model-group")
-
     const padding = 4;
-
     const ymid = margin.top + (margin.height - margin.top - margin.bottom) / 2;
     const imgSize = (margin.width - margin.left - margin.right) / img_urls.length;
-
     const cornerRadius = 3;
     const borderWidth = 1;
     const imgDisplaySize = imgSize - padding * 2;
-    const imgs = []
+
+    const imgs = [];
     img_urls.forEach((img_url, i) => {
         const x = margin.left + i * imgSize + padding;
         const y = ymid - imgDisplaySize / 2;
         const clipId = `clip-rounded-${i}`;
 
-        // Create rounded clip path
+        // Create rounded clip path once
         svg.append("clipPath")
             .attr("id", clipId)
             .append("rect")
@@ -81,10 +76,11 @@
             .attr("rx", cornerRadius)
             .attr("ry", cornerRadius);
 
-        // Draw border rectangle (optional: behind or in front)
-        const img = svg.append("g")
-            .attr("opacity", 0)
-        img.append("rect")
+        // Group for border + image with initial opacity 0
+        const imgGroup = svg.append("g")
+            .attr("opacity", 0);
+
+        imgGroup.append("rect")
             .attr("x", x - borderWidth / 2)
             .attr("y", y - borderWidth / 2)
             .attr("width", imgDisplaySize + borderWidth)
@@ -95,26 +91,28 @@
             .attr("stroke", "var(--bs-secondary)")
             .attr("stroke-width", borderWidth);
 
-        // Add the clipped image
-        img.append("image")
+        imgGroup.append("image")
             .attr("xlink:href", img_url)
             .attr("x", x)
             .attr("y", y)
             .attr("width", imgDisplaySize)
             .attr("height", imgDisplaySize)
             .attr("clip-path", `url(#${clipId})`);
-        imgs.push(img);
+
+        imgs.push(imgGroup);
     });
 
+    const modelGroup = svg.append("g")
+        .attr("class", "model-group");
 
     const boxWidth = imgSize;
     const boxHeight = 50;
-    const Yshift = 10
+    const Yshift = 10;
 
     function drawModel(inptSeqLength, outputSeqLength, pos) {
         modelGroup.selectAll("g").remove();
-        console.log(modelGroup.selectAll("g").size());
-        const model = modelGroup.append("g")
+
+        const model = modelGroup.append("g");
 
         model.append("rect")
             .attr("x", -boxWidth / 2)
@@ -123,9 +121,8 @@
             .attr("height", boxHeight)
             .attr("rx", cornerRadius)
             .attr("ry", cornerRadius)
-            .attr("fill", "var(--bs-primary)")
+            .attr("fill", "var(--bs-primary)");
 
-        // Add label centered in the box
         model.append("text")
             .attr("x", 0)
             .attr("y", ymid - pos * (imgSize / 2 + boxHeight / 2 + Yshift))
@@ -135,19 +132,17 @@
             .attr("font-size", "1.2em")
             .text("Model");
 
-
-        drawBranch(model, -imgSize * (inptSeqLength - 0.5), -imgSize / 2, pos, direction = "backward", color = "var(--bs-success)");
-        drawBranch(model, imgSize / 2, imgSize * (outputSeqLength - 0.5), pos, direction = "forward", color = "var(--bs-danger)");
-
+        drawBranch(model, -imgSize * (inptSeqLength - 0.5), -imgSize / 2, pos, "backward", "var(--bs-success)");
+        drawBranch(model, imgSize / 2, imgSize * (outputSeqLength - 0.5), pos, "forward", "var(--bs-danger)");
     }
 
     function drawBranch(model, firstX, lastX, pos, direction = "forward", color = "var(--bs-success)") {
-        const historyShiftY = 5
+        const historyShiftY = 5;
 
-        const x0 = firstX - imgDisplaySize / 2 - padding / 2
-        const x1 = lastX + imgDisplaySize / 2 + padding / 2
-        const y0 = ymid - pos * (imgDisplaySize / 2 + historyShiftY)
-        const y1 = ymid + pos * (imgDisplaySize / 2 + historyShiftY)
+        const x0 = firstX - imgDisplaySize / 2 - padding / 2;
+        const x1 = lastX + imgDisplaySize / 2 + padding / 2;
+        const y0 = ymid - pos * (imgDisplaySize / 2 + historyShiftY);
+        const y1 = ymid + pos * (imgDisplaySize / 2 + historyShiftY);
 
         model.append("rect")
             .attr("x", x0)
@@ -158,6 +153,7 @@
             .attr("ry", cornerRadius)
             .attr("fill", color)
             .attr("opacity", 0.5);
+
         model.append("text")
             .attr("x", (x0 + x1) / 2)
             .attr("y", y0 + (y1 - y0) + 12.5)
@@ -189,52 +185,43 @@
     let outputSeqLength = 1;
     let stride = 1;
 
-
-
     drawModel(primingSeqLength, outputSeqLength, 1);
+
     let currentStep = -stride + primingSeqLength;
-
-
-
     const slideTimer = 500;
 
-    for (let i = 0; i < primingSeqLength; i++) {
-        imgs[i].attr("opacity", 1)
-    }
+    // Show initial priming images immediately
+    imgs.forEach((img, i) => img.attr("opacity", i < primingSeqLength ? 1 : 0));
 
     function update() {
-
         currentStep += stride;
 
         if (currentStep + outputSeqLength > img_urls.length) {
             currentStep = -stride + primingSeqLength;
-            for (let i = primingSeqLength; i < img_urls.length; i++) {
-                imgs[i].attr("opacity", 0);
-            }
-            modelGroup
-                .attr("transform", `translate(${margin.left + primingSeqLength * imgSize}, 0)`);
-
+            // Hide images beyond priming sequence
+            imgs.forEach((img, i) => img.attr("opacity", i < primingSeqLength ? 1 : 0));
+            // Reset model position instantly, no transition needed
+            modelGroup.interrupt().attr("transform", `translate(${margin.left + primingSeqLength * imgSize}, 0)`);
         } else {
-            modelGroup
+            // Slide model group with transition
+            modelGroup.interrupt()
                 .transition()
                 .duration(slideTimer)
-                .attr("transform", `translate(${margin.left + currentStep * imgSize}, 0)`)
-                .on("end", () => {
-                    for (let i = 0; i < currentStep + outputSeqLength; i++) {
-                        if (i >= img_urls.length) {
-                            break;
-                        }
-                        imgs[i].transition()
-                            .duration(slideTimer)
-                            .attr("opacity", 1)
-                    }
+                .attr("transform", `translate(${margin.left + currentStep * imgSize}, 0)`);
 
-                })
+            // Update opacity in bulk without chaining transitions per image
+            imgs.forEach((img, i) => {
+                if (i < currentStep + outputSeqLength) {
+                    img.interrupt().transition().duration(slideTimer).attr("opacity", 1);
+                } else {
+                    img.interrupt().transition().duration(slideTimer).attr("opacity", 0);
+                }
+            });
         }
     }
 
     update();
-    let interval = setInterval(update, 3 * slideTimer);
+    setInterval(update, 3 * slideTimer);
 
 
     //

@@ -8,7 +8,7 @@
 </head>
 <body>
 <script>
-    var p = {
+    const p = {
         square_size: 0.8,
         img_size: 8,
         kernel_size: [3, 3, 3, 1],
@@ -17,52 +17,51 @@
         interval: 100,
     }
 
-    var width = window.innerWidth;
-    var height = window.innerHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-    var layers_width = width / (2 * p.kernel_size.length - 1);
-    var block_size = layers_width * p.square_size;
+    const layers_width = width / (2 * p.kernel_size.length - 1);
+    const block_size = layers_width * p.square_size;
 
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    var graph = d3.select("body").append("svg")
+    const svg = d3.select("body").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", [0, 0, width, height])
 
     function create_layer(n) {
-        var layer = graph.append("g")
+        const layer = svg.append("g")
             .attr("transform", "translate(" + layers_width * n + ",0)")
-        var kernel = graph.append('g')
+        const kernel = svg.append('g')
             .attr("transform", "translate(" + layers_width * n + ",0)")
 
-        var true_n = n;
+        const true_n = n;
         if (n > p.kernel_size.length - 1) {
             n = p.kernel_size.length - (n - p.kernel_size.length) - 2
         }
 
-        var dimension = p.img_size
-        for (var i = 0; i < n; i++) {
+        let dimension = p.img_size
+        for (let i = 0; i < n; i++) {
             dimension = (dimension - p.kernel_size[i] + 1)
         }
 
         // (n-1) * pixel_size + block = block_size
-        var correct_blocksize = block_size - p.space * (p.n_channels[n] - 1)
+        const correct_blocksize = block_size - p.space * (p.n_channels[n] - 1)
+        const x0 = (layers_width - block_size) / 2
+        const y0 = (height - block_size) / 2
 
-        var x0 = (layers_width - block_size) / 2
-        var y0 = (height - block_size) / 2
+        const pixel_size = correct_blocksize / dimension
 
-        var pixel_size = correct_blocksize / dimension
-
-        var scale_x = d3.scaleLinear()
+        const scale_x = d3.scaleLinear()
             .domain([0, dimension])
             .range([x0 + p.space * (p.n_channels[n] - 1), x0 + p.space * (p.n_channels[n] - 1) + correct_blocksize])
-        var scale_y = d3.scaleLinear()
+        const scale_y = d3.scaleLinear()
             .domain([0, dimension])
             .range([y0 + p.space * (p.n_channels[n] - 1), y0 + p.space * (p.n_channels[n] - 1) + correct_blocksize])
 
 
-        for (var k = 0; k < p.n_channels[n]; k++) {
-            var g = layer.append('g')
+        for (let k = 0; k < p.n_channels[n]; k++) {
+            const g = layer.append('g')
             g.append("rect")
                 .attr('x', x0 + p.space * k)
                 .attr('y', y0 + p.space * k)
@@ -72,7 +71,7 @@
                 .attr('stroke', 'black')
                 .attr('stroke-width', 1)
 
-            if (true_n == 2 * p.kernel_size.length - 2) {
+            if (true_n === 2 * p.kernel_size.length - 2) {
                 g.append("image")
                     .attr("transform", "translate(" + (layers_width - block_size) / 2 + "," + (height - block_size) / 2 + ")")
                     .attr("xlink:href", "../../assets/eagle/sota/out.jpg")
@@ -80,9 +79,9 @@
                     .attr("height", block_size);
             }
 
-            for (var i = 0; i < dimension; i++) {
-                for (var j = 0; j < dimension; j++) {
-                    if (true_n == 2 * p.kernel_size.length - 2) {
+            for (let i = 0; i < dimension; i++) {
+                for (let j = 0; j < dimension; j++) {
+                    if (true_n === 2 * p.kernel_size.length - 2) {
                         g.append('rect')
                             .attr("class", "pixel_" + i + "_" + j + " pixel")
                             .attr('x', x0 + p.space * k + pixel_size * i - 1)
@@ -110,10 +109,10 @@
         }
 
 
-        var blocks = kernel.append('g')
+        const blocks = kernel.append('g')
 
-        for (var i = 0; i < p.kernel_size[n]; i++) {
-            for (var j = 0; j < p.kernel_size[n]; j++) {
+        for (let i = 0; i < p.kernel_size[n]; i++) {
+            for (let j = 0; j < p.kernel_size[n]; j++) {
                 blocks.append('rect')
                     .attr('x', scale_x(i))
                     .attr('y', scale_y(j))
@@ -125,7 +124,7 @@
                     .attr("opacity", 0)
             }
         }
-        var pixel = layer.append('rect')
+        const pixel = layer.append('rect')
             .attr('x', scale_x(0))
             .attr('y', scale_y(0))
             .attr('width', pixel_size)
@@ -150,28 +149,28 @@
     }
 
 
-    var layers = []
+    let layers = []
     for (var i = 0; i < 2 * p.kernel_size.length - 1; i++) {
         layers.push(create_layer(i))
     }
 
-    for (var i = 0; i < layers.length; i++) {
-        if (i == 0) {
-            graph.append("text")
+    for (let i = 0; i < layers.length; i++) {
+        if (i === 0) {
+            svg.append("text")
                 .attr("x", layers_width * i + layers_width / 2)
                 .attr("y", height / 2 + block_size / 2 + 20)
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
                 .text("Input")
-        } else if (i == layers.length - 1) {
-            graph.append("text")
+        } else if (i === layers.length - 1) {
+            svg.append("text")
                 .attr("x", layers_width * i + layers_width / 2)
                 .attr("y", height / 2 + block_size / 2 + 20)
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
                 .text("Output")
         } else {
-            graph.append("text")
+            svg.append("text")
                 .attr("x", layers_width * i + layers_width / 2)
                 .attr("y", height / 2 + block_size / 2 + 20)
                 .attr("text-anchor", "middle")
@@ -188,7 +187,7 @@
         .attr("height", block_size);
 
 
-    var line_g = graph.append("g")
+    var line_g = svg.append("g")
         .attr("transform", "translate(" + layers_width + ",0)")
         .attr("opacity", 0);
     var lines = []
@@ -338,20 +337,16 @@
             current_layer = current_layer + 1
 
 
-            if (current_layer == layers.length - 1) {
+            if (current_layer === layers.length - 1) {
                 current_layer = 0
                 for (var i = 1; i < layers.length; i++) {
                     if (i < layers.length - 1) {
                         layers[i].layer.selectAll(".pixel")
                             .attr("visibility", "hidden")
-                        // layers[i].layer.selectAll(".pixel_0_0")
-                        //     .attr("visibility", "visible")
 
                     } else {
                         layers[i].layer.selectAll(".pixel")
                             .attr("visibility", "visible")
-                        // layers[i].layer.selectAll(".pixel_0_0")
-                        //     .attr("visibility", "hidden")
                     }
                 }
             }

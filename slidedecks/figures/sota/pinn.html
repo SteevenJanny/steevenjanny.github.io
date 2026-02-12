@@ -17,19 +17,20 @@
     </script>
     <style>
         .equation-term {
-            overflow: hidden;
-            opacity: 1;
-            max-width: 1000px; /* enough to show full content */
+            will-change: opacity, transform;
+            opacity: 0;
             transform: translateX(30px);
-            transition: all 0.5s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             white-space: nowrap;
+            /* Remove max-width animation */
+            max-width: 1000px; /* fixed */
         }
 
         .equation-term.visible {
             opacity: 1;
-            max-width: 1000px; /* enough to show full content */
             transform: translateX(0);
         }
+
 
         .equation-wrapper {
             display: flex;
@@ -134,10 +135,6 @@
 
         checkbox.addEventListener('change', () => {
             term.classList.toggle('visible', checkbox.checked);
-            // Re-typeset math if needed
-            if (typeof MathJax !== 'undefined') {
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-            }
         });
 
     });

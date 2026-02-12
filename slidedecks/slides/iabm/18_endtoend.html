@@ -1,0 +1,86 @@
+<div class="iabm-slide-title">> 3. Everything as a neural network</div>
+
+<div class="container-lg mt-5">
+
+    <div class="row">
+        <p class="fs-5"> > illustration with fluid simulation</p>
+    </div>
+
+
+    <div class="row gap-3">
+        <div class="col card fragment fade-right" data-fragment-index="1">
+            <div class="fragment semi-fade-out" data-fragment-index="4">
+
+                <p class="fs-5">- smooth particle hydro-dyn.</p>
+                <video data-autoplay data-src="assets/eagle/intro_navier/liquid.mp4" loop autoplay
+                       muted class="rounded" height="200px"></video>
+                <div class="text-start mt-5">
+                    <p class="text-muted m-1">> lagrangian, particle-based</p>
+                    <p class="text-muted m-1">> not great for accuracy</p>
+                    <p class="text-muted m-1">> scale bad with # of particles</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col card fragment fade-up" data-fragment-index="2">
+            <div class="fragment semi-fade-out" data-fragment-index="4">
+                <p class="fs-5">- stable fluid</p>
+                <video data-autoplay data-src="assets/eagle/intro_navier/smoke.mp4" loop autoplay muted
+                       class="rounded" height="200px"></video>
+                <div class="text-start mt-5">
+                    <p class="text-muted m-1">> lagrangian/eulerian, grid-based</p>
+                    <p class="text-muted m-1">> not great for accuracy</p>
+                    <p class="text-muted m-1">> extremely fast and stable</p>
+                </div>
+            </div>
+        </div>
+        <div class="col card fragment fade-left" data-fragment-index="3">
+            <p class="fs-5">- fvm/fem & rans</p>
+            <video data-autoplay data-src="assets/eagle/intro_navier/rans.mp4" height="200px" autoplay muted
+                   loop></video>
+            <div class="text-start mt-5">
+                <p class="text-muted m-1">> eulerian, mesh-based</p>
+                <p class="text-muted m-1">> good/excellent accuracy</p>
+                <p class="text-muted m-1">> extremely expensive and slow</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ul class="fs-6 iabm-citation-list text-start w-100 mt-3">
+    <li class="iabm-citation-item">
+        <div class="iabm-citation-link">See citation panel</div>
+        <div class="iabm-citation-popup">
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Learning Mesh-Based Simulation with Graph Networks</span>
+                Tobias Pfaff, Meire Fortunato, Alvaro Sanchez-Gonzalez, Peter W. Battaglia
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Eagle: Large-Scale Learning of Turbulent Fluid Dynamics with Mesh Transformers</span>
+                Steeven Janny, Aurélien Béneteau, Madiha Nadri, Julie Digne, Nicolas Thome, Christian Wolf
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Learning to Simulate Complex Physics with Graph Networks</span>
+                Alvaro Sanchez-Gonzalez, Jonathan Godwin, Tobias Pfaff, Rex Ying, Jure Leskovec, Peter W. Battaglia
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Learned Coarse Models for Efficient Turbulence Simulation</span>
+                Kimberly Stachenfeld, Drummond B. Fielding, Dmitrii Kochkov, Miles Cranmer, Tobias Pfaff, Jonathan Godwin, Can Cui, Shirley Ho, Peter Battaglia, Alvaro Sanchez-Gonzalez
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">ScalarFlow: A Large-Scale Volumetric Data Set of Real-world Scalar Transport Flows for Computer Animation and Machine Learning</span>
+                Marie-Lena Eckert, Kiwon Um, Nils Thuerey
+            </div>
+        </div>
+    </li>
+</ul>

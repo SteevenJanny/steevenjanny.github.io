@@ -5,11 +5,17 @@
     <title>Title</title>
     <link rel="stylesheet" href="../../src_css/custom.css">
     <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <style>
+        body{
+            font-family: "Computer Modern Sans", sans-serif;
+        }
+    </style>
 </head>
 <body>
 <script>
 
-    var p = {
+    const p = {
         square_size: 0.9,
         layer_ratio: 0.7,
         radius: 2,
@@ -17,104 +23,112 @@
         n_layers: 8,
     }
 
-    var width = window.innerWidth;
-    var height = window.innerHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-    var layers_width = width / (p.n_layers);
-    var block_size = layers_width * p.square_size;
+    const layers_width = width / (p.n_layers);
+    let block_size = layers_width * p.square_size;
 
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    var graph = d3.select("body").append("svg")
+    const svg = d3.select("body").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", [0, 0, width, height])
 
 
     // Load json data
     root = "../../assets/eagle/sota/"
-    d3.json(root+"inputs.json").then(function (data) {
-        var N_nodes = data.points.length
+    d3.json(root + "inputs.json").then(function (data) {
+        const N_nodes = data.points.length
 
-        var nodes = []
-        for (var i = 0; i < N_nodes; i++) {
-            nodes.push({
-                x: data.points[i][0],
-                y: data.points[i][1],
-            })
-        }
-
-        var adjacencies = data.edges
-        var colors_in = data.colors_in
-        var colors_out = data.colors_out
+        const adjacencies = data.edges
+        const colors_in = data.colors_in
+        const colors_out = data.colors_out
 
         function make_layer(n) {
-            var layer = graph.append("g")
+            const layer = svg.append("g")
                 .attr("transform", "translate(" + n * layers_width + " ,0)");
 
-            if (n==0 || n==p.n_layers-1){
-                block_size= layers_width * p.square_size
-            }else{
-                block_size= layers_width * p.square_size*p.layer_ratio
+            if (n === 0 || n === p.n_layers - 1) {
+                block_size = layers_width * p.square_size
+            } else {
+                block_size = layers_width * p.square_size * p.layer_ratio
             }
 
-            var x0 = (layers_width - block_size) / 2
-            var y0 = (height - block_size) / 2
+            const x0 = (layers_width - block_size) / 2
+            const y0 = (height - block_size) / 2
 
-            var scale_x = d3.scaleLinear()
+            const scale_x = d3.scaleLinear()
                 .domain([0, 1])
                 .range([x0, x0 + block_size])
-            var scale_y = d3.scaleLinear()
+            const scale_y = d3.scaleLinear()
                 .domain([0, 1])
                 .range([y0, y0 + block_size])
 
-
-            for (var i = 0; i < nodes.length; i++) {
-                for (var j = i + 1; j < nodes.length; j++) {
-                    if (adjacencies[i][j] == 1) {
+            for (var i = 0; i < data.points.length; i++) {
+                for (var j = i + 1; j < data.points.length; j++) {
+                    if (adjacencies[i][j] === 1) {
                         layer.append("line")
                             .attr("class", "edge")
                             .attr("id", "edge_" + i + "_" + j)
-                            .attr("x1", scale_x(nodes[i].x))
-                            .attr("y1", scale_y(nodes[i].y))
-                            .attr("x2", scale_x(nodes[j].x))
-                            .attr("y2", scale_y(nodes[j].y))
+                            .attr("x1", scale_x(data.points[i][0]))
+                            .attr("y1", scale_y(data.points[i][1]))
+                            .attr("x2", scale_x(data.points[j][0]))
+                            .attr("y2", scale_y(data.points[j][1]))
                             .attr("stroke", "black")
                             .attr("stroke-width", 1)
                             .attr("visibility", "hidden")
                     }
                 }
+            }
 
-                layer.append("circle")
-                    .attr("cx", scale_x(nodes[i].x))
-                    .attr("cy", scale_y(nodes[i].y))
-                    .attr("r", p.radius)
-                    .attr("fill", "white")
-            }
-            for (var i = 0; i < nodes.length; i++) {
-                var c = color(n)
-                var o = d3.randomUniform(0.4, 1)()
-                if (n==0){
-                    c = "rgb("+colors_in[i][0]+","+colors_in[i][1]+","+colors_in[i][2]+")"
-                    o = 1
-                }else if (n==p.n_layers-1){
-                    c = "rgb("+colors_out[i][0]+","+colors_out[i][1]+","+colors_out[i][2]+")"
-                    o = 1
-                }
-                layer.append("circle")
-                    .attr("class", "node")
-                    .attr("id", "node_" + i)
-                    .attr("cx", scale_x(nodes[i].x))
-                    .attr("cy", scale_y(nodes[i].y))
-                    .attr("r", p.radius)
-                    .attr("fill", c)
-                    .attr("opacity", o)
-                    .attr("visibility", "hidden")
-                    .attr("fallback_color", c)
-            }
+
+            layer.selectAll(".background")
+                .data(data.points)
+                .enter()
+                .append("circle")
+                .attr("class", "background")
+                .attr("cx", d => scale_x(d[0]))
+                .attr("cy", d => scale_y(d[1]))
+                .attr("r", p.radius)
+                .attr("fill", "white");
+
+            layer.selectAll(".node")
+                .data(data.points)
+                .enter()
+                .append("circle")
+                .attr("class", "node")
+                .attr("id", (d, i) => "node_" + i)
+                .attr("cx", d => scale_x(d[0]))
+                .attr("cy", d => scale_y(d[1]))
+                .attr("r", p.radius)
+                .attr("fill", (d, i) => {
+                    if (n === 0) {
+                        return "rgb(" + colors_in[i][0] + "," + colors_in[i][1] + "," + colors_in[i][2] + ")"
+                    } else if (n === p.n_layers - 1) {
+                        return "rgb(" + colors_out[i][0] + "," + colors_out[i][1] + "," + colors_out[i][2] + ")"
+                    } else {
+                        return color(n);
+                    }
+                })
+                .attr("opacity", (d, i) => {
+                    return (n === 0 || n === p.n_layers - 1) ? 1 : d3.randomUniform(0.4, 1)();
+                })
+                .attr("visibility", "hidden")
+                .attr("fallback_color", (d, i) => {
+                    if (n === 0) {
+                        return "rgb(" + colors_in[i][0] + "," + colors_in[i][1] + "," + colors_in[i][2] + ")"
+                    } else if (n === p.n_layers - 1) {
+                        return "rgb(" + colors_out[i][0] + "," + colors_out[i][1] + "," + colors_out[i][2] + ")"
+                    } else {
+                        return color(n);
+                    }
+                })
+
             return layer
         }
 
-        var layers = []
+        let layers = []
         for (var i = 0; i <= p.n_layers; i++) {
             layers.push(make_layer(i))
         }
@@ -123,10 +137,10 @@
         layers[0].selectAll(".edge")
             .attr("visibility", "visible")
 
-        var current_id = 0;
-        var current_layer = 0;
+        let current_id = 0;
+        let current_layer = 0;
 
-        var line = graph.append("line")
+        const line = svg.append("line")
             .attr("x1", 0)
             .attr("y1", 0)
             .attr("x2", 0)
@@ -136,23 +150,23 @@
             .attr("stroke-dasharray", "5,5")
             .attr("opacity", 1);
 
-        for (var i = 0; i < p.n_layers; i++) {
-            if (i == 0) {
-                graph.append("text")
+        for (let i = 0; i < p.n_layers; i++) {
+            if (i === 0) {
+                svg.append("text")
                     .attr("x", layers_width * i + layers_width / 2)
                     .attr("y", height / 2 + block_size / 2 + 20)
                     .attr("text-anchor", "middle")
                     .attr("dominant-baseline", "middle")
                     .text("Input")
-            } else if (i == p.n_layers-1) {
-                graph.append("text")
+            } else if (i === p.n_layers - 1) {
+                svg.append("text")
                     .attr("x", layers_width * i + layers_width / 2)
                     .attr("y", height / 2 + block_size / 2 + 20)
                     .attr("text-anchor", "middle")
                     .attr("dominant-baseline", "middle")
                     .text("Output")
             } else {
-                graph.append("text")
+                svg.append("text")
                     .attr("x", layers_width * i + layers_width / 2)
                     .attr("y", height / 2 + block_size / 2 + 20)
                     .attr("text-anchor", "middle")
@@ -163,14 +177,12 @@
         }
 
         function reset(layer_id, node_id) {
-            layer = layers[layer_id]
+            const layer = layers[layer_id]
             layer.selectAll("#node_" + (node_id))
-                    .attr("fill", layer.select("#node_" + (node_id)).attr("fallback_color"))
+                .attr("fill", layer.select("#node_" + (node_id)).attr("fallback_color"))
             for (var i = 0; i < N_nodes; i++) {
                 if (adjacencies[node_id][i] === 1) {
-                    var min = Math.min(node_id, i)
-                    var max = Math.max(node_id, i)
-                    layer.select("#edge_" + min + "_" + max)
+                    layer.select("#edge_" + Math.min(node_id, i) + "_" + Math.max(node_id, i))
                         .attr("stroke", "black")
                         .attr("stroke-width", 1)
                         .attr("stroke-opacity", 1)
@@ -179,8 +191,8 @@
         }
 
         function move(layer_id) {
-            var layer1 = layers[layer_id]
-            var layer2 = layers[layer_id + 1]
+            const layer1 = layers[layer_id]
+            const layer2 = layers[layer_id + 1]
 
             if (current_id > 0) {
                 reset(layer_id, current_id - 1)
@@ -232,7 +244,7 @@
                 current_layer += 1
                 if (current_layer === p.n_layers - 1) {
                     current_layer = 0
-                    for (var i=1; i<p.n_layers; i++){
+                    for (var i = 1; i < p.n_layers; i++) {
                         layers[i].selectAll(".node")
                             .attr("visibility", "hidden")
                         layers[i].selectAll(".edge")

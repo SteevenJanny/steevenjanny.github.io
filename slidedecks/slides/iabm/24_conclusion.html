@@ -1,0 +1,39 @@
+<div class="iabm-slide-title">> Current limitations</div>
+
+
+<div class="container-lg fs-4 mt-5">
+    <p>- Generalization</p>
+    <div class="row gap-3 w-100">
+        <div class="col card align-items-center fragment fade-right  d-flex flex-column justify-content-around">
+            <p>> across tasks</p>
+            <div class="row fs-5 gap-5 m-1 mb-3">
+                <div class="col d-flex justify-content-between flex-column bg-success-subtle rounded pb-4 align-items-center">
+                    <p class="mb-0 fw-bold">training domain</p>
+                    <video data-autoplay data-src="assets/eagle/public_datasets/airfoil.mp4" loop autoplay muted
+                           class="rounded m-0"></video>
+                    <video data-autoplay data-src="assets/eagle/public_datasets/cylinder.mp4" loop autoplay muted
+                           class="rounded m-0"></video>
+                </div>
+                <div class="col d-flex justify-content-between flex-column border border-danger rounded pb-4 align-items-center">
+                    <p class="mb-5 fst-italic">can't generalize</p>
+                    <video data-autoplay data-src="assets/eagle/public_datasets/crenellation.mp4" loop autoplay
+                           muted class="rounded m-0"></video>
+                    <video data-autoplay data-src="assets/eagle/public_datasets/vascular.mp4" loop autoplay muted
+                           class="rounded m-0"></video>
+                </div>
+
+            </div>
+            <p class="text-muted fs-6">> contrary to physics sim., DL requires dedicated model per task </p>
+        </div>
+        <div class="col card align-items-center fragment fade-left d-flex flex-column justify-content-around">
+            <p class="w-100">> across space and time</p>
+            <div class="fig-container w-100 "
+                 data-file="figures/misc/generalization_time.html"
+                 data-style="width:100%; align:center; height:100%;"
+                 style="height: 300px;" data-scroll="no" data-overflow-shown=true></div>
+
+            <p class="text-muted fs-6">> error raises quickly outside the training horizon / spatial domain </p>
+        </div>
+    </div>
+</div>
+

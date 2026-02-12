@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="src_css/custom.css">
 
     <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="src_plugin/highlight/monokai.css">
     <script src="src_js/fontawesome.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
             crossorigin="anonymous"></script>
@@ -98,9 +97,6 @@
 </div>
 
 <script src="src_dist/reveal.js"></script>
-<script src="src_plugin/notes/notes.js"></script>
-<script src="src_plugin/markdown/markdown.js"></script>
-<script src="src_plugin/highlight/highlight.js"></script>
 <script src="src_plugin/reveald3.js"></script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="src_plugin/math/math.js"></script>
@@ -112,7 +108,7 @@
         slideNumber: 'c/t',
         autoPlayMedia: true,
         navigationMode: 'linear',
-        plugins: [RevealMarkdown, RevealHighlight, Reveald3, RevealMath.MathJax3, RevealMenu],
+        plugins: [Reveald3, RevealMath.MathJax3, RevealMenu],
         viewDistance: 1,
         dependencies: [
             {
@@ -129,14 +125,6 @@
             numbers: true,
         }
     })
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-            new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    });
 </script>
 
 </body>

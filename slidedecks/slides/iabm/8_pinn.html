@@ -1,0 +1,125 @@
+<div class="iabm-slide-title">> 1. Solution as a neural network</div>
+
+
+<div class="container-lg fs-4 mt-3">
+    <div class="row text-center fw-bold"><p class="m-0 p-0">Physics-informed neural networks</p></div>
+    <div class="row mt-3 mb-3">> Pros</div>
+    <div class="row gap-3">
+        <div class="col card p-4 fragment fade-right" data-fragment-index="1">
+            <p>- data free (almost)</p>
+            <div class="my-auto">
+
+            <div class="row iabm-border-bottom fs-5 fw-bold">
+                <div class="col text-start align-content-center">Loss term</div>
+                <div class="col-6 align-content-center">
+                    Equation
+                </div>
+                <div class="col-2 align-content-center">Data</div>
+            </div>
+
+            <div class="row iabm-border-bottom fs-6">
+                <div class="col text-start align-content-center">PDE Residual</div>
+                <div class="col-6 align-content-center">
+                    $\Big\|$ <span class="text-ml">$\dot s_\theta$</span>$ - f($<span
+                        class="text-ml">$s_\theta$</span>$)$
+                    $\Big\|$
+                </div>
+                <div class="col-2 align-content-center">$$\emptyset$$</div>
+            </div>
+            <div class="row iabm-border-bottom fs-6">
+                <div class="col text-start align-content-center">IC / BC</div>
+                <div class="col-6 align-content-center">
+                    $\Big\|$ <span class="text-ml">$s_\theta(x, 0)$</span>$ - s(x, 0) $ $\Big\|$
+                </div>
+                <div class="col-2 align-content-center">$$\emptyset$$</div>
+            </div>
+            <div class="row fs-6" style="padding-top: 1rem">
+                <div class="col text-start align-content-center">Sparse obs.</div>
+                <div class="col-6 align-content-center">
+                    $\Big\|$
+                    <span class="text-ml">$s_\theta(x, t) -  $</span>
+                    <img src="assets/continuous_pde/sota/initial.jpg" alt="Initial"
+                         class="img-fluid m-0 border" style="width:40px">
+                    $\Big\|$
+                </div>
+                <div class="col-2 align-content-center">option.</div>
+            </div>
+
+            </div>
+            <p class="fs-6">> pinns can be trained without dataset </p>
+        </div>
+
+        <div class="col card p-4 fragment fade-left" data-fragment-index="2">
+            <p>- space & time continuous</p>
+            <div class="m-auto">
+
+                <div class="row g-0 fs-6 fragment" data-fragment-index="1">
+                    <div class="col">
+                        <img src="assets/eagle/sota/ferret_mesh.png" alt="Initial"
+                             class="img-fluid m-0 rounded">
+                    </div>
+                    <div class="col-1 align-content-center">→</div>
+                    <div class="col">
+                        <img src="assets/eagle/sota/ferret_1.jpg" alt="Initial"
+                             class="img-fluid m-0 rounded">
+                    </div>
+                </div>
+                <div class="row fs-5">
+                    <div class="col text-center">
+                        Sparse training
+                    </div>
+                    <div class="col-2 align-content-center"></div>
+                    <div class="col text-center">
+                        Dense prediction
+                    </div>
+                </div>
+            </div>
+            <p class="fs-6">> can generalize within the training domain</p>
+        </div>
+    </div>
+</div>
+
+
+<ul class="fs-6 iabm-citation-list text-start w-100 mt-4">
+    <li class="iabm-citation-item">
+        <div class="iabm-citation-link">See citation panel</div>
+        <div class="iabm-citation-popup">
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Physics Informed Deep Learning (Part I): Data-driven Solutions of Nonlinear Partial Differential Equations</span>
+                Maziar Raissi, Paris Perdikaris, George Em Karniadakis
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">PINNsFormer: A Transformer-Based Framework For Physics-Informed Neural Networks</span>
+                Zhiyuan Zhao, Xueying Ding, B. Aditya Prakash
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Competitive Physics Informed Networks</span>
+                Qi Zeng, Yash Kothari, Spencer H. Bryngelson, Florian Schäfer
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Characterizing possible failure modes in physics-informed neural networks</span>
+                Aditi S. Krishnapriyan, Amir Gholami, Shandian Zhe, Robert M. Kirby, Michael W. Mahoney
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Message Passing Neural PDE Solvers</span>
+                Johannes Brandstetter, Daniel Worrall, Max Welling
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Learning Incompressible Fluid Dynamics from Scratch -- Towards Fast, Differentiable Fluid Models that Generalize</span>
+                Nils Wandel, Michael Weinmann, Reinhard Klein
+            </div>
+
+        </div>
+    </li>
+</ul>

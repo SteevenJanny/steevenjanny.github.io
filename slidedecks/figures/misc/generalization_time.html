@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Computer Modern Sans", sans-serif;
+        }
+
+        svg {
+            display: block;
+            margin: auto;
+        }
+
+        .MathJax_SVG_Display {
+            margin: 0 ! important
+        }
+
+    </style>
+</head>
+<body>
+<script type="module">
+    const width = 500, height = 350;
+
+    const margin = {top: 10, right: 20, bottom: 50, left: 50};
+    const svg = d3.select("body").append("svg")
+        // .style("border", "1px solid red")
+        .attr("viewBox", [0, 0, width, height]);
+
+    const xScale = d3.scaleLinear().domain([0, 100]).range([margin.left, width - margin.right]);
+    const yScale = d3.scaleLinear().domain([0, 20]).range([height - margin.bottom, margin.top]);
+
+    // add zones [0-20, [20-40] and [40 -100] label ("training", "generalization", "failure")
+
+    const training = svg.append("g").attr("opacity", 0)
+    const generalization = svg.append("g").attr("opacity", 0)
+    const failure = svg.append("g").attr("opacity", 0)
+    training.append("rect")
+        .attr("x", xScale(0))
+        .attr("y", margin.top)
+        .attr("width", xScale(20) - xScale(0))
+        .attr("height", yScale(0) - yScale(20))
+        .attr("fill", "#D5EFDA")
+        .attr("opacity", 0.75);
+
+    generalization.append("rect")
+        .attr("x", xScale(20))
+        .attr("y", margin.top)
+        .attr("width", xScale(40) - xScale(20))
+        .attr("height", yScale(0) - yScale(20))
+        .attr("fill", "#FFF3CD")
+        .attr("opacity", 0.75);
+
+    failure.append("rect")
+        .attr("x", xScale(40))
+        .attr("y", margin.top)
+        .attr("width", xScale(100) - xScale(40))
+        .attr("height", yScale(0) - yScale(20))
+        .attr("fill", "#F8D7DA")
+        .attr("opacity", 0.75);
+
+    training.append("text")
+        .attr("x", xScale(10))
+        .attr("y", margin.top + 40)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "18px")
+        .text("training");
+
+    generalization.append("text")
+        .attr("x", xScale(30))
+        .attr("y", margin.top + 40)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "18px")
+        .text("generalize");
+
+    failure.append("text")
+        .attr("x", xScale(70))
+        .attr("y", margin.top + 40)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "18px")
+        .text("fail");
+
+    // Draw axes
+    svg.append("g")
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(xScale).ticks(5))
+        .selectAll("text")
+        .attr("font-size", "20px");
+
+    svg.append("g")
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(yScale).ticks(5))
+        .selectAll("text")
+        .attr("font-size", "20px");
+
+    // Add a grid
+    svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(xScale)
+            .ticks(5)
+            .tickSize(-height + margin.top + margin.bottom)
+            .tickFormat(""))
+        .selectAll("line")
+        .attr("stroke", "#ccc");
+
+    svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(yScale)
+            .ticks(5)
+            .tickSize(-width + margin.left + margin.right)
+            .tickFormat(""))
+        .selectAll("line")
+        .attr("stroke", "#ccc");
+
+
+    // Add labels
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", height - 5)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "20px")
+        .text("Simulation time");
+
+    svg.append("text")
+        .attr("x", -height / 2)
+        .attr("y", 15)
+        .attr("text-anchor", "middle")
+        .attr("transform", "rotate(-90)")
+        .attr("font-size", "20px")
+        .text("Average error (MSE)");
+
+    const data = d3.range(101).map(x => ({x: x, y: 1 + Math.exp((x - 40) / 20) + 2 * (Math.random() - 0.5)}));
+    const line = d3.line()
+        .x(d => xScale(d.x))
+        .y(d => yScale(d.y))
+        .curve(d3.curveMonotoneX);
+
+    const linePlot = svg.append("path")
+        .datum({})
+        .attr("fill", "none")
+        .attr("stroke", "#006EFF")
+        .attr("stroke-width", 3)
+        .attr("d", line);
+
+
+    // animate the line drawing
+    let currentStep = 0;
+    let isAnimating = true;
+
+    function animate() {
+        if (!isAnimating) return;
+        currentStep += 1
+        if (currentStep > 2*data.length) {
+            currentStep =0;
+        }
+        linePlot.attr("d", line(data.slice(0, currentStep)));
+
+        training.attr("opacity", (currentStep > 0) ? 1.0 : 0);
+        generalization.attr("opacity", (currentStep > 20) ? 1.0 : 0);
+        failure.attr("opacity", (currentStep > 40) ? 1.0 : 0);
+    }
+
+    d3.timer(animate, 1000);
+
+
+
+
+
+</script>

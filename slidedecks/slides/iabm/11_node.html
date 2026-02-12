@@ -1,0 +1,70 @@
+<div class="iabm-slide-title">> 2. Dynamics as a neural network</div>
+
+<div class="container fs-3">
+    <div class="row fw-bold text-center fs-5">
+        <p>> Neural Ordinary Differential Equation (Neural ODE)</p>
+    </div>
+    <div class="row gap-3">
+        <div class="col fragment fade-right" data-fragment-index="1">
+            <div class="fig-container"
+                 data-file="figures/neuralode/residual.html"
+                 data-style="width:100%; align:center; height:100%;"
+                 style="height: 300px;" data-scroll="no" data-overflow-shown=true></div>
+        </div>
+        <div class="col fragment fade-left" data-fragment-index="1">
+            <div class="fig-container"
+                 data-file="figures/neuralode/euler.html"
+                 data-style="width:100%; align:center; height:100%;"
+                 style="height: 300px;" data-scroll="no" data-overflow-shown=true></div>
+        </div>
+    </div>
+</div>
+<div class="r-stack fs-3">
+    <div class="container">
+        <div class="row gap-3">
+            <div class="col fragment fade-right fade-in-then-out" data-fragment-index="1">
+                <p>> residual connexion</p>
+                <p> $$ \mathbf{z}_{\ell +1} = \mathbf{z}_{\ell} + f_\ell(\mathbf{z}_\ell) $$</p>
+            </div>
+            <div class="col fragment fade-left fade-in-then-out" data-fragment-index="1">
+                <p>> euler integration</p>
+                <p> $$ \mathbf{s}_{t +1} = \mathbf{s}_{t} + \delta_t \; f(\mathbf{s}, t) $$</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row gap-3 fragment fade-down" data-fragment-index="2">
+            <div class="col">
+                <p>> Neural ODE</p>
+                <p>$ \mathbf{s}_{0\cdots T} = $ <span class="text-phy">$ \text{ODESolve}$ </span>$(\mathbf{s}_0,$ <span class="text-ml">$f_\theta$</span>$\, , t, x) $
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ul class="fs-6 iabm-citation-list text-start w-100 mt-3">
+    <li class="iabm-citation-item">
+        <div class="iabm-citation-link">See citation panel</div>
+        <div class="iabm-citation-popup">
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Neural Ordinary Differential Equations</span>
+                Ricky T. Q. Chen, Yulia Rubanova, Jesse Bettencourt, David Duvenaud
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Continuous PDE Dynamics Forecasting with Implicit Neural Representations</span>
+                Yuan Yin, Matthieu Kirchmeyer, Jean-Yves Franceschi, Alain Rakotomamonjy, Patrick Gallinari
+            </div>
+
+            <div class="pb-1">
+                <span class="fa fa-book"></span>
+                <span class="fw-bold">Augmenting Physical Models with Deep Networks for Complex Dynamics Forecasting</span>
+                Yuan Yin, Vincent Le Guen, Jérémie Dona, Emmanuel de Bézenac, Ibrahim Ayed, Nicolas Thome, Patrick Gallinari
+            </div>
+        </div>
+    </li>
+</ul>

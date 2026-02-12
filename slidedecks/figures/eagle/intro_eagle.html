@@ -24,29 +24,27 @@
 </div>
 
 <script>
-    var width = window.innerWidth;
-    var height = window.innerHeight;
+    const width = 1000;
+    const height = 400;
 
-    var N_arrow = 20;
+    const N_arrow = 20;
+    const drone_speed = 0.1;
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    var drone_speed = 0.1;
-
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
-
-    var graph = d3.select("body").append("svg")
+    const svg = d3.select("body").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", [0, 0, width, height])
 
 
-    var x_scale = d3.scaleLinear()
+    const x_scale = d3.scaleLinear()
         .domain([-4, 4])
         .range([0, width])
 
-    var y_scale = d3.scaleLinear()
+    const y_scale = d3.scaleLinear()
         .domain([-2.1, 1.7])
         .range([height, 0])
 
-    graph.append("rect")
+    svg.append("rect")
         .attr("x", x_scale(-2.6))
         .attr("y", y_scale(1.5))
         .attr("width", x_scale(2.6) - x_scale(-2.6))
@@ -54,20 +52,23 @@
         .attr("fill", "#3f3f3f")
         .attr("rx", 5)
 
-    var index = 0
-    var data_contours;
-    var dots = graph.append('g')
+    let index = 0
+    let data_contours;
+    let drone;
 
-    var drone;
+    const dots = svg.append('g')
     dots.append("path")
 
-    var arrows = graph.append('g')
+    const arrows = svg.append('g').on("mouseover", function () {
+        arrows.selectAll("text")
+            .attr("font-size", "3em")
+    }).on("mouseout", function () {
+        arrows.selectAll("text")
+            .attr("font-size", "2em")
+    })
     for (var i = 0; i < N_arrow; i++) {
-
-        var x = -2.5 + i / N_arrow * 5
-
         arrows.append("text")
-            .attr("x", x_scale(x))
+            .attr("x", x_scale(-2.5 + i / N_arrow * 5))
             .attr("y", y_scale(1.5))
             .attr("dy", ".35em")
             .attr("font-size", "2em")
@@ -76,26 +77,22 @@
             .text("↑")
     }
 
-    arrows.on("mouseover", function () {
-        arrows.selectAll("text")
-            .attr("font-size", "3em")
-    }).on("mouseout", function () {
-        // make text normal
-        arrows.selectAll("text")
-            .attr("font-size", "2em")
-    })
-
 
     function activateButton(button) {
-        // Deactivate all buttons
         const buttons = document.querySelectorAll('.btn');
         buttons.forEach(btn => btn.classList.remove('active'));
-
-        // Activate the clicked button
         button.classList.add('active');
         draw_contours()
     }
 
+    const targetPoints = [
+        [x_scale(-0.5), y_scale(0.5)],
+        [x_scale(-0.5), y_scale(0)],
+        [x_scale(1), y_scale(0)],
+        [x_scale(-2), y_scale(0)],
+        [x_scale(-0.5), y_scale(0)]
+    ]
+    const geomMap = {"Step": "Cre", "Triangular": "Tri", "Splines": "Spl"}
 
     const root = "../../assets/eagle/intro_eagle/"
 
@@ -105,8 +102,6 @@
 
         // Initial value display
         sliderValue.textContent = slider.value;
-
-        // Update value display on slider change
         slider.addEventListener('input', function () {
             sliderValue.textContent = slider.value;
             index = slider.value - 1
@@ -116,10 +111,10 @@
         draw_contours()
 
 
-        d3.xml(root+"drone.svg").then(function (xml) {
+        d3.xml(root + "drone.svg").then(function (xml) {
             // scale and position the svg to fit in the graph
-            drone = graph.append("g")
-                .attr("transform", "translate(" + x_scale(-0.5) + "," + y_scale(0.5) + ") scale(0.15)");
+            drone = svg.append("g")
+                .attr("transform", "translate(" + targetPoints[0][0] + "," + targetPoints[0][1] + ") scale(0.15)");
 
             drone.node().appendChild(xml.documentElement)
 
@@ -139,125 +134,69 @@
                 .attr("fill", "#E77475")
                 .text("↓")
 
-            var interval = setInterval(function () {
-                if (drone != undefined) {
+            let interval = setInterval(function () {
+                if (drone !== undefined) {
                     clearInterval(interval)
-                    move_drone()
+                    d3.timer(move_drone);
                 }
             }, 100)
         })
     })
 
-    var dots_list = []
-
-    var line = d3.line()
+    const line = d3.line()
         .x(function (d) {
-            return x_scale(d.x)
+            return x_scale(d[0])
         })
         .y(function (d) {
-            return y_scale(d.y)
+            return y_scale(d[1])
         })
         .curve(d3.curveLinearClosed);
 
+
     function draw_contours() {
-        var activated_button = document.querySelector('.btn.active');
-        if (activated_button.innerHTML === "Step") {
-            var contour = data_contours.Cre
-        } else if (activated_button.innerHTML == "Triangular") {
-            var contour = data_contours.Tri
-        } else if (activated_button.innerHTML == "Splines") {
-            var contour = data_contours.Spl
-        }
+        const activated_button = document.querySelector('.btn.active');
+        const contour = data_contours[geomMap[activated_button.innerHTML]][index];
+        const rainbow = d3.scaleSequential(d3.interpolateRainbow).domain([0, contour.length])
 
-
-        if (dots_list.length == 0) {
-            for (var i = 0; i < 250; i++) {
-                dots_list.push(dots.append("circle")
-                    .attr("cx", x_scale(0))
-                    .attr("cy", y_scale(0))
-                    .attr("r", 3)
-                    .attr("fill", "#C0C0C0")
-                    .attr("stroke", "black")
-                    .attr("stroke-width", 0.5)
-                    .attr("visibility", "hidden"))
-            }
-        }
-
-        var raw_nodes = contour[index]
-        var nodes = []
-        for (var i = 0; i < raw_nodes.length; i++) {
-            nodes.push({
-                x: raw_nodes[i][0],
-                y: raw_nodes[i][1],
-            })
-        }
-
-        var rainbow = d3.scaleSequential(d3.interpolateRainbow).domain([0, dots_list.length])
-
-        for (var i = 0; i < dots_list.length; i++) {
-            if (i < nodes.length) {
-                dots_list[i].transition().duration(500)
-                    .attr("cx", x_scale(nodes[i].x))
-                    .attr("cy", y_scale(nodes[i].y))
-                    .attr("visibility", "visible")
-                    .attr("fill", rainbow(i))
-            } else {
-                dots_list[i].attr("visibility", "hidden")
-            }
-        }
+        dots.selectAll("circle")
+            .data(contour)
+            .join("circle")
+            .transition()
+            .duration(500)
+            .attr("cx", d => x_scale(d[0]))
+            .attr("cy", d => y_scale(d[1]))
+            .attr("r", 3)
+            .attr("fill", (d, i) => rainbow(i))
+            .attr("stroke", "black")
+            .attr("stroke-width", 0.5)
 
         dots.selectAll("path").transition().duration(500)
-            .attr("d", line(nodes))
+            .attr("d", line(contour))
             .attr("stroke", "black")
             .attr("stroke-width", 2)
             .attr("fill", "#aad0e0")
     }
 
-    function move_drone() {
-        var t = d3.transition().duration(1000)
-            .ease(d3.easeLinear);
 
-        var distance = Math.abs(y_scale(-0) - y_scale(0.5))
-        var duration = distance / drone_speed
+    let currentPtIndex = 0;
+    let timeTarget = 0;
 
-        drone.transition().ease(d3.easeLinear).duration(duration)
-            .attr("transform", "translate(" + x_scale(-0.5) + "," + y_scale(0.5) + ") scale(0.15)")
-            .on("end", function () {
-
-                var distance = Math.abs(y_scale(-0) - y_scale(0.5))
-                var duration = distance / drone_speed
-
-                drone.transition().ease(d3.easeLinear).duration(duration)
-                    .attr("transform", "translate(" + x_scale(-0.5) + "," + y_scale(-0) + ") scale(0.15)")
-                    .on("end", function () {
-
-                        var distance = Math.abs(x_scale(-0.5) - x_scale(1))
-                        var duration = distance / drone_speed
-
-                        drone.transition().ease(d3.easeLinear).duration(duration)
-                            .attr("transform", "translate(" + x_scale(1) + "," + y_scale(-0) + ") scale(0.15)")
-                            .on("end", function () {
-
-                                var distance = Math.abs(x_scale(1) - x_scale(-2))
-                                var duration = distance / drone_speed
-
-                                drone.transition().ease(d3.easeLinear).duration(duration)
-                                    .attr("transform", "translate(" + x_scale(-2) + "," + y_scale(-0) + ") scale(0.15)")
-                                    .on("end", function () {
-
-                                        var distance = Math.abs(x_scale(-2) - x_scale(-0.5))
-                                        var duration = distance / drone_speed
-
-                                        drone.transition().ease(d3.easeLinear).duration(duration)
-                                            .attr("transform", "translate(" + x_scale(-0.5) + "," + y_scale(-0) + ") scale(0.15)")
-                                            .on("end", function () {
-                                                move_drone()
-                                            })
-                                    })
-                            })
-                    })
-            })
-
+    function move_drone(elapsed) {
+        if (elapsed > timeTarget) {
+            let nxtPoint = currentPtIndex + 1;
+            if (nxtPoint >= targetPoints.length) {
+                nxtPoint = 0;
+            }
+            const source = targetPoints[currentPtIndex];
+            const target = targetPoints[nxtPoint];
+            const distance = Math.sqrt(Math.pow(target[0] - source[0], 2) + Math.pow(target[1] - source[1], 2));
+            const duration = distance / drone_speed;
+            timeTarget = elapsed + duration;
+            currentPtIndex = nxtPoint;
+            drone.transition().duration(duration)
+                .ease(d3.easeLinear)
+                .attr("transform", "translate(" + target[0] + "," + target[1] + ") scale(0.15)")
+        }
     }
 
 

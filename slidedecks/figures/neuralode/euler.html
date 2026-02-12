@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Optimized Animation</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        svg {
+            display: block;
+            margin: auto;
+        }
+
+        .MathJax_SVG_Display {
+            margin: 0 ! important
+        }
+
+    </style>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+</head>
+<body>
+
+<script>
+    const width = 500, height = 300;
+
+    const margin = {top: 10, right: 50, bottom: 10, left: 50};
+    const xScale = d3.scaleLinear().domain([0, 1]).range([margin.left, width - margin.right]);
+    const yScale = d3.scaleLinear().domain([-2, 2]).range([height - margin.bottom, margin.top]);
+
+    const svg = d3.select("body").append("svg")
+        .attr("viewBox", [0, 0, width, height]);
+
+    const arrow_size = 12;
+    const marker = svg.append("defs").append("marker")
+        .attr("id", "arrowhead")
+        .attr("markerWidth", arrow_size)
+        .attr("markerHeight", arrow_size)
+        .attr("refX", arrow_size)
+        .attr("refY", arrow_size / 2)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M 0,0 L " + arrow_size + "," + (arrow_size / 2) + " L 0," + arrow_size + " Z")
+        .attr("fill", "#4E5458");
+
+
+    // Draw axes
+    svg.append("g").attr("transform", `translate(0,${yScale(0)})`).call(d3.axisBottom(xScale));
+    svg.append("g").attr("transform", `translate(${xScale(0)},0)`).call(d3.axisLeft(yScale));
+
+
+    // Draw grid
+    const grid = (axis, ticks, size) => axis.tickSize(-size).tickFormat("").ticks(ticks);
+    svg.append("g").attr("transform", `translate(0,${height - margin.top})`)
+        .call(grid(d3.axisBottom(xScale), 10, height - margin.top - margin.bottom))
+        .style("color", "#CECECE").call(g => g.select(".domain").remove());
+    svg.append("g").attr("transform", `translate(${margin.left},0)`)
+        .call(grid(d3.axisLeft(yScale), 10, width - margin.left - margin.right))
+        .style("color", "#CECECE").call(g => g.select(".domain").remove());
+
+    function f(t) {
+        return Math.sin(2 * Math.PI * t);
+    }
+
+    // Draw the ground truth curve
+    const line = d3.line()
+        .x(d => xScale(d.x))
+        .y(d => yScale(d.y));
+
+    let data = [];
+    for (let i = 0; i <= 100; i++) {
+        const t = i / 100;
+        data.push({x: t, y: f(t)});
+    }
+
+    svg.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "#006EFF")
+        .attr("stroke-width", 2)
+        .attr("d", line);
+
+    const eulerPoint = svg.append("g")
+        .append("circle")
+        .attr("r", 12)
+        .attr("cx", xScale(0))
+        .attr("cy", yScale(0))
+        .attr("fill", "#03C15F")
+        .attr("stroke", "white")
+        .attr("stroke-width", 2);
+    const eulerArrow = svg.append("g")
+        .append("line")
+        .attr("stroke", "#4E5458")
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#arrowhead)");
+
+    const eulerVertical = svg.append("g")
+        .append("line")
+        .attr("stroke", "black")
+        .attr("stroke-dasharray", "4 2")
+        .attr("stroke-width", 2);
+
+    let t = 0;
+    const dt = 0.15;
+
+    function update() {
+        if (t > 1) return;
+        const y = f(t);
+        const dydt = 2 * Math.PI * Math.cos(2 * Math.PI * t);
+
+        eulerPoint
+            .attr("cx", xScale(t))
+            .attr("cy", yScale(y));
+
+        eulerArrow
+            .attr("x1", xScale(t))
+            .attr("y1", yScale(y))
+            .attr("x2", xScale(t + dt))
+            .attr("y2", yScale(y + dydt * dt));
+
+        eulerVertical
+            .attr("x1", xScale(t + dt))
+            .attr("y1", yScale(0))
+            .attr("x2", xScale(t + dt))
+            .attr("y2", yScale(y + dydt * dt));
+        t += dt;
+        if (t > 1) t=0;
+    }
+
+    setInterval(update, 1000);
+
+</script>
+</body>
+</html>

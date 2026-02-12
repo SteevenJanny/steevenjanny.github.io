@@ -165,7 +165,7 @@
             .attr("d", "M 0,0 V 4 L6,2 Z")
             .style("fill", color);
 
-        arrowHeads[i / numArrowHeads] = "url(" + color + ")";
+        arrowHeads[i] = "url(" + color + ")";
 
     }
 
@@ -183,21 +183,9 @@
         .attr("stroke-width", 1.5)
         .attr("stroke", d => gradientColor(d.norm / max_norm))
         .attr("marker-end", d => {
-            const color_target = d.norm / max_norm;
-            // Find the closest color in the arrowHeads
-            let closestColor = 0;
-            let minDiff = Math.abs(color_target - closestColor);
-            for (let i = 0; i < numArrowHeads; i++) {
-                const diff = Math.abs(color_target - i / numArrowHeads);
-                if (diff < minDiff) {
-                    minDiff = diff;
-                    closestColor = i / numArrowHeads;
-                }
-            }
-            return arrowHeads[closestColor];
+            const arrowIndex = Math.floor(d.norm / max_norm * numArrowHeads);
+            return arrowHeads[arrowIndex];
         })
-
-    const particleLiveTime = 200;
 
     const particle_set = svg.append("g")
         .attr("id", "particle_set");
@@ -214,19 +202,15 @@
 
         particle_set.selectAll("circle")
             .data(particles)
-            .join("circle")
+            .enter()
+            .append("circle")
             .attr("cx", d => xScale(d.x))
             .attr("cy", d => yScale(d.y))
             .attr("r", 4)
             .attr("stroke", "black")
             .attr("stroke-width", 0.5)
             .attr("fill", d => d3.interpolateRainbow(Math.random()))
-            .attr("opacity", 0);
-
-        particle_set.selectAll("circle")
-            .transition()
-            .duration(500)
-            .style("opacity", 1)
+            .attr("opacity", 1);
     }
 
     function update_particles() {
@@ -239,7 +223,6 @@
 
         particle_set.selectAll("circle")
             .data(particles)
-            .join("circle")
             .attr("cx", d => xScale(d.x))
             .attr("cy", d => yScale(d.y))
     }
@@ -253,7 +236,7 @@
             // Every 100 frames, draw new particles
             draw_particles(100);
             frm_cnt = 0;
-            iter_cnt += alpha===1 ? 1 : 0; // Increment iteration count if alpha is reset
+            iter_cnt += alpha === 1 ? 1 : 0; // Increment iteration count if alpha is reset
         }
         update_particles();
         frm_cnt++;
@@ -274,21 +257,9 @@
 
         arrows.data(f_blend)
             .attr("marker-end", d => {
-                const color_target = d.norm / max_norm;
-                // Find the closest color in the arrowHeads
-                let closestColor = 0;
-                let minDiff = Math.abs(color_target - closestColor);
-                for (let i = 0; i < numArrowHeads; i++) {
-                    const diff = Math.abs(color_target - i / numArrowHeads);
-                    if (diff < minDiff) {
-                        minDiff = diff;
-                        closestColor = i / numArrowHeads;
-                    }
-                }
-                return arrowHeads[closestColor];
+                const arrowIndex = Math.floor(d.norm / max_norm * numArrowHeads);
+                return arrowHeads[arrowIndex];
             })
-            .transition()
-            .duration(100)
             .attr("x1", d => d.x)
             .attr("y1", d => d.y)
             .attr("x2", d => d.x2)
@@ -296,17 +267,19 @@
             .attr("stroke-width", 1.5)
             .attr("stroke", d => gradientColor(d.norm / max_norm));
     }
+
     update()
-    let interval;
+
+    let timer
 
     var _transitions = [
         {
             transitionForward: () => {
                 draw_particles(100);
-                interval = setInterval(update, 20);
+                timer = d3.timer(update, 20)
             },
             transitionBackward: () => {
-                clearInterval(interval);
+                timer.stop()
                 particle_set.selectAll("circle")
                     .transition()
                     .duration(500)

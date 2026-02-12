@@ -1,0 +1,34 @@
+<div class="iabm-slide-title">> physics simulation</div>
+
+
+<div class="fs-3 w-100 mt-5 r-stretch d-flex flex-column justify-content-evenly">
+
+    <div class=" align-items-center" style="font-size: 2rem">
+        > how to blend <span style="color:var(--phy)">physics</span> and <span style="color:var(--ml)">machine learning</span> ?
+    </div>
+
+    <div class="row align-items-center">
+        <div class="col-2 fs-4">Init. Cond. →
+            <div>\(\mathbf{s}_0\)</div>
+        </div>
+        <div class="col shadow rounded animated-phy-ml">
+            <div class="border-bottom" data-fragment-index="1">Dynamics</div>
+            <div class="mt-1 mb-1">$$\frac{\partial \mathbf{s}}{\partial t} = f(\mathbf{s})$$</div>
+        </div>
+        <div class="col-1 p-0 fs-4">+</div>
+        <div class="col shadow rounded animated-phy-ml delay" data-fragment-index="1">
+            <div class="border-bottom" data-fragment-index="1">Numerical Solver</div>
+            <div class="mt-3 mb-3 fas fa-cogs"></div>
+        </div>
+        <div class="col-2 fs-4">
+            <div>Trajectory</div>
+            →
+            <div> \(\mathbf{s}(\mathbf{x}, t)\)</div>
+        </div>
+    </div>
+
+    <div class="align-items-center fragment" style="font-size: 2rem">
+        depends on <b> prior knowledge</b>, and <b>data</b>.
+    </div>
+</div>
+

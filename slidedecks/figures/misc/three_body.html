@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+<script type="module">
+    const width = 300, height = 120;
+
+    const margin = {top: 10, right: 20, bottom: 10, left: 20};
+    const svg = d3.select("body").append("svg")
+        //.style("border", "3px solid gray")
+        //.style("border-radius", "15px")
+        .attr("viewBox", [0, 0, width, height]);
+
+    const xScale = d3.scaleLinear().domain([-4, 4]).range([margin.left, width - margin.right]);
+    const yScale = d3.scaleLinear().domain([-2, 2]).range([height - margin.bottom, margin.top]);
+
+    const particles = d3.range(3).map(() => ({
+        x: 4 * Math.random() - 2,
+        y: 4 * Math.random() - 2,
+        vx: 0,
+        vy: 0,
+        color: d3.interpolateRainbow(Math.random()),
+        trace: []
+    }));
+
+    function resetParticles() {
+        // Color is evenly sampled + random shift
+        particles.forEach((p, i) => {
+            p.x = 4 * Math.random() - 2;
+            p.y = 4 * Math.random() - 2;
+            p.vx = 0;
+            p.vy = 0;
+            p.trace = [];
+            p.color= d3.interpolateRainbow((i / particles.length + Math.random() * 0.1) % 1);
+        })
+    }
+
+    const G = 1; // Gravitational constant
+    const dt = 0.1; // Time step
+    function updateParticles(phy_factor=10){
+        for (let i = 0; i < phy_factor; i++) {
+            particles.forEach(p => {
+                let ax = 0, ay = 0;
+                particles.forEach(other => {
+                    if (p !== other) {
+                        const dx = other.x - p.x;
+                        const dy = other.y - p.y;
+                        const distSq = dx * dx + dy * dy + 0.01; // Avoid singularity
+                        const force = G / distSq;
+                        ax += force * dx / Math.sqrt(distSq);
+                        ay += force * dy / Math.sqrt(distSq);
+                    }
+                });
+                p.vx += ax * dt / phy_factor;
+                p.vy += ay * dt / phy_factor;
+            });
+
+            particles.forEach(p => {
+                p.x += p.vx * dt / phy_factor;
+                p.y += p.vy * dt / phy_factor;
+                p.trace.push({x: p.x, y: p.y});
+                if (p.trace.length > 100) p.trace.shift(); // Limit trace length
+            });
+        }
+    }
+
+    function drawParticles() {
+        const particleSelection = svg.selectAll(".particle").data(particles);
+        particleSelection.enter().append("circle")
+            .attr("class", "particle")
+            .attr("r", 5)
+            .merge(particleSelection)
+            .attr("cx", d => xScale(d.x))
+            .attr("cy", d => yScale(d.y))
+            .style("fill", d => d.color);
+
+        const traceSelection = svg.selectAll(".trace").data(particles);
+        traceSelection.enter().append("path")
+            .attr("class", "trace")
+            .merge(traceSelection)
+            .attr("d", d => d3.line()
+                .x(p => xScale(p.x))
+                .y(p => yScale(p.y))(d.trace))
+            .style("stroke", d => d.color)
+            .style("fill", "none");
+    }
+
+
+    let stepCounter = 0
+    function animate() {
+        updateParticles();
+        drawParticles();
+        requestAnimationFrame(animate);
+        let isParticleOutOfBounds = particles.some(p => p.x < -4 || p.x > 4 || p.y < -2 || p.y > 2);
+        if (stepCounter > 500 || isParticleOutOfBounds) {
+            resetParticles();
+            stepCounter = 0;
+        }
+        stepCounter += 1;
+    }
+
+    animate();
+</script>
