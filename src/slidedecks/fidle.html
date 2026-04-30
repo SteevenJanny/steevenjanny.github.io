@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="#"/>
+
+    <title>JDLS: Deep Learning for Fluid Mechanics</title>
+
+
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        .equation-term {
+            overflow: hidden;
+            opacity: 0;
+            max-width: 0;
+            transform: translateX(30px);
+            transition: all 0.5s ease;
+            white-space: nowrap;
+        }
+
+        .equation-term.visible {
+            opacity: 1;
+            max-width: 1000px; /* enough to show full content */
+            transform: translateX(0);
+        }
+
+        .equation-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            /*flex-wrap: nowrap;*/
+            flex-direction: row;
+            gap: 1rem;
+            transition: all 0.5s ease;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <section id="title" data-external="/slidedecks/slides/fidle/0_title.html" data-menu-title="Title"></section>
+        <section id="education" data-external="/slidedecks/slides/fidle/1_education.html"
+                 data-menu-title="Education"></section>
+        <section id="motivation" data-external="/slidedecks/slides/fidle/2_motivation.html"
+                 data-menu-title="Motivation"></section>
+        <section data-external="/slidedecks/slides/fidle/3_motivation.html"></section>
+        <section id="sota" data-external="/slidedecks/slides/fidle/4_pinn.html" data-menu-title="SOTA"></section>
+        <section data-external="/slidedecks/slides/fidle/5_node.html"></section>
+        <section data-external="/slidedecks/slides/fidle/6_endtoend.html"></section>
+
+        <section>
+            <div class="shadow bg-primary-subtle rounded">
+                <div class="fs-3 fw-bold p-2">Dataset & Method selection</div>
+            </div>
+        </section>
+
+        <section id="intro_navier" data-external="/slidedecks/slides/fidle/7_intro_navier.html"
+                 data-menu-title="CFD"></section>
+        <section data-external="/slidedecks/slides/fidle/8_intro_navier.html"></section>
+        <section id="dataset" data-external="/slidedecks/slides/fidle/9_eagle_dataset.html"
+                 data-menu-title="Dataset"></section>
+        <section data-external="/slidedecks/slides/fidle/10_eagle_dataset.html"></section>
+        <section data-external="/slidedecks/slides/fidle/11_eagle_dataset.html"></section>
+
+        <section>
+            <div class="shadow bg-primary-subtle rounded">
+                <div class="fs-3 fw-bold p-2">Model architecture & design</div>
+            </div>
+
+        </section>
+
+        <section id="cnn" data-external="/slidedecks/slides/fidle/12_eagle_cnn.html" data-menu-title="SOTA"></section>
+        <section data-external="/slidedecks/slides/fidle/13_eagle_gnn.html"></section>
+        <section id="mesh_tf" data-external="/slidedecks/slides/fidle/14_mesh_tf.html"
+                 data-menu-title="Model"></section>
+        <section id="results" data-external="/slidedecks/slides/fidle/15_eagle_results.html"
+                 data-menu-title="Results"></section>
+        <section data-external="/slidedecks/slides/fidle/16_result_eagle.html"></section>
+
+        <section>
+            <div class="shadow bg-primary-subtle rounded">
+                <div class="fs-3 fw-bold p-2">Limitations and perspectives</div>
+            </div>
+        </section>
+
+        <section id="limits" data-external="/slidedecks/slides/fidle/17_clustering.html"
+                 data-menu-title="Limitations"></section>
+        <section data-external="/slidedecks/slides/fidle/18_sim3d.html"></section>
+        <section data-external="/slidedecks/slides/fidle/19_generative.html"></section>
+    </div>
+</div>
+
+<script src="../main.js" type="module"></script>
+
+<script>
+    window.MathJax = {
+        tex: {
+            packages: {'[+]': ['color']},
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+            load: ['[tex]/color']
+        }
+    };
+</script>
+
+<script src="/mathjax/tex-mml-chtml.js" async>
+</script>
+<script type="module">
+    import Reveal from "reveal.js"
+    import "reveal.js/dist/reveal.css"
+    import "reveal.js/dist/theme/simple.css"
+    import External from "./revealjs_plugins/external"
+    import Reveald3 from "./revealjs_plugins/reveald3-vite.js"
+    import RevealMenu from "./revealjs_plugins/menu/menu.esm.js"
+    import * as RevealMath from "reveal.js/plugin/math/plugin.js";
+    import highlight from "./revealjs_plugins/highlight/plugin.js"
+
+    Reveal.initialize({
+        showHiddenSlides: false,
+        hash: true,
+        slideNumber: 'c/t',
+        autoPlayMedia: true,
+        navigationMode: 'linear',
+        plugins: [External, highlight, Reveald3, RevealMenu],//, RevealMath.default.MathJax3],
+        viewDistance: 1,
+        menu: {
+            side: 'left',
+            hideMissingTitles: true,
+            markers: true,
+            numbers: true,
+            path: "/revealjs_plugins/menu",
+        },
+        highlight: {
+            hightlightOnLoad: false,
+        },
+        mathjax3: {
+            mathjax: new URL(
+                "mathjax/es5/tex-mml-chtml.js",
+                import.meta.url
+            ).toString(),
+            options: {
+                menuOptions: {
+                    settings: {
+                        enrich: false,
+                        collapsible: false,
+                        speech: false,
+                        braille: false,
+                        assistiveMml: false,
+                    }
+                }
+            }
+        }
+    })
+
+    Reveal.on("externalready", async () => {
+        console.log("Reveal external ready!")
+        Reveal.getPlugin("highlight").init(Reveal);
+        if (window.MathJax) {
+            await window.MathJax.startup.promise;
+            await window.MathJax.typesetPromise();
+        }
+    });
+</script>
+
+</body>
+</html>

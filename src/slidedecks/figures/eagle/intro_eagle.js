@@ -1,0 +1,203 @@
+import * as d3 from "d3";
+
+const innerHTMLContent = `
+    
+<div class="row text-center mt-3 fs-5">
+    <div class="btn-group col">
+        <button class="btn btn-outline-primary active">Step</button>
+        <button class="btn btn-outline-primary">Triangular</button>
+        <button class="btn btn-outline-primary">Splines</button>
+    </div>
+    <div class="slider-container col">
+        <label for="slider">Select a value:</label> <span id="slider-value">1</span>
+        <input type="range" id="slider" min="1" max="20" value="1" class="slider">
+
+    </div>
+</div>
+`
+
+export function create(container, context) {
+    const width = 1000;
+    const height = 400;
+
+    const N_arrow = 20;
+    const drone_speed = 0.1;
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    container.innerHTML = innerHTMLContent;
+
+    d3.select(container).selectAll("button").on("click", function () {
+        activateButton(this)
+    })
+
+    const svg = d3.select(container).append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+
+    const x_scale = d3.scaleLinear()
+        .domain([-4, 4])
+        .range([0, width])
+
+    const y_scale = d3.scaleLinear()
+        .domain([-2.1, 1.7])
+        .range([height, 0])
+
+    svg.append("rect")
+        .attr("x", x_scale(-2.6))
+        .attr("y", y_scale(1.5))
+        .attr("width", x_scale(2.6) - x_scale(-2.6))
+        .attr("height", y_scale(-1.5) - y_scale(1.5))
+        .attr("fill", "#3f3f3f")
+        .attr("rx", 5)
+
+    let index = 0
+    let data_contours;
+    let drone;
+
+    const dots = svg.append('g')
+    dots.append("path")
+
+    const arrows = svg.append('g').on("mouseover", function () {
+        arrows.selectAll("text")
+            .attr("font-size", "1.2em")
+    }).on("mouseout", function () {
+        arrows.selectAll("text")
+            .attr("font-size", "1em")
+    })
+    for (var i = 0; i < N_arrow; i++) {
+        arrows.append("text")
+            .attr("x", x_scale(-2.5 + i / N_arrow * 5))
+            .attr("y", y_scale(1.5))
+            .attr("dy", ".35em")
+            .attr("font-size", "1em")
+            .attr("font-family", "sans-serif")
+            .attr("fill", "#598938")
+            .text("↑")
+    }
+
+
+    function activateButton(button) {
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        draw_contours()
+    }
+
+    const targetPoints = [
+        [x_scale(-0.5), y_scale(0.5)],
+        [x_scale(-0.5), y_scale(0)],
+        [x_scale(1), y_scale(0)],
+        [x_scale(-2), y_scale(0)],
+        [x_scale(-0.5), y_scale(0)]
+    ]
+    const geomMap = {"Step": "Cre", "Triangular": "Tri", "Splines": "Spl"}
+
+    const root = "assets/eagle/intro_eagle/"
+
+    d3.json(root + "contours.json").then(function (data) {
+        const slider = document.getElementById('slider');
+        const sliderValue = document.getElementById('slider-value');
+
+        // Initial value display
+        sliderValue.textContent = slider.value;
+        slider.addEventListener('input', function () {
+            sliderValue.textContent = slider.value;
+            index = slider.value - 1
+            draw_contours()
+        });
+        data_contours = data
+        draw_contours()
+
+
+        d3.xml(root + "drone.svg").then(function (xml) {
+            // scale and position the svg to fit in the graph
+            drone = svg.append("g")
+                .attr("transform", "translate(" + targetPoints[0][0] + "," + targetPoints[0][1] + ") scale(0.15)");
+
+            drone.node().appendChild(xml.documentElement)
+
+            drone.append("text")
+                .attr("x", x_scale(-1.5))
+                .attr("y", y_scale(-2))
+                .attr("font-size", "5em")
+                .attr("font-family", "sans-serif")
+                .attr("fill", "#E77475")
+                .text("↓")
+
+            drone.append("text")
+                .attr("x", x_scale(0.2))
+                .attr("y", y_scale(-2))
+                .attr("font-size", "5em")
+                .attr("font-family", "sans-serif")
+                .attr("fill", "#E77475")
+                .text("↓")
+
+            let interval = setInterval(function () {
+                if (drone !== undefined) {
+                    clearInterval(interval)
+                    d3.timer(move_drone);
+                }
+            }, 100)
+        })
+    })
+
+    const line = d3.line()
+        .x(function (d) {
+            return x_scale(d[0])
+        })
+        .y(function (d) {
+            return y_scale(d[1])
+        })
+        .curve(d3.curveLinearClosed);
+
+
+    function draw_contours() {
+        const activated_button = document.querySelector('.btn.active');
+        const contour = data_contours[geomMap[activated_button.innerHTML]][index];
+        const rainbow = d3.scaleSequential(d3.interpolateRainbow).domain([0, contour.length])
+
+        dots.selectAll("circle")
+            .data(contour)
+            .join("circle")
+            .transition()
+            .duration(500)
+            .attr("cx", d => x_scale(d[0]))
+            .attr("cy", d => y_scale(d[1]))
+            .attr("r", 3)
+            .attr("fill", (d, i) => rainbow(i))
+            .attr("stroke", "black")
+            .attr("stroke-width", 0.5)
+
+        dots.selectAll("path").transition().duration(500)
+            .attr("d", line(contour))
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .attr("fill", "#aad0e0")
+    }
+
+
+    let currentPtIndex = 0;
+    let timeTarget = 0;
+
+    function move_drone(elapsed) {
+        if (elapsed > timeTarget) {
+            let nxtPoint = currentPtIndex + 1;
+            if (nxtPoint >= targetPoints.length) {
+                nxtPoint = 0;
+            }
+            const source = targetPoints[currentPtIndex];
+            const target = targetPoints[nxtPoint];
+            const distance = Math.sqrt(Math.pow(target[0] - source[0], 2) + Math.pow(target[1] - source[1], 2));
+            const duration = distance / drone_speed;
+            timeTarget = elapsed + duration;
+            currentPtIndex = nxtPoint;
+            drone.transition().duration(duration)
+                .ease(d3.easeLinear)
+                .attr("transform", "translate(" + target[0] + "," + target[1] + ") scale(0.15)")
+        }
+    }
+
+    return {steps: []}
+}
+

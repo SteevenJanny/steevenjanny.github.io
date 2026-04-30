@@ -1,0 +1,182 @@
+import * as d3 from "d3";
+
+export function create(container, context) {
+
+    function f(n) {
+        var t = n.x, i = n.y, r = i, u = -t + (1 - t * t) * i;
+        return {x: r, y: u}
+    }
+
+    function draw_grid_and_axes() {
+        xScale.range([graph_margin.left, width - graph_margin.right]);
+        yScale.range([height - graph_margin.bottom, graph_margin.top]);
+        plot_xaxis.transition().call(xAxis).style("opacity", 1);
+        plot_yaxis.transition().call(yAxis).style("opacity", 1);
+        x_label.transition().style("opacity", 1);
+        y_label.transition().style("opacity", 1);
+        grid_x.transition().style("opacity", .5);
+        grid_y.transition().style("opacity", .5)
+    }
+
+    function erase_grid_and_axes() {
+        xScale.range([graph_margin.left, graph_margin.left]);
+        yScale.range([height - graph_margin.bottom, height - graph_margin.bottom]);
+        plot_xaxis.transition().call(xAxis).style("opacity", 0);
+        plot_yaxis.transition().call(yAxis).style("opacity", 0);
+        x_label.transition().style("opacity", 0);
+        y_label.transition().style("opacity", 0);
+        grid_x.transition().style("opacity", 0);
+        grid_y.transition().style("opacity", 0)
+    }
+
+    function draw_vector_field() {
+        function nt(n) {
+            return n = "" + n, (!n || n.indexOf("rgb") < 0) && (n = d3.rgb(n).toString()), n = n.replace("rgb(", "").replace(")", ""), n = n.split(",").map(function (n) {
+                return parseInt(n)
+            }), n = n.map(function (n) {
+                return ("0" + n.toString(16)).slice(-2)
+            }), n = "#" + n.join(""), defs.append("svg:marker").attr("id", n.replace("#", "")).attr("refX", 3).attr("refY", 2).attr("markerWidth", 6).attr("markerHeight", 4).attr("orient", "auto").append("path").attr("d", "M 0,0 V 4 L6,2 Z").style("fill", n), "url(" + n + ")"
+        }
+
+        for (var p, h, t, v, y = 8 / N_points * .8, o = [], s = [], n = N_points, e = 0, i = 0; i < n + 1; i++) for (t = 0; t < n + 1; t++) p = {
+            x: -4 + 8 * i / n + e,
+            y: -4 + 8 * t / n + e
+        }, h = f(p), o.push(h.x), s.push(h.y);
+        var w = d3.scaleSequential().interpolator(d3.interpolateCool).domain([0, 1]), b = Math.max(...o),
+            k = Math.max(...s), g = Math.sqrt(b * b + k * k);
+        for (i = 0; i < n + 1; i++) for (t = 0; t < n + 1; t++) {
+            var c = -4 + 8 * i / n + e, l = -4 + 8 * t / n + e, r = o[i * (n + 1) + t], u = s[i * (n + 1) + t],
+                a = Math.sqrt(r * r + u * u + 1e-5), d = a / g;
+            r = r / a * y;
+            u = u / a * y;
+            v = graph.append("line").attr("x1", xScale(c)).attr("y1", yScale(l)).attr("x2", xScale(c)).attr("y2", yScale(l)).attr("stroke-width", 1.5).attr("stroke", w(d)).attr("marker-end", nt(w(d))).style("opacity", 1).attr("z-index", "100");
+            v.transition().duration(1e3).attr("x2", xScale(c + r)).attr("y2", yScale(l + u));
+            lines.push(v)
+        }
+    }
+
+    function update_particles() {
+        for (var t = 0; t < particles.length; t++) {
+            var n = particles[t], i = {x: n.x, y: n.y}, r = f(i);
+            n.x = i.x + r.x * dt;
+            n.y = i.y + r.y * dt;
+            n.t += 1;
+            n.t > T && (n.x = 8 * Math.random() - 4, n.y = 8 * Math.random() - 4, n.t = 0);
+            n.path.attr("cx", xScale(n.x)).attr("cy", yScale(n.y));
+            particles.length > 1 && n.path.style("opacity", 1 - n.t / T)
+        }
+    }
+
+    function erase_vector_field() {
+        for (var n = 0; n < lines.length; n++) lines[n].remove();
+        lines = []
+    }
+
+    function get_pos(i) {
+        if (i == 0) {
+            return 1;
+        } else {
+            return 8 * Math.random() - 4;
+        }
+    }
+
+    function draw_particles(n, t) {
+        var r, u, i;
+        for (erase_particles(), T = t, r = 4, n == 1 && (r = 10), u = 0; u < n; u++) i = {
+            x: get_pos(u),
+            y: get_pos(u),
+            t: Math.random() * T
+        }, i.path = particle_set.append("circle").attr("cx", xScale(i.x)).attr("cy", yScale(i.y)).attr("r", r).attr("stroke", "black").attr("stroke-width", .5).attr("fill", d3.interpolateRainbow(Math.random())).attr("opacity", 1), particles.push(i);
+        interval = setInterval(update_particles, plot_delay)
+    }
+
+    function erase_particles() {
+        for (var n = 0; n < particles.length; n++) particles[n].path.remove();
+        particles = [];
+        clearInterval(interval)
+    }
+
+    function animation_step1() {
+        draw_grid_and_axes();
+        draw_particles(1, 1e4)
+    }
+
+    function reverse_animation_step1() {
+        erase_particles();
+        erase_grid_and_axes()
+    }
+
+    function animation_step2() {
+        draw_vector_field()
+    }
+
+    function reverse_animation_step2() {
+        erase_vector_field()
+    }
+
+    function animation_step3() {
+        draw_particles(100, 100);
+        plot_xaxis.style("opacity") == 0 && draw_grid_and_axes();
+        lines.length == 0 && draw_vector_field()
+    }
+
+    function reverse_animation_step3() {
+        draw_particles(1, 1e4)
+    }
+
+    const width = 1000, height = 375;
+
+    const d3Container = d3.select(container);
+    const graph = d3Container.append("svg")
+        .attr("viewBox", [0, 0, width, height]);
+
+    var initial_state = {x: .1, y: .1}, dt = .01, T = 75, plot_delay = 20, N_points = 25, N_particles = 1e3, interval,
+        states = [initial_state], graph_margin = {top: 10, right: 10, bottom: 10, left: 10},
+        xScale = d3.scaleLinear().domain([-4, 4]).range([graph_margin.left, graph_margin.left]),
+        yScale = d3.scaleLinear().domain([-4, 4]).range([height - graph_margin.bottom, height - graph_margin.bottom]),
+        xAxis = d3.axisBottom(xScale), yAxis = d3.axisLeft(yScale),
+        plot_xaxis = graph.append("g").attr("transform", "translate(0," + height / 2 + ")").call(xAxis).style("opacity", 0),
+        plot_yaxis = graph.append("g").attr("transform", "translate(" + width / 2 + ",0)").call(yAxis).style("opacity", 0),
+        grid_x = graph.append("g").attr("transform", "translate(0," + (height - graph_margin.top) + ")").style("color", "#CECECE").style("opacity", 0).call(d3.axisBottom(d3.scaleLinear().domain([-4, 4]).range([graph_margin.left, width - graph_margin.right])).tickSize(-height + graph_margin.top + graph_margin.bottom).tickFormat("").ticks(N_points)).call(n => n.select(".domain").remove()),
+        grid_y = graph.append("g").attr("class", "grid").attr("transform", "translate(" + graph_margin.left + ",0)").call(d3.axisLeft(d3.scaleLinear().domain([-4, 4]).range([height - graph_margin.bottom, graph_margin.top])).tickSize(-width + graph_margin.left + graph_margin.right).tickFormat("").ticks(N_points)).style("color", "#CECECE").call(n => n.select(".domain").remove()).style("opacity", 0),
+        x_label = graph.append("g").attr("transform", "translate(" + (width - 10) + "," + (height / 2 - 10) + ")").style("opacity", 0),
+        y_label = graph.append("g").attr("transform", "translate(" + (width / 2 + 10) + ",30)").style("opacity", 0),
+        line, lines, defs, particle_set, particles, _transitions;
+    x_label.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", 0).text("position").style("font-family", "sans-serif").style("font-size", "20px");
+    y_label.append("text").attr("text-anchor", "start").attr("x", 0).attr("y", 0).text("velocity").style("font-family", "sans-serif").style("font-size", "20px");
+    line = d3.line().x(function (n) {
+        return xScale(n.x)
+    }).y(function (n) {
+        return yScale(n.y)
+    });
+    graph.append("path").attr("id", "x_path").datum(states).attr("fill", "none").attr("stroke", "steelblue").attr("stroke-width", 1.5).attr("d", line);
+    lines = [];
+    defs = graph.append("svg:defs");
+    particle_set = graph.append("g").attr("id", "particle_set");
+    particles = [];
+
+    return {
+        steps: [
+            {
+                index: 0,
+                forward: () => animation_step1(),
+                backward: () => reverse_animation_step1()
+            },
+            {
+                index: 1,
+                forward: () => animation_step2(),
+                backward: () => reverse_animation_step2()
+            },
+            {
+                index: 2,
+                forward: () => animation_step3(),
+                backward: () => reverse_animation_step3()
+            }
+        ],
+        onSlideEnter: () => {
+        },
+        onSlideLeave: () => {
+            clearInterval(interval)
+        }
+    }
+}
