@@ -1,0 +1,71 @@
+import * as d3 from "d3";
+
+const width = 500, height = 200;
+
+const margin = {top: 10, right: 20, bottom: 10, left: 10};
+
+export function create(container, context) {
+    const svg = d3.select(container).append("svg")
+        .attr("viewBox", [0, 0, width, height]);
+
+    const xScale = d3.scaleLinear().domain([0, 1]).range([margin.left, width - margin.right]);
+    const yScale = d3.scaleLinear().domain([0, 1]).range([height - margin.bottom, margin.top]);
+
+    // Insert video spawning the full width
+    svg.append("foreignObject")
+        .attr("x", xScale(0))
+        .attr("y", (height - margin.bottom) - 120) // Center the video vertically
+        .attr("width", xScale(1) - xScale(0))
+        .attr("height", 120)
+        .append("xhtml:video")
+        .attr("src", "assets/eagle/results/eagle.mp4")
+        .attr("autoplay", true)
+        .attr("loop", true)
+        .attr("muted", true)
+        .style("width", "100%")
+        .style("height", "100%");
+
+    svg.append("rect")
+        .attr("x", xScale(0))
+        .attr("y", yScale(0.6))
+        .attr("width", xScale(1) - xScale(0))
+        .attr("height", 30)
+        .attr("fill", "white");
+
+    svg.append("text")
+        .attr("x", xScale(0.04))
+        .attr("y", yScale(0.5))
+        .attr("text-anchor", "start")
+        .attr("font-size", "16px")
+        .attr("fill", "black")
+        .text("Model #1");
+    svg.append("text")
+        .attr("x", xScale(0.3))
+        .attr("y", yScale(0.5))
+        .attr("text-anchor", "start")
+        .attr("font-size", "16px")
+        .attr("fill", "black")
+        .text("Model #2");
+    svg.append("text")
+        .attr("x", xScale(0.57))
+        .attr("y", yScale(0.5))
+        .attr("text-anchor", "start")
+        .attr("font-size", "16px")
+        .attr("fill", "black")
+        .text("Model #3");
+    svg.append("text")
+        .attr("x", xScale(0.82))
+        .attr("y", yScale(0.5))
+        .attr("text-anchor", "start")
+        .attr("font-size", "16px")
+        .attr("fill", "black")
+        .text("Model #4");
+
+    return {
+        steps: [],
+        onSlideEnter: () => {
+        },
+        onSlideLeave: () => {
+        }
+    }
+}

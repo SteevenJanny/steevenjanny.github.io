@@ -1,0 +1,57 @@
+{
+  "name": "personalpagev2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "electron/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run build && npm run preview",
+    "css-compile": "node-sass --include-path node_modules --output-style compressed --source-map true --source-map-contents true --precision 6 scss -o src/css/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "bootstrap": "^5.3.8",
+    "d3": "^7.9.0",
+    "d3-simple-slider": "^2.0.0",
+    "highlight.js": "^11.11.1",
+    "jquery": "^4.0.0",
+    "mathjax": "^3.2.2",
+    "mathjax-full": "^3.2.1",
+    "node-sass": "^9.0.0",
+    "npyjs": "^1.1.0",
+    "reveal.js": "^5.2.1",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "electron": "^40.6.0",
+    "electron-builder": "^26.8.1",
+    "vite": "^7.3.1"
+  },
+  "build": {
+    "appId": "com.yourname.iabm",
+    "productName": "IABM Slides",
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}

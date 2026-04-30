@@ -1,0 +1,96 @@
+import * as d3 from "d3";
+
+const width = 500, height = 200;
+
+const margin = {top: 10, right: 20, bottom: 10, left: 10};
+
+export function create(container, context) {
+    const svg = d3.select(container).append("svg")
+        .attr("viewBox", [0, 0, width, height]);
+
+    const xScale = d3.scaleLinear().domain([0, 1]).range([margin.left, width - margin.right]);
+    const yScale = d3.scaleLinear().domain([0, 1]).range([height - margin.bottom, margin.top]);
+
+    // Insert image spawning the full width
+    svg.append("image")
+        .attr("href", "assets/eagle/public_datasets/eagle_sequence.png")
+        .attr("x", xScale(0))
+        .attr("y", (height - margin.bottom) - 120) // Center the image vertically
+        .attr("width", xScale(1) - xScale(0))
+
+    const L = 0.02
+    const TOPHEIGHT = 0.7
+    const BOTTOMHEIGHT = 0.1
+    const line = d3.line()
+        .x(d => xScale(d[0]))
+        .y(d => yScale(d[1]));
+    svg.append("path")
+        .attr("d", line([[0, BOTTOMHEIGHT + L], [0, BOTTOMHEIGHT], [1, BOTTOMHEIGHT], [1, BOTTOMHEIGHT + L]]))
+        .attr("stroke", "#006EFF")
+        .attr("stroke-width", 2)
+        .attr("fill", "none");
+    svg.append("text")
+        .attr("x", xScale(0.5))
+        .attr("y", yScale(BOTTOMHEIGHT) + 20)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "16px")
+        .attr("fill", "#006EFF")
+        .text("Full-length simulation");
+
+
+    const N = 5;
+    const GAP = 0.01;
+    const sequences = [];
+    for (let i = 1; i <= N; i++) {
+        const group = svg.append("g")
+        group.append("path")
+            .attr("d", line([[(i - 1) / N + GAP, TOPHEIGHT], [(i - 1) / N + GAP, TOPHEIGHT + L], [i / N - GAP, TOPHEIGHT + L], [i / N - GAP, TOPHEIGHT]]))
+            .attr("stroke", (i === 1) ? "#03C15F" : "darkgray")
+            .attr("stroke-width", 2)
+            .attr("fill", "none");
+        group.append("text")
+            .attr("x", xScale((i - 0.5) / N))
+            .attr("y", yScale(TOPHEIGHT) - 20)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "14px")
+            .attr("fill", (i === 1) ? "#03C15F" : "darkgray")
+            .text(`Train Seq. ${i}`);
+        sequences.push(group);
+    }
+
+    sequences.forEach((group, index) => {
+        group.attr("opacity", 0).attr("transform", `translate(0, ${-20 * (index + 1)})`)
+    });
+
+    let currentSeq = 0;
+
+    function animate() {
+        // Simple animation where groups are slided in one by one
+        if (currentSeq > (5 + sequences.length)) {
+            sequences.forEach((group, index) => {
+                group.transition().attr("opacity", 0).attr("transform", `translate(0, ${-20 * (index + 1)})`)
+            });
+            currentSeq = -1;
+        } else if (currentSeq < sequences.length) {
+            const group = sequences[currentSeq];
+            group.transition()
+                .duration(500)
+                .attr("opacity", 1).attr("transform", "translate(0, 0)")
+        }
+        currentSeq = currentSeq + 1;
+    }
+
+    let interval;
+
+    return {
+        steps: [],
+        onSlideEnter: () => {
+            clearInterval(interval);
+            interval = setInterval(animate, 600);
+        },
+        onSlideLeave: () => {
+            clearInterval(interval);
+        }
+    }
+
+}

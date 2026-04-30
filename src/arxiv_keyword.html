@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Steeven Janny"/>
+    <title>Steeven Janny</title>
+    <script type="module" src="main.js"></script>
+    <style>
+
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        #placeholder h1 {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Steeven Janny</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#posts">Publications</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#education">Education</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#misc">Misc</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="display-4 text-center">Who leads my field ?</h1>
+            <p class="lead text-center">Discover the most prolific authors in your research domain. Enter keywords and
+                find out who leads your field based on arXiv publications.</p>
+        </div>
+    </div>
+    </br>
+    <div class="row">
+        <div class="col text-center">
+            <form id="search_form" style="margin:auto">
+                Keywords:
+                <input type="text" name="keyword" value="" id="keywords_field">
+                <input class="btn btn-primary" type="button" name="button" value="Search"
+                       onClick="launchSearch(this.form)" id="submit_button" style="margin-right: 30px">
+                <!--                </br>-->
+                <input type="radio" id="title" name="search_type" value="title" checked>
+                <label for="title">In title</label>
+                <input type="radio" id="abstract" name="search_type" value="abstract">
+                <label for="abstract">In abstract</label>
+                <input type="radio" id="all" name="search_type" value="all">
+                <label for="all">In both</label>
+            </form>
+            <div id="loading_anim"></div>
+        </div>
+    </div>
+
+    <div id="placeholder" class="text-center"
+         style="height:500px;display:flex;align-items:center;justify-content:center">
+        <h1>What are we looking for today?</h1>
+    </div>
+
+    <div id="main_container" style="display: none">
+        <div class="row" style="border:none;padding-top: 20px">
+            <div class="col text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" id="graph_title">Waiting for keywords...</h4>
+                    </div>
+                    <div class="card-body p-1  overflow-auto">
+                        <div id="author_block_container" style="width: 100%; margin:auto"></div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="checkbox" id="singleton" name="singleton" value="singleton" checked
+                                       class="form-check-input">
+                                <label for="singleton">Include single-paper authors</label>
+                            </div>
+                            <div class="col">
+                                <input type="checkbox" id="first_authors" name="first_authors" value="first_authors"
+                                       class="form-check-input">
+                                <label for="singleton">First author only</label>
+                            </div>
+                            <div class="col">
+                                <label for="start_date">Starting from</label>
+                                <input type="date" id="start_date" name="start_date" value="1995-04-04"
+                                       class="form-control form-control-sm" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-5 justify-content-evenly">
+                <div class="card" style="height: 750px">
+                    <div class="card-header">
+                        <h4 class="card-title">Author list</h4>
+                    </div>
+                    <div class="card-body p-1  overflow-auto">
+                        <div id="paper_list">
+                            <p class="text-center fst-italic">Nothing to show yet !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:50px; margin-bottom:50px">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Looking for someone ?</h4>
+                        <p class="card-subtitle">Enter a name below, and we will highlight the corresponding square.</p>
+                        <form id="myForm2" class="text-center mt-4">
+                            <input type="text" name="name" value="" id="name_field"
+                                   oninput="highlightAuthor(this.form)">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4 overflow-auto" style="max-height: 500px">
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs" id="categoryTabs"></ul>
+
+        <!-- Tabs Content -->
+        <div class="tab-content" id="tabContent"></div>
+    </div>
+
+    <h5 class="text-danger mt-5">Caveats</h5>
+    <ul class="list-group">
+        <li class="list-group-item text-danger">Sometimes, the API returns too fast with partial results... Try to
+            search again !
+        </li>
+        <li class="list-group-item text-danger">The API is a bit slow, be patient, especially if you search for a
+            very common keyword.
+        </li>
+        <li class="list-group-item text-danger"> The results are limited to the first 10,000 papers.</li>
+        <li class="list-group-item text-danger">Authors are merged by their names, so "Steven L. Brunton", "Steve
+            Brunton" and
+            "Steeven Brunton" are considered as different authors.
+        </li>
+
+    </ul>
+
+    <p class="mt-4">
+        Thanks to ArXiv for providing a well documented and freely accessible API !
+    </p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3-color@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-interpolate@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-scale-chromatic@3"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="js/arxiv_api.js"></script>
+<script src="js/author_blocks.js"></script>
+</body>
+</html>

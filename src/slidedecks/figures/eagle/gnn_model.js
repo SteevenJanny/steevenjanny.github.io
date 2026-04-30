@@ -1,0 +1,265 @@
+import * as d3 from "d3";
+
+const p = {
+    square_size: 0.9,
+    layer_ratio: 0.7,
+    radius: 2,
+    interval: 10,
+    n_layers: 8,
+}
+
+const width = 600;
+const height = 200;
+
+const layers_width = width / (p.n_layers);
+let block_size = layers_width * p.square_size;
+
+const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+export async function create(container, context) {
+    const svg = d3.select(container).append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", [0, 0, width, height])
+
+
+    const data = await d3.json("assets/eagle/sota/inputs.json")
+    // Load json data
+
+    const N_nodes = data.points.length
+
+    const adjacencies = data.edges
+    const colors_in = data.colors_in
+    const colors_out = data.colors_out
+
+    function make_layer(n) {
+        const layer = svg.append("g")
+            .attr("transform", "translate(" + n * layers_width + " ,0)");
+
+        if (n === 0 || n === p.n_layers - 1) {
+            block_size = layers_width * p.square_size
+        } else {
+            block_size = layers_width * p.square_size * p.layer_ratio
+        }
+
+        const x0 = (layers_width - block_size) / 2
+        const y0 = (height - block_size) / 2
+
+        const scale_x = d3.scaleLinear()
+            .domain([0, 1])
+            .range([x0, x0 + block_size])
+        const scale_y = d3.scaleLinear()
+            .domain([0, 1])
+            .range([y0, y0 + block_size])
+
+        for (var i = 0; i < data.points.length; i++) {
+            for (var j = i + 1; j < data.points.length; j++) {
+                if (adjacencies[i][j] === 1) {
+                    layer.append("line")
+                        .attr("class", "edge")
+                        .attr("id", "edge_" + i + "_" + j)
+                        .attr("x1", scale_x(data.points[i][0]))
+                        .attr("y1", scale_y(data.points[i][1]))
+                        .attr("x2", scale_x(data.points[j][0]))
+                        .attr("y2", scale_y(data.points[j][1]))
+                        .attr("stroke", "black")
+                        .attr("stroke-width", 1)
+                        .attr("visibility", "hidden")
+                }
+            }
+        }
+
+
+        layer.selectAll(".background")
+            .data(data.points)
+            .enter()
+            .append("circle")
+            .attr("class", "background")
+            .attr("cx", d => scale_x(d[0]))
+            .attr("cy", d => scale_y(d[1]))
+            .attr("r", p.radius)
+            .attr("fill", "white");
+
+        layer.selectAll(".node")
+            .data(data.points)
+            .enter()
+            .append("circle")
+            .attr("class", "node")
+            .attr("id", (d, i) => "node_" + i)
+            .attr("cx", d => scale_x(d[0]))
+            .attr("cy", d => scale_y(d[1]))
+            .attr("r", p.radius)
+            .attr("fill", (d, i) => {
+                if (n === 0) {
+                    return "rgb(" + colors_in[i][0] + "," + colors_in[i][1] + "," + colors_in[i][2] + ")"
+                } else if (n === p.n_layers - 1) {
+                    return "rgb(" + colors_out[i][0] + "," + colors_out[i][1] + "," + colors_out[i][2] + ")"
+                } else {
+                    return color(n);
+                }
+            })
+            .attr("opacity", (d, i) => {
+                return (n === 0 || n === p.n_layers - 1) ? 1 : d3.randomUniform(0.4, 1)();
+            })
+            .attr("visibility", "hidden")
+            .attr("fallback_color", (d, i) => {
+                if (n === 0) {
+                    return "rgb(" + colors_in[i][0] + "," + colors_in[i][1] + "," + colors_in[i][2] + ")"
+                } else if (n === p.n_layers - 1) {
+                    return "rgb(" + colors_out[i][0] + "," + colors_out[i][1] + "," + colors_out[i][2] + ")"
+                } else {
+                    return color(n);
+                }
+            })
+
+        return layer
+    }
+
+    let layers = []
+    for (var i = 0; i <= p.n_layers; i++) {
+        layers.push(make_layer(i))
+    }
+    layers[0].selectAll(".node")
+        .attr("visibility", "visible")
+    layers[0].selectAll(".edge")
+        .attr("visibility", "visible")
+
+    let current_id = 0;
+    let current_layer = 0;
+
+    const line = svg.append("line")
+        .attr("x1", 0)
+        .attr("y1", 0)
+        .attr("x2", 0)
+        .attr("y2", 0)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1)
+        .attr("stroke-dasharray", "5,5")
+        .attr("opacity", 1);
+
+    for (let i = 0; i < p.n_layers; i++) {
+        if (i === 0) {
+            svg.append("text")
+                .attr("x", layers_width * i + layers_width / 2)
+                .attr("y", height / 2 + block_size / 2 + 30)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .attr("font-size", "1rem")
+                .text("Input")
+        } else if (i === p.n_layers - 1) {
+            svg.append("text")
+                .attr("x", layers_width * i + layers_width / 2)
+                .attr("y", height / 2 + block_size / 2 + 30)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .attr("font-size", "1rem")
+                .text("Output")
+        } else {
+            svg.append("text")
+                .attr("x", layers_width * i + layers_width / 2)
+                .attr("y", height / 2 + block_size / 2 + 20)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .attr("font-size", "1rem")
+                .text("GNN " + (i))
+
+        }
+    }
+
+    function reset(layer_id, node_id) {
+        const layer = layers[layer_id]
+        layer.selectAll("#node_" + (node_id))
+            .attr("fill", layer.select("#node_" + (node_id)).attr("fallback_color"))
+        for (var i = 0; i < N_nodes; i++) {
+            if (adjacencies[node_id][i] === 1) {
+                layer.select("#edge_" + Math.min(node_id, i) + "_" + Math.max(node_id, i))
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1)
+                    .attr("stroke-opacity", 1)
+            }
+        }
+    }
+
+    function move(layer_id) {
+        const layer1 = layers[layer_id]
+        const layer2 = layers[layer_id + 1]
+
+        if (current_id > 0) {
+            reset(layer_id, current_id - 1)
+        }
+
+        layer1.selectAll("#node_" + current_id)
+            .attr("fill", "red")
+
+        layer2.selectAll("#node_" + current_id)
+            .attr("visibility", "visible")
+
+        for (var i = 0; i < N_nodes; i++) {
+            if (adjacencies[current_id][i] === 1) {
+                var min = Math.min(current_id, i)
+                var max = Math.max(current_id, i)
+                layer1.select("#edge_" + min + "_" + max)
+                    .attr("stroke", "red")
+                    .attr("stroke-width", 4)
+                    .attr("stroke-opacity", 1)
+                if (layer2.selectAll("#node_" + i).attr("visibility") === "visible") {
+                    layer2.select("#edge_" + min + "_" + max)
+                        .attr("visibility", "visible")
+                }
+            }
+        }
+
+        var bb1 = layer1.select("#node_" + current_id).node().getBBox()
+        var bb2 = layer2.select("#node_" + current_id).node().getBBox()
+        var x1 = bb1.x + bb1.width / 2
+        var y1 = bb1.y + bb1.height / 2
+        var x2 = bb2.x + bb2.width / 2
+        var y2 = bb2.y + bb2.height / 2
+
+        line.attr("x1", x1 + (layer_id) * layers_width)
+            .attr("y1", y1)
+            .attr("x2", x2 + (layer_id + 1) * layers_width)
+            .attr("y2", y2)
+
+
+        current_id += 1
+
+    }
+
+    function animate() {
+        move(current_layer)
+        if (current_id === N_nodes) {
+            reset(current_layer, current_id - 1)
+            current_id = 0
+            current_layer += 1
+            if (current_layer === p.n_layers - 1) {
+                current_layer = 0
+                for (var i = 1; i < p.n_layers; i++) {
+                    layers[i].selectAll(".node")
+                        .attr("visibility", "hidden")
+                    layers[i].selectAll(".edge")
+                        .attr("visibility", "hidden")
+                }
+            }
+            layers[current_layer + 1].selectAll(".node")
+                .attr("visibility", "hidden")
+            layers[current_layer + 1].selectAll(".edge")
+                .attr("visibility", "hidden")
+
+        }
+    }
+
+    let interval;
+
+
+    return {
+        steps: [],
+        onSlideEnter: () => {
+            clearInterval(interval);
+            interval = setInterval(animate, p.interval)
+        },
+        onSlideLeave: () => {
+            clearInterval(interval);
+        },
+    }
+
+}

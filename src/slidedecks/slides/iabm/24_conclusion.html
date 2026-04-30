@@ -1,0 +1,74 @@
+<div class="iabm-slide-title">> Current limitations</div>
+
+
+<div class="container-lg fs-4 mt-5">
+    <div class="row gap-3 w-100 fragment">
+        <div class="col card align-items-center  fade-right  d-flex flex-column justify-content-around">
+            <p>> multi-task</p>
+            <div class="row fs-5">
+                <p class="text-start">> models trained on :</p>
+                <div class="row">
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <video data-autoplay data-src="assets/eagle/public_datasets/airfoil.mp4" loop autoplay muted
+                               class="rounded m-0"></video>
+                    </div>
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <video data-autoplay data-src="assets/eagle/public_datasets/cylinder.mp4" loop autoplay muted
+                               class="rounded m-0"></video>
+                    </div>
+                </div>
+                <p class="text-start">> won't work on:</p>
+
+                <div class="row">
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <video data-autoplay data-src="assets/eagle/public_datasets/crenellation.mp4" loop autoplay
+                               muted class="rounded m-0"></video>
+                    </div>
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <video data-autoplay data-src="assets/eagle/public_datasets/vascular.mp4" loop autoplay muted
+                               class="rounded m-0"></video>
+                    </div>
+                </div>
+            </div>
+            <p class="text-muted fs-6">> contrary to physics sim., DL requires dedicated model per task </p>
+        </div>
+
+        <div class="col card align-items-center fragment fade-left d-flex flex-column justify-content-around">
+            <p class="w-100">> compute & environmental cost</p>
+            <div class="fig-container w-100"
+                 data-module="/slidedecks/figures/misc/compute.js"
+                 data-scroll="no" data-overflow-shown=true></div>
+
+            <p class="text-muted fs-6">> DL-based simulators are costly during training, but cheap during inference </p>
+        </div>
+
+        <div class="col card align-items-center fragment fade-right d-flex flex-column justify-content-around">
+            <p>> consistency & interpretability</p>
+            <img src="assets/eagle/public_datasets/ic_spline.jpg" alt="Initial"
+                 class="img-fluid m-0 rounded" width="40%">
+
+            <div class="">↓</div>
+            <div class="">
+                <p class="bg-ml p-2 rounded m-0 px-3">
+                    <span class="fa fa-magic text-white me-3"></span>
+                    Magic !
+                    <span class="fa fa-magic text-white ms-3"></span>
+                </p>
+            </div>
+            <div class="">↓</div>
+            <video src="assets/eagle/public_datasets/splines.mp4" loop autoplay muted
+                   class="img-fluid m-0 rounded mb-2" width="40%">
+            </video>
+            <p class="text-muted fs-6">> enforcing physical properties is non-trivial</p>
+        </div>
+        <!--        <div class="col card align-items-center fragment fade-left d-flex flex-column justify-content-around">-->
+        <!--            <p class="w-100">> across space and time</p>-->
+        <!--            <div class="fig-container w-100 "-->
+        <!--                 data-module="/slidedecks/figures/misc/generalization_time.js"-->
+        <!--                 style="height: 300px;" data-scroll="no" data-overflow-shown=true></div>-->
+        <!---->
+        <!--            <p class="text-muted fs-6">> error raises quickly outside the training horizon / spatial domain </p>-->
+        <!--        </div>-->
+    </div>
+</div>
+
